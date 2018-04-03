@@ -19,5 +19,13 @@
     "PumaPay"
   ],
   "author": "PumaPay Team",
-  "license": "ISC"
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "cd server && npm test && cd ../client && ng lint && ng build"
+    }
+  },
+  "devDependencies": {
+    "husky": "^0.15.0-rc.13"
+  }
 }

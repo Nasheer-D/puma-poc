@@ -11,15 +11,10 @@
     "nodemon": "node_modules/.bin/nodemon",
     "mocha": "node_modules/.bin/mocha",
     "start": "nodemon -L server.js",
-    "test": "npm run lint &&  mocha test/*.ts && npm run test-e2e",
+    "test": "npm run lint && npm run test-e2e",
     "test-e2e": "mocha --timeout 15000 -r ts-node/register test/e2e/**/*.ts",
     "test-unit": "mocha -r ts-node/register test/unit/**/*.ts",
     "lint": "tslint --fix -c tslint.json 'src/**/*.ts'"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test"
-    }
   },
   "dependencies": {
     "@types/body-parser": "^1.16.8",
