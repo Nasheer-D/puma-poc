@@ -4,5 +4,4 @@ export interface DataSourceInterface {
   user: string;
   password: string;
   database: any;
-  charset: string;
 }

@@ -12,7 +12,7 @@ services:
       - PGUSER=local_user
       - PGPASSWORD=local_pass
       - PGDATABASE=local_puma_poc
-      - PGPORT=5435
+      - PGPORT=5432
     volumes:
       - ./server/src:/usr/src/app/src
       - ./server/tsconfig.json:/usr/src/app/tsconfig.json

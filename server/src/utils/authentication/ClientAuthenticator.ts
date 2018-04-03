@@ -1,23 +1,24 @@
-import {LoggerInstance} from 'winston';
-import {UserAuthenticator} from './UserAuthenticator';
-import {MySQLSource} from '../../datasource/MySQLSource';
-import {DataSourceConfig} from '../../datasource/config/DataSource.config';
-import {DataService} from '../../datasource/DataService';
+import { LoggerInstance } from 'winston';
+import { UserAuthenticator } from './UserAuthenticator';
+import { DataSourceConfig } from '../../datasource/config/DataSource.config';
+import { DataService, ISqlQuery } from '../../datasource/DataService';
 
 export class ClientAuthenticator {
   public constructor(private logger: LoggerInstance,
-                     private username: string,
-                     private password: string) {
+    private username: string,
+    private password: string) {
   }
 
   public async authenticate(): Promise<AuthenticationResponse> {
     this.logger.debug('Login attempt with username: ', this.username);
-    const connection = new MySQLSource(DataSourceConfig.configuration).poolConnection;
 
     try {
-      const sqlQuery = `SELECT * FROM app_users where username = ?`;
+      const sqlQuery: ISqlQuery = {
+        text: `SELECT * FROM app_users where username = ?`,
+        values: [this.username]
+      };
 
-      const queryResult = await new DataService(connection).executeQueryAsPromise(sqlQuery, [this.username]);
+      const queryResult = await new DataService().executeQueryAsPromise(sqlQuery);
       if (!new UserAuthenticator().validPassword(queryResult.data[0], this.password)) {
         return <AuthenticationResponse>{
           success: false,
@@ -29,8 +30,8 @@ export class ClientAuthenticator {
       return <AuthenticationResponse>{
         success: true,
         message: `Succesful login for user: ` + this.username,
-        token:   new UserAuthenticator().generateToken(queryResult.data[0]),
-        user:    queryResult.data[0]
+        token: new UserAuthenticator().generateToken(queryResult.data[0]),
+        user: queryResult.data[0]
       };
     } catch (error) {
       if (error.message === 'Cannot read property \'0\' of undefined') {

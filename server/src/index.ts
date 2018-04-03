@@ -6,7 +6,6 @@ import { LoggerFactory } from './utils/logger';
 import { Config } from './config';
 import { IDebugger } from 'debug';
 import { Application } from 'express';
-import { DBInitiator } from './utils/db/DBInitiator';
 import { DataSourceConfig } from './datasource/config/DataSource.config';
 import * as express from 'express';
 import * as cors from 'cors';
@@ -15,7 +14,7 @@ import * as debug from 'debug';
 
 class App {
   private loggerFactory: LoggerFactory = new LoggerFactory(Config.settings.winston, Config.settings.morgan);
-  private logger: LoggerInstance = this.loggerFactory.get('App');
+  private logger: LoggerInstance = this.loggerFactory.getInstance('App');
 
   private debug: IDebugger = debug('app:main');
 
@@ -45,14 +44,12 @@ class App {
     useExpressServer(app, routingControllersOptions);
 
     this.debug('listen');
-    app.listen(Config.settings.port as number, Config.settings.host);
+    app.listen(Number(Config.settings.port), Config.settings.host);
     this.logger.info(`Visit API at ${Config.settings.host}:${Config.settings.port}${apiPath}`);
-
+    this.logger.info(process.env.PGHOST);
     process.on('unhandledRejection', (error: Error, promise: Promise<any>) => {
       this.logger.error('Unhandled rejection', error.stack);
     });
-
-    await new DBInitiator(DataSourceConfig.configuration).initiate();
   }
 }
 

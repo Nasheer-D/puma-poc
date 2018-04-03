@@ -1,7 +1,7 @@
 import * as http from 'http';
 
 export class TestHelpers {
-  public static ok = (res) => {
+  public static OK = (res: any) => {
     if (res.status !== 200) {
       const status = http.STATUS_CODES[res.status];
 
@@ -9,7 +9,7 @@ export class TestHelpers {
     }
   };
 
-  public static bad_request = (res) => {
+  public static BAD_REQUEST = (res: any) => {
     if (res.status !== 400) {
       const status = http.STATUS_CODES[res.status];
 
@@ -17,7 +17,7 @@ export class TestHelpers {
     }
   };
 
-  public static not_found = (res) => {
+  public static NOT_FOUND = (res: any) => {
     if (res.status !== 404) {
       const status = http.STATUS_CODES[res.status];
 
@@ -25,7 +25,7 @@ export class TestHelpers {
     }
   };
 
-  public static server_error = (res) => {
+  public static SERVER_ERROR = (res: any) => {
     if (res.status !== 500) {
       const status = http.STATUS_CODES[res.status];
 

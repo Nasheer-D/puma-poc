@@ -1,4 +1,4 @@
-CREATE TABLE public.users
+CREATE TABLE public.app_users
 (
     "userID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
     "userName" character varying(255) COLLATE pg_catalog."default" NOT NULL,
@@ -6,14 +6,14 @@ CREATE TABLE public.users
     password character varying(255) COLLATE pg_catalog."default" NOT NULL,
     credits double precision NOT NULL,
     "registrationDate" bigint NOT NULL,
-    CONSTRAINT users_pkey PRIMARY KEY ("userID")
+    CONSTRAINT app_users_pkey PRIMARY KEY ("userID")
 )
 WITH (
     OIDS = FALSE
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.users
+ALTER TABLE public.app_users
     OWNER to local_user;
 
 CREATE TABLE public.items
@@ -25,13 +25,13 @@ CREATE TABLE public.items
     price double precision NOT NULL,
     size character varying(255) COLLATE pg_catalog."default" NOT NULL,
     licence character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    "itemAsBase64" bytea NOT NULL,
+    "itemUrl" character varying(255) COLLATE pg_catalog."default" NOT NULL,
     tags character varying[] COLLATE pg_catalog."default",
     rating double precision[],
     "uploadedDate" bigint NOT NULL,
     CONSTRAINT items_pkey PRIMARY KEY ("itemID"),
     CONSTRAINT "ownerID" FOREIGN KEY ("ownerID")
-        REFERENCES public.users ("userID") MATCH SIMPLE
+        REFERENCES public.app_users ("userID") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )

@@ -19,7 +19,7 @@ export class LoggerFactory {
    * @param prefix
    * @returns {LoggerInstance}
    */
-  public get(prefix?: string): LoggerInstance {
+  public getInstance(prefix?: string): LoggerInstance {
     prefix = prefix || 'default';
     this.debug(`getting logger with prefix '${prefix}'`);
     if (!LoggerFactory.loggers[prefix]) {
@@ -39,7 +39,7 @@ export class LoggerFactory {
    * @returns {express.RequestHandler}
    */
   public get requestLogger(): RequestHandler {
-    const logger = this.get('RequestLogger');
+    const logger = this.getInstance('RequestLogger');
 
     const options = this.morganOptions || {};
     options.stream = {

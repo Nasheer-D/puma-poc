@@ -1,8 +1,8 @@
-import {Container} from 'typedi';
-import {JsonController, Post, Body, Param, Res} from 'routing-controllers';
-import {ClientAuthenticator, AuthenticationResponse} from '../../utils/authentication/ClientAuthenticator';
-import {LoggerFactory} from '../../utils/logger';
-import {LoggerInstance} from 'winston';
+import { Container } from 'typedi';
+import { JsonController, Post, Body, Param, Res } from 'routing-controllers';
+import { ClientAuthenticator, AuthenticationResponse } from '../../utils/authentication/ClientAuthenticator';
+import { LoggerFactory } from '../../utils/logger';
+import { LoggerInstance } from 'winston';
 
 class LoginParams {
   public username: string;
@@ -11,7 +11,7 @@ class LoginParams {
 
 @JsonController('/login')
 export class AuthController {
-  private logger: LoggerInstance = Container.get(LoggerFactory).get('AuthController');
+  private logger: LoggerInstance = Container.get(LoggerFactory).getInstance('AuthController');
 
   @Post('/')
   public async login(@Body() loginParams: LoginParams, @Res() response: any): Promise<void> {

@@ -1,42 +1,33 @@
-// import * as mysql from 'mysql';
-// import {MysqlError} from 'mysql';
+import { Pool, QueryResult, Client } from 'pg';
 import { LoggerFactory } from '../utils/logger/LoggerFactory';
 import { Container } from 'typedi';
 import { LoggerInstance } from 'winston';
 
 export class DataService {
-  private logger: LoggerInstance = Container.get(LoggerFactory).get('Request Error');
+  private logger: LoggerInstance = Container.get(LoggerFactory).getInstance('DataService');
 
-  public constructor(private connection: mysql.Pool) {
+  protected async executeQuery(sqlQuery: ISqlQuery): Promise<any> {
+    const pool: Pool = new Pool();
+    pool.on('error', (error: Error, client: Client) => {
+      this.logger.error(`Error On PG Pool. Reason: ${error}`);
+    });
 
-  }
-
-  protected async executeQuery(sqlQuery: string, callback: any, values?: string[]): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      this.connection.getConnection(async (err, conn) => {
+    return new Promise<any>(async (resolve: (res: any) => void, reject: (error: Error) => void) => {
+      await pool.query(sqlQuery, (err: Error, res: QueryResult) => {
+        pool.end();
         if (err) {
-          this.logger.error(err);
+          this.logger.error(`Error Executing Query '${sqlQuery.text}'. Reason: ${err}`);
           reject(err);
 
           return;
         }
-
-        await conn.query(sqlQuery, values, callback);
-        this.connection.end((error) => {
-          if (error) {
-            reject(error);
-
-            return;
-          }
-        });
-
-        resolve();
+        resolve(res.rows[0]);
       });
     });
   }
 
-  public executeQueryAsPromise(query: string, values?: any[]): Promise<any> {
-    const queryMessage: QueryMessage = {
+  public executeQueryAsPromise(sqlQuery: ISqlQuery): Promise<any> {
+    const queryMessage: IQueryMessage = {
       success: false,
       status: '',
       message: ''
@@ -44,65 +35,60 @@ export class DataService {
 
     return new Promise(async (resolve, reject) => {
       try {
-        await this.executeQuery(query,
-          (err: MysqlError, result) => {
-            if (err) {
-              queryMessage.status = 'FAILED';
-              queryMessage.message = `SQL Query failed. Reason: ${err.message}`;
-              queryMessage.errcode = err.code;
+        const result = await this.executeQuery(sqlQuery);
+        if (result.length === 0) {
+          queryMessage.status = 'NO DATA';
+          queryMessage.message = `SQL Query returned no data from database.`;
 
-              resolve(queryMessage);
-            } else if (result.length === 0) {
-              queryMessage.status = 'NO DATA';
-              queryMessage.message = `SQL Query returned no data from database.`;
+          resolve(queryMessage);
+        } else {
+          queryMessage.success = true;
+          queryMessage.status = 'OK';
+          queryMessage.message = `SQL Query completed successful.`;
+          queryMessage.data = result;
 
-              resolve(queryMessage);
-            } else {
-              queryMessage.success = true;
-              queryMessage.status = 'OK';
-              queryMessage.message = `SQL Query completed successful.`;
-              queryMessage.data = result;
+          resolve(queryMessage);
+        }
+      } catch (err) {
+        queryMessage.status = 'FALED';
+        queryMessage.message = `SQL Query failed. ${err}`;
 
-              resolve(queryMessage);
-            }
-          }, values);
-      } catch (error) {
-        reject(error);
+        reject(queryMessage);
       }
-
     });
   }
 
-  public executeUpdateAsPromise(query: string, updateType: string, values?: any[]): Promise<any> {
-    const updateMessage: UpdateMessage = {
+  public executeUpdateAsPromise(sqlQuery: ISqlQuery, updateType: string): Promise<any> {
+    const updateMessage: IUpdateMessage = {
       success: false,
       status: '',
       message: ''
     };
 
-    return new Promise(async (resolve) => {
-      await this.executeQuery(query,
-        (err: MysqlError) => {
-          if (err) {
-            this.logger.error(`Error on '${updateType}'. Reason: ${err.message}`);
-            updateMessage.status = 'FAILED';
-            updateMessage.message = `Query for ${updateType} completed has failed. Reason: ${err.message}`;
-            updateMessage.errcode = err.code;
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await this.executeQuery(sqlQuery);
+        updateMessage.success = true;
+        updateMessage.status = 'OK';
+        updateMessage.message = `SQL Query completed successful.`;
 
-            resolve(updateMessage);
-          } else {
-            updateMessage.success = true;
-            updateMessage.status = 'OK';
-            updateMessage.message = `Query for ${updateType} completed successful.`;
+        resolve(updateMessage);
+      } catch (err) {
+        updateMessage.status = 'FAILED';
+        updateMessage.message = `Query for ${updateType} completed has failed. Reason: ${err.message}`;
+        updateMessage.errcode = err.code;
 
-            resolve(updateMessage);
-          }
-        }, values);
+        reject(updateMessage);
+      }
     });
   }
 }
 
-export interface QueryMessage {
+export interface ISqlQuery {
+  text: string;
+  values?: any[];
+}
+export interface IQueryMessage {
   success: boolean;
   status: string;
   message: string;
@@ -110,7 +96,7 @@ export interface QueryMessage {
   errcode?: string;
 }
 
-export interface UpdateMessage {
+export interface IUpdateMessage {
   success: boolean;
   status: string;
   message: string;

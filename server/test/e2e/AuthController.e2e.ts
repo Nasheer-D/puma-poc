@@ -3,22 +3,23 @@ import 'mocha';
 import * as chai from 'chai';
 import {TestHelpers} from '../testHelpers';
 
+// tslint:disable-next-line:mocha-no-side-effect-code
 const should = chai.should();
-
-let server = supertest.agent('http://192.168.99.100:8080');
-let endpoint = '/api/v1/login';
+// tslint:disable-next-line:no-http-string
+const server = supertest.agent('http://localhost:8080');
+const endpoint = '/api/v1/login';
 
 describe('An AuthController', () => {
   it('should login an admin user', (done) => {
-    let loginParams = {
-      'username': 'admin',
-      'password': 'admin'
+    const loginParams = {
+      username: 'admin',
+      password: 'admin'
     };
 
     server
       .post(endpoint)
       .send(loginParams)
-      .expect(TestHelpers.ok)
+      .expect(TestHelpers.OK)
       .expect('Content-Type', /json/)
       .expect(200)
       .end((err: Error, res) => {
@@ -34,15 +35,15 @@ describe('An AuthController', () => {
 
 describe('An AuthController', () => {
   it('should login a normal user', (done) => {
-    let loginParams = {
-      'username': 'user',
-      'password': 'passw0rd'
+    const loginParams = {
+      username: 'user',
+      password: 'passw0rd'
     };
 
     server
       .post(endpoint)
       .send(loginParams)
-      .expect(TestHelpers.ok)
+      .expect(TestHelpers.OK)
       .expect('Content-Type', /json/)
       .expect(200)
       .end((err: Error, res) => {
@@ -58,15 +59,15 @@ describe('An AuthController', () => {
 
 describe('An AuthController', () => {
   it('should give a "WRONG_PASS" error when the user password is wrong', (done) => {
-    let loginParams = {
-      'username': 'user',
-      'password': 'wrong_pass'
+    const loginParams = {
+      username: 'user',
+      password: 'wrong_pass'
     };
 
     server
       .post(endpoint)
       .send(loginParams)
-      .expect(TestHelpers.bad_request)
+      .expect(TestHelpers.BAD_REQUEST)
       .expect('Content-Type', /json/)
       .expect(400)
       .end((err: Error, res) => {
@@ -82,15 +83,15 @@ describe('An AuthController', () => {
 
 describe('An AuthController', () => {
   it('should give a "NO_USER" error when the user does not exists', (done) => {
-    let loginParams = {
-      'username': 'no_user',
-      'password': 'wrong_pass'
+    const loginParams = {
+      username: 'no_user',
+      password: 'wrong_pass'
     };
 
     server
       .post(endpoint)
       .send(loginParams)
-      .expect(TestHelpers.bad_request)
+      .expect(TestHelpers.BAD_REQUEST)
       .expect('Content-Type', /json/)
       .expect(400)
       .end((err: Error, res) => {

@@ -1,6 +1,7 @@
 {
   "linterOptions": {
     "exclude": [
+      "test/**.ts",
       "test/**/*.ts"
     ]
   },
@@ -52,10 +53,6 @@
     "jquery-deferred-must-complete": true,
     "jsdoc-format": false,
     "label-position": true,
-    "linebreak-style": [
-      true,
-      "LF"
-    ],
     "max-classes-per-file": [
       false
     ],
@@ -80,7 +77,7 @@
     "missing-jsdoc": false,
     "missing-optional-annotation": false,
     "mocha-avoid-only": true,
-    "mocha-no-side-effect-code": true,
+    "mocha-no-side-effect-code": false,
     "mocha-unneeded-done": true,
     "new-parens": true,
     "no-angle-bracket-type-assertion": false,
@@ -294,7 +291,6 @@
     "binary-expression-operand-order": false,
     "deprecation": false,
     "encoding": true,
-    "no-duplicate-imports": false,
     "no-irregular-whitespace": true,
     "no-object-literal-type-assertion": false,
     "no-parameter-reassignment": false,
