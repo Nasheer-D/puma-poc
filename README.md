@@ -10,33 +10,34 @@
 ## Get started
 1. Clone this repo   
 ```git
-git clone https://github.com/pumapayio/puma.poc.git
+$ git clone https://github.com/pumapayio/puma.poc.git
 ```
 
 2. Change to project directory
 ```sh
-cd puma.poc
+$ cd puma.poc
 ```
 
 3. Install the required packages
 ```npm
-npm install
+$ npm install
 ```
 or individually server and client
 ```npm
-npm install-server
-npm install-client
+$ npm install-server
+$ npm install-client
 ```
 
 4. Build the docker containers
 ```docker
-docker-compose build
+$ docker-compose build
 ```
 
 5. Start the application
 ```docker
-docker-compose up -d
+$ docker-compose up -d
 ```
+
 #### Clean up local development environment 
 Remove running PostgreSQL container
 ```bash

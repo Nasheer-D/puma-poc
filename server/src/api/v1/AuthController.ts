@@ -1,8 +1,8 @@
 import { Container } from 'typedi';
 import { JsonController, Post, Body, Param, Res } from 'routing-controllers';
+import { LoggerInstance } from 'winston';
 import { ClientAuthenticator, AuthenticationResponse } from '../../utils/authentication/ClientAuthenticator';
 import { LoggerFactory } from '../../utils/logger';
-import { LoggerInstance } from 'winston';
 
 class LoginParams {
   public username: string;

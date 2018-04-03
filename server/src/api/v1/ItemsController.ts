@@ -1,7 +1,7 @@
 import { Body, Get, JsonController, Param, Post, UseBefore, Put, Delete, Res } from 'routing-controllers';
-import { LoggerFactory } from '../../utils/logger/LoggerFactory';
 import { Container } from 'typedi';
 import { LoggerInstance } from 'winston';
+import { LoggerFactory } from '../../utils/logger/LoggerFactory';
 import { DataSourceConfig } from '../../datasource/config/DataSource.config';
 import { DataService, IQueryMessage, ISqlQuery } from '../../datasource/DataService';
 import { UserAuthenticatorMiddleware } from '../../middleware/UserAuthenticatorMiddleware';
