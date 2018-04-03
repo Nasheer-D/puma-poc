@@ -1,0 +1,58 @@
+version: '3'
+services:
+  server:
+    build: server
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=development
+      - HOST=0.0.0.0
+      - PORT=8080
+      - PGHOST=postgres
+      - PGUSER=local_user
+      - PGPASSWORD=local_pass
+      - PGDATABASE=local_puma_poc
+      - PGPORT=5435
+    volumes:
+      - ./server/src:/usr/src/app/src
+      - ./server/tsconfig.json:/usr/src/app/tsconfig.json
+      - ./server/package.json:/usr/src/app/package.json
+      - ./server/resources:/usr/src/app/resources
+    depends_on:
+      - postgres
+    networks:
+      - puma_poc
+    command: sh -c "npm start"
+
+  # Web client
+  client:
+    build: client
+    ports:
+        - "4200:4200"
+        - "49153:49153"
+    volumes:
+        - ./client/src:/usr/src/app/src
+        - ./client/angular-cli.json:/usr/src/app/angular-cli.json
+        - ./client/tslint.json:/usr/src/app/tslint.json
+    command: bash -c 'ng lint && ng serve --host 0.0.0.0'
+    networks:
+      - puma_poc
+
+  postgres:
+    image: postgres:9.6
+    environment:
+      POSTGRES_PASSWORD: local_pass
+      POSTGRES_USER: local_user
+      POSTGRES_DB: local_puma_poc
+    ports:
+      - "5435:5432"
+    volumes:
+      - ./db/init-tables.sql:/docker-entrypoint-initdb.d/20-create-tables.sql
+      - ./db/insert-users.sql:/docker-entrypoint-initdb.d/21-insert-users.sql
+      - ./db/insert-items.sql:/docker-entrypoint-initdb.d/22-insert-items.sql
+    networks:
+      - puma_poc
+    restart: unless-stopped
+networks:
+  puma_poc:
+    driver: bridge

@@ -1,0 +1,23 @@
+{
+  "name": "pumapay.poc",
+  "version": "0.0.1",
+  "description": "PumaPay Proof of Concept",
+  "main": "docker-compose.yml",
+  "scripts": {
+    "install": "cd server && npm install && cd ../client && npm install",
+    "install-server": "cd server && npm install",
+    "install-client": "cd client && npm install",
+    "start": "docker-compose up -d --force-recreate",
+    "test-server": "cd server && npm test",
+    "test-client": "cd client && npm test"
+  },
+  "keywords": [
+    "NodeJS",
+    "Angular",
+    "PostgreSql",
+    "Docker",
+    "PumaPay"
+  ],
+  "author": "PumaPay Team",
+  "license": "ISC"
+}

@@ -1,0 +1,22 @@
+{
+  "users": [{
+    "userID": "admin",
+    "password": "admin",
+    "role": "admin"
+  },
+  {
+    "userID": "user",
+    "password": "passw0rd",
+    "role": "user"
+  }],
+  "things": [
+    {
+      "thingID": "01",
+      "description": "thing one description"
+    },
+    {
+      "thingID": "02",
+      "description": "thing two description"
+    }
+  ]
+}
