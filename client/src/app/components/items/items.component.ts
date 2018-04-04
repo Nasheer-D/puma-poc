@@ -17,9 +17,9 @@ export class ItemsComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.thingsService.getAllThings().subscribe((things: HttpResponse) => {
-      this.things = things.data;
-    });
+    // this.thingsService.getAllThings().subscribe((things: HttpResponse) => {
+    //   this.things = things.data;
+    // });
   }
 
   public goToThingDetals(thingID: string) {
