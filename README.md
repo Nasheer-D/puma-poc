@@ -7,6 +7,10 @@
 * [Install Docker](https://docs.docker.com/engine/installation/)
 * Install [Angular-cli](https://github.com/angular/angular-cli) - `npm install -g @angular/cli@latest`
 
+### Configure Docker
+You need to share your C drive with docker. Go to `Docker > Settings > Shared Drives > Select C > Apply` - You will be asked to fill in your credentials.
+In case this doesn't work, follow [this guide](https://blogs.msdn.microsoft.com/stevelasker/2016/06/14/configuring-docker-for-windows-volumes/).
+
 ## Get started
 1. Clone this repo   
 ```git
