@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NglModule } from 'ng-lightning/ng-lightning';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { routing, appRoutingProviders } from './app.routing';
@@ -28,7 +28,7 @@ import { ThingDetailsComponent } from './components/thing-details/thing-details.
     FormsModule,
     HttpClientModule,
     routing,
-    NglModule.forRoot()
+    NgbModule.forRoot()
   ],
   providers: [
     appRoutingProviders,
