@@ -10,7 +10,7 @@
 ## Get started
 1. Clone this repo   
 ```git
-$ git clone https://github.com/pumapayio/puma.poc.git
+$ git clone https://github.com/pumapayio/puma-poc.git
 ```
 
 2. Change to project directory
