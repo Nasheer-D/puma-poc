@@ -10,7 +10,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { ThingsComponent } from './components/things/things.component';
+import { ItemsComponent } from './components/items/items.component';
 
 import { ThingService } from './services/things.service';
 import { AuthenticationService } from './services/authentication.service';
@@ -20,7 +20,7 @@ import { ThingDetailsComponent } from './components/thing-details/thing-details.
   declarations: [
     AppComponent,
     LoginComponent,
-    ThingsComponent,
+    ItemsComponent,
     ThingDetailsComponent
   ],
   imports: [

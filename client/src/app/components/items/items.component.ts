@@ -5,11 +5,11 @@ import { HttpResponse } from '../../utils/web/models/HttpResponse';
 import { Thing } from '../../models/Thing';
 
 @Component({
-  selector: 'app-things',
-  templateUrl: './things.component.html',
-  styleUrls: ['./things.component.css']
+  selector: 'app-items',
+  templateUrl: './items.component.html',
+  styleUrls: ['./items.component.css']
 })
-export class ThingsComponent implements OnInit {
+export class ItemsComponent implements OnInit {
   private things: Thing;
 
   public constructor( private router: Router,
