@@ -6,7 +6,6 @@ import { LoggerFactory } from './utils/logger';
 import { Config } from './config';
 import { IDebugger } from 'debug';
 import { Application } from 'express';
-import { DataSourceConfig } from './datasource/config/DataSource.config';
 import * as express from 'express';
 import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
@@ -26,6 +25,7 @@ class App {
 
     // parse application/json
     app.use(bodyParser.json());
+    // allow CORS
     app.use(cors());
     app.use(this.loggerFactory.requestLogger);
 
@@ -46,7 +46,6 @@ class App {
     this.debug('listen');
     app.listen(Number(Config.settings.port), Config.settings.host);
     this.logger.info(`Visit API at ${Config.settings.host}:${Config.settings.port}${apiPath}`);
-    this.logger.info(process.env.PGHOST);
 
     process.on('unhandledRejection', (error: Error, promise: Promise<any>) => {
       this.logger.error('Unhandled rejection', error.stack);
