@@ -25,7 +25,6 @@
     "core-js": "^2.5.4",
     "jwt-decode": "^2.2.0",
     "rxjs": "^5.5.8",
-    "save": "^2.3.2",
     "zone.js": "^0.8.24"
   },
   "devDependencies": {
