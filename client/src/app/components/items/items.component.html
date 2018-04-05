@@ -1,13 +1,2 @@
 
 <app-header></app-header>
-<div class="slds-grid slds-gutters" *ngFor="let thing of things">
-  <div class="slds-col">
-    <span>ThingID: {{thing.thingID}}</span>
-  </div>
-  <div class="slds-col">
-    <span>Description: {{thing.description}}</span>
-  </div>
-  <div class="slds-col last_column">
-    <button (click)="goToThingDetals(thing.thingID); return;">Go To Details</button>
-  </div>
-</div>
