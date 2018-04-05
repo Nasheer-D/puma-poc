@@ -15,7 +15,7 @@ export class ItemsController {
   @Get('/')
   public async getAllItems(@Res() response: any): Promise<any> {
     const sqlQuery: ISqlQuery = {
-      text: `SELECT * FROM itemsss`
+      text: `SELECT * FROM items`
     };
 
     try {

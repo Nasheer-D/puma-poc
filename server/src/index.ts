@@ -47,6 +47,7 @@ class App {
     app.listen(Number(Config.settings.port), Config.settings.host);
     this.logger.info(`Visit API at ${Config.settings.host}:${Config.settings.port}${apiPath}`);
     this.logger.info(process.env.PGHOST);
+
     process.on('unhandledRejection', (error: Error, promise: Promise<any>) => {
       this.logger.error('Unhandled rejection', error.stack);
     });
