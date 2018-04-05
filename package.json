@@ -27,5 +27,9 @@
   },
   "devDependencies": {
     "husky": "^0.15.0-rc.13"
+  },
+  "dependencies": {
+    "client": "file:client",
+    "server": "file:server"
   }
 }
