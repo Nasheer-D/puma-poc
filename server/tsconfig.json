@@ -9,7 +9,8 @@
     "outDir":                 "dist",
     "emitDecoratorMetadata":  true,
     "experimentalDecorators": true,
-    "strictNullChecks":       false
+    "strictNullChecks":       false,
+    "noUnusedLocals":         true
   },
   "include":         [
     "src/**/*",

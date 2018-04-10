@@ -1,0 +1,75 @@
+openapi: "3.0.0"
+info:
+  title: PumaPay PoC API
+  description: ATTENTION - FOR INTERNAL USE ONLY
+  version: 0.0.1
+  contact: 
+    name: PumaPay Team
+    email: dev@pumapay.io
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local server
+paths:
+  /items:
+    get:
+      summary: List all items
+      operationId: getAllItems
+      tags:
+        - Item
+      responses:
+        '200':
+          description: A Success Responce with a JSON array of all items
+          content:
+            application/json:    
+              schema:
+               allOf:
+                - $ref: "#/components/schemas/Response"
+                - type: object
+                  properties:
+                    data: 
+                      type: array
+                      items: 
+                        $ref: "#/components/schemas/Item"
+components:
+  schemas:
+    Response:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        status:
+          type: string
+        data: 
+          type: array
+          items: {}
+    Item:
+      type: object
+      properties:
+        itemID: 
+          type: string
+        ownerID: 
+          type: string
+        title: 
+          type: string
+        description: 
+          type: string
+        price: 
+          type: number
+        size: 
+          type: number
+        licence: 
+          type: string
+        itemUrl: 
+          type: string
+        tags: 
+          type: array
+          items: 
+            type: string
+        rating: 
+          type: array
+          items: 
+            type: number
+        uploadedDate: 
+          type: number

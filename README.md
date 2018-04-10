@@ -72,7 +72,24 @@ To run individual unit test
 $ mocha -r ts-node/register path/to/unit/test
 ```
 
-## Docker
+# API Documentation
+To see the specification of the APIs import [swagger.yml](./swagger.yml) at the [online swagger editor](https://editor.swagger.io)
+
+# Troubleshooting
+
+### Docker containers failed to start 
+In case of the error below when starting the docker containers, you should quit docker from the taskbar and start it again
+```
+ERROR: for pumaapi_pp_io_dev_1  Cannot start service pp_io_dev: driver failed programming external connectivity on endpoint pumaapi_pp_io_dev_1 
+```
+
+### Docker Shared Volumes - Not working as expected
+In case of the error below when starting the docker containers, you should go to Docker Settings from the taskbar > Shared Drives > UnShare and Share the C drive for this to work. Keep in mind that your firewall should be disabled during this process. 
+```
+ psql:/docker-entrypoint-initdb.d/20-create-io-tables.sql:0: could not read from input file: Is a directory
+ ```
+
+# Docker Useful Links
 You can find some more info about docker [here](https://github.com/wsargent/docker-cheat-sheet) and [here](https://medium.com/statuscode/dockercheatsheet-9730ce03630d)
 #### Other Useful docker commands 
 * Build Docker images
@@ -122,17 +139,3 @@ docker-compose logs -f
 # or for a specific container 
 docker-compose logs -f <CONTAINER_NAME>
 ```
-
-# Troubleshooting
-
-### Docker containers failed to start 
-In case of the error below when starting the docker containers, you should quit docker from the taskbar and start it again
-```
-ERROR: for pumaapi_pp_io_dev_1  Cannot start service pp_io_dev: driver failed programming external connectivity on endpoint pumaapi_pp_io_dev_1 
-```
-
-### Docker Shared Volumes - Not working as expected
-In case of the error below when starting the docker containers, you should go to Docker Settings from the taskbar > Shared Drives > UnShare and Share the C drive for this to work. Keep in mind that your firewall should be disabled during this process. 
-```
- psql:/docker-entrypoint-initdb.d/20-create-io-tables.sql:0: could not read from input file: Is a directory
- ```
