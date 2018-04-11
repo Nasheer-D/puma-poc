@@ -21,7 +21,7 @@ export class DataService {
 
           return;
         }
-        resolve(res.rows[0]);
+        resolve(res.rows);
       });
     });
   }
@@ -50,35 +50,11 @@ export class DataService {
           resolve(queryMessage);
         }
       } catch (err) {
-        queryMessage.status = 'FALED';
+        queryMessage.status = 'FAILED';
         queryMessage.message = `SQL Query failed. ${err}`;
+        queryMessage.catched = true;
 
         reject(queryMessage);
-      }
-    });
-  }
-
-  public executeUpdateAsPromise(sqlQuery: ISqlQuery, updateType: string): Promise<any> {
-    const updateMessage: IUpdateMessage = {
-      success: false,
-      status: '',
-      message: ''
-    };
-
-    return new Promise(async (resolve, reject) => {
-      try {
-        const result = await this.executeQuery(sqlQuery);
-        updateMessage.success = true;
-        updateMessage.status = 'OK';
-        updateMessage.message = `SQL Query completed successful.`;
-
-        resolve(updateMessage);
-      } catch (err) {
-        updateMessage.status = 'FAILED';
-        updateMessage.message = `Query for ${updateType} completed has failed. Reason: ${err.message}`;
-        updateMessage.errcode = err.code;
-
-        reject(updateMessage);
       }
     });
   }
@@ -94,11 +70,5 @@ export interface IQueryMessage {
   message: string;
   data?: any;
   errcode?: string;
-}
-
-export interface IUpdateMessage {
-  success: boolean;
-  status: string;
-  message: string;
-  errcode?: string;
+  catched?: boolean;
 }
