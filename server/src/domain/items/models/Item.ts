@@ -5,7 +5,7 @@ export class Item {
   public title: string;
   public description: string;
   public price: number;
-  public size: string;
+  public size: number;
   public licence: string;
   public itemUrl: string;
   public tags: string[];
