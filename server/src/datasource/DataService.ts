@@ -50,37 +50,11 @@ export class DataService {
           resolve(queryMessage);
         }
       } catch (err) {
-        queryMessage.status = 'FALED';
+        queryMessage.status = 'FAILED';
         queryMessage.message = `SQL Query failed. ${err}`;
         queryMessage.catched = true;
 
         reject(queryMessage);
-      }
-    });
-  }
-
-  public executeUpdateAsPromise(sqlQuery: ISqlQuery, updateType: string): Promise<any> {
-    const updateMessage: IQueryMessage = {
-      success: false,
-      status: '',
-      message: ''
-    };
-
-    return new Promise(async (resolve, reject) => {
-      try {
-        const result = await this.executeQuery(sqlQuery);
-        updateMessage.success = true;
-        updateMessage.status = 'OK';
-        updateMessage.message = `SQL Query completed successful.`;
-
-        resolve(updateMessage);
-      } catch (err) {
-        updateMessage.status = 'FAILED';
-        updateMessage.message = `Query for ${updateType} completed has failed. Reason: ${err.message}`;
-        updateMessage.errcode = err.code;
-        updateMessage.catched = true;
-
-        reject(updateMessage);
       }
     });
   }

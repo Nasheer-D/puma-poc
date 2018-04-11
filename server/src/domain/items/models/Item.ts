@@ -1,11 +1,11 @@
 // tslint:disable:variable-name
 export class Item {
-  public thingID: string;
+  public itemID: string;
   public ownerID: string;
   public title: string;
   public description: string;
   public price: number;
-  public size: string;
+  public size: number;
   public licence: string;
   public itemUrl: string;
   public tags: string[];
