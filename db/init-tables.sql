@@ -42,3 +42,18 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.items
     OWNER to local_user;
+
+-- THIS IS A TEST TABLE USED ONLY FOR DEVELOPMENT AND UNIT TEST REASONS
+-- DO NOT CREATE THIS TABLE IN THE PRODUCTION ENVIRONENT 
+CREATE TABLE public.test_table
+(
+    "testID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT test_table_pkey PRIMARY KEY ("testID")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.items
+    OWNER to local_user;

@@ -69,6 +69,7 @@ $ npm run test-unit
 ```
 To run individual unit test
 ```bash
+$ cd server 
 $ mocha -r ts-node/register path/to/unit/test
 ```
 
