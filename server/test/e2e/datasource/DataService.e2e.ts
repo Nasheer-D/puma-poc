@@ -12,6 +12,7 @@ process.env.PGPASSWORD = 'local_pass';
 process.env.PGDATABASE = 'local_puma_poc';
 
 const dataservice = new DataService();
+
 const insertTestData = async () => {
     const sqlQuery: ISqlQuery = {
         text: `INSERT INTO test_table("testID") VALUES ($1);`,
@@ -19,12 +20,14 @@ const insertTestData = async () => {
     };
     await dataservice.executeQueryAsPromise(sqlQuery);
 }
+
 const clearTestData = async () => {
     const sqlQuery: ISqlQuery = {
         text: `DELETE FROM test_table`
     };
     await dataservice.executeQueryAsPromise(sqlQuery);
 }
+
 describe('A DataService', () => {
     describe('with a correct query', () => {
         afterEach(async () => {
@@ -65,33 +68,6 @@ describe('A DataService', () => {
         it('should return a success message when inserting correctly into the DB',  () => {
             const sqlQuery: ISqlQuery = {
                 text: `INSERT INTO test_table("testID") VALUES ($1) RETURNING *`,
-                values: ['0000']
-            };
-            const result = dataservice.executeQueryAsPromise(sqlQuery);
-
-            const expectedQueryMessage: IQueryMessage = {
-                success: true,
-                status: 'OK',
-                message: 'SQL Query completed successful.',
-                data: [
-                    {
-                        testID: '0000'
-                    }
-                ]
-            };
-
-            expect(result.then).to.be.a('Function');
-            expect(result.catch).to.be.a('Function');
-            expect(result).to.eventually.be.fulfilled;
-            expect(Promise.resolve(result)).to.eventually.have.property('success').that.is.equal(expectedQueryMessage.success);
-            expect(Promise.resolve(result)).to.eventually.have.property('status').that.is.equal(expectedQueryMessage.status);
-            expect(Promise.resolve(result)).to.eventually.have.property('message').that.is.equal(expectedQueryMessage.message);
-            expect(Promise.resolve(result)).to.eventually.have.property('data').to.be.an('array').to.deep.equal(expectedQueryMessage.data);
-        });
-
-        it('should return a success message when inserting correctly into the DB',  () => {
-            const sqlQuery: ISqlQuery = {
-                text: `UPDATE test_table SET "testID" = ($1) WHERE "testID" = '1234' RETURNING *`,
                 values: ['0000']
             };
             const result = dataservice.executeQueryAsPromise(sqlQuery);
