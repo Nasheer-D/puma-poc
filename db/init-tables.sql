@@ -16,10 +16,6 @@ TABLESPACE pg_default;
 ALTER TABLE public.app_users
     OWNER to local_user;
 
--- Table: public.items
-
--- DROP TABLE public.items;
-
 CREATE TABLE public.items
 (
     "itemID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
