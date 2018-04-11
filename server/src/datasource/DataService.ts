@@ -1,7 +1,8 @@
-import { Pool, QueryResult, Client } from 'pg';
+import { Pool, Client } from 'pg';
 import { LoggerFactory } from '../utils/logger/LoggerFactory';
 import { Container } from 'typedi';
 import { LoggerInstance } from 'winston';
+import { DbErrorHelper } from '../utils/dbHelpers/dbErrorHelper';
 
 export class DataService {
   private logger: LoggerInstance = Container.get(LoggerFactory).getInstance('DataService');
@@ -12,18 +13,7 @@ export class DataService {
       this.logger.error(`Error On PG Pool. Reason: ${error}`);
     });
 
-    return new Promise<any>(async (resolve: (res: any) => void, reject: (error: Error) => void) => {
-      await pool.query(sqlQuery, (err: Error, res: QueryResult) => {
-        pool.end();
-        if (err) {
-          this.logger.error(`Error Executing Query '${sqlQuery.text}'. Reason: ${err}`);
-          reject(err);
-
-          return;
-        }
-        resolve(res.rows);
-      });
-    });
+    return pool.query(sqlQuery);
   }
 
   public executeQueryAsPromise(sqlQuery: ISqlQuery): Promise<any> {
@@ -36,7 +26,7 @@ export class DataService {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await this.executeQuery(sqlQuery);
-        if (result.length === 0) {
+        if (result.rows.length === 0) {
           queryMessage.status = 'NO DATA';
           queryMessage.message = `SQL Query returned no data from database.`;
 
@@ -45,42 +35,17 @@ export class DataService {
           queryMessage.success = true;
           queryMessage.status = 'OK';
           queryMessage.message = `SQL Query completed successful.`;
-          queryMessage.data = result;
+          queryMessage.data = result.rows;
 
           resolve(queryMessage);
         }
       } catch (err) {
-        queryMessage.status = 'FALED';
-        queryMessage.message = `SQL Query failed. ${err}`;
+        queryMessage.status = 'FAILED';
+        queryMessage.message = `SQL Query failed. Reason: ${DbErrorHelper.GET_DB_ERROR_CODES()[err.code]}`;
+        queryMessage.errcode = err.code;
         queryMessage.catched = true;
 
         reject(queryMessage);
-      }
-    });
-  }
-
-  public executeUpdateAsPromise(sqlQuery: ISqlQuery, updateType: string): Promise<any> {
-    const updateMessage: IQueryMessage = {
-      success: false,
-      status: '',
-      message: ''
-    };
-
-    return new Promise(async (resolve, reject) => {
-      try {
-        const result = await this.executeQuery(sqlQuery);
-        updateMessage.success = true;
-        updateMessage.status = 'OK';
-        updateMessage.message = `SQL Query completed successful.`;
-
-        resolve(updateMessage);
-      } catch (err) {
-        updateMessage.status = 'FAILED';
-        updateMessage.message = `Query for ${updateType} completed has failed. Reason: ${err.message}`;
-        updateMessage.errcode = err.code;
-        updateMessage.catched = true;
-
-        reject(updateMessage);
       }
     });
   }
