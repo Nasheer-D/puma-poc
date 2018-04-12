@@ -1,7 +1,14 @@
-.last_column {
-  text-align: right;
+img {
+  height: 400px;
+  width: 550px;
+  border-radius: 8px; 
 }
 
-.slds-col {
-  margin: 10px 0px
+.box {
+  padding: 20px 20px 20px 20px;
 }
+
+.mt-2{
+  margin: 60px;
+}
+

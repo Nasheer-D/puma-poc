@@ -9,7 +9,7 @@ INSERT INTO public.items(
 
 INSERT INTO public.items(
 	"itemID", "ownerID", title, description, price, size, licence, "itemUrl", tags, rating, "uploadedDate")
-	VALUES ('item03', 'owner01', 'Item 03 Title', 'Item 03 Description', 2000, 10500, 'standard', 'https://s3.amazonaws.com/pumapay-poc-items/pumapay03.png', '{"puma", "ico", "crypto"}', '{4, 3.5, 5}', 1522759457);
+	VALUES ('item03', 'owner01', 'Item 03 Title', 'Item 03 Description', 2000, 10500, 'standard', 'https://s3.amazonaws.com/pumapay-poc-items/pumapay03.jpg', '{"puma", "ico", "crypto"}', '{4, 3.5, 5}', 1522759457);
 
 INSERT INTO public.items(
 	"itemID", "ownerID", title, description, price, size, licence, "itemUrl", tags, rating, "uploadedDate")
@@ -17,7 +17,7 @@ INSERT INTO public.items(
 
 INSERT INTO public.items(
 	"itemID", "ownerID", title, description, price, size, licence, "itemUrl", tags, rating, "uploadedDate")
-	VALUES ('item05', 'owner01', 'Item 05 Title', 'Item 05 Description', 8000, 3900, 'standard', 'https://s3.amazonaws.com/pumapay-poc-items/pumapay05.png', '{"puma", "ico", "crypto"}', '{4, 3.5, 5}', 1522759457);
+	VALUES ('item05', 'owner01', 'Item 05 Title', 'Item 05 Description', 8000, 3900, 'standard', 'https://s3.amazonaws.com/pumapay-poc-items/pumapay05.jpg', '{"puma", "ico", "crypto"}', '{4, 3.5, 5}', 1522759457);
 
 INSERT INTO public.items(
 	"itemID", "ownerID", title, description, price, size, licence, "itemUrl", tags, rating, "uploadedDate")

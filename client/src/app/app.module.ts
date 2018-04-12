@@ -13,7 +13,6 @@ import { LoginComponent } from './components/login/login.component';
 import { ItemsComponent } from './components/items/items.component';
 
 import { AuthenticationService } from './services/authentication.service';
-import { ThingDetailsComponent } from './components/thing-details/thing-details.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { ItemsService } from './services/items.service';
 
@@ -22,7 +21,6 @@ import { ItemsService } from './services/items.service';
     AppComponent,
     LoginComponent,
     ItemsComponent,
-    ThingDetailsComponent,
     HeaderComponent
   ],
   imports: [

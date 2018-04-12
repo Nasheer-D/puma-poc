@@ -3,12 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './components/login/login.component';
 import { ItemsComponent } from './components/items/items.component';
-import { ThingDetailsComponent } from './components/thing-details/thing-details.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'items', component: ItemsComponent },
-  { path: 'item-details/:thingID', component: ThingDetailsComponent},
 
   // otherwise redirect to login
   { path: '**', redirectTo: 'items' }
