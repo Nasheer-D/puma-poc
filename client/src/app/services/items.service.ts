@@ -9,11 +9,11 @@ import { Item } from '../models/Item';
 export class ItemsService {
     private actionUrl: string;
 
-    public constructor(private http: HttpClient, private authService: AuthenticationService) {
+    public constructor(private http: HttpClient) {
         this.actionUrl = `${Constants.apiHost}${Constants.apiPrefix}items`;
     }
 
     public getAllImages() {
-        return new HttpGetRequest(this.http, this.actionUrl, this.authService).getResult();
+        return new HttpGetRequest(this.http, this.actionUrl).getResult();
     }
 }
