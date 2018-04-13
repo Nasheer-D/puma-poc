@@ -12,10 +12,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { ItemsComponent } from './components/items/items.component';
 
-import { ThingService } from './services/things.service';
 import { AuthenticationService } from './services/authentication.service';
 import { ThingDetailsComponent } from './components/thing-details/thing-details.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { ItemsService } from './services/items.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import { HeaderComponent } from './shared/header/header.component';
     Constants,
     AuthenticationService,
     AuthGuard,
-    ThingService
+    ItemsService
   ],
   bootstrap: [AppComponent]
 })
