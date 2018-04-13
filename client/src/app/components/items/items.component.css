@@ -1,14 +1,9 @@
 img {
-  height: 400px;
-  width: 550px;
+  height: 204px;
+  width: 316px;
   border-radius: 8px; 
 }
 
-.box {
-  padding: 20px 20px 20px 20px;
+.image-container {
+  padding: 12px;
 }
-
-.mt-2{
-  margin: 60px;
-}
-

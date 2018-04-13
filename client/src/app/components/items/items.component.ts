@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpResponse } from '../../utils/web/models/HttpResponse';
 import { ItemsService } from '../../services/items.service';
 import { Item } from '../../models/Item';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-items',
@@ -12,13 +13,19 @@ import { Item } from '../../models/Item';
 
 })
 export class ItemsComponent implements OnInit {
-  public items: Array<Item> = new Array<Item>();
+  public items: Item[] = [];
 
-  public constructor(private router: Router, private itemsService: ItemsService) { }
+  public constructor(private itemsService: ItemsService) { }
 
   public ngOnInit() {
-    this.itemsService.getAllItems().subscribe((items: HttpResponse) => {
-      this.items = items.data;
+    this.itemsService.getAllItems().subscribe((res: HttpResponse) => {
+      if (res.success) {
+        this.items = res.data;
+      } else {
+        alert(res.message);
+      }
     });
   }
 }
+
+
