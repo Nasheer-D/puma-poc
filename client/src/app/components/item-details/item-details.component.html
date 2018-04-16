@@ -1,0 +1,35 @@
+<app-header></app-header>
+<br>
+<div class="container">
+  <div class="row">
+    <a href="items" class="backLink"> &laquo; Back to search results</a>
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="row row-center">
+    <div class="col-lg-4">
+      <img class="img-responsive" src={{itemsDetails.itemUrl}} alt="{{itemsDetails.description}}">
+      <br>
+      <br>
+      <label class="plainText">Largest size: {{itemsDetails.size}} </label>
+      <br>
+      <label class="plainText">Photo number ID: {{itemsDetails.itemID}}</label>
+      <br>
+      <label class="plainText">Uploaded: {{itemsDetails.uploadedDate}}</label>
+    </div>
+    <div class="col-lg-4">
+      <label class="description">{{itemsDetails.description}}</label><br>
+      <label class="tags">{{itemsDetails.tags}}</label><p></p>
+      <label class="imagePrice">This image price is:</label><br>
+      <label class="actualPrice">{{itemsDetails.price}} PMA </label><br>
+      <button class="btn btn-primary">Buy with one click</button>
+      <br><br>
+      <label class="plainText">Licence: {{itemsDetails.licence}}</label>&nbsp;
+      <a href="" class="extendedLink">Make Extented</a>
+      <br>
+      <label class="plainText">Credit: {{itemsDetails.ownerID}}</label>
+      <br>
+    </div>
+  </div>
+</div>
