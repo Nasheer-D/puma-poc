@@ -16,10 +16,6 @@ TABLESPACE pg_default;
 ALTER TABLE public.app_users
     OWNER to local_user;
 
--- Table: public.items
-
--- DROP TABLE public.items;
-
 CREATE TABLE public.items
 (
     "itemID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
@@ -39,6 +35,21 @@ CREATE TABLE public.items
         REFERENCES public.app_users ("userID") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.items
+    OWNER to local_user;
+
+-- THIS IS A TEST TABLE USED ONLY FOR DEVELOPMENT AND UNIT TEST REASONS
+-- DO NOT CREATE THIS TABLE IN THE PRODUCTION ENVIRONENT 
+CREATE TABLE public.test_table
+(
+    "testID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT test_table_pkey PRIMARY KEY ("testID")
 )
 WITH (
     OIDS = FALSE
