@@ -1,7 +1,9 @@
-.last_column {
-  text-align: right;
+img {
+  height: 204px;
+  width: 316px;
+  border-radius: 8px; 
 }
 
-.slds-col {
-  margin: 10px 0px
+.image-container {
+  padding: 12px;
 }

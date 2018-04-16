@@ -1,2 +1,8 @@
-
 <app-header></app-header>
+<div class="container">
+    <div class="row margin-space">
+        <div class="image-container col-md-4 col-sm-6 col-xs-12" *ngFor="let item of items">
+            <img class="img-responsive" src={{item.itemUrl}} alt="{{item.description}}">
+        </div>
+    </div>
+</div>

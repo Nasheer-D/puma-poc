@@ -13,7 +13,7 @@ export class ItemsService {
         this.actionUrl = `${Constants.apiHost}${Constants.apiPrefix}items`;
     }
 
-    public getAllImages() {
+    public getAllItems() {
         return new HttpGetRequest(this.http, this.actionUrl).getResult();
     }
 }
