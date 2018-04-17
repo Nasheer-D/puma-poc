@@ -1,6 +1,6 @@
-img {
-    height: 204px;
-    width: 316px;
+ img {
+    height: 241px;
+    width: 373px;
     border-radius: 8px;
   }
 
@@ -9,33 +9,33 @@ img {
       letter-spacing: -1%;
       color: black;
       font-family: Heebo;
-      margin-bottom: 0;
+      margin-bottom: 0px;
   }
 
   .tags{
     font-size: 14px;
     color: #9C9C9C;
     font-family: Heebo;
-    margin-bottom: 1;
+    margin-bottom: 10px;
   }
 
   .imagePrice{
     font-size: 16px;
     color: black;
     font-family: Heebo;
-    margin-bottom: 0;
+    margin-bottom: 0px;
   }
 
   .actualPrice{
     font-size: 36px;
     color: #1E69F5;
     font-family: Heebo;
-    margin-bottom: 0;
+    margin-bottom: 10px;
   }
 
   .plainText{
     font-size: 14px;
-    color:#757575;
+    color:#353535;
     font-family: Heebo;
   }
 
@@ -48,13 +48,8 @@ img {
     font-family: Heebo;
     margin-left: 15px;
 }
-
-.row-bottom-margin {
-  margin:0px !important; 
-}
-
-@media (min-width: 1200px){
-  .row-center{
-  margin-left:130px;
-}
+ .valueColor{
+  color: #9C9C9C;
+  font-size: 14px;
+  font-family: Heebo;
 }

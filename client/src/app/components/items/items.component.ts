@@ -10,7 +10,6 @@ import { Http } from '@angular/http';
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.css'],
   providers: [ItemsService]
-
 })
 export class ItemsComponent implements OnInit {
   public items: Item[] = [];

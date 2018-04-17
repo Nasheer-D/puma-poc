@@ -6,20 +6,20 @@ import { Item } from '../../models/Item';
   templateUrl: './item-details.component.html',
   styleUrls: ['./item-details.component.css']
 })
-export class ItemDetailsComponent implements OnInit {
+export class ItemDetailsComponent {
   public itemsDetails: Item = <Item>{
-    itemID: "item01",
-    ownerID: "owner01",
-    title: "Item 01 Title",
-    description: "Item 01 Description",
+    itemID: 'item01',
+    ownerID: 'owner01',
+    title: 'Item 01 Title',
+    description: 'Item 01 Description',
     price: 1000,
     size: 2100,
-    licence: "standard",
-    itemUrl: "https://s3.amazonaws.com/pumapay-poc-items/pumapay01.png",
+    licence: 'standard',
+    itemUrl: 'https://s3.amazonaws.com/pumapay-poc-items/pumapay01.png',
     tags: [
-      "puma",
-      "ico",
-      "crypto"
+      'puma',
+      ' ico',
+      ' crypto '
     ],
     rating: [
       4,
@@ -28,10 +28,4 @@ export class ItemDetailsComponent implements OnInit {
     ],
     uploadedDate: 1522759457
   };
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

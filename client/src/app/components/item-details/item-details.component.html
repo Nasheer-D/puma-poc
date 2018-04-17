@@ -1,34 +1,45 @@
 <app-header></app-header>
-<br>
-<div class="container">
-  <div class="row">
-    <a href="items" class="backLink"> &laquo; Back to search results</a>
-  </div>
+<div class="container-fluid">
+  <a href="items" class="backLink"> &laquo; Back to search results</a>
 </div>
-<br>
 <div class="container">
-  <div class="row row-center">
-    <div class="col-lg-4">
+  <div class="row col-lg-12">
+    <div class="col-lg-6">
       <img class="img-responsive" src={{itemsDetails.itemUrl}} alt="{{itemsDetails.description}}">
       <br>
       <br>
-      <label class="plainText">Largest size: {{itemsDetails.size}} </label>
+      <label class="plainText">Largest size:
+        <label class="valueColor">{{itemsDetails.size}} </label>
+      </label>
       <br>
-      <label class="plainText">Photo number ID: {{itemsDetails.itemID}}</label>
+      <label class="plainText">Photo number ID:
+        <label class="valueColor">{{itemsDetails.itemID}}</label>
+      </label>
       <br>
-      <label class="plainText">Uploaded: {{itemsDetails.uploadedDate}}</label>
+      <label class="plainText">Uploaded:
+        <label class="valueColor"> {{itemsDetails.uploadedDate | date }}</label>
+      </label>
     </div>
-    <div class="col-lg-4">
-      <label class="description">{{itemsDetails.description}}</label><br>
-      <label class="tags">{{itemsDetails.tags}}</label><p></p>
-      <label class="imagePrice">This image price is:</label><br>
-      <label class="actualPrice">{{itemsDetails.price}} PMA </label><br>
+    <div class="col-lg-6">
+      <label class="description">{{itemsDetails.description}}</label>
+      <br>
+      <label class="tags">{{itemsDetails.tags}}</label>
+      <p></p>
+      <label class="imagePrice">This image price is:</label>
+      <br>
+      <label class="actualPrice">{{itemsDetails.price | number: '1.2-2'}} PMA </label>
+      <br>
+      <br>
       <button class="btn btn-primary">Buy with one click</button>
-      <br><br>
-      <label class="plainText">Licence: {{itemsDetails.licence}}</label>&nbsp;
+      <br>
+      <br>
+      <label class="plainText">Licence: {{itemsDetails.licence}}
+      </label>&nbsp;
       <a href="" class="extendedLink">Make Extented</a>
       <br>
-      <label class="plainText">Credit: {{itemsDetails.ownerID}}</label>
+      <label class="plainText">Credit:
+        <label class="valueColor">{{itemsDetails.ownerID}}</label>
+      </label>
       <br>
     </div>
   </div>

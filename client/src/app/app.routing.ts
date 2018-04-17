@@ -8,7 +8,7 @@ import { ItemDetailsComponent } from './components/item-details/item-details.com
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'items', component: ItemsComponent },
-  {path:'item-details', component:ItemDetailsComponent},
+  { path: 'item-details', component: ItemDetailsComponent },
 
   // otherwise redirect to login
   { path: '**', redirectTo: 'items' }
