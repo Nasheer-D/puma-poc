@@ -14,7 +14,10 @@ import { Http } from '@angular/http';
 export class ItemsComponent implements OnInit {
   public items: Item[] = [];
 
-  public constructor(private itemsService: ItemsService) { }
+  public constructor(
+    private router: Router,
+    private itemsService: ItemsService
+  ) {}
 
   public ngOnInit() {
     this.itemsService.getAllItems().subscribe((res: HttpResponse) => {
@@ -25,6 +28,10 @@ export class ItemsComponent implements OnInit {
       }
     });
   }
+
+  public goToItemDetails(itemID: string) {
+    console.log(itemID);
+
+    this.router.navigate(['/items', itemID]);
+  }
 }
-
-
