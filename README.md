@@ -5,7 +5,7 @@
 ## Prerequisites
 * [Install Node and NPM](https://www.npmjs.com/get-npm)
 * [Install Docker](https://docs.docker.com/engine/installation/)
-* Install [Angular-cli](https://github.com/angular/angular-cli) - `npm install -g @angular/cli@latest`
+* [Angular-cli](https://github.com/angular/angular-cli) `npm install -g @angular/cli@latest`
 
 ### Configure Docker
 You need to share your C drive with docker. Go to `Docker > Settings > Shared Drives > Select C > Apply` - You will be asked to fill in your credentials.
@@ -56,6 +56,16 @@ $ docker rm <CONTAINER_ID> -f # force remove the container with ID
 
 # Tests
 First you need to deploy the application locally - See [Local Deployment](#local-deployment)
+Testing Suite:
+* [Mocha](https://mochajs.org/) - Test Framework 
+* [Chai](http://www.chaijs.com/) - Assertion Library 
+* [Supertest](https://github.com/visionmedia/supertest) - HTTP Testing
+
+## Run all tests
+To run all the tests 
+```bash
+$ npm test
+```
 ## E2E Testing 
 To run the E2E tests
 ```bash

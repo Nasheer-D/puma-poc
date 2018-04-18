@@ -8,8 +8,9 @@
     "install-server": "cd server && npm install",
     "install-client": "cd client && npm install",
     "start": "docker-compose up -d --force-recreate",
+    "test": "npm run test-server && npm run test-client",
     "test-server": "cd server && npm test",
-    "test-client": "cd client && npm test"
+    "test-client": "cd client && npm run lint"
   },
   "keywords": [
     "NodeJS",
@@ -22,7 +23,7 @@
   "license": "ISC",
   "husky": {
     "hooks": {
-      "pre-commit": "cd server && npm test && cd ../client && ng lint && ng build"
+      "pre-commit": "npm test"
     }
   },
   "devDependencies": {
