@@ -1,13 +1,13 @@
-export class Item {
-  public itemID: string;
-  public ownerID: string;
-  public title: string;
-  public description: string;
-  public price: number;
-  public size: number;
-  public licence: string;
-  public itemUrl: string;
-  public tags: string[];
-  public rating: number[];
-  public uploadedDate: number;
+export interface Item {
+  itemID: string;
+  ownerID: string;
+  title: string;
+  description: string;
+  price: number;
+  size: number;
+  licence: string;
+  itemUrl: string;
+  tags: string[];
+  rating: number[];
+  uploadedDate: number;
 }

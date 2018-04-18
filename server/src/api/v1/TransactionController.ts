@@ -11,15 +11,12 @@ import { TransactionBuilder, Transaction } from '../../domain/transactions/model
 export class TransactionController {
     private logger: LoggerInstance = Container.get(LoggerFactory).getInstance('TransactionController');
 
-    @Post('/')
-    public retrieveTransactionData(@Body() transactionRequest: ITransactionRequest, @Res() response: any) {
+    @Get('/txdetails/:amount')
+    public retrieveTransactionData(@Param('amount') amount: number, @Res() response: any) {
         this.logger.info('Retrieving Transaction Data');
 
         const transactionBuilder = new TransactionBuilder();
-        transactionBuilder.description = transactionRequest.description;
-        transactionBuilder.name = transactionRequest.name;
-        transactionBuilder.to = transactionRequest.to;
-        transactionBuilder.value = transactionRequest.value;
+        transactionBuilder.value = amount;
 
         const transaction: Transaction = transactionBuilder.build();
         const responseMessage: IResponseMessage = {
@@ -32,7 +29,7 @@ export class TransactionController {
         return new ResponseHandler().handle(response, responseMessage);
     }
 
-    @Get('/:transactionHash')
+    @Get('/txhash/:transactionHash')
     public async retrieveTransactionStatus(@Param('transactionHash') transactionHash: string, @Res() response: any) {
         this.logger.info('Retrieving Transaction Status');
         // tslint:disable-next-line:no-http-string

@@ -4,6 +4,7 @@ import { HttpGetRequest } from '../utils/web/HttpGetRequest';
 import { AuthenticationService } from './authentication.service';
 import { Constants } from '../app.constants';
 import { Item } from '../models/Item';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ItemsService {
@@ -13,7 +14,7 @@ export class ItemsService {
         this.actionUrl = `${Constants.apiHost}${Constants.apiPrefix}items`;
     }
 
-    public getAllItems() {
+    public getAllItems(): Observable<any> {
         return new HttpGetRequest(this.http, this.actionUrl).getResult();
     }
 }

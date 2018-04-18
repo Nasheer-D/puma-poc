@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { routing, appRoutingProviders } from './app.routing';
+import { QRCodeModule } from 'angularx-qrcode';
 
 import { Constants } from './app.constants';
 import { AuthGuard } from './guards/auth.guard';
+import { routing, appRoutingProviders } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -27,6 +28,7 @@ import { ItemsService } from './services/items.service';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    QRCodeModule,
     routing,
     NgbModule.forRoot()
   ],
