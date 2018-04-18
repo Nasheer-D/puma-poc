@@ -1,15 +1,16 @@
-import { Pool, Client } from 'pg';
+import { Pool, PoolClient } from 'pg';
 import { LoggerFactory } from '../utils/logger/LoggerFactory';
 import { Container } from 'typedi';
 import { LoggerInstance } from 'winston';
 import { DbErrorHelper } from '../utils/dbHelpers/dbErrorHelper';
+import { IResponseMessage } from '../utils/responseHandler/ResponseHandler';
 
 export class DataService {
   private logger: LoggerInstance = Container.get(LoggerFactory).getInstance('DataService');
 
   protected async executeQuery(sqlQuery: ISqlQuery): Promise<any> {
     const pool: Pool = new Pool();
-    pool.on('error', (error: Error, client: Client) => {
+    pool.on('error', (error: Error, client: PoolClient) => {
       this.logger.error(`Error On PG Pool. Reason: ${error}`);
     });
 
@@ -17,7 +18,7 @@ export class DataService {
   }
 
   public executeQueryAsPromise(sqlQuery: ISqlQuery): Promise<any> {
-    const queryMessage: IQueryMessage = {
+    const queryMessage: IResponseMessage = {
       success: false,
       status: '',
       message: ''
@@ -55,12 +56,4 @@ export class DataService {
 export interface ISqlQuery {
   text: string;
   values?: any[];
-}
-export interface IQueryMessage {
-  success: boolean;
-  status: string;
-  message: string;
-  data?: any;
-  errcode?: string;
-  catched?: boolean;
 }

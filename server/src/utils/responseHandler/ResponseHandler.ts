@@ -1,7 +1,5 @@
-import { IQueryMessage } from '../../datasource/DataService';
-
 export class ResponseHandler {
-    public handle(response: any, result: IQueryMessage): any {
+    public handle(response: any, result: IResponseMessage): any {
         if (result.catched) {
             delete result.catched;
             return response.status(500).send(result);
@@ -11,4 +9,12 @@ export class ResponseHandler {
             return response.status(200).send(result);
         }
     }
+}
+export interface IResponseMessage {
+    success: boolean;
+    status: string;
+    message: string;
+    data?: any;
+    errcode?: string;
+    catched?: boolean;
 }

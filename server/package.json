@@ -34,6 +34,9 @@
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "debug": "^3.1.0",
+    "ethereumjs-util": "^5.1.5",
+    "ethereumjs-units": "0.2.0",
+    "ethers": "^3.0.12",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.2.0",
     "moment-timezone": "^0.5.14",
@@ -45,6 +48,7 @@
     "routing-controllers": "^0.7.7",
     "shortid": "^2.2.8",
     "typedi": "^0.7.2",
+    "web3": "1.0.0-beta.34",
     "winston": "^2.4.1"
   },
   "devDependencies": {
