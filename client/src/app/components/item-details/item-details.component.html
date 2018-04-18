@@ -1,0 +1,64 @@
+<app-header></app-header>
+<div class="details-container">
+  <div class="container-fluid">
+    <div class="row">
+      <a href="items" class="back-link"> &laquo; Back to search results</a>
+    </div>
+  </div>
+  <div class="item-details container">
+    <div class="row">
+      <div class="col-md-6">
+        <div classs="image-wrapper">
+          <img class="item-image img-fluid" src={{itemsDetails.itemUrl}} alt="{{itemsDetails.description}}">
+        </div>
+      </div>
+      <div class="cols-md-6">
+        <div class="col">
+          <label class="item-description">{{itemsDetails.description}}</label>
+        </div>
+        <div class="col">
+          <label class="item-tags">{{itemsDetails.tags}}</label>
+        </div>
+        <div class="col">
+          <label class="item-price-label">This image price is:</label>
+        </div>
+        <div class="col">
+          <label class="item-price">{{itemsDetails.price | number: '1.2-2'}} PMA </label>
+        </div>
+        <div class="col">
+          <button class="btn btn-primary">Buy with one click</button>
+        </div>
+      </div>
+      <div class="item-info col-md-6">
+        <div class="col">
+          <label class="plain-text">Largest size:
+            <span class="value-color">{{itemsDetails.size}} </span>
+          </label>
+        </div>
+        <div class="col">
+          <label class="plain-text">Photo number ID:
+            <span class="value-color">{{itemsDetails.itemID}}</span>
+          </label>
+        </div>
+        <div class="col">
+          <label class="plain-text">Uploaded:
+            <span class="value-color">{{itemsDetails.uploadedDate | date }}</span>
+          </label>
+        </div>
+      </div>
+      <div class="item-info col-md-6">
+        <div class="col">
+          <label class="plain-text">Licence:
+            <span class="value-color">{{itemsDetails.licence}}</span>
+            <a href="" class="extended-link">Make Extented</a>
+          </label>
+        </div>
+        <div class="col">
+          <label class="plain-text">Credit:
+            <label class="value-color">{{itemsDetails.ownerID}}</label>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

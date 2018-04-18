@@ -16,13 +16,15 @@ import { ItemsComponent } from './components/items/items.component';
 import { AuthenticationService } from './services/authentication.service';
 import { HeaderComponent } from './shared/header/header.component';
 import { ItemsService } from './services/items.service';
+import { ItemDetailsComponent } from './components/item-details/item-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ItemsComponent,
-    HeaderComponent
+    HeaderComponent,
+    ItemDetailsComponent
   ],
   imports: [
     BrowserModule,
