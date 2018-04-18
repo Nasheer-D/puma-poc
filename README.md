@@ -66,8 +66,6 @@ $ docker-compose up -d
 
 #### Clean up local development environment
 
-Remove running PostgreSQL container
-
 ```bash
 $ docker-compose down
 ## OR
