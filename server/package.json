@@ -17,7 +17,6 @@
     "lint": "tslint --fix -c tslint.json 'src/**/*.ts'"
   },
   "dependencies": {
-    "@angular/cli": "^1.7.3",
     "@types/body-parser": "^1.16.8",
     "@types/cookie-parser": "^1.4.1",
     "@types/cors": "^2.8.3",
