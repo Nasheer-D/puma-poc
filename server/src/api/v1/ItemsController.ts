@@ -18,8 +18,8 @@ export class ItemsController {
     }
   }
 
-  @Get('/:itemID')
-  public async getItemsByID(
+  @Get('getItemByID/:itemID')
+  public async getItemByID(
     @Param('itemID') itemID: string,
     @Res() response: any
   ): Promise<any> {

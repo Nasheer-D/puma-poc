@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../models/Item';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../../services/items.service';
 import { HttpResponse } from '../../utils/web/models/HttpResponse';
 import { Subscription } from 'rxjs/Subscription';
@@ -19,12 +19,12 @@ export class ItemDetailsComponent implements OnInit {
     private getItemDetails: ItemsService
   ) {}
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.routerSubscription = this.router.params.subscribe(params => {
       const itemID = params['itemID'];
 
       this.getItemDetails
-        .getItemDetails(itemID)
+        .getItemByID(itemID)
         .subscribe((response: HttpResponse) => {
           this.itemsDetails = response.data[0];
         });

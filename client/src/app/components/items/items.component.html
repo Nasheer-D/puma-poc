@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row margin-space">
     <div class="image-container col-lg-4 col-md-4 col-sm-6 col-xs-6" *ngFor="let item of items">
-      <img class="img-style" src={{item.itemUrl}} (click)="goToItemDetails(item.itemID)" alt="{{item.description}}">
+      <img class="img-style" src={{item.itemUrl}} (click)="getItemByID(item.itemID)" alt="{{item.description}}">
     </div>
   </div>
 </div>

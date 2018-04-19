@@ -4,6 +4,7 @@ import { HttpGetRequest } from '../utils/web/HttpGetRequest';
 import { AuthenticationService } from './authentication.service';
 import { Constants } from '../app.constants';
 import { Item } from '../models/Item';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ItemsService {
@@ -17,10 +18,10 @@ export class ItemsService {
     return new HttpGetRequest(this.http, this.actionUrl).getResult();
   }
 
-  public getItemDetails(itemID: string) {
+  public getItemByID(itemID: string): Observable<any> {
     return new HttpGetRequest(
       this.http,
-      this.actionUrl + `/${itemID}`
+      this.actionUrl + `getItemByID/${itemID}`
     ).getResult();
   }
 }
