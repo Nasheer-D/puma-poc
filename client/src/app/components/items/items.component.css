@@ -1,9 +1,18 @@
-img {
-  height: 204px;
-  width: 316px;
-  border-radius: 8px;
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  align-content: center;
 }
 
 .image-container {
-  padding: 12px;
+  padding: 8px;
+  margin-left: 0 auto;
+  margin-right: 0 auto;
+  align-content: center;
+}
+
+.img-style {
+  height: 204px;
+  width: 100%;
+  border-radius: 8px;
 }

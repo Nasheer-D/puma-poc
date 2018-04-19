@@ -7,11 +7,11 @@ import { ItemDetailsComponent } from './components/item-details/item-details.com
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'items', component: ItemsComponent },
-  { path: 'item-details', component: ItemDetailsComponent },
+  { path: `items`, component: ItemsComponent },
+  { path: `items/:itemID`, component: ItemDetailsComponent },
 
   // otherwise redirect to login
-  { path: '**', redirectTo: 'items' }
+  { path: `**`, redirectTo: `items` }
 ];
 
 export const appRoutingProviders: any[] = [];
