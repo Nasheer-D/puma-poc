@@ -61,3 +61,27 @@
 .item-info {
   padding: 10px;
 }
+
+.modal-title {
+  color: #1E69F5;
+  font-size: 36px;
+  font-family: Heebo;
+}
+
+.modal-credits{
+  color: black;
+  font-size: 16px;
+  font-family: Heebo;
+}
+
+
+.modal{
+  max-width: 1000%;
+  width: auto !important;
+  height: 550px;
+}
+
+.metamask-image {
+  width: 69px;
+  height: 63px;
+}

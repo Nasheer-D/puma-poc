@@ -26,7 +26,7 @@
           <label class="item-price">{{item.price | number: '1.2-2'}} PMA </label>
         </div>
         <div class="col">
-          <button class="btn btn-primary">Buy with one click</button>
+          <button class="btn btn-primary" data-toggle="modal" (click)="showModal(content)">Buy with one click</button>
         </div>
       </div>
       <div class="item-info col-md-6">
@@ -61,4 +61,96 @@
       </div>
     </div>
   </div>
+
+  <ng-template class="modal" tabindex="-1" #content let-d="dismiss">
+    <div class="container modal-content">
+      <div class="modal-body">
+        <!-- Modal close button !-->
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <!-- Modal titles !-->
+        <div class="modal-description">
+          <div class="row row-credits">
+            <label class="modal-credits">You choose .. tokens. </label>
+          </div>
+          <div class="row row-title">
+            <label class="modal-title">Make your purchase with</label>
+          </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-6">
+          <!-- Modal content pumapay!-->
+          <div class="container modal-content">
+            <div class="row content-row">
+                <div class="col-md-6">
+                    <div classs="image-wrapper">
+                      <img class="item-image img-fluid" src="" alt="">
+                    </div>
+                  <div class="col">
+                    <div class="col">
+                      <label class="modal-description">PumaPay Wallet app</label>
+                    </div>
+                    <div class="col">
+                      <label class="modal-scanQR">Scan a QR code with the app and approve your transaction details</label>
+                    </div>
+                    <div class="col">
+                      <button class="modal-show-code btn btn-primary">Show me the code</button>
+                    </div>
+                    <div class="col">
+                      <label class="modal-click-for-puma">Don't have PumaPay wallet?</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div classs="image-wrapper">
+                      <img class="item-image img-fluid" src="" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal content metamask!-->
+          <div class="col-md-6">
+          <div class="container modal-content">
+            <div class="row content-row">
+
+                <div class="container metamask-tab">
+                  <div class="col">
+                    <div class="container">
+                    <div class="metamask-image">
+                      <img class src="../../../assets/images/metamask.png" alt="">
+                    </div>
+                  </div>
+                  </div>
+                  <div class="col">
+                    <div class="col">
+                      <label class="modal-description">MataMask add-on</label>
+                    </div>
+                    <div class="col">
+                      <label class="modal-scanQR">Browser add-on available fro Chrome &#38; Firefox</label>
+                    </div>
+                    <div class="col">
+                      <button class="modal-show-code btn btn-primary">Use MetaMask</button>
+                    </div>
+                    <div class="col">
+                      <label class="modal-click-for-puma">Follow the instruction on the MetaMask window to confirm the transaction.</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+
+      </div>
+    </div>
+  </ng-template>
 </div>
