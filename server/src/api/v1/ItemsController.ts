@@ -18,7 +18,7 @@ export class ItemsController {
     }
   }
 
-  @Get('getItemByID/:itemID')
+  @Get('/:itemID')
   public async getItemByID(
     @Param('itemID') itemID: string,
     @Res() response: any

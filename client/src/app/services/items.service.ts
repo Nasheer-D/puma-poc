@@ -21,7 +21,7 @@ export class ItemsService {
   public getItemByID(itemID: string): Observable<any> {
     return new HttpGetRequest(
       this.http,
-      this.actionUrl + `getItemByID/${itemID}`
+      this.actionUrl + `/${itemID}`
     ).getResult();
   }
 }
