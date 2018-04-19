@@ -31,7 +31,6 @@ export class ItemsComponent implements OnInit {
 
   public goToItemDetails(itemID: string) {
     console.log(itemID);
-
     this.router.navigate(['/items', itemID]);
   }
 }
