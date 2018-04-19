@@ -1,13 +1,13 @@
-openapi: "3.0.0"
+openapi: 3.0.0
 info:
   title: PumaPay PoC API
   description: ATTENTION - FOR INTERNAL USE ONLY
   version: 0.0.1
-  contact: 
+  contact:
     name: PumaPay Team
     email: dev@pumapay.io
 servers:
-  - url: http://localhost:8080/api/v1
+  - url: 'http://localhost:8080/api/v1'
     description: Local server
 paths:
   /items:
@@ -20,16 +20,43 @@ paths:
         '200':
           description: A Success Responce with a JSON array of all items
           content:
-            application/json:    
+            application/json:
               schema:
-               allOf:
-                - $ref: "#/components/schemas/Response"
-                - type: object
-                  properties:
-                    data: 
-                      type: array
-                      items: 
-                        $ref: "#/components/schemas/Item"
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Item'
+  /items/{itemID}:
+    get:
+      summary: Get item details based on ID
+      operationId: getItemByID
+      tags: 
+        - Item
+      parameters: 
+      - name: "itemID"
+        in: path
+        schema:
+          type: string
+        description: Id of item details to be returned
+        required: true
+      responses:
+        '200': 
+          description: A Success Response with a JSON object with the details of the item
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Item'     
 components:
   schemas:
     Response:
@@ -41,35 +68,35 @@ components:
           type: string
         status:
           type: string
-        data: 
+        data:
           type: array
           items: {}
     Item:
       type: object
       properties:
-        itemID: 
+        itemID:
           type: string
-        ownerID: 
+        ownerID:
           type: string
-        title: 
+        title:
           type: string
-        description: 
+        description:
           type: string
-        price: 
+        price:
           type: number
-        size: 
+        size:
           type: number
-        licence: 
+        licence:
           type: string
-        itemUrl: 
+        itemUrl:
           type: string
-        tags: 
+        tags:
           type: array
-          items: 
+          items:
             type: string
-        rating: 
+        rating:
           type: array
-          items: 
+          items:
             type: number
-        uploadedDate: 
+        uploadedDate:
           type: number
