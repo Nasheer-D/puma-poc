@@ -3,7 +3,7 @@ import * as chaiAsPromised from 'chai-as-promised';
 import * as supertest from 'supertest';
 import { IQueryMessage, ISqlQuery, DataService } from '../../../../src/datasource/DataService';
 import { Item } from '../../../../src/domain/items/models/Item';
-import {TestHelpers} from 'server/test/testHelpers';
+import { TestHelpers } from 'server/test/testHelpers';
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
@@ -51,8 +51,7 @@ describe('An ItemsController', () => {
         afterEach(async () => {
             await deleteTestData();
         });
-
-        it('should get items by id', () => {
+        it('should return an array of items', () => {
             const expectedQueryMessage: IQueryMessage = {
                 success: true,
                 status: 'OK',
@@ -84,7 +83,7 @@ describe('An ItemsController', () => {
                 });
         });
 
-        it('should return an array of items', () => {
+        it('should get items by id', () => {
             const expectedQueryMessage: IQueryMessage = {
                 success: true,
                 status: 'OK',
