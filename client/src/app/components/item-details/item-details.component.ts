@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: [`./item-details.component.css`]
 })
 export class ItemDetailsComponent implements OnInit {
-  public itemsDetails: Item = <Item>{};
+  public item: Item = <Item>{};
   private routerSubscription: Subscription;
 
   public constructor(
@@ -26,7 +26,7 @@ export class ItemDetailsComponent implements OnInit {
       this.getItemDetails
         .getItemByID(itemID)
         .subscribe((response: HttpResponse) => {
-          this.itemsDetails = response.data[0];
+          this.item = response.data[0];
         });
     });
   }

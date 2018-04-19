@@ -29,7 +29,7 @@ export class ItemsComponent implements OnInit {
     });
   }
 
-  public getItemByID(itemID: string) {
-    this.router.navigate(['/getItemByID', itemID]);
+  public goToItemDetails(itemID: string): void {
+    this.router.navigate(['item/', itemID]);
   }
 }
