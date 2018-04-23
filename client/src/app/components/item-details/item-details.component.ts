@@ -15,8 +15,8 @@ export class ItemDetailsComponent implements OnInit {
   public item: Item = <Item>{};
   private routerSubscription: Subscription;
 
-  private open(content): void {
-    this.modalService.open(content, { centered: true, size: 'lg' });
+  private open(purchaseOptionModal): void {
+    this.modalService.open(purchaseOptionModal, { centered: true, size: 'lg' });
   }
 
   public constructor(
@@ -33,6 +33,7 @@ export class ItemDetailsComponent implements OnInit {
         .getItemByID(itemID)
         .subscribe((response: HttpResponse) => {
           this.item = response.data[0];
+          this.item.uploadedDate = this.item.uploadedDate * 1000;
         });
     });
   }

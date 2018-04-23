@@ -41,7 +41,7 @@
   font-size: 36px;
   color: #1e69f5;
   font-family: Heebo;
-  margin-bottom: 21px;
+  margin-bottom: 22px;
 }
 
 .plain-text {
@@ -84,7 +84,7 @@
   text-align: center;
 }
 
-.modal-scanQR {
+.modal-scan-qr {
   font-family: Heebo;
   font-size: 16px;
   color: black;
@@ -97,19 +97,19 @@
   color: #9c9c9c;
   text-align: center;
   margin-top: 15px;
-  margin-bottom: -10px;
+  /* margin-bottom: -10px; */
 }
 
 .title-name {
   color: #1e69f5;
   font-size: 36px;
   font-family: Heebo;
-  margin-top: -10px;
+  margin-bottom: 10px;
 }
 
 /*Styles the modal(border,background etc) */
-.modal-content {
-  background-color: rgba(0, 0, 0, 0.15) !important;
+.options-modal {
+  background-color: rgba(0, 0, 0, 0.15);
   align-content: center;
   border-radius: 15px;
 }
@@ -126,29 +126,22 @@
   background-color: white;
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.15);
   offset-block-end: 0px, 5px;
-  margin: 13px;
+  margin: 14px;
   max-width: 680px;
   height: 420px;
   border-radius: 15px;
   overflow: auto;
+  padding: 0px;
 }
 
-.pumapay-position {
-  padding: 10px;
-}
-
-.metamask-position {
-  padding: 10px;
-}
-
-.btn-modal {
+.modal-btn {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .option-picture {
-  width: 69px;
-  height: 63px;
+  width: 70px;
+  height: 65px;
 }
 
 .image-container-modal {
@@ -187,8 +180,4 @@
 .modal-show-code {
   margin-top: 15px;
   margin-bottom: 20px;
-}
-
-.transaction-tool {
-  margin-top: -40px;
 }
