@@ -66,7 +66,8 @@
 .modal-dialog {
   height: auto !important;
   max-width: 1000px !important;
-  /* background-color: rgba(0, 0, 0, 0.15) !important; */
+  margin: auto;
+  border-radius: 15px !important;
 }
 
 .modal-credits {
@@ -106,17 +107,8 @@
 .modal-content {
   background-color: rgba(0, 0, 0, 0.15) !important;
   align-content: center;
-  border-radius: 15px !important;
+  border-radius: 15px;
 }
-
-/*Styles the body of the modal.Add html markup paragraphs images bideos*/
-/* .modal {
-  text-align: center;
-  background-color: #ededed !important;
-  border: 0px;
-  height: 100% !important;
-  width: 100% !important;
-} */
 
 .modal-header {
   border: 0px;
@@ -161,12 +153,12 @@
   justify-content: center;
 }
 
-.app-store {
+.app-store-apple {
   height: 45px;
   width: 105px;
 }
 
-.app-store2 {
+.app-store-google {
   height: 66px;
   width: 120px;
 }
@@ -176,4 +168,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.close-button {
+  position: absolute;
+  right: 35px;
+  top: 8px;
 }
