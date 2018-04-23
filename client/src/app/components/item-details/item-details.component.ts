@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Item } from '../../models/Item';
 import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../../services/items.service';
@@ -15,7 +15,7 @@ export class ItemDetailsComponent implements OnInit {
   public item: Item = <Item>{};
   private routerSubscription: Subscription;
 
-  open(content) {
+  private open(content): void {
     this.modalService.open(content, { centered: true, size: 'lg' });
   }
 
