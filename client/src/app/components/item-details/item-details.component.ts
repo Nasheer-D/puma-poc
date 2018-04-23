@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../../services/items.service';
 import { HttpResponse } from '../../utils/web/models/HttpResponse';
 import { Subscription } from 'rxjs/Subscription';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: `app-item-details`,
@@ -18,7 +18,10 @@ export class ItemDetailsComponent implements OnInit {
   closeResult: string;
 
   showModal(content) {
-    this.modalService.open(content, {centered: true, size:'lg'});
+    this.modalService.open(content, {
+      centered: true,
+      size: 'lg'
+    });
   }
 
   public constructor(
