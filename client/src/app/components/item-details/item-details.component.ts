@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Item } from '../../models/Item';
 import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../../services/items.service';
 import { HttpResponse } from '../../utils/web/models/HttpResponse';
 import { Subscription } from 'rxjs/Subscription';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PurchaseOptionsComponent } from '../../components/item-details/modal/purchase-options/purchase-options.component';
 
 @Component({
   selector: `app-item-details`,
@@ -14,14 +15,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ItemDetailsComponent implements OnInit {
   public item: Item = <Item>{};
   private routerSubscription: Subscription;
-
-  private open(purchaseOptionModal): void {
-    this.modalService.open(purchaseOptionModal, { centered: true, size: 'lg' });
-  }
+  @ViewChild('purchaseOptionModal') modal: PurchaseOptionsComponent;
 
   public constructor(
     private router: ActivatedRoute,
-    private getItemDetails: ItemsService,
+    private itemService: ItemsService,
     private modalService: NgbModal
   ) {}
 
@@ -29,12 +27,16 @@ export class ItemDetailsComponent implements OnInit {
     this.routerSubscription = this.router.params.subscribe(params => {
       const itemID = params['itemID'];
 
-      this.getItemDetails
+      this.itemService
         .getItemByID(itemID)
         .subscribe((response: HttpResponse) => {
           this.item = response.data[0];
           this.item.uploadedDate = this.item.uploadedDate * 1000;
         });
     });
+  }
+
+  public openModal() {
+    this.modal.open();
   }
 }

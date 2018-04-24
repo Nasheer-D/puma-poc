@@ -16,6 +16,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { HeaderComponent } from './shared/header/header.component';
 import { ItemsService } from './services/items.service';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
+import { PurchaseOptionsComponent } from './components/item-details/modal/purchase-options/purchase-options.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ItemDetailsComponent } from './components/item-details/item-details.com
     LoginComponent,
     ItemsComponent,
     HeaderComponent,
-    ItemDetailsComponent
+    ItemDetailsComponent,
+    PurchaseOptionsComponent
   ],
   imports: [
     BrowserModule,
