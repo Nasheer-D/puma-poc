@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../models/Item';
+import { TransactionService } from '../../services/transaction.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal';
+import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: `app-item-details`,
   templateUrl: `./item-details.component.html`,
@@ -19,4 +22,28 @@ export class ItemDetailsComponent {
     rating: [4, 3.5, 5],
     uploadedDate: 1522759457
   };
+
+  public qrCodeAsString = '';
+  public closeResult = '';
+
+  public constructor(
+    private txService: TransactionService,
+    private modalService: NgbModal) {
+  }
+
+  private getTransactionData(amount) {
+    console.log('getTransactionData', amount);
+
+  }
+
+  public open(content, amount) {
+    console.log(content);
+    this.txService.getTransactionData(amount).subscribe(res => {
+      this.qrCodeAsString = JSON.stringify(res.data[0]);
+      console.log(this.qrCodeAsString);
+      this.modalService.open(content).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      });
+    });
+  }
 }

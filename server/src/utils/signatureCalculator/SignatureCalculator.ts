@@ -19,7 +19,7 @@ export class SignatureCalculator {
                 Buffer.from(this.transaction.callback, 'utf8'),
                 Buffer.from(this.transaction.description, 'utf8'),
                 Buffer.from(this.transaction.name, 'utf8'),
-                this.transaction.networkid,
+                this.transaction.networkID,
                 this.transaction.to,
                 this.transaction.value
             ]);

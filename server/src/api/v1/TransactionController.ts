@@ -11,10 +11,9 @@ import { TransactionBuilder, Transaction } from '../../domain/transactions/model
 export class TransactionController {
     private logger: LoggerInstance = Container.get(LoggerFactory).getInstance('TransactionController');
 
-    @Get('/txdetails/:amount')
+    @Get('/wallet/txdetails/:amount')
     public retrieveTransactionData(@Param('amount') amount: number, @Res() response: any) {
         this.logger.info('Retrieving Transaction Data');
-
         const transactionBuilder = new TransactionBuilder();
         transactionBuilder.value = amount;
 
@@ -23,7 +22,7 @@ export class TransactionController {
             success: true,
             status: 'OK',
             message: 'Retrieved transaction data succesfully',
-            data: [transaction]
+            data: [transaction.toJSON()]
         };
 
         return new ResponseHandler().handle(response, responseMessage);
@@ -35,9 +34,14 @@ export class TransactionController {
         // tslint:disable-next-line:no-http-string
         const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/ZDNEJN22wNXziclTLijw'));
         const receipt = await web3.eth.getTransactionReceipt(transactionHash);
-        if (!receipt.status) {
-            this.logger.info('Transaction not completed. Trying again...');
-            this.retrieveTransactionStatus(transactionHash, response);
+        if (!receipt) {
+            this.logger.info('Transaction not completed. Trying again after 10 seconds...');
+            setTimeout(() => {
+                this.retrieveTransactionStatus(transactionHash, response);
+
+            }, 10000);
+
+            return;
         }
 
         const responseMessage: IResponseMessage = {

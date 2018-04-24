@@ -7,7 +7,7 @@ export class Transaction {
     private _callback: string;
     private _description: string;
     private _name: string;
-    private _networkid: number;
+    private _networkID: number;
     private _to: string;
     private _value: number;
     private _signature: string;
@@ -16,7 +16,7 @@ export class Transaction {
         this._callback = `callback_url`;
         this._description = 'Static description';
         this._name = 'static name';
-        this._networkid = 3;
+        this._networkID = 3;
         this._to = '0x756C1a06ddaD72b71c4C43F6e40111A0E5b921e1';
         this._value = unit.convert(transactionBuilder.value, 'eth', 'wei');
         this._signature = new SignatureCalculator(this).calculate();
@@ -66,8 +66,8 @@ export class Transaction {
      * Getter networkID
      * @return {number}
      */
-    public get networkid(): number {
-        return this._networkid;
+    public get networkID(): number {
+        return this._networkID;
     }
 
     /**
@@ -92,6 +92,18 @@ export class Transaction {
      */
     public get signature(): string {
         return this._signature;
+    }
+
+    public toJSON() {
+        return {
+            callback: this.callback,
+            description: this.description,
+            name: this.name,
+            networkid: this.networkID,
+            to: this.to,
+            value: this.value,
+            signature: this.signature
+        };
     }
 }
 

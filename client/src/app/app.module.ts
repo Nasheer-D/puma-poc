@@ -12,11 +12,13 @@ import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { ItemsComponent } from './components/items/items.component';
+import { ItemDetailsComponent } from './components/item-details/item-details.component';
 
 import { AuthenticationService } from './services/authentication.service';
 import { HeaderComponent } from './shared/header/header.component';
 import { ItemsService } from './services/items.service';
-import { ItemDetailsComponent } from './components/item-details/item-details.component';
+import { TransactionService } from './services/transaction.service';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { ItemDetailsComponent } from './components/item-details/item-details.com
     Constants,
     AuthenticationService,
     AuthGuard,
-    ItemsService
+    ItemsService,
+    TransactionService
   ],
   bootstrap: [AppComponent]
 })
