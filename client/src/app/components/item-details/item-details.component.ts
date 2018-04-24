@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../../services/items.service';
 import { HttpResponse } from '../../utils/web/models/HttpResponse';
 import { Subscription } from 'rxjs/Subscription';
-import { PurchaseOptionsModalComponent } from '../../components/item-details/modal/purchase-options/purchase-options.component';
+import { PurchaseOptionsModalComponent } from '../../components/item-details/modals/purchase-options/purchase-options.component';
 
 @Component({
   selector: `app-item-details`,

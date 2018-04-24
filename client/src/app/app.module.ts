@@ -16,7 +16,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { HeaderComponent } from './shared/header/header.component';
 import { ItemsService } from './services/items.service';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
-import { PurchaseOptionsModalComponent } from './components/item-details/modal/purchase-options/purchase-options.component';
+import { PurchaseOptionsModalComponent } from './components/item-details/modals/purchase-options/purchase-options.component';
 
 @NgModule({
   declarations: [
