@@ -4,8 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../../services/items.service';
 import { HttpResponse } from '../../utils/web/models/HttpResponse';
 import { Subscription } from 'rxjs/Subscription';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PurchaseOptionsComponent } from '../../components/item-details/modal/purchase-options/purchase-options.component';
+import { PurchaseOptionsModalComponent } from '../../components/item-details/modal/purchase-options/purchase-options.component';
 
 @Component({
   selector: `app-item-details`,
@@ -15,12 +14,12 @@ import { PurchaseOptionsComponent } from '../../components/item-details/modal/pu
 export class ItemDetailsComponent implements OnInit {
   public item: Item = <Item>{};
   private routerSubscription: Subscription;
-  @ViewChild('purchaseOptionModal') modal: PurchaseOptionsComponent;
+  @ViewChild('purchaseOptionModal')
+  public purchaseOptionsModal: PurchaseOptionsModalComponent;
 
   public constructor(
     private router: ActivatedRoute,
-    private itemService: ItemsService,
-    private modalService: NgbModal
+    private itemService: ItemsService
   ) {}
 
   public ngOnInit(): void {
@@ -36,7 +35,7 @@ export class ItemDetailsComponent implements OnInit {
     });
   }
 
-  public openModal() {
-    this.modal.open();
+  public openPurchaseOptionsModal() {
+    this.purchaseOptionsModal.open();
   }
 }

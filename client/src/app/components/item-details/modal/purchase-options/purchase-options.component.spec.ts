@@ -1,20 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { PurchaseOptionsComponent } from './purchase-options.component';
+import { PurchaseOptionsModalComponent } from './purchase-options.component';
 
 describe('PurchaseOptionsComponent', () => {
-  let component: PurchaseOptionsComponent;
-  let fixture: ComponentFixture<PurchaseOptionsComponent>;
+  let component: PurchaseOptionsModalComponent;
+  let fixture: ComponentFixture<PurchaseOptionsModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PurchaseOptionsComponent ]
-    })
-    .compileComponents();
+      declarations: [PurchaseOptionsModalComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PurchaseOptionsComponent);
+    fixture = TestBed.createComponent(PurchaseOptionsModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

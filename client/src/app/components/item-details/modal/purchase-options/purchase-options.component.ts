@@ -6,8 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './purchase-options.component.html',
   styleUrls: ['./purchase-options.component.css']
 })
-export class PurchaseOptionsComponent {
-  @ViewChild('purchaseOptionModal') purchaseOptionModal: any;
+export class PurchaseOptionsModalComponent {
+  @ViewChild('purchaseOptionModal') purchaseOptionModal: NgbModal;
   @Input() itemPrice: number;
 
   constructor(private modal: NgbModal) {}

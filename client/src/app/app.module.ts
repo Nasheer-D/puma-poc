@@ -16,7 +16,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { HeaderComponent } from './shared/header/header.component';
 import { ItemsService } from './services/items.service';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
-import { PurchaseOptionsComponent } from './components/item-details/modal/purchase-options/purchase-options.component';
+import { PurchaseOptionsModalComponent } from './components/item-details/modal/purchase-options/purchase-options.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { PurchaseOptionsComponent } from './components/item-details/modal/purcha
     ItemsComponent,
     HeaderComponent,
     ItemDetailsComponent,
-    PurchaseOptionsComponent
+    PurchaseOptionsModalComponent
   ],
   imports: [
     BrowserModule,
@@ -43,4 +43,4 @@ import { PurchaseOptionsComponent } from './components/item-details/modal/purcha
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
