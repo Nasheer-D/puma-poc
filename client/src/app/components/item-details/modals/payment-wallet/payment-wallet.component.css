@@ -1,0 +1,269 @@
+/*Modal size*/
+.modal-dialog {
+  height: auto;
+  max-width: 1000px;
+  margin: auto;
+  border-radius: 15px;
+}
+
+.modal-credits {
+  color: black;
+  font-size: 16px;
+  font-family: Heebo;
+}
+
+.modal-description {
+  font-family: Heebo;
+  font-size: 26px;
+  color: black;
+  text-align: center;
+}
+
+.modal-scan-qr {
+  font-family: Heebo;
+  font-size: 16px;
+  color: black;
+  text-align: center;
+}
+
+.modal-link {
+  font-family: Heebo;
+  font-size: 14px;
+  color: #9c9c9c;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.title-name {
+  color: #1e69f5;
+  font-size: 36px;
+  font-family: Heebo;
+  margin-bottom: 10px;
+}
+
+/*Styles the modal(border,background etc) */
+.options-modal {
+  background-color: rgba(0, 0, 0, 0.15);
+  align-content: center;
+  border-radius: 15px;
+}
+
+.modal-header {
+  border: 0px;
+  text-align: center;
+  object-position: center;
+}
+
+.options-container {
+  border-radius: 15px;
+  border: 1px white solid;
+  background-color: white;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.15);
+  offset-block-end: 0px, 5px;
+  margin: 14px;
+  max-width: 680px;
+  height: 420px;
+  border-radius: 15px;
+  overflow: auto;
+  padding: 0px;
+}
+
+.modal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-picture {
+  width: 150px;
+  height: 105px;
+}
+
+.image-container-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 80px;
+  margin-bottom: 65px;
+}
+
+.app-store-apple {
+  height: 35px;
+  width: 105px;
+  margin-bottom: 15px;
+}
+
+.app-store-google {
+  height: 52px;
+  width: 120px;
+  margin-bottom: 15px;
+}
+
+.download-option-image {
+  border: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-button {
+  position: absolute;
+  right: 35px;
+  top: 8px;
+}
+
+.modal-show-code {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.btn-layout {
+  margin-top: 10px;
+  margin-right: 5px;
+  border-radius: 8px;
+}
+.transaction-progress {
+  border-radius: 15px;
+  border: 1px white solid;
+  background-color: white;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.15);
+  offset-block-end: 0px, 5px;
+  margin: 14px;
+  border-radius: 15px;
+  overflow: auto;
+  padding: 0px;
+  width: 340px;
+  height: 100px;
+}
+
+.transaction-text {
+  font-family: Heebo;
+  font-size: 16px;
+  color: black;
+  text-align: right;
+}
+
+.status {
+  color: #9c9c9c;
+  font-family: Heebo;
+  font-size: 14px;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: 2s linear infinite;
+}
+@keyframes lds-spinner {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes lds-spinner {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.lds-spinner {
+  position: relative;
+}
+.lds-spinner div {
+  left: 94px;
+  top: 42px;
+  position: absolute;
+  -webkit-animation: lds-spinner linear 1s infinite;
+  animation: lds-spinner linear 1s infinite;
+  background: #1463ff;
+  width: 12px;
+  height: 36px;
+  border-radius: 32%;
+  -webkit-transform-origin: 6px 58px;
+  transform-origin: 6px 58px;
+}
+.lds-spinner div:nth-child(1) {
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-animation-delay: -0.916666666666667s;
+  animation-delay: -0.916666666666667s;
+}
+.lds-spinner div:nth-child(2) {
+  -webkit-transform: rotate(30deg);
+  transform: rotate(30deg);
+  -webkit-animation-delay: -0.833333333333333s;
+  animation-delay: -0.833333333333333s;
+}
+.lds-spinner div:nth-child(3) {
+  -webkit-transform: rotate(60deg);
+  transform: rotate(60deg);
+  -webkit-animation-delay: -0.75s;
+  animation-delay: -0.75s;
+}
+.lds-spinner div:nth-child(4) {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  -webkit-animation-delay: -0.666666666666667s;
+  animation-delay: -0.666666666666667s;
+}
+.lds-spinner div:nth-child(5) {
+  -webkit-transform: rotate(120deg);
+  transform: rotate(120deg);
+  -webkit-animation-delay: -0.583333333333333s;
+  animation-delay: -0.583333333333333s;
+}
+.lds-spinner div:nth-child(6) {
+  -webkit-transform: rotate(150deg);
+  transform: rotate(150deg);
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}
+.lds-spinner div:nth-child(7) {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  -webkit-animation-delay: -0.416666666666667s;
+  animation-delay: -0.416666666666667s;
+}
+.lds-spinner div:nth-child(8) {
+  -webkit-transform: rotate(210deg);
+  transform: rotate(210deg);
+  -webkit-animation-delay: -0.333333333333333s;
+  animation-delay: -0.333333333333333s;
+}
+.lds-spinner div:nth-child(9) {
+  -webkit-transform: rotate(240deg);
+  transform: rotate(240deg);
+  -webkit-animation-delay: -0.25s;
+  animation-delay: -0.25s;
+}
+.lds-spinner div:nth-child(10) {
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+  -webkit-animation-delay: -0.166666666666667s;
+  animation-delay: -0.166666666666667s;
+}
+.lds-spinner div:nth-child(11) {
+  -webkit-transform: rotate(300deg);
+  transform: rotate(300deg);
+  -webkit-animation-delay: -0.083333333333333s;
+  animation-delay: -0.083333333333333s;
+}
+.lds-spinner div:nth-child(12) {
+  -webkit-transform: rotate(330deg);
+  transform: rotate(330deg);
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+.lds-spinner {
+  width: 200px !important;
+  height: 200px !important;
+  -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+  transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+}

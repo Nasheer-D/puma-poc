@@ -17,6 +17,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { ItemsService } from './services/items.service';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
 import { PurchaseOptionsModalComponent } from './components/item-details/modals/purchase-options/purchase-options.component';
+import { PaymentWalletComponent } from './components/item-details/modals/payment-wallet/payment-wallet.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PurchaseOptionsModalComponent } from './components/item-details/modals/
     ItemsComponent,
     HeaderComponent,
     ItemDetailsComponent,
-    PurchaseOptionsModalComponent
+    PurchaseOptionsModalComponent,
+    PaymentWalletComponent
   ],
   imports: [
     BrowserModule,
