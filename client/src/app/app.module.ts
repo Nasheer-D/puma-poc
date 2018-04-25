@@ -18,6 +18,8 @@ import { ItemsService } from './services/items.service';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
 import { PurchaseOptionsModalComponent } from './components/item-details/modals/purchase-options/purchase-options.component';
 import { PaymentWalletComponent } from './components/item-details/modals/payment-wallet/payment-wallet.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +29,16 @@ import { PaymentWalletComponent } from './components/item-details/modals/payment
     HeaderComponent,
     ItemDetailsComponent,
     PurchaseOptionsModalComponent,
-    PaymentWalletComponent
+    PaymentWalletComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     routing,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [
     appRoutingProviders,

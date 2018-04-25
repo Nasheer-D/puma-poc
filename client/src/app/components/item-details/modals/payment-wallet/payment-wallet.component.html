@@ -45,105 +45,54 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="row">
-                <div class="container transaction-progress">
-                  <div class="row">
-                    <div class="col-md-9">
-                      <div class="row">
-                        <label class="transaction-text">Sending transaction request</label>
-                      </div>
-                      <div class="row">
-                        <div class="status">In Progress...</div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="lds-css ng-scope">
-                        <div class="lds-spinner">
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="container transaction-progress">
-                  <div class="col-md-9">
-                    <div class="row">
-                      <label class="transaction-text">Transaction response</label>
-                    </div>
-                    <div class="row">
-                      <span class="status">In Progress...</span>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="lds-css ng-scope">
-                      <div class="lds-spinner">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="container transaction-progress">
-                  <div class="col-md-9">
-                    <div class="row">
-                      <label class="transaction-text">Transaction status</label>
-                    </div>
-                    <div class="row">
-                      <span class="status">In Progress...</span>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="lds-css ng-scope">
-                      <div class="lds-spinner">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="container">
+              <div class="container transaction-progress-container">
                 <div class="row">
-                  <div class="col-6">
-                    <button class="btn btn-outline-primary btn-layout">See your balance</button>
+                  <div class="container transaction-progress">
+                    <div class="row">
+                      <div class="col-sm-9">
+                        <label class="transaction-text">Sending transaction request</label>
+                        <div class="span status">In Progress...</div>
+                      </div>
+                      <div class="col-sm-3">
+                        <app-loading-spinner></app-loading-spinner>
+                      </div>
+                    </div>
                   </div>
-                  <div class="row-6">
-                    <button class="btn btn-outline-primary btn-layout" (click)="d()">Back to image</button>
+                </div>
+                <div class="row">
+                  <div class="container transaction-progress">
+                    <div class="row">
+                      <div class="col-md-9">
+                        <label class="transaction-text">Transaction response</label>
+                        <div class="span status">In Progress...</div>
+                      </div>
+                      <div class="col-md-3">
+                        <app-loading-spinner></app-loading-spinner>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="container transaction-progress">
+                    <div class="row">
+                      <div class="col-md-9">
+                        <label class="transaction-text">Transaction status</label>
+                        <div class="span status">In Progress...</div>
+                      </div>
+                      <div class="col-md-3">
+                        <app-loading-spinner></app-loading-spinner>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-6">
+                      <button class="btn btn-outline-primary btn-layout">See your balance</button>
+                    </div>
+                    <div class="row-6">
+                      <button class="btn btn-outline-primary btn-layout" (click)="d()">Back to image</button>
+                    </div>
                   </div>
                 </div>
               </div>
