@@ -9,53 +9,53 @@
     <div class="row">
       <div class="col-md-6">
         <div classs="image-wrapper">
-          <img class="item-image img-fluid" src={{itemsDetails.itemUrl}} alt="{{itemsDetails.description}}">
+          <img class="item-image img-fluid" src={{item.itemUrl}} alt="{{item.description}}">
         </div>
       </div>
       <div class="cols-md-6">
         <div class="col">
-          <label class="item-description">{{itemsDetails.description}}</label>
+          <label class="item-description">{{item.description}}</label>
         </div>
         <div class="col">
-          <label class="item-tags">{{itemsDetails.tags}}</label>
+          <label class="item-tags">{{item.tags}}</label>
         </div>
         <div class="col">
           <label class="item-price-label">This image price is:</label>
         </div>
         <div class="col">
-          <label class="item-price">{{itemsDetails.price | number: '1.2-2'}} PMA </label>
+          <label class="item-price">{{item.price | number: '1.2-2'}} PMA </label>
         </div>
         <div class="col">
-          <button class="btn btn-primary" (click)="open(content, itemsDetails.price)">Buy with one click</button>
+          <button class="btn btn-primary" (click)="openPurchaseOptionsModal()">Buy with one click</button>
         </div>
       </div>
       <div class="item-info col-md-6">
         <div class="col">
           <label class="plain-text">Largest size:
-            <span class="value-color">{{itemsDetails.size}} </span>
+            <span class="value-color">{{item.size}} </span>
           </label>
         </div>
         <div class="col">
           <label class="plain-text">Photo number ID:
-            <span class="value-color">{{itemsDetails.itemID}}</span>
+            <span class="value-color">{{item.itemID}}</span>
           </label>
         </div>
         <div class="col">
           <label class="plain-text">Uploaded:
-            <span class="value-color">{{itemsDetails.uploadedDate | date }}</span>
+            <span class="value-color">{{item.uploadedDate | date }}</span>
           </label>
         </div>
       </div>
       <div class="item-info col-md-6">
         <div class="col">
           <label class="plain-text">Licence:
-            <span class="value-color">{{itemsDetails.licence}}</span>
+            <span class="value-color">{{item.licence}}</span>
             <a href="" class="extended-link">Make Extented</a>
           </label>
         </div>
         <div class="col">
           <label class="plain-text">Credit:
-            <label class="value-color">{{itemsDetails.ownerID}}</label>
+            <label class="value-color">{{item.ownerID}}</label>
           </label>
         </div>
       </div>
@@ -63,20 +63,4 @@
   </div>
 </div>
 
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">Modal title</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>One fine body&hellip;</p>
-    <div class="qr-container">
-      <qrcode [qrdata]="qrCodeAsString" [size]="256" [level]="'M'" [allowEmptyString]=true></qrcode>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-  </div>
-</ng-template>
+<app-purchase-options #purchaseOptionModal [itemPrice]="item.price"></app-purchase-options>

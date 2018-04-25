@@ -1,0 +1,78 @@
+<ng-template #purchaseOptionModal let-d="dismiss" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content options-modal">
+      <div class="container modal-header">
+        <div class="row close-button">
+          <button type="button" class="close" aria-label="Close" (click)="d()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="row col-md-12">
+          <div class="col-lg-12">
+            <label class="modal-credits">You choose
+              <b>{{itemPrice | number: '1.2-2'}} PumaPay</b> tokens.</label>
+          </div>
+          <div class="col-lg-12">
+            <label class="title-name">Make your purchase with</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="container transaction-tool">
+          <div class="row">
+            <div class="container options-container col-md">
+              <div class="col">
+                <div class="container image-container-modal">
+                  <img class="option-picture " src="../../../../../assets/images/pumapay.png" alt="">
+                </div>
+              </div>
+              <div class="col modal-description">
+                <label>PumaPay Wallet app</label>
+              </div>
+              <div class="col modal-scan-qr">
+                <label>Scan a QR code with the app and approve your transaction details</label>
+              </div>
+              <div class="col modal-btn">
+                <button class="modal-show-code btn btn-primary">Show me the code</button>
+              </div>
+              <div class="col modal-link">
+                <label>Don't have PumaPay wallet?</label>
+              </div>
+              <div class="col">
+                <div class="container download-option-image col-sm-12">
+                  <a href="https://itunes.apple.com/us/genre/ios/id36?mt=8">
+                    <img class="app-store-apple" src="../../../../../assets/images/app-store.png">
+                  </a>
+                  <a href="https://play.google.com/store?hl=en">
+                    <img class="app-store-google" src="../../../../../assets/images/google-play-badge.png">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="container options-container col-md">
+              <div>
+                <div class="col">
+                  <div class="container image-container-modal">
+                    <img class="option-picture" src="../../../../../assets/images/metamask.png" alt="">
+                  </div>
+                </div>
+                <div class="col modal-description">
+                  <label>MataMask add-on</label>
+                </div>
+                <div class="col modal-scan-qr">
+                  <label>Browser add-on available for Chrome &#38; Firefox</label>
+                </div>
+                <div class="col modal-btn">
+                  <button class="modal-show-code btn btn-primary">Use MetaMask</button>
+                </div>
+                <div class="col modal-link">
+                  <label>Follow the instruction on the MetaMask window to confirm the transaction.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,6 +1,7 @@
 import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
-import { DataService, ISqlQuery, IQueryMessage } from '../../../src/datasource/DataService';
+import { DataService, ISqlQuery } from '../../../src/datasource/DataService';
+import { IResponseMessage } from '../../../src/utils/responseHandler/ResponseHandler';
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
@@ -38,14 +39,24 @@ describe('A DataService', () => {
             await insertTestData();
         });
 
-        it('should return a success message when querying correctly the DB', () => {
+        it('should return a promise when querying the DB', (done) => {
             const sqlQuery: ISqlQuery = {
                 text: `SELECT * FROM test_table`
             };
 
             const result = dataservice.executeQueryAsPromise(sqlQuery);
+            expect(result.then).to.be.a('Function');
+            expect(result.catch).to.be.a('Function');
+            expect(result).to.eventually.be.fulfilled;
+            done();
+        });
 
-            const expectedQueryMessage: IQueryMessage = {
+        it('should return a success message when querying correctly the DB', () => {
+            const sqlQuery: ISqlQuery = {
+                text: `SELECT * FROM test_table`
+            };
+
+            const expectedQueryMessage: IResponseMessage = {
                 success: true,
                 status: 'OK',
                 message: 'SQL Query completed successful.',
@@ -56,23 +67,21 @@ describe('A DataService', () => {
                 ]
             };
 
-            expect(result.then).to.be.a('Function');
-            expect(result.catch).to.be.a('Function');
-            expect(result).to.eventually.be.fulfilled;
-            expect(Promise.resolve(result)).to.eventually.have.property('success').that.is.equal(expectedQueryMessage.success);
-            expect(Promise.resolve(result)).to.eventually.have.property('status').that.is.equal(expectedQueryMessage.status);
-            expect(Promise.resolve(result)).to.eventually.have.property('message').that.is.equal(expectedQueryMessage.message);
-            expect(Promise.resolve(result)).to.eventually.have.property('data').to.be.an('array').to.deep.equal(expectedQueryMessage.data);
+            return dataservice.executeQueryAsPromise(sqlQuery).then(res => {
+                expect(res).to.have.property('success').that.is.equal(expectedQueryMessage.success);
+                expect(res).to.have.property('status').that.is.equal(expectedQueryMessage.status);
+                expect(res).to.have.property('message').that.is.equal(expectedQueryMessage.message);
+                expect(res).to.have.property('data').to.be.an('array').to.deep.equal(expectedQueryMessage.data);
+            });
         });
 
-        it('should return a success message when inserting correctly into the DB',  () => {
+        it('should return a success message when inserting correctly into the DB', () => {
             const sqlQuery: ISqlQuery = {
                 text: `INSERT INTO test_table("testID") VALUES ($1) RETURNING *`,
                 values: ['0000']
             };
-            const result = dataservice.executeQueryAsPromise(sqlQuery);
 
-            const expectedQueryMessage: IQueryMessage = {
+            const expectedQueryMessage: IResponseMessage = {
                 success: true,
                 status: 'OK',
                 message: 'SQL Query completed successful.',
@@ -83,13 +92,12 @@ describe('A DataService', () => {
                 ]
             };
 
-            expect(result.then).to.be.a('Function');
-            expect(result.catch).to.be.a('Function');
-            expect(result).to.eventually.be.fulfilled;
-            expect(Promise.resolve(result)).to.eventually.have.property('success').that.is.equal(expectedQueryMessage.success);
-            expect(Promise.resolve(result)).to.eventually.have.property('status').that.is.equal(expectedQueryMessage.status);
-            expect(Promise.resolve(result)).to.eventually.have.property('message').that.is.equal(expectedQueryMessage.message);
-            expect(Promise.resolve(result)).to.eventually.have.property('data').to.be.an('array').to.deep.equal(expectedQueryMessage.data);
+            return dataservice.executeQueryAsPromise(sqlQuery).then(res => {
+                expect(res).to.have.property('success').that.is.equal(expectedQueryMessage.success);
+                expect(res).to.have.property('status').that.is.equal(expectedQueryMessage.status);
+                expect(res).to.have.property('message').that.is.equal(expectedQueryMessage.message);
+                expect(res).to.have.property('data').to.be.an('array').to.deep.equal(expectedQueryMessage.data);
+            });
         });
     });
 
@@ -102,20 +110,18 @@ describe('A DataService', () => {
             const sqlQuery: ISqlQuery = {
                 text: `SELECT * FROM test_table`
             };
-            const result = dataservice.executeQueryAsPromise(sqlQuery);
 
-            const expectedQueryMessage: IQueryMessage = {
+            const expectedQueryMessage: IResponseMessage = {
                 success: false,
                 status: 'NO DATA',
                 message: 'SQL Query returned no data from database.'
             };
 
-            expect(result.then).to.be.a('Function');
-            expect(result.catch).to.be.a('Function');
-            expect(result).to.eventually.be.fulfilled;
-            expect(Promise.resolve(result)).to.eventually.have.property('success').that.is.equal(expectedQueryMessage.success);
-            expect(Promise.resolve(result)).to.eventually.have.property('status').that.is.equal(expectedQueryMessage.status);
-            expect(Promise.resolve(result)).to.eventually.have.property('message').that.is.equal(expectedQueryMessage.message);
+            return dataservice.executeQueryAsPromise(sqlQuery).then(res => {
+                expect(res).to.have.property('success').that.is.equal(expectedQueryMessage.success);
+                expect(res).to.have.property('status').that.is.equal(expectedQueryMessage.status);
+                expect(res).to.have.property('message').that.is.equal(expectedQueryMessage.message);
+            });
         });
 
         it('should return a failed query message when querying with syntax error', () => {
@@ -123,19 +129,17 @@ describe('A DataService', () => {
                 text: `WRONG QUERY`
             };
 
-            const result = dataservice.executeQueryAsPromise(sqlQuery);
-
-            const expectedRejectedMessage: IQueryMessage = {
+            const expectedRejectedMessage: IResponseMessage = {
                 success: false,
                 status: 'FAILED',
                 message: `SQL Query failed. Reason: syntax_error`
             };
 
-            expect(result.then).to.be.a('Function');
-            expect(result.catch).to.be.a('Function');
-            expect(result).to.eventually.be.rejected.and.have.property('success').that.is.equal(expectedRejectedMessage.success);
-            expect(result).to.eventually.be.rejected.and.have.property('status').that.is.equal(expectedRejectedMessage.status);
-            expect(result).to.eventually.be.rejected.and.have.property('message').that.is.equal(expectedRejectedMessage.message);
+            return dataservice.executeQueryAsPromise(sqlQuery).then().catch(err => {
+                expect(err).to.have.property('success').that.is.equal(expectedRejectedMessage.success);
+                expect(err).to.have.property('status').that.is.equal(expectedRejectedMessage.status);
+                expect(err).to.have.property('message').that.is.equal(expectedRejectedMessage.message);
+            });
         });
 
         it('should return a failed query message when querying not existing table', () => {
@@ -143,19 +147,17 @@ describe('A DataService', () => {
                 text: `SELECT * FROM no_table`
             };
 
-            const result = dataservice.executeQueryAsPromise(sqlQuery);
-
-            const expectedRejectedMessage: IQueryMessage = {
+            const expectedRejectedMessage: IResponseMessage = {
                 success: false,
                 status: 'FAILED',
                 message: `SQL Query failed. Reason: undefined_table`
             };
 
-            expect(result.then).to.be.a('Function');
-            expect(result.catch).to.be.a('Function');
-            expect(result).to.eventually.be.rejected.and.have.property('success').that.is.equal(expectedRejectedMessage.success);
-            expect(result).to.eventually.be.rejected.and.have.property('status').that.is.equal(expectedRejectedMessage.status);
-            expect(result).to.eventually.be.rejected.and.have.property('message').that.is.equal(expectedRejectedMessage.message);
+            return dataservice.executeQueryAsPromise(sqlQuery).then().catch(err => {
+                expect(err).to.have.property('success').that.is.equal(expectedRejectedMessage.success);
+                expect(err).to.have.property('status').that.is.equal(expectedRejectedMessage.status);
+                expect(err).to.have.property('message').that.is.equal(expectedRejectedMessage.message);
+            });
         });
 
         after(async () => {

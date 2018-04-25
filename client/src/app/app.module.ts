@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { ItemsComponent } from './components/items/items.component';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
+import { PurchaseOptionsModalComponent } from './components/item-details/modals/purchase-options/purchase-options.component';
 
 import { AuthenticationService } from './services/authentication.service';
 import { HeaderComponent } from './shared/header/header.component';
@@ -26,7 +27,8 @@ import { TransactionService } from './services/transaction.service';
     LoginComponent,
     ItemsComponent,
     HeaderComponent,
-    ItemDetailsComponent
+    ItemDetailsComponent,
+    PurchaseOptionsModalComponent
   ],
   imports: [
     BrowserModule,
