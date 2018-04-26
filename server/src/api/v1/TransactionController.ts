@@ -3,6 +3,7 @@ import { JsonController, Post, Body, Res, Param, Get } from 'routing-controllers
 import { LoggerInstance } from 'winston';
 import { LoggerFactory } from '../../utils/logger';
 import { Container } from 'typedi';
+import { v1 } from 'uuid';
 
 import { IResponseMessage, ResponseHandler } from '../../utils/responseHandler/ResponseHandler';
 import { TransactionBuilder, Transaction } from '../../domain/transactions/models/Transaction';
@@ -37,6 +38,7 @@ export class TransactionController {
             success: true,
             status: 'OK',
             message: 'Retrieved transaction data succesfully',
+            sessionID: v1(), // generate UUID
             data: [transaction.toJSON()]
         };
 

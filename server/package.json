@@ -27,6 +27,7 @@
     "@types/morgan": "^1.7.35",
     "@types/node": "^9.6.2",
     "@types/shortid": "^0.0.29",
+    "@types/uuid": "^3.4.3",
     "@types/winston": "^2.3.9",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
@@ -47,6 +48,7 @@
     "routing-controllers": "^0.7.7",
     "shortid": "^2.2.8",
     "typedi": "^0.7.2",
+    "uuid": "^3.2.1",
     "web3": "1.0.0-beta.34",
     "winston": "^2.4.1"
   },
