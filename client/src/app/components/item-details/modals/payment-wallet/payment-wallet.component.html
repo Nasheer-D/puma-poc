@@ -54,7 +54,7 @@
                         <div class="span status">In Progress...</div>
                       </div>
                       <div class="col-sm-3">
-                        <app-loading-spinner id="transaction-request-spinner"></app-loading-spinner>
+                        <app-loading-spinner #transactionRequestSpinner></app-loading-spinner>
                       </div>
                     </div>
                   </div>
@@ -67,7 +67,7 @@
                         <div class="span status">In Progress...</div>
                       </div>
                       <div class="col-md-3">
-                        <app-loading-spinner id="transaction-response-spinner"></app-loading-spinner>
+                        <app-loading-spinner #transactionResponseSpinner></app-loading-spinner>
                       </div>
                     </div>
                   </div>
@@ -80,7 +80,7 @@
                         <div class="span status">In Progress...</div>
                       </div>
                       <div class="col-md-3">
-                        <app-loading-spinner id="transaction-status-spinner"></app-loading-spinner>
+                        <app-loading-spinner #transactionStatusSpinner></app-loading-spinner>
                       </div>
                     </div>
                   </div>
@@ -88,7 +88,7 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-6">
-                      <button class="btn btn-outline-primary btn-layout" disabled="{{!disableElements}}">See your balance</button>
+                      <button class="btn btn-outline-primary btn-layout" disabled="{{disableElements}}">See your balance</button>
                     </div>
                     <div class="row-6">
                       <button class="btn btn-outline-primary btn-layout" (click)="d()" disabled="{{disableElements}}">Back to image</button>

@@ -13,8 +13,16 @@ export class PaymentWalletComponent implements OnInit {
   @Input() itemPrice2: number;
   disableElements: boolean;
 
+  activeRequest: boolean;
+  completedRequest: number;
+
+  activeResponse: boolean;
+  completedResponse: number;
+
+  activeStatus: boolean;
+  completedStatus: number;
+
   constructor(private modal: NgbModal, private spinner: NgxSpinnerService) {
-    this.spinner.show();
     this.disableElements = true;
   }
 
