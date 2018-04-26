@@ -45,7 +45,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="container transaction-progress-container">
+              <div class="container transaction-progress-container" id="transaction-request">
                 <div class="row">
                   <div class="container transaction-progress">
                     <div class="row">
@@ -54,33 +54,33 @@
                         <div class="span status">In Progress...</div>
                       </div>
                       <div class="col-sm-3">
-                        <app-loading-spinner></app-loading-spinner>
+                        <app-loading-spinner id="transaction-request-spinner"></app-loading-spinner>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="container transaction-progress">
+                  <div class="container transaction-progress" id="transaction-response">
                     <div class="row">
                       <div class="col-md-9">
                         <label class="transaction-text">Transaction response</label>
                         <div class="span status">In Progress...</div>
                       </div>
                       <div class="col-md-3">
-                        <app-loading-spinner></app-loading-spinner>
+                        <app-loading-spinner id="transaction-response-spinner"></app-loading-spinner>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="container transaction-progress">
+                  <div class="container transaction-progress" id="transaction-status">
                     <div class="row">
                       <div class="col-md-9">
                         <label class="transaction-text">Transaction status</label>
                         <div class="span status">In Progress...</div>
                       </div>
                       <div class="col-md-3">
-                        <app-loading-spinner></app-loading-spinner>
+                        <app-loading-spinner id="transaction-status-spinner"></app-loading-spinner>
                       </div>
                     </div>
                   </div>
@@ -88,10 +88,10 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-6">
-                      <button class="btn btn-outline-primary btn-layout">See your balance</button>
+                      <button class="btn btn-outline-primary btn-layout" disabled="{{!disableElements}}">See your balance</button>
                     </div>
                     <div class="row-6">
-                      <button class="btn btn-outline-primary btn-layout" (click)="d()">Back to image</button>
+                      <button class="btn btn-outline-primary btn-layout" (click)="d()" disabled="{{disableElements}}">Back to image</button>
                     </div>
                   </div>
                 </div>

@@ -11,19 +11,27 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class PaymentWalletComponent implements OnInit {
   @ViewChild('paymentWalletModal') paymentWalletModal: NgbModal;
   @Input() itemPrice2: number;
+  disableElements: boolean;
 
   constructor(private modal: NgbModal, private spinner: NgxSpinnerService) {
     this.spinner.show();
+    this.disableElements = true;
   }
 
   ngOnInit() {
     /** spinner starts on init */
     this.spinner.show();
 
-    // setTimeout(() => {
-    //   /** spinner ends after 5 seconds */
-    //   this.spinner.hide();
-    // }, 5000);
+    setTimeout(() => {
+      this.spinner.hide();
+      setTimeout(() => {
+        this.spinner.hide();
+        setTimeout(() => {
+          this.spinner.hide();
+          this.disableElements = null;
+        }, 5000);
+      }, 5000);
+    }, 5000);
   }
 
   public open(): void {
