@@ -1,0 +1,104 @@
+<ng-template #paymentWalletModal let-d="dismiss" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content options-modal">
+      <div class="container modal-header">
+        <div class="row close-button">
+          <button type="button" class="close" aria-label="Close" (click)="d()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="row col-md-12">
+          <div class="col-lg-12">
+            <label class="modal-credits">You choose
+              <b>{{itemPrice | number: '1.2-2'}} PumaPay</b> tokens.</label>
+          </div>
+          <div class="col-lg-12">
+            <label class="title-name">Scan to complete your purchase</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="container transaction-tool">
+          <div class="row">
+            <div class="container options-container col-md">
+              <div class="col">
+                <div class="container qr-container">
+                  <qrcode [qrdata]="txDataAsString" [size]="150" [level]="'M'"></qrcode>
+                </div>
+              </div>
+              <div class="col modal-scan-qr">
+                <label>Scan a QR code with the app to complete the transaction.</label>
+              </div>
+              <div class="col modal-link">
+                <label>Don't have PumaPay wallet?</label>
+              </div>
+              <div class="col">
+                <div class="container download-option-image col-sm-12">
+                  <a href="https://itunes.apple.com/us/genre/ios/id36?mt=8">
+                    <img class="app-store-apple" src="../../../assets/images/app-store.png">
+                  </a>
+                  <a href="https://play.google.com/store?hl=en">
+                    <img class="app-store-google" src="../../../assets/images/google-play-badge.png">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="container transaction-progress-container">
+                <div class="row">
+                  <div class="container transaction-progress" #transactionRequest [class.inactiveBackgroundColor]="">
+                    <div class="row">
+                      <div class="col-sm-9">
+                        <label class="transaction-text">Sending transaction request</label>
+                        <div class="span status">In Progress...</div>
+                      </div>
+                      <div class="col-sm-3">
+                        <app-loading-spinner #transactionRequestSpinner></app-loading-spinner>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="container transaction-progress" #transactionResponse>
+                    <div class="row">
+                      <div class="col-md-9">
+                        <label class="transaction-text">Transaction response</label>
+                        <div class="span status">In Progress...</div>
+                      </div>
+                      <div class="col-md-3">
+                        <app-loading-spinner #transactionResponseSpinner></app-loading-spinner>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="container transaction-progress" #transactionStatus>
+                    <div class="row">
+                      <div class="col-md-9">
+                        <label class="transaction-text">Transaction status</label>
+                        <div class="span status">In Progress...</div>
+                      </div>
+                      <div class="col-md-3">
+                        <app-loading-spinner #transactionStatusSpinner></app-loading-spinner>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-6">
+                      <button class="btn btn-outline-primary btn-layout" disabled="{{disableElements}}">See your balance</button>
+                    </div>
+                    <div class="row-6">
+                      <button class="btn btn-outline-primary btn-layout" (click)="d()" disabled="{{disableElements}}">Back to image</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

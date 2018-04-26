@@ -1,5 +1,5 @@
 import * as Web3 from 'web3';
-import { JsonController, Post, Body, Res, Param, Get } from 'routing-controllers';
+import { JsonController, Post, Body, Res, Param, Get, Put } from 'routing-controllers';
 import { LoggerInstance } from 'winston';
 import { LoggerFactory } from '../../utils/logger';
 import { Container } from 'typedi';
@@ -8,6 +8,7 @@ import { v1 } from 'uuid';
 import { IResponseMessage, ResponseHandler } from '../../utils/responseHandler/ResponseHandler';
 import { TransactionBuilder, Transaction } from '../../domain/transactions/models/Transaction';
 import { ISqlQuery, DataService } from '../../datasource/DataService';
+import { Session } from '../../domain/sessions/models/Session';
 
 @JsonController('/transaction')
 export class TransactionController {
@@ -33,12 +34,19 @@ export class TransactionController {
         transactionBuilder.to = queryResult.data[0].walletAddress;
         transactionBuilder.value = queryResult.data[0].price;
 
+        const sessionID = v1();
+        const sessionStoredResult = await new Session().storeSessionID(sessionID);
+        this.logger.info(sessionStoredResult.message);
+        if (!sessionStoredResult.success) {
+            return new ResponseHandler().handle(response, sessionStoredResult);
+        }
+
         const transaction: Transaction = transactionBuilder.build();
         const responseMessage: IResponseMessage = {
             success: true,
             status: 'OK',
             message: 'Retrieved transaction data succesfully',
-            sessionID: v1(), // generate UUID
+            sessionID: sessionID,
             data: [transaction.toJSON()]
         };
 
@@ -69,6 +77,11 @@ export class TransactionController {
         };
 
         return new ResponseHandler().handle(response, responseMessage);
+    }
+
+    @Put('/wallet/txStatus/:sessionID/')
+    public getTxStatusForSessionID(@Param('sessionID') sessionID: string, @Res() response: any) {
+        this.logger.info('Retrieving Transaction Status for session');
     }
 }
 

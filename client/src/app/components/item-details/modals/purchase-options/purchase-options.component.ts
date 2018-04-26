@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TransactionService } from '../../../../services/transaction.service';
 import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
 import { TransactionData } from '../../../../models/Transaction';
+import { PaymentWalletModalComponent } from '../payment-wallet/payment-wallet.component';
 
 @Component({
   selector: 'app-purchase-options',
@@ -10,10 +11,16 @@ import { TransactionData } from '../../../../models/Transaction';
   styleUrls: ['./purchase-options.component.css']
 })
 export class PurchaseOptionsModalComponent {
-  @ViewChild('purchaseOptionModal') purchaseOptionModal: NgbModal;
+  @ViewChild('purchaseOptionModal')
+  public purchaseOptionModal: NgbModal;
+  @ViewChild('paymentWalletModal')
+  public paymentWalletModal: PaymentWalletModalComponent;
+
   @Input() itemPrice: number;
   @Input() itemID: string;
+
   private txData: TransactionData;
+  public txDataAsString: string;
 
   constructor(private modal: NgbModal,
     private transactionService: TransactionService) { }
@@ -22,13 +29,12 @@ export class PurchaseOptionsModalComponent {
     this.modal.open(this.purchaseOptionModal, { centered: true, size: 'lg' });
   }
 
-  public getQrCodeForMobile(): void {
-  }
-
-  private getTxData(): void {
+  public openPaymentWalletModal(): void {
     this.transactionService.getTransactionData(this.itemID).subscribe((httpResonse: HttpResponse) => {
       localStorage.setItem('sessionID', httpResonse.sessionID);
       this.txData = httpResonse.data[0];
+      this.txDataAsString = JSON.stringify(this.txData);
+      this.paymentWalletModal.open();
     });
   }
 }
