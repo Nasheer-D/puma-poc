@@ -47,40 +47,43 @@
             <div class="col-md-6">
               <div class="container transaction-progress-container">
                 <div class="row">
-                  <div class="container transaction-progress" #transactionRequest [class.inactiveBackgroundColor]="">
+                  <div class="container transaction-progress" #transactionRequest [ngClass]="{'inactiveBackgroundColor': activeRequest == false}">
                     <div class="row">
                       <div class="col-sm-9">
                         <label class="transaction-text">Sending transaction request</label>
                         <div class="span status">In Progress...</div>
                       </div>
                       <div class="col-sm-3">
-                        <app-loading-spinner #transactionRequestSpinner></app-loading-spinner>
+                        <app-loading-spinner #transactionRequestSpinner *ngIf="activeRequest == true"></app-loading-spinner>
+                        <label class="numberLayout" *ngIf="activeRequest == false">1</label>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="container transaction-progress" #transactionResponse>
+                  <div class="container transaction-progress" #transactionResponse [ngClass]="{'inactiveBackgroundColor': activeResponse == false}">
                     <div class="row">
                       <div class="col-md-9">
                         <label class="transaction-text">Transaction response</label>
                         <div class="span status">In Progress...</div>
                       </div>
                       <div class="col-md-3">
-                        <app-loading-spinner #transactionResponseSpinner></app-loading-spinner>
+                        <app-loading-spinner #transactionResponseSpinner *ngIf="activeResponse == true"></app-loading-spinner>
+                        <label class="numberLayout" *ngIf="activeResponse == false">2</label>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="container transaction-progress" #transactionStatus>
+                  <div class="container transaction-progress" #transactionStatus [ngClass]="{'inactiveBackgroundColor': activeStatus == false}">
                     <div class="row">
                       <div class="col-md-9">
                         <label class="transaction-text">Transaction status</label>
                         <div class="span status">In Progress...</div>
                       </div>
                       <div class="col-md-3">
-                        <app-loading-spinner #transactionStatusSpinner></app-loading-spinner>
+                        <app-loading-spinner #transactionStatusSpinner *ngIf="activeStatus == true"></app-loading-spinner>
+                        <label class="numberLayout" *ngIf="activeStatus == false">3</label>
                       </div>
                     </div>
                   </div>

@@ -141,5 +141,11 @@
 }
 
 .inactiveBackgroundColor{
-  background-color: #dddddd;
+  background-color:#EDEDED;
+}
+
+.numberLayout{
+  font-size: 36px;
+  color: #d4d4d4;
+  font-family: Heebo;
 }
