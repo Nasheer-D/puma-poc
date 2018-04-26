@@ -6,16 +6,31 @@ import { Container } from 'typedi';
 
 import { IResponseMessage, ResponseHandler } from '../../utils/responseHandler/ResponseHandler';
 import { TransactionBuilder, Transaction } from '../../domain/transactions/models/Transaction';
+import { ISqlQuery, DataService } from '../../datasource/DataService';
 
 @JsonController('/transaction')
 export class TransactionController {
     private logger: LoggerInstance = Container.get(LoggerFactory).getInstance('TransactionController');
 
-    @Get('/wallet/txdetails/:amount')
-    public retrieveTransactionData(@Param('amount') amount: number, @Res() response: any) {
-        this.logger.info('Retrieving Transaction Data');
+    @Get('/wallet/txdetails/:itemID')
+    public async retrieveTransactionData(@Param('itemID') itemID: string, @Res() response: any) {
+        this.logger.info('Retrieving Transaction Data for Item');
+        const sqlQuery: ISqlQuery = {
+            text: `SELECT price, description, title, "walletAddress"
+            FROM items INNER JOIN app_users ON "ownerID" = "userID" WHERE "itemID" = $1;`,
+            values: [itemID]
+        };
+        const queryResult = await new DataService().executeQueryAsPromise(sqlQuery);
+        this.logger.info(queryResult.data[0]);
+        if (!queryResult.success) {
+            return new ResponseHandler().handle(response, queryResult);
+        }
+
         const transactionBuilder = new TransactionBuilder();
-        transactionBuilder.value = amount;
+        transactionBuilder.description = queryResult.data[0].description;
+        transactionBuilder.name = queryResult.data[0].title;
+        transactionBuilder.to = queryResult.data[0].walletAddress;
+        transactionBuilder.value = queryResult.data[0].price;
 
         const transaction: Transaction = transactionBuilder.build();
         const responseMessage: IResponseMessage = {

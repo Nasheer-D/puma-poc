@@ -6,6 +6,7 @@ CREATE TABLE public.app_users
     password character varying(255) COLLATE pg_catalog."default" NOT NULL,
     credits double precision NOT NULL,
     "registrationDate" bigint NOT NULL,
+    "walletAddress" character varying(255) COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT app_users_pkey PRIMARY KEY ("userID")
 )
 WITH (

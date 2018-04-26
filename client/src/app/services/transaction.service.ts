@@ -14,7 +14,7 @@ export class TransactionService {
         this.actionUrl = `${Constants.apiHost}${Constants.apiPrefix}transaction/`;
     }
 
-    public getTransactionData(amount: number): Observable<any> {
-        return new HttpGetRequest(this.http, `${this.actionUrl}txdetails/${amount}`).getResult();
+    public getTransactionData(itemID: string): Observable<any> {
+        return new HttpGetRequest(this.http, `${this.actionUrl}wallet/txdetails/${itemID}`).getResult();
     }
 }
