@@ -45,9 +45,9 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="container transaction-progress-container" id="transaction-request">
+              <div class="container transaction-progress-container">
                 <div class="row">
-                  <div class="container transaction-progress">
+                  <div class="container transaction-progress" #transactionRequest>
                     <div class="row">
                       <div class="col-sm-9">
                         <label class="transaction-text">Sending transaction request</label>
@@ -60,7 +60,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="container transaction-progress" id="transaction-response">
+                  <div class="container transaction-progress" #transactionResponse>
                     <div class="row">
                       <div class="col-md-9">
                         <label class="transaction-text">Transaction response</label>
@@ -73,7 +73,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="container transaction-progress" id="transaction-status">
+                  <div class="container transaction-progress" #transactionStatus>
                     <div class="row">
                       <div class="col-md-9">
                         <label class="transaction-text">Transaction status</label>

@@ -31,6 +31,9 @@ export class PaymentWalletComponent implements OnInit {
     this.spinner.show();
 
     setTimeout(() => {
+      this.activeRequest = false;
+      this.activeResponse = false;
+      this.activeStatus = false;
       this.spinner.hide();
       setTimeout(() => {
         this.spinner.hide();
