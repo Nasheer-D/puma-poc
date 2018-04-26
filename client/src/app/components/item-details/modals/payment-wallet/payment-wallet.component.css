@@ -104,7 +104,6 @@
   margin-right: 5px;
   border-radius: 8px;
 }
-
 .transaction-progress-container {
   border-radius: 15px;
   offset-block-end: 0px, 5px;
@@ -114,7 +113,6 @@
   border-radius: 15px;
   padding: 0px;
 }
-
 .transaction-progress {
   border-radius: 15px;
   border: 1px white solid;
@@ -133,19 +131,26 @@
   color: black;
   text-align: left;
 }
+.transaction-text-inactive{
+  color: #ADADAD; 
+}
 .status {
   color: #9c9c9c;
   font-family: Heebo;
   font-size: 14px;
   text-align: left;
 }
-
 .inactiveBackgroundColor{
-  background-color:#EDEDED;
+  background-color:#EDEDED; 
 }
-
 .numberLayout{
   font-size: 36px;
   color: #d4d4d4;
   font-family: Heebo;
+}
+.imageSize{
+  height: 30px;
+  width: 30px;
+  margin-top: 15px;
+  margin-left: 10px;
 }

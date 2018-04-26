@@ -21,7 +21,6 @@ export class PaymentWalletComponent implements OnInit {
   @Input() completedStatus: number;
 
   constructor(private modal: NgbModal, private spinner: NgxSpinnerService) {
-    // this.disableElements = null;
     this.activeRequest = false;
     this.activeResponse = false;
     this.activeStatus = false;
@@ -34,16 +33,17 @@ export class PaymentWalletComponent implements OnInit {
     setTimeout(() => {
       this.disableElements = true;
       this.activeRequest = true;
-  
-      // this.spinner.hide();
+
       setTimeout(() => {
         this.activeResponse = true;
         this.disableElements = true;
-        // this.spinner.hide();
+
         setTimeout(() => {
           this.activeStatus = true;
-          this.disableElements = null;
-          // this.spinner.hide();
+
+          setTimeout(() => {
+            this.disableElements = null;
+          }, 5000);
         }, 5000);
       }, 5000);
     }, 5000);
