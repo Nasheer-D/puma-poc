@@ -13,33 +13,35 @@ export class PaymentWalletComponent implements OnInit {
   @Input() itemPrice2: number;
   disableElements: boolean;
 
-  activeRequest: boolean;
-  completedRequest: number;
+  public activeRequest: boolean;
+  public activeResponse: boolean;
+  public activeStatus: boolean;
 
-  activeResponse: boolean;
-  completedResponse: number;
-
-  activeStatus: boolean;
-  completedStatus: number;
+  public completedRequest: number;
+  public completedResponse: number;
+  public completedStatus: number;
 
   constructor(private modal: NgbModal, private spinner: NgxSpinnerService) {
-    this.disableElements = true;
+    this.disableElements = null;
+    // this.activeRequest = false;
+    // this.activeResponse = false;
+    // this.activeStatus = false;
   }
 
   ngOnInit() {
-    /** spinner starts on init */
-    this.spinner.show();
+    // this.spinner.show();
+
 
     setTimeout(() => {
-      this.activeRequest = false;
-      this.activeResponse = false;
-      this.activeStatus = false;
+      // this.disableElements = true;
+      this.activeRequest = true;
+      this.activeResponse = true;
+      this.activeStatus = true;
       this.spinner.hide();
       setTimeout(() => {
         this.spinner.hide();
         setTimeout(() => {
           this.spinner.hide();
-          this.disableElements = null;
         }, 5000);
       }, 5000);
     }, 5000);
