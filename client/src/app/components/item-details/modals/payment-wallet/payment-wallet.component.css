@@ -156,17 +156,13 @@
   color: #d4d4d4;
   font-family: Heebo;
 }
-<<<<<<< Updated upstream
-.imageSize {
-=======
+
 .imageSizeSuccess{
->>>>>>> Stashed changes
   height: 30px;
   width: 30px;
   margin-top: 15px;
   margin-left: 10px;
 }
-<<<<<<< Updated upstream
 
 .border-succesfull-transaction {
   border-color: #2cc93c;
@@ -176,7 +172,7 @@
 .border-failed-transaction {
   border-color: #e01a0d;
   border-width: 2px;
-=======
+}
 .imageSizeFail{
   height: 30px;
   width: 30px;
@@ -188,5 +184,4 @@
   height: 120px;
   margin-top: -63px;
   margin-bottom: -50px;
->>>>>>> Stashed changes
 }
