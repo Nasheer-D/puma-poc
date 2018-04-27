@@ -16,14 +16,14 @@ export class ItemDetailsComponent implements OnInit {
   private routerSubscription: Subscription;
   @ViewChild('purchaseOptionModal')
   public purchaseOptionsModal: PurchaseOptionsModalComponent;
-  @Input() showWarning: boolean;
-  completedStatus: number = 0;
+  // @Input() showWarning: boolean;
+  // completedStatus: number = 0;
 
   public constructor(
     private router: ActivatedRoute,
     private itemService: ItemsService
   ) {
-    this.showWarning = true;
+    // this.showWarning = true;
   }
 
   public ngOnInit(): void {
@@ -39,9 +39,13 @@ export class ItemDetailsComponent implements OnInit {
     });
   }
 
-  public closeButton() {
-    this.showWarning = false;
-  }
+  // onPurchaseStatusUpdate(completedStatus) {
+  //   this.completedStatus = completedStatus;
+  // }
+
+  // public closeButton() {
+  //   this.showWarning = false;
+  // }
 
   public openPurchaseOptionsModal() {
     this.purchaseOptionsModal.open();

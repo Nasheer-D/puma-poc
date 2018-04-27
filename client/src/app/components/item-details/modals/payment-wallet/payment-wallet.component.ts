@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -21,6 +28,8 @@ export class PaymentWalletComponent implements OnInit {
   @Input() completedResponse: number; // [0,1,2] Pending, Loading, Success => Response
   @Input() completedStatus: number; // [0,1,2,3] Pending, Loading, Success, Failed => Status
 
+  // @Output() private onPurchaseSuccess = new EventEmmiter();
+
   constructor(private modal: NgbModal, private spinner: NgxSpinnerService) {
     this.activeRequest = false;
     this.activeResponse = false;
@@ -30,6 +39,10 @@ export class PaymentWalletComponent implements OnInit {
     this.completedResponse = 0;
     this.completedStatus = 0;
   }
+
+  // transactionCompleted() {
+  //   this.onPurchaseSuccess.emit(this.completedStatus);
+  // }
 
   ngOnInit() {
     setTimeout(() => {
