@@ -5,17 +5,20 @@
   margin: auto;
   border-radius: 15px;
 }
+
 .modal-credits {
   color: black;
   font-size: 16px;
   font-family: Heebo;
 }
+
 .modal-description {
   font-family: Heebo;
   font-size: 26px;
   color: black;
   text-align: center;
 }
+
 .modal-scan-qr {
   font-family: Heebo;
   font-size: 16px;
@@ -23,13 +26,14 @@
   text-align: center;
 }
 
-.modal-email{
+.modal-email {
   font-family: Heebo;
   font-size: 16px;
   color: black;
   text-align: center;
   margin-top: 30px;
 }
+
 .modal-link {
   font-family: Heebo;
   font-size: 14px;
@@ -37,6 +41,7 @@
   text-align: center;
   margin-top: 15px;
 }
+
 .title-name {
   color: #1e69f5;
   font-size: 36px;
@@ -49,11 +54,13 @@
   align-content: center;
   border-radius: 15px;
 }
+
 .modal-header {
   border: 0px;
   text-align: center;
   object-position: center;
 }
+
 .options-container {
   border-radius: 15px;
   border: 1px white solid;
@@ -66,15 +73,18 @@
   border-radius: 15px;
   padding: 0px;
 }
+
 .modal-btn {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .option-picture {
   width: 180px;
   height: 110px;
 }
+
 .image-container-modal {
   display: flex;
   align-items: center;
@@ -82,45 +92,53 @@
   margin-top: 80px;
   margin-bottom: 65px;
 }
+
 .app-store-apple {
   height: 35px;
   width: 105px;
   margin-bottom: 15px;
 }
+
 .app-store-google {
   height: 52px;
   width: 120px;
   margin-bottom: 15px;
 }
+
 .download-option-image {
   border: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .close-button {
   position: absolute;
   right: 35px;
   top: 8px;
 }
+
 .modal-show-code {
   margin-top: 15px;
   margin-bottom: 20px;
 }
+
 .btn-layout {
-  margin-top: 10px;
+  margin-top: 12px;
   margin-right: 5px;
   border-radius: 8px;
 }
+
 .transaction-progress-container {
   border-radius: 15px;
   offset-block-end: 0px, 5px;
   margin: 0px;
   max-width: 680px;
-  height: 420px;
+  /* height: 420px; */
   border-radius: 15px;
   padding: 0px;
 }
+
 .transaction-progress {
   border-radius: 15px;
   border: 1px white solid;
@@ -133,31 +151,36 @@
   height: 100px;
   padding: 20px;
 }
+
 .transaction-text {
   font-family: Heebo;
   font-size: 16px;
   color: black;
   text-align: left;
 }
+
 .transaction-text-inactive {
   color: #adadad;
 }
+
 .status {
   color: #9c9c9c;
   font-family: Heebo;
   font-size: 14px;
   text-align: left;
 }
+
 .inactiveBackgroundColor {
   background-color: #ededed;
 }
+
 .numberLayout {
   font-size: 36px;
   color: #d4d4d4;
   font-family: Heebo;
 }
 
-.imageSizeSuccess{
+.imageSizeSuccess {
   height: 30px;
   width: 30px;
   margin-top: 15px;
@@ -173,13 +196,15 @@
   border-color: #e01a0d;
   border-width: 2px;
 }
-.imageSizeFail{
+
+.imageSizeFail {
   height: 30px;
   width: 30px;
   margin-top: 15px;
   margin-left: 10px;
 }
-.changeImageSize{
+
+.changeImageSize {
   width: 190px;
   height: 120px;
   margin-top: -63px;

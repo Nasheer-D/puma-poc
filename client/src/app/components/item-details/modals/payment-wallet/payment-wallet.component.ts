@@ -13,33 +13,41 @@ export class PaymentWalletComponent implements OnInit {
   @Input() itemPrice2: number;
   disableElements: boolean;
 
-  @Input() activeRequest: boolean;
-  @Input() activeResponse: boolean;
-  @Input() activeStatus: boolean;
-  @Input() completedRequest: number;
-  @Input() completedResponse: number;
-  @Input() completedStatus: number;
+  @Input() activeRequest: boolean; // Request Container color
+  @Input() activeResponse: boolean; // Response Container color
+  @Input() activeStatus: boolean; // Status Container color
+  @Input() completedRequest: number; // [0,1,2] Pending,Loading,Success => Request
+  @Input() completedResponse: number; // [0,1,2] Pending, Loading, Success => Response
+  @Input() completedStatus: number; // [0,1,2,3] Pending, Loading, Success, Failed => Status
 
   constructor(private modal: NgbModal, private spinner: NgxSpinnerService) {
     this.activeRequest = false;
     this.activeResponse = false;
     this.activeStatus = false;
-    this.disableElements = true;
+    this.disableElements = null;
+    this.completedRequest = 0;
+    this.completedResponse = 0;
+    this.completedStatus = 0;
   }
 
   ngOnInit() {
     setTimeout(() => {
+      // Request
       this.disableElements = true;
       this.activeRequest = true;
-
+      this.completedRequest = 1;
       setTimeout(() => {
+        // Response
+        this.completedRequest = 2;
         this.activeResponse = true;
-        this.disableElements = true;
-
+        this.completedResponse = 1;
         setTimeout(() => {
+          // Status
+          this.completedResponse = 2;
           this.activeStatus = true;
-
+          this.completedStatus = 1;
           setTimeout(() => {
+            this.completedStatus = 2;
             this.disableElements = null;
           }, 2000);
         }, 2000);
