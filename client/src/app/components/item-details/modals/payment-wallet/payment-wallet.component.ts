@@ -11,6 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class PaymentWalletComponent implements OnInit {
   @ViewChild('paymentWalletModal') paymentWalletModal: NgbModal;
   @Input() itemPrice2: number;
+  @Input() transactionStatus: boolean;
   disableElements: boolean;
 
   @Input() activeRequest: boolean; // Request Container color
