@@ -27,6 +27,14 @@
   text-align: center;
 }
 
+.modal-email {
+  font-family: Heebo;
+  font-size: 16px;
+  color: black;
+  text-align: center;
+  margin-top: 30px;
+}
+
 .modal-link {
   font-family: Heebo;
   font-size: 14px;
@@ -76,8 +84,8 @@
 }
 
 .option-picture {
-  width: 150px;
-  height: 105px;
+  width: 180px;
+  height: 110px;
 }
 
 .image-container-modal {
@@ -119,7 +127,7 @@
 }
 
 .btn-layout {
-  margin-top: 10px;
+  margin-top: 12px;
   margin-right: 5px;
   border-radius: 8px;
 }
@@ -129,7 +137,7 @@
   offset-block-end: 0px, 5px;
   margin: 0px;
   max-width: 680px;
-  height: 420px;
+  /* height: 420px; */
   border-radius: 15px;
   padding: 0px;
 }
@@ -154,6 +162,10 @@
   text-align: left;
 }
 
+.transaction-text-inactive {
+  color: #adadad;
+}
+
 .status {
   color: #9c9c9c;
   font-family: Heebo;
@@ -161,11 +173,52 @@
   text-align: left;
 }
 
-.inactive-background-color {
-  background-color: #dddddd;
+.inactiveBackgroundColor {
+  background-color: #ededed;
+}
+
+.numberLayout {
+  font-size: 36px;
+  color: #d4d4d4;
+  font-family: Heebo;
+}
+
+.imageSizeSuccess {
+  height: 30px;
+  width: 30px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.border-succesfull-transaction {
+  border-color: #2cc93c;
+  border-width: 2px;
+}
+
+.border-failed-transaction {
+  border-color: #e01a0d;
+  border-width: 2px;
+}
+
+.imageSizeFail {
+  height: 30px;
+  width: 30px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.changeImageSize {
+  width: 190px;
+  height: 120px;
+  margin-top: -63px;
+  margin-bottom: -50px;
 }
 
 .qr-container {
-  width: 60%;
-  margin: 2rem auto;
+  width: 50%;
+  margin: 1rem auto;
+}
+
+qr-code>img {
+  width: 100%;
 }

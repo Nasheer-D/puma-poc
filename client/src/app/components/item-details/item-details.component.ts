@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Item } from '../../models/Item';
 import { TransactionService } from '../../services/transaction.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal';
@@ -18,6 +18,8 @@ export class ItemDetailsComponent implements OnInit {
   private routerSubscription: Subscription;
   @ViewChild('purchaseOptionModal')
   public purchaseOptionsModal: PurchaseOptionsModalComponent;
+  // @Input() showWarning: boolean;
+  // completedStatus: number = 0;
 
   public constructor(
     private router: ActivatedRoute,
@@ -36,6 +38,14 @@ export class ItemDetailsComponent implements OnInit {
         });
     });
   }
+
+  // onPurchaseStatusUpdate(completedStatus) {
+  //   this.completedStatus = completedStatus;
+  // }
+
+  // public closeButton() {
+  //   this.showWarning = false;
+  // }
 
   public openPurchaseOptionsModal() {
     this.purchaseOptionsModal.open();

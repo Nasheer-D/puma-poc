@@ -1,19 +1,16 @@
 .details-container {
   padding: 15px;
 }
-
 .back-link {
   color: #9c9c9c;
   font-family: Heebo;
   margin-left: 15px;
 }
-
 .item-image {
   height: 241px;
   width: 100%;
   border-radius: 8px;
 }
-
 .item-description {
   font-size: 26px;
   letter-spacing: -1%;
@@ -21,44 +18,76 @@
   font-family: Heebo;
   margin-bottom: 0px;
 }
-
 .item-tags {
   font-size: 14px;
   color: #9c9c9c;
   font-family: Heebo;
   margin-bottom: 10px;
 }
-
 .item-price-label {
   font-size: 16px;
   color: black;
   font-family: Heebo;
   margin-bottom: 0px;
-  margin-top: 30px;
+  margin-top: 15px;
 }
-
 .item-price {
   font-size: 36px;
   color: #1e69f5;
   font-family: Heebo;
-  margin-bottom: 22px;
+  margin-bottom: 38px;
 }
-
+.item-purchased {
+  font-size: 36px;
+  color: #1e69f5;
+  font-family: Heebo;
+  margin-bottom: -5px;
+}
+.download-image {
+  margin-top: 2px;
+}
 .plain-text {
   font-size: 14px;
   color: #353535;
   font-family: Heebo;
 }
-
 .value-color {
   color: #9c9c9c;
   font-size: 14px;
   font-family: Heebo;
 }
-
 .extended-link {
   font-size: 12px;
 }
 .item-info {
   padding: 10px;
+}
+.close {
+  margin-top: 5px;
+  padding-left: 20px;
+  color: #e01a0d;
+}
+.warning-message {
+  font-size: 11px;
+  font-family: Heebo;
+  color: #e01a0d;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+.border-danger {
+  border-width: 10px;
+  border-radius: 4px;
+}
+.hideWarning {
+  border-color: white;
+  color: white;
+}
+.close-button {
+  margin-left: 20px;
+  color: #e01a0d;
+  font-weight: bold;
+}
+
+.btn-download-no-warning {
+  margin-top: 40px;
 }
