@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Item } from '../../models/Item';
 import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../../services/items.service';
@@ -16,11 +16,14 @@ export class ItemDetailsComponent implements OnInit {
   private routerSubscription: Subscription;
   @ViewChild('purchaseOptionModal')
   public purchaseOptionsModal: PurchaseOptionsModalComponent;
+  @Input() showWarning: boolean;
 
   public constructor(
     private router: ActivatedRoute,
     private itemService: ItemsService
-  ) {}
+  ) {
+    this.showWarning = true;
+  }
 
   public ngOnInit(): void {
     this.routerSubscription = this.router.params.subscribe(params => {
@@ -33,6 +36,10 @@ export class ItemDetailsComponent implements OnInit {
           this.item.uploadedDate = this.item.uploadedDate * 1000;
         });
     });
+  }
+
+  public closeButton() {
+    this.showWarning = false;
   }
 
   public openPurchaseOptionsModal() {

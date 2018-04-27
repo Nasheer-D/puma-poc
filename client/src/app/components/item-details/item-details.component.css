@@ -71,6 +71,8 @@
   font-size: 11px;
   font-family: Heebo;
   color: #e01a0d;
+  padding-left: 5px;
+  padding-top: 5px;
 }
 .border-danger {
   border-width: 10px;
@@ -84,4 +86,8 @@
   margin-left: 20px;
   color: #e01a0d;
   font-weight: bold;
+}
+
+.btn-download-no-warning {
+  margin-top: 40px;
 }
