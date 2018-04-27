@@ -131,8 +131,8 @@
   color: black;
   text-align: left;
 }
-.transaction-text-inactive{
-  color: #ADADAD; 
+.transaction-text-inactive {
+  color: #adadad;
 }
 .status {
   color: #9c9c9c;
@@ -140,17 +140,27 @@
   font-size: 14px;
   text-align: left;
 }
-.inactiveBackgroundColor{
-  background-color:#EDEDED; 
+.inactiveBackgroundColor {
+  background-color: #ededed;
 }
-.numberLayout{
+.numberLayout {
   font-size: 36px;
   color: #d4d4d4;
   font-family: Heebo;
 }
-.imageSize{
+.imageSize {
   height: 30px;
   width: 30px;
   margin-top: 15px;
   margin-left: 10px;
+}
+
+.border-succesfull-transaction {
+  border-color: #2cc93c;
+  border-width: 2px;
+}
+
+.border-failed-transaction {
+  border-color: #e01a0d;
+  border-width: 2px;
 }

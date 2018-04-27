@@ -28,8 +28,6 @@ export class PaymentWalletComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.spinner.show();
-
     setTimeout(() => {
       this.disableElements = true;
       this.activeRequest = true;
@@ -43,10 +41,10 @@ export class PaymentWalletComponent implements OnInit {
 
           setTimeout(() => {
             this.disableElements = null;
-          }, 5000);
-        }, 5000);
-      }, 5000);
-    }, 5000);
+          }, 2000);
+        }, 2000);
+      }, 2000);
+    }, 2000);
   }
 
   public open(): void {

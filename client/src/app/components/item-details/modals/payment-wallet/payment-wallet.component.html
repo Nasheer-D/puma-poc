@@ -81,31 +81,33 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="container transaction-progress" #transactionStatus [ngClass]="{'inactiveBackgroundColor': activeStatus == false, 'border border-success rounded': activeStatus == true && disableElements == null} ">
+                  <!-- Failed transaction <div class="container transaction-progress" #transactionStatus [ngClass]="{'inactiveBackgroundColor': activeStatus == false, 'border-failed-transaction': activeStatus == true && disableElements == null} "> -->
+                  <div class="container transaction-progress" #transactionStatus [ngClass]="{'inactiveBackgroundColor': activeStatus == false, 'border-succesfull-transaction': activeStatus == true && disableElements == null} ">
                     <div class="row">
                       <div class="col-md-9">
                         <label class="transaction-text" [ngClass]="{'transaction-text-inactive': activeStatus == false}">Transaction status</label>
                         <div class="span status" *ngIf="activeStatus == false">Waiting</div>
                         <div class="span status" *ngIf="activeStatus == true && disableElements == true">In Progress...</div>
                         <div class="span status" *ngIf="activeStatus == true && disableElements == null">Transation has been approved!</div>
-                        <!-- <div class="span status" *ngIf="activeStatus == true && disableElements == null">Transation was failed.Try again.</div> -->
+                        <!-- Failed transaction <div class="span status" *ngIf="activeStatus == true && disableElements == null">Transation was failed.Try again.</div> -->
                       </div>
                       <div class="col-md-3">
                         <app-loading-spinner #transactionStatusSpinner *ngIf="activeStatus == true && disableElements == true"></app-loading-spinner>
                         <label class="numberLayout" *ngIf="activeStatus == false">3</label>
                         <img src="../../../../../assets/images/success-btn.png" class="imageSize" *ngIf="activeStatus == true && disableElements == null">
-                        <!-- <img src="../../../../../assets/images/fail-btn.png" class="imageSize" *ngIf="activeStatus == true"> -->
+                        <!-- Failed transaction <img src="../../../../../assets/images/fail-btn.png" class="imageSize" *ngIf="activeStatus == true && disableElements == null"> -->
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="container">
-                  <div class="row">
-                    <div class="col-6">
+                <div class="container ">
+                  <div class="row ">
+                    <div class="col-6 ">
                       <button class="btn btn-outline-primary btn-layout" disabled="{{disableElements}}">See your balance</button>
                     </div>
-                    <div class="row-6">
-                      <button class="btn btn-outline-primary btn-layout" (click)="d()" disabled="{{disableElements}}">Back to image</button>
+                    <div class="row-6 ">
+                      <button class="btn btn-outline-primary btn-layout" (click)="d() " disabled="{{disableElements}}">Back to image</button>
+                      <!-- <button class="btn btn-outline-primary btn-layout" (click)="d() " disabled="{{disableElements}}" *ngIf="activeStatus == false && disableElements == null">Try Again</button> -->
                     </div>
                   </div>
                 </div>
