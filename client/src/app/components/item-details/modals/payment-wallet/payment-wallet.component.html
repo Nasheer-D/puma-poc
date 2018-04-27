@@ -22,10 +22,13 @@
         <div class="container transaction-tool">
           <div class="row">
             <div class="container options-container col-md">
-              <div class="col">
-                <div class="container image-container-modal">
-                  <img class="option-picture " src="../../../../../assets/images/pumapay-qr.PNG" alt="">
-                </div>
+              <div class="col modal-email" *ngIf="activeStatus == true && disableElements == null">
+                <label>Connect with your
+                  <a href="https://outlook.live.com/owa/?authRedirect=true">email </a> to save this image for later access.</label>
+              </div>
+              <div class="container image-container-modal">
+                <img class="option-picture " src="../../../../../assets/images/pumapay-qr.PNG" [ngClass]="{'changeImageSize': activeStatus == true && disableElements == null}"
+                  alt="">
               </div>
               <div class="col modal-scan-qr">
                 <label>Scan a QR code with the app to complete the transaction.</label>
@@ -58,7 +61,7 @@
                       <div class="col-sm-3">
                         <app-loading-spinner #transactionRequestSpinner *ngIf="activeRequest == true && activeResponse == false"></app-loading-spinner>
                         <label class="numberLayout" *ngIf="activeRequest == false">1</label>
-                        <img src="../../../../../assets/images/success-btn.png" class="imageSize" *ngIf="activeRequest == true && activeResponse == true">
+                        <img src="../../../../../assets/images/success-btn.png" class="imageSizeSuccess" *ngIf="activeRequest == true && activeResponse == true">
                       </div>
                     </div>
                   </div>
@@ -75,7 +78,7 @@
                       <div class="col-md-3">
                         <app-loading-spinner #transactionResponseSpinner *ngIf="activeResponse == true && activeStatus == false"></app-loading-spinner>
                         <label class="numberLayout" *ngIf="activeResponse == false">2</label>
-                        <img src="../../../../../assets/images/success-btn.png" class="imageSize" *ngIf="activeResponse == true && activeStatus == true">
+                        <img src="../../../../../assets/images/success-btn.png" class="imageSizeFail" *ngIf="activeResponse == true && activeStatus == true">
                       </div>
                     </div>
                   </div>

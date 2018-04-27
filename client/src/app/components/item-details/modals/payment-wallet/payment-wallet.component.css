@@ -22,6 +22,14 @@
   color: black;
   text-align: center;
 }
+
+.modal-email{
+  font-family: Heebo;
+  font-size: 16px;
+  color: black;
+  text-align: center;
+  margin-top: 30px;
+}
 .modal-link {
   font-family: Heebo;
   font-size: 14px;
@@ -64,8 +72,8 @@
   justify-content: center;
 }
 .option-picture {
-  width: 150px;
-  height: 105px;
+  width: 180px;
+  height: 110px;
 }
 .image-container-modal {
   display: flex;
@@ -148,12 +156,17 @@
   color: #d4d4d4;
   font-family: Heebo;
 }
+<<<<<<< Updated upstream
 .imageSize {
+=======
+.imageSizeSuccess{
+>>>>>>> Stashed changes
   height: 30px;
   width: 30px;
   margin-top: 15px;
   margin-left: 10px;
 }
+<<<<<<< Updated upstream
 
 .border-succesfull-transaction {
   border-color: #2cc93c;
@@ -163,4 +176,17 @@
 .border-failed-transaction {
   border-color: #e01a0d;
   border-width: 2px;
+=======
+.imageSizeFail{
+  height: 30px;
+  width: 30px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+.changeImageSize{
+  width: 190px;
+  height: 120px;
+  margin-top: -63px;
+  margin-bottom: -50px;
+>>>>>>> Stashed changes
 }
