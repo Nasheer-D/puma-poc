@@ -1,5 +1,5 @@
 import * as unit from 'ethereumjs-units';
-import { SignatureCalculator } from '../../../utils/signatureCalculator/SignatureCalculator';
+import { SignatureCalculator } from '../../../utils/txHelpers/SignatureCalculator';
 
 // tslint:disable:variable-name
 export class Transaction {
@@ -13,7 +13,7 @@ export class Transaction {
     private _signature: string;
 
     public constructor(transactionBuilder: TransactionBuilder) {
-        this._callback = `callback_url`;
+        this._callback = transactionBuilder.callbackUrl;
         this._description = transactionBuilder.description;
         this._name = transactionBuilder.name;
         this._networkID = 3;
@@ -108,6 +108,7 @@ export class Transaction {
 }
 
 export class TransactionBuilder {
+    private _callbackUrl: string;
     private _description: string;
     private _value: number;
     private _name: string;
@@ -115,6 +116,22 @@ export class TransactionBuilder {
 
     public build(): Transaction {
         return new Transaction(this);
+    }
+
+    /**
+   * Getter callbackUrl
+   * @return {string}
+   */
+    public get callbackUrl(): string {
+        return this._callbackUrl;
+    }
+
+    /**
+     * Setter callbackUrl
+     * @param {string} value
+     */
+    public set callbackUrl(value: string) {
+        this._callbackUrl = value;
     }
 
     /**

@@ -19,10 +19,7 @@ export class ItemsController {
   }
 
   @Get('/:itemID')
-  public async getItemByID(
-    @Param('itemID') itemID: string,
-    @Res() response: any
-  ): Promise<any> {
+  public async getItemByID(@Param('itemID') itemID: string, @Res() response: any): Promise<any> {
     const sqlQuery: ISqlQuery = {
       text: `SELECT * FROM items where "itemID" = $1`,
       values: [itemID]

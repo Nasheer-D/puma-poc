@@ -45,7 +45,6 @@ export class DataService {
         queryMessage.status = 'FAILED';
         queryMessage.message = `SQL Query failed. Reason: ${errorReason}`;
         queryMessage.errcode = err.code;
-        queryMessage.catched = true;
 
         reject(queryMessage);
       }

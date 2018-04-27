@@ -1,7 +1,7 @@
 import { ISqlQuery, DataService } from '../../../datasource/DataService';
 import { IResponseMessage } from '../../../utils/responseHandler/ResponseHandler';
 
-export interface Session {
+export interface ISession {
     sessionID: string;
     txHash: string;
     status: TxStatus;

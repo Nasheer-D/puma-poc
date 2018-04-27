@@ -10,6 +10,8 @@ import * as express from 'express';
 import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import * as debug from 'debug';
+import * as http from 'http';
+import { WebSocketHelper } from './utils/webSocket/webSocketHelper';
 
 class App {
   private loggerFactory: LoggerFactory = new LoggerFactory(Config.settings.winston, Config.settings.morgan);
@@ -43,8 +45,15 @@ class App {
     this.debug('routing: %o', routingControllersOptions);
     useExpressServer(app, routingControllersOptions);
 
+    //initialize a simple http server
+    const server: http.Server = http.createServer(app);
+    //initialize the web socket server
+    const webSocket = new WebSocketHelper();
+    webSocket.initiate(server);
+    Container.set(WebSocketHelper, webSocket);
+
     this.debug('listen');
-    app.listen(Number(Config.settings.port), Config.settings.host);
+    server.listen(Number(Config.settings.port), Config.settings.host);
     this.logger.info(`Visit API at ${Config.settings.host}:${Config.settings.port}${apiPath}`);
 
     process.on('unhandledRejection', (error: Error, promise: Promise<any>) => {
