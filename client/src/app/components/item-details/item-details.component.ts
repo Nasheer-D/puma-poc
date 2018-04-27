@@ -14,12 +14,10 @@ import { PurchaseOptionsModalComponent } from '../../components/item-details/mod
   styleUrls: [`./item-details.component.css`]
 })
 export class ItemDetailsComponent implements OnInit {
-  public item: Item = <Item>{};
-  private routerSubscription: Subscription;
   @ViewChild('purchaseOptionModal')
   public purchaseOptionsModal: PurchaseOptionsModalComponent;
-  // @Input() showWarning: boolean;
-  // completedStatus: number = 0;
+  public item: Item = <Item>{};
+  private routerSubscription: Subscription;
 
   public constructor(
     private router: ActivatedRoute,
@@ -38,14 +36,6 @@ export class ItemDetailsComponent implements OnInit {
         });
     });
   }
-
-  // onPurchaseStatusUpdate(completedStatus) {
-  //   this.completedStatus = completedStatus;
-  // }
-
-  // public closeButton() {
-  //   this.showWarning = false;
-  // }
 
   public openPurchaseOptionsModal() {
     this.purchaseOptionsModal.open();

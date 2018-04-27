@@ -1,5 +1,5 @@
 import * as Web3 from 'web3';
-import { JsonController, Post, Body, Res, Param, Get, Put } from 'routing-controllers';
+import { JsonController, Body, Res, Param, Get, Put } from 'routing-controllers';
 import { LoggerInstance } from 'winston';
 import { LoggerFactory } from '../../utils/logger';
 import { Container } from 'typedi';
@@ -10,12 +10,12 @@ import { TransactionBuilder, Transaction } from '../../domain/transactions/model
 import { ISqlQuery, DataService } from '../../datasource/DataService';
 import { Session, TxStatus } from '../../domain/sessions/models/Session';
 import { Globals } from '../../globals';
-import { WebSocketHelper } from '../../utils/webSocket/webSocketHelper';
+import * as io from 'socket.io';
 
 @JsonController('/transaction')
 export class TransactionController {
     private logger: LoggerInstance = Container.get(LoggerFactory).getInstance('TransactionController');
-    private webSocket: WebSocketHelper = Container.get(WebSocketHelper);
+    private webSocket: io = Container.get(io);
 
     @Get('/wallet/txdetails/:itemID')
     public async retrieveTransactionData(@Param('itemID') itemID: string, @Res() response: any) {
@@ -88,8 +88,9 @@ export class TransactionController {
         };
 
         try {
+
             const queryResult = await new DataService().executeQueryAsPromise(sqlQuery);
-            await this.webSocket.sendTxStatusForSession(queryResult.data[0]);
+            this.webSocket.emit('txStatus', queryResult);
             return new ResponseHandler().handle(response, queryResult);
         } catch (err) {
             return new ResponseHandler().handle(response, err);

@@ -1,4 +1,10 @@
 import 'reflect-metadata';
+import * as express from 'express';
+import * as cors from 'cors';
+import * as bodyParser from 'body-parser';
+import * as debug from 'debug';
+import * as http from 'http';
+import * as io from 'socket.io';
 import { useExpressServer, useContainer, RoutingControllersOptions } from 'routing-controllers';
 import { Container } from 'typedi';
 import { LoggerInstance } from 'winston';
@@ -6,11 +12,6 @@ import { LoggerFactory } from './utils/logger';
 import { Config } from './config';
 import { IDebugger } from 'debug';
 import { Application } from 'express';
-import * as express from 'express';
-import * as cors from 'cors';
-import * as bodyParser from 'body-parser';
-import * as debug from 'debug';
-import * as http from 'http';
 import { WebSocketHelper } from './utils/webSocket/webSocketHelper';
 
 class App {
@@ -46,11 +47,10 @@ class App {
     useExpressServer(app, routingControllersOptions);
 
     //initialize a simple http server
-    const server: http.Server = http.createServer(app);
+    const server = new http.Server(app);
     //initialize the web socket server
-    const webSocket = new WebSocketHelper();
-    webSocket.initiate(server);
-    Container.set(WebSocketHelper, webSocket);
+    const webSocket = new WebSocketHelper().initiate(server);
+    Container.set(io, webSocket);
 
     this.debug('listen');
     server.listen(Number(Config.settings.port), Config.settings.host);

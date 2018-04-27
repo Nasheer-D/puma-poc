@@ -22,6 +22,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { HeaderComponent } from './shared/header/header.component';
 import { ItemsService } from './services/items.service';
 import { TransactionService } from './services/transaction.service';
+import { TxStatusService } from './services/webSocket.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { TransactionService } from './services/transaction.service';
     AuthenticationService,
     AuthGuard,
     ItemsService,
-    TransactionService
+    TransactionService,
+    TxStatusService
   ],
   bootstrap: [AppComponent]
 })

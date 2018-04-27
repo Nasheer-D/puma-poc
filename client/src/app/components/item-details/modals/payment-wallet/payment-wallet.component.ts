@@ -9,6 +9,9 @@ import {
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { TxStatusService } from '../../../../services/webSocket.service';
+import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
+import { TxStatus } from '../../../../models/Transaction';
 
 @Component({
   selector: 'app-payment-wallet',
@@ -22,7 +25,8 @@ export class PaymentWalletModalComponent implements OnInit {
   public itemPrice: number;
   @Input()
   public txDataAsString: string;
-  @Input() transactionStatus: boolean;
+  public sessionTransaction: any = {};
+  public txStatus: TxStatus;
 
   disableElements: boolean;
 
@@ -33,42 +37,63 @@ export class PaymentWalletModalComponent implements OnInit {
   @Input() completedResponse: number; // [0,1,2] Pending, Loading, Success => Response
   @Input() completedStatus: number; // [0,1,2,3] Pending, Loading, Success, Failed => Status
 
-  constructor(private modal: NgbModal, private spinner: NgxSpinnerService) {
-    this.activeRequest = false;
-    this.activeResponse = false;
-    this.activeStatus = false;
-    this.disableElements = null;
-    this.completedRequest = 0;
-    this.completedResponse = 0;
-    this.completedStatus = 0;
+  constructor(private modal: NgbModal, private spinner: NgxSpinnerService,
+    private txStatusService: TxStatusService) {
+
   }
 
   public ngOnInit(): void {
-    // setTimeout(() => {
-    //   // Request
-    //   this.disableElements = true;
-    //   this.activeRequest = true;
-    //   this.completedRequest = 1;
-    //   setTimeout(() => {
-    //     // Response
-    //     this.completedRequest = 2;
-    //     this.activeResponse = true;
-    //     this.completedResponse = 1;
-    //     setTimeout(() => {
-    //       // Status
-    //       this.completedResponse = 2;
-    //       this.activeStatus = true;
-    //       this.completedStatus = 1;
-    //       setTimeout(() => {
-    //         this.completedStatus = 2;
-    //         this.disableElements = null;
-    //       }, 2000);
-    //     }, 2000);
-    //   }, 2000);
-    // }, 2000);
+    this.sessionTransaction.status = 0;
+    this.txStatusService.onTxStatusChange().subscribe((response: HttpResponse) => {
+      console.log(response);
+      if (response.success) {
+        this.sessionTransaction = response.data[0];
+      }
+      console.log(this.sessionTransaction.status);
+    });
   }
 
   public open(): void {
     this.modal.open(this.paymentWalletModal, { centered: true, size: 'lg' });
+  }
+
+  public isInactiveRequest(): boolean {
+    return this.sessionTransaction.status === 0;
+  }
+
+  public isPendingRequest(): boolean {
+    return this.sessionTransaction.status === 1;
+  }
+
+  public isClosedRequest(): boolean {
+    return this.sessionTransaction.status !== 0 && this.sessionTransaction.status !== 1;
+  }
+
+  public isInactiveResponse(): boolean {
+    return this.sessionTransaction.status === 0 || this.sessionTransaction.status === 1;
+  }
+
+  public isPendingResponse(): boolean {
+    return this.sessionTransaction.status === 2;
+  }
+
+  public isClosedResponse(): boolean {
+    return this.sessionTransaction.status !== 0 && this.sessionTransaction.status !== 1 && this.sessionTransaction.status !== 2;
+  }
+
+  public isInactiveStatus(): boolean {
+    return this.sessionTransaction.status === 0 || this.sessionTransaction.status === 1 || this.sessionTransaction.status === 2;
+  }
+
+  public isPendingStatus(): boolean {
+    return this.sessionTransaction.status === 3;
+  }
+
+  public isSucccessfulStatus(): boolean {
+    return this.sessionTransaction.status === 4;
+  }
+
+  public isFailedStatus(): boolean {
+    return this.sessionTransaction.status === 5;
   }
 }
