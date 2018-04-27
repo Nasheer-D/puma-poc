@@ -17,6 +17,7 @@ export class ItemDetailsComponent implements OnInit {
   @ViewChild('purchaseOptionModal')
   public purchaseOptionsModal: PurchaseOptionsModalComponent;
   @Input() showWarning: boolean;
+  completedStatus: number = 0;
 
   public constructor(
     private router: ActivatedRoute,

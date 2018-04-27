@@ -23,11 +23,11 @@
           <label class="item-price-label">This image price is:</label>
         </div>
         <div class="col">
-          <label class="item-price">{{item.price | number: '1.2-2'}} PMA </label>
-          <!-- <label class="item-purchased">Purchased</label> -->
+          <label class="item-price" *ngIf="completedStatus == 0">{{item.price | number: '1.2-2'}} PMA </label>
+          <label class="item-purchased" *ngIf="completedStatus == 2">Purchased</label>
         </div>
-        <!-- <div class="col">
-          <div class="border border-danger" *ngIf="showWarning == true">
+        <div class="col">
+          <div class="border border-danger" *ngIf="showWarning == true && completedStatus == 2">
             <button type="button" class="close" aria-label="Close" (click)="closeButton()">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -35,10 +35,10 @@
               <br> &nbsp;&nbsp; Send link to your email to save this image for later access.
             </label>
           </div>
-        </div> -->
+        </div>
         <div class="col">
-          <button class="btn btn-primary" data-toggle="modal" (click)="openPurchaseOptionsModal()">Buy with one click</button>
-          <!-- <button class="btn btn-primary download-image" [ngClass]="{'btn-download-no-warning' : showWarning == false}">Download image</button> -->
+          <button class="btn btn-primary" data-toggle="modal" (click)="openPurchaseOptionsModal()" *ngIf="completedStatus == 0">Buy with one click</button>
+          <button class="btn btn-primary download-image" [ngClass]="{'btn-download-no-warning' : showWarning == false}" *ngIf="completedStatus == 2">Download image</button>
         </div>
       </div>
       <div class="item-info col-md-6">
