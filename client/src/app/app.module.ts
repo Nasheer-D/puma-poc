@@ -20,6 +20,7 @@ import { PurchaseOptionsModalComponent } from './components/item-details/modals/
 import { PaymentWalletComponent } from './components/item-details/modals/payment-wallet/payment-wallet.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { OrderModule } from 'ngx-order-pipe';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     HttpClientModule,
     routing,
     NgbModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    OrderModule
   ],
   providers: [
     appRoutingProviders,
