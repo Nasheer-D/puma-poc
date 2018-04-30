@@ -16,3 +16,12 @@
   width: 100%;
   border-radius: 8px;
 }
+
+.images-filtering {
+  padding-top: 10px;
+  font-family: Heebo;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: right;
+  color: #9c9c9c;
+}

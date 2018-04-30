@@ -1,5 +1,19 @@
 <app-header></app-header>
 <div class="container">
+  <div class="row search-bar">
+    <div class="col-6">
+      <label>hello there general kenobi</label>
+    </div>
+    <div class="col-6 images-filtering">
+      <label>Filter images by:
+        <span>Recent</span>
+        <span> | </span>
+        <span>Featured</span>
+        <span> | </span>
+        <span>Rating</span>
+      </label>
+    </div>
+  </div>
   <div class="row margin-space">
     <div class="image-container col-lg-4 col-md-4 col-sm-6 col-xs-6" *ngFor="let item of items">
       <img class="img-style" src={{item.itemUrl}} (click)="goToItemDetails(item.itemID)" alt="{{item.description}}">
