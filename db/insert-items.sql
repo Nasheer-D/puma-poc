@@ -4,7 +4,7 @@ INSERT INTO public.items(
 
 INSERT INTO public.items(
 	"itemID", "ownerID", title, description, price, size, licence, "itemUrl", tags, rating, "uploadedDate", featured)
-	VALUES ('item02', 'owner01', 'Item 02 Title', 'Item 02 Description', 1200, 16400, 'standard', 'https://s3.amazonaws.com/pumapay-poc-items/pumapay02.jpg', '{"puma", "ico", "crypto"}', '{1, 3, 2}', 902759201,'false');
+	VALUES ('item02', 'owner01', 'Item 02 Title', 'Item 02 Description', 1200, 16400, 'standard', 'https://s3.amazonaws.com/pumapay-poc-items/pumapay02.jpg', '{"puma", "ico", "crypto"}', '{1, 3, 2}', 1102759201,'false');
 
 INSERT INTO public.items(
 	"itemID", "ownerID", title, description, price, size, licence, "itemUrl", tags, rating, "uploadedDate", featured)

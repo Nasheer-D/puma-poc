@@ -18,6 +18,7 @@ export class ItemsComponent implements OnInit {
   sortedItems: any[];
   reverse: boolean = true;
   unsortedItems: any[];
+  isFiltered: boolean = false;
 
   public constructor(
     private router: Router,
@@ -43,12 +44,28 @@ export class ItemsComponent implements OnInit {
   public orderByDate() {
     this.sortedItems = this.orderPipe.transform(
       this.unsortedItems,
-      'uploadedDate'
+      'uploadedDate',
+      this.reverse
     );
+    if (this.isFiltered === false) {
+      this.isFiltered = true;
+    } else {
+      this.isFiltered = false;
+    }
+    console.log(this.sortedItems);
   }
 
   public orderByRating() {
-    this.sortedItems = this.orderPipe.transform(this.unsortedItems, 'rating');
+    this.sortedItems = this.orderPipe.transform(
+      this.unsortedItems,
+      'rating',
+      this.reverse
+    );
+    if (this.isFiltered === false) {
+      this.isFiltered = true;
+    } else {
+      this.isFiltered = false;
+    }
   }
 
   public orderByFeatured() {
@@ -57,5 +74,10 @@ export class ItemsComponent implements OnInit {
       'featured',
       this.reverse
     );
+    if (this.isFiltered === false) {
+      this.isFiltered = true;
+    } else {
+      this.isFiltered = false;
+    }
   }
 }

@@ -7,21 +7,26 @@
     <div class="col-6 images-filtering">
       <label>Filter images by:
         <span>
-          <a class="images-filtering" href="#">Recent</a>
+          <a class="images-filtering" [routerLink]="" (click)="orderByDate()">Recent</a>
         </span>
         <span> | </span>
         <span>
-          <a class="images-filtering" href="#">Featured</a>
+          <a class="images-filtering" [routerLink]="" (click)="orderByFeatured()">Featured</a>
         </span>
         <span> | </span>
         <span>
-          <a class="images-filtering" href="#">Rating</a>
+          <a class="images-filtering" [routerLink]="" (click)="orderByRating()">Rating</a>
         </span>
       </label>
     </div>
   </div>
-  <div class="row margin-space">
+  <div class="row margin-space" *ngIf="isFiltered == false">
     <div class="image-container col-lg-4 col-md-4 col-sm-6 col-xs-6" *ngFor="let item of items">
+      <img class="img-style" src={{item.itemUrl}} (click)="goToItemDetails(item.itemID)" alt="{{item.description}}">
+    </div>
+  </div>
+  <div class="row margin-space" *ngIf="isFiltered == true">
+    <div class="image-container col-lg-4 col-md-4 col-sm-6 col-xs-6" *ngFor="let item of sortedItems">
       <img class="img-style" src={{item.itemUrl}} (click)="goToItemDetails(item.itemID)" alt="{{item.description}}">
     </div>
   </div>
