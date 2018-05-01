@@ -29,6 +29,7 @@ CREATE TABLE public.items
     tags character varying[] COLLATE pg_catalog."default",
     rating double precision[],
     "uploadedDate" bigint NOT NULL,
+    featured boolean,
     
     CONSTRAINT items_pkey PRIMARY KEY ("itemID"),
     CONSTRAINT "ownerID" FOREIGN KEY ("ownerID")

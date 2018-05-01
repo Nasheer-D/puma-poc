@@ -14,9 +14,10 @@ import { OrderPipe } from 'ngx-order-pipe';
 })
 export class ItemsComponent implements OnInit {
   public items: Item[] = [];
+  order: string = 'rating';
   sortedItems: any[];
-  order: string = 'item.rating';
-  reverse: boolean = false;
+  reverse: boolean = true;
+  unsortedItems: any[];
 
   public constructor(
     private router: Router,
@@ -31,19 +32,30 @@ export class ItemsComponent implements OnInit {
       } else {
         alert(res.message);
       }
+      this.unsortedItems = this.items;
     });
-
-    console.log(this.orderPipe.transform(this.items, this.order));
   }
 
   public goToItemDetails(itemID: string): void {
     this.router.navigate(['item/', itemID]);
   }
 
-  public setOrder(value: string) {
-    if (this.order === value) {
-      this.reverse = !this.reverse;
-    }
-    this.order = value;
+  public orderByDate() {
+    this.sortedItems = this.orderPipe.transform(
+      this.unsortedItems,
+      'uploadedDate'
+    );
+  }
+
+  public orderByRating() {
+    this.sortedItems = this.orderPipe.transform(this.unsortedItems, 'rating');
+  }
+
+  public orderByFeatured() {
+    this.sortedItems = this.orderPipe.transform(
+      this.unsortedItems,
+      'featured',
+      this.reverse
+    );
   }
 }

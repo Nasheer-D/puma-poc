@@ -25,3 +25,7 @@
   text-align: right;
   color: #9c9c9c;
 }
+
+a:hover {
+  color: #575454;
+}
