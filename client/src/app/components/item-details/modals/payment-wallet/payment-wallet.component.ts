@@ -18,7 +18,7 @@ import { TxStatus } from '../../../../models/Transaction';
   templateUrl: './payment-wallet.component.html',
   styleUrls: ['./payment-wallet.component.css']
 })
-export class PaymentWalletModalComponent implements OnInit {
+export class PaymentWalletModalComponent {
   @ViewChild('paymentWalletModal')
   public paymentWalletModal: NgbModal;
   @Input()
@@ -42,58 +42,58 @@ export class PaymentWalletModalComponent implements OnInit {
 
   }
 
-  public ngOnInit(): void {
-    this.sessionTransaction.status = 0;
-    this.txStatusService.onTxStatusChange().subscribe((response: HttpResponse) => {
-      console.log(response);
+  public open(): void {
+    this.sessionTransaction.status = -1;
+    const sessionID = localStorage.getItem('sessionID');
+    this.txStatusService.onTxStatusChange(sessionID).subscribe((response: HttpResponse) => {
       if (response.success) {
         this.sessionTransaction = response.data[0];
       }
-      console.log(this.sessionTransaction.status);
     });
-  }
-
-  public open(): void {
     this.modal.open(this.paymentWalletModal, { centered: true, size: 'lg' });
   }
 
   public isInactiveRequest(): boolean {
-    return this.sessionTransaction.status === 0;
+    return this.sessionTransaction.status === -1;
   }
 
   public isPendingRequest(): boolean {
-    return this.sessionTransaction.status === 1;
+    return this.sessionTransaction.status === 0;
   }
 
   public isClosedRequest(): boolean {
-    return this.sessionTransaction.status !== 0 && this.sessionTransaction.status !== 1;
+    return this.sessionTransaction.status !== -1 && this.sessionTransaction.status !== 0;
   }
 
   public isInactiveResponse(): boolean {
-    return this.sessionTransaction.status === 0 || this.sessionTransaction.status === 1;
+    return this.sessionTransaction.status === -1 || this.sessionTransaction.status === 0;
   }
 
   public isPendingResponse(): boolean {
-    return this.sessionTransaction.status === 2;
+    return this.sessionTransaction.status === 1;
   }
 
   public isClosedResponse(): boolean {
-    return this.sessionTransaction.status !== 0 && this.sessionTransaction.status !== 1 && this.sessionTransaction.status !== 2;
+    return this.sessionTransaction.status !== -1 && this.sessionTransaction.status !== 0 && this.sessionTransaction.status !== 1;
   }
 
   public isInactiveStatus(): boolean {
-    return this.sessionTransaction.status === 0 || this.sessionTransaction.status === 1 || this.sessionTransaction.status === 2;
+    return this.sessionTransaction.status === -1 || this.sessionTransaction.status === 0 || this.sessionTransaction.status === 1;
   }
 
   public isPendingStatus(): boolean {
-    return this.sessionTransaction.status === 3;
+    return this.sessionTransaction.status === 2;
   }
 
   public isSucccessfulStatus(): boolean {
-    return this.sessionTransaction.status === 4;
+    return this.sessionTransaction.status === 3;
   }
 
   public isFailedStatus(): boolean {
+    return this.sessionTransaction.status === 4;
+  }
+
+  public isCancelledStatus(): boolean {
     return this.sessionTransaction.status === 5;
   }
 }

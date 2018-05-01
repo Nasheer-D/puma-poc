@@ -8,7 +8,7 @@ export interface ISession {
 }
 
 export enum TxStatus {
-    initiated,
+    initiated = -1,
     scanned,
     open,
     approved,

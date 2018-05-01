@@ -1,5 +1,5 @@
 import * as Web3 from 'web3';
-import { JsonController, Body, Res, Param, Get, Put } from 'routing-controllers';
+import { JsonController, Body, Res, Param, Get, Put, QueryParam } from 'routing-controllers';
 import { LoggerInstance } from 'winston';
 import { LoggerFactory } from '../../utils/logger';
 import { Container } from 'typedi';
@@ -63,15 +63,18 @@ export class TransactionController {
     }
 
     @Get('/wallet/txStatus/:sessionID')
-    public async getTxStatusForSessionID(@Param('sessionID') sessionID: string, @Res() response: any) {
+    public async getTxStatusForSessionID(@Param('sessionID') sessionID: string, @QueryParam('tx') txHash: string,
+        @QueryParam('status') status: number, @QueryParam('fromApp') fromApp: number,
+        @Res() response: any) {
         this.logger.info('Retrieving Transaction Status for session');
         const sqlQuery: ISqlQuery = {
-            text: 'SELECT * FROM sessions WHERE "sessionID" = $1',
-            values: [sessionID]
+            text: 'UPDATE sessions SET ("txHash", "status") = ($1, $2) WHERE "sessionID" =$3 RETURNING *',
+            values: [txHash, status, sessionID]
         };
 
         try {
             const queryResult = await new DataService().executeQueryAsPromise(sqlQuery);
+            this.webSocket.emit(`txStatus/${sessionID}`, queryResult);
             return new ResponseHandler().handle(response, queryResult);
         } catch (err) {
             return new ResponseHandler().handle(response, err);
@@ -90,7 +93,7 @@ export class TransactionController {
         try {
 
             const queryResult = await new DataService().executeQueryAsPromise(sqlQuery);
-            this.webSocket.emit('txStatus', queryResult);
+            this.webSocket.emit(`txStatus/${sessionID}`, queryResult);
             return new ResponseHandler().handle(response, queryResult);
         } catch (err) {
             return new ResponseHandler().handle(response, err);

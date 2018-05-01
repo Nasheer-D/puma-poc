@@ -1,7 +1,7 @@
 export class Globals {
     public static GET_BACKEND_HOST(): string {
         // tslint:disable-next-line:no-http-string
-        return 'http://172.25.16.1:8080/';
+        return 'http://192.168.1.50:8080/';
     }
 
     public static GET_API_PREFIX(): string {

@@ -11,9 +11,9 @@ export class TxStatusService {
         this.socket = io('http://localhost:8080');
     }
 
-    public onTxStatusChange() {
+    public onTxStatusChange(sessionID: string) {
         return Observable.create(observer => {
-            this.socket.on('txStatus', (httpResponse: HttpResponse) => {
+            this.socket.on(`txStatus/${sessionID}`, (httpResponse: HttpResponse) => {
                 observer.next(httpResponse);
             });
         });

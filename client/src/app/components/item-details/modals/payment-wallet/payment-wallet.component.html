@@ -83,7 +83,7 @@
                 </div>
                 <div class="row">
                   <div class="container transaction-progress" [ngClass]="{'inactiveBackgroundColor': isInactiveStatus(), 
-                  'border-failed-transaction': isFailedStatus(), 
+                  'border-failed-transaction': isFailedStatus() || isCancelledStatus(), 
                   'border-succesfull-transaction': isSucccessfulStatus()}">
                     <div class="row">
                       <div class="col-sm-9">
@@ -92,12 +92,13 @@
                         <div class="span status" *ngIf="isPendingStatus()">In Progress...</div>
                         <div class="span status" *ngIf="isSucccessfulStatus()">Transation has been approved!</div>
                         <div class="span status" *ngIf="isFailedStatus()">Transation was failed.Try again.</div>
+                        <div class="span status" *ngIf="isCancelledStatus()">Transation was cancelled.Try again.</div>
                       </div>
                       <div class="col-sm-3">
                         <label class="numberLayout" *ngIf="isInactiveStatus()">3</label>
                         <app-loading-spinner *ngIf="isPendingStatus()"></app-loading-spinner>
                         <img src="../../../../../assets/images/success-btn.png" class="imageSizeSuccess" *ngIf="isSucccessfulStatus()">
-                        <img src="../../../../../assets/images/fail-btn.png" class="imageSizeFail" *ngIf="isFailedStatus()">
+                        <img src="../../../../../assets/images/fail-btn.png" class="imageSizeFail" *ngIf="isFailedStatus() || isCancelledStatus()">
                       </div>
                     </div>
                   </div>
@@ -111,7 +112,7 @@
                   <div class="row-6 ">
                     <button class="btn btn-outline-primary btn-layout" (click)="d() " *ngIf="isInactiveStatus() || isPendingStatus()">Back to image</button>
                     <button class="btn btn-outline-primary btn-layout" (click)="d() " *ngIf="isSucccessfulStatus()">Download Image</button>
-                    <button class="btn btn-outline-primary btn-layout" (click)="d() " *ngIf="isFailedStatus()">Try Again</button>
+                    <button class="btn btn-outline-primary btn-layout" (click)="d() " *ngIf="isFailedStatus() || isCancelledStatus()">Try Again</button>
                   </div>
                 </div>
               </div>
