@@ -32,6 +32,7 @@ export class SignatureCalculator {
         // TODO: store secret key
         const privateKey = Buffer.from('7737d0e22f791970f8a847d24f27d90d4693d39074b76a758a99232aba6ec37a', 'hex');
         const sig = utils.ecsign(prefixedMsg, privateKey);
+
         return utils.toRpcSig(sig.v, sig.r, sig.s);
     }
 }

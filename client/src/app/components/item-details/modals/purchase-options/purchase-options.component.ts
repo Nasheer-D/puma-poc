@@ -4,6 +4,7 @@ import { TransactionService } from '../../../../services/transaction.service';
 import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
 import { TransactionData } from '../../../../models/Transaction';
 import { PaymentWalletModalComponent } from '../payment-wallet/payment-wallet.component';
+import { Constants } from '../../../../app.constants';
 
 @Component({
   selector: 'app-purchase-options',
@@ -30,11 +31,14 @@ export class PurchaseOptionsModalComponent {
   }
 
   public openPaymentWalletModal(): void {
-    this.transactionService.getTransactionData(this.itemID).subscribe((httpResonse: HttpResponse) => {
-      localStorage.setItem('sessionID', httpResonse.sessionID);
-      this.txData = httpResonse.data[0];
-      this.txDataAsString = JSON.stringify(this.txData);
-      this.paymentWalletModal.open();
-    });
+    // this.transactionService.getTransactionData(this.itemID).subscribe((httpResonse: HttpResponse) => {
+    //   localStorage.setItem('sessionID', httpResonse.sessionID);
+    //   this.txData = httpResonse.data[0];
+    //   this.txDataAsString = JSON.stringify(this.txData);
+    //   this.paymentWalletModal.open();
+    // });
+
+    this.txDataAsString = `${Constants.apiHost}${Constants.apiPrefix}transaction/wallet/tx/${this.itemID}`;
+    this.paymentWalletModal.open();
   }
 }

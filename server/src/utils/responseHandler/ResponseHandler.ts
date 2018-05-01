@@ -1,5 +1,5 @@
 export class ResponseHandler {
-    public handle(response: any, result: IResponseMessage): any {
+    public handle(response: any, result: any): any {
         if (result.errcode) {
             return response.status(500).send(result);
         } else if (!result.success) {
