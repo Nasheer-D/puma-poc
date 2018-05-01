@@ -7,15 +7,15 @@
     <div class="col-6 images-filtering">
       <label>Filter images by:
         <span>
-          <a class="images-filtering" [routerLink]="" (click)="orderByDate()">Recent</a>
+          <a class="images-filtering" [ngClass]="{'active-filter': byDate == true}" [routerLink]="" (click)="orderByDate()">Recent</a>
         </span>
         <span> | </span>
         <span>
-          <a class="images-filtering" [routerLink]="" (click)="orderByFeatured()">Featured</a>
+          <a class="images-filtering" [ngClass]="{'active-filter': byFeatured == true}" [routerLink]="" (click)="orderByFeatured()">Featured</a>
         </span>
         <span> | </span>
         <span>
-          <a class="images-filtering" [routerLink]="" (click)="orderByRating()">Rating</a>
+          <a class="images-filtering" [ngClass]="{'active-filter': byRating == true}" [routerLink]="" (click)="orderByRating()">Rating</a>
         </span>
       </label>
     </div>

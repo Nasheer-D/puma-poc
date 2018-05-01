@@ -29,3 +29,8 @@
 a:hover {
   color: #575454;
 }
+
+.active-filter {
+  color: #575454;
+  text-decoration: underline;
+}

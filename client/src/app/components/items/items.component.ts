@@ -19,6 +19,9 @@ export class ItemsComponent implements OnInit {
   reverse: boolean = true;
   unsortedItems: any[];
   isFiltered: boolean = false;
+  byDate: boolean = false;
+  byRating: boolean = false;
+  byFeatured: boolean = false;
 
   public constructor(
     private router: Router,
@@ -47,24 +50,18 @@ export class ItemsComponent implements OnInit {
       'uploadedDate',
       this.reverse
     );
-    if (this.isFiltered === false) {
+    if (this.isFiltered === false && this.byDate === false) {
       this.isFiltered = true;
+      this.byDate = true;
+      this.byFeatured = false;
+      this.byRating = false;
+    } else if (this.isFiltered === true && this.byDate === false) {
+      this.byDate = true;
+      this.byFeatured = false;
+      this.byRating = false;
     } else {
       this.isFiltered = false;
-    }
-    console.log(this.sortedItems);
-  }
-
-  public orderByRating() {
-    this.sortedItems = this.orderPipe.transform(
-      this.unsortedItems,
-      'rating',
-      this.reverse
-    );
-    if (this.isFiltered === false) {
-      this.isFiltered = true;
-    } else {
-      this.isFiltered = false;
+      this.byDate = false;
     }
   }
 
@@ -74,10 +71,39 @@ export class ItemsComponent implements OnInit {
       'featured',
       this.reverse
     );
-    if (this.isFiltered === false) {
+    if (this.isFiltered === false && this.byFeatured === false) {
       this.isFiltered = true;
+      this.byFeatured = true;
+      this.byDate = false;
+      this.byRating = false;
+    } else if (this.isFiltered === true && this.byFeatured === false) {
+      this.byFeatured = true;
+      this.byDate = false;
+      this.byRating = false;
     } else {
       this.isFiltered = false;
+      this.byFeatured = false;
+    }
+  }
+
+  public orderByRating() {
+    this.sortedItems = this.orderPipe.transform(
+      this.unsortedItems,
+      'rating',
+      this.reverse
+    );
+    if (this.isFiltered === false && this.byRating === false) {
+      this.isFiltered = true;
+      this.byRating = true;
+      this.byFeatured = false;
+      this.byDate = false;
+    } else if (this.isFiltered === true && this.byRating === false) {
+      this.byRating = true;
+      this.byFeatured = false;
+      this.byDate = false;
+    } else {
+      this.isFiltered = false;
+      this.byRating = false;
     }
   }
 }
