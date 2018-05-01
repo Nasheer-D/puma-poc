@@ -14,6 +14,7 @@ import { OrderPipe } from 'ngx-order-pipe';
 })
 export class ItemsComponent implements OnInit {
   public items: Item[] = [];
+  public searchText = '';
   order: string = 'rating';
   sortedItems: any[];
   reverse: boolean = true;

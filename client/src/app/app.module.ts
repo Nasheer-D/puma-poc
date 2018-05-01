@@ -21,6 +21,7 @@ import { PaymentWalletComponent } from './components/item-details/modals/payment
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { OrderModule } from 'ngx-order-pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { OrderModule } from 'ngx-order-pipe';
     routing,
     NgbModule.forRoot(),
     NgxSpinnerModule,
-    OrderModule
+    OrderModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     appRoutingProviders,

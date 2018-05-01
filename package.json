@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "client": "file:client",
-    "ngx-order-pipe": "^2.0.1",
     "server": "file:server"
   }
 }

@@ -34,3 +34,15 @@ a:hover {
   color: #575454;
   text-decoration: underline;
 }
+
+.search-option {
+  font-size: 14px;
+  font-family: Heebo;
+  color: #9c9c9c;
+  margin-top: 20px;
+}
+
+.search-input-layout {
+  border: none;
+  color: #9c9c9c;
+}
