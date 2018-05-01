@@ -13,7 +13,7 @@ export class SignatureCalculator {
 
     public calculate(): string {
         this.logger.info('Calculating Singature');
-        const hash = ethers.utils.solidityKeccak256(
+        const hash = Buffer.from(ethers.utils.solidityKeccak256(
             ['bytes', 'bytes', 'bytes', 'uint256', 'address', 'uint256'],
             [
                 Buffer.from(this.transaction.callback, 'utf8'),
@@ -22,17 +22,16 @@ export class SignatureCalculator {
                 this.transaction.networkID,
                 this.transaction.to,
                 this.transaction.value
-            ]);
+            ]).substr(2), 'hex');
 
         const prefix = new Buffer('\x19Ethereum Signed Message:\n');
         const prefixedMsg = Buffer.from(
             ethers.utils.keccak256(Buffer.concat(
-                [prefix, new Buffer(String(hash.length)), Buffer.from(hash.substr(2), 'hex')]
+                [prefix, new Buffer(String(hash.length)), hash]
             )).substr(2), 'hex');
         // TODO: store secret key
-        const privateKey = Buffer.from('98c1f1a2ffa5e704eb499a9852837cc7e30fee258035b60263d05a6ed31af621', 'hex');
+        const privateKey = Buffer.from('7737d0e22f791970f8a847d24f27d90d4693d39074b76a758a99232aba6ec37a', 'hex');
         const sig = utils.ecsign(prefixedMsg, privateKey);
-
         return utils.toRpcSig(sig.v, sig.r, sig.s);
     }
 }
