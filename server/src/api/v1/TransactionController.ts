@@ -62,8 +62,8 @@ export class TransactionController {
         }
     }
 
-    @Get('/wallet/tx/:itemID')
-    public async retrieveTransaction(@Param('itemID') itemID: string, @Res() response: any) {
+    @Get('/wallet/tx/:sessionID/:itemID')
+    public async retrieveTransaction(@Param('sessionID') sessionID: string, @Param('itemID') itemID: string, @Res() response: any) {
         this.logger.info('Retrieving Transaction Data for Item');
         const sqlQuery: ISqlQuery = {
             text: `SELECT price, description, title, "walletAddress"
@@ -75,11 +75,6 @@ export class TransactionController {
             const queryResult = await new DataService().executeQueryAsPromise(sqlQuery);
 
             if (!queryResult.success) {
-                return new ResponseHandler().handle(response, queryResult);
-            }
-            const sessionID = v1();
-            const sessionStoredResult = await new Session().storeSessionID(sessionID);
-            if (!sessionStoredResult.success) {
                 return new ResponseHandler().handle(response, queryResult);
             }
 
@@ -94,7 +89,7 @@ export class TransactionController {
 
             const transaction: Transaction = transactionBuilder.build();
 
-            return new ResponseHandler().handle(response, transaction.toJSON());
+            return new ResponseHandler().handle(response, transaction.toJSON(), false);
         } catch (err) {
             return new ResponseHandler().handle(response, err);
         }

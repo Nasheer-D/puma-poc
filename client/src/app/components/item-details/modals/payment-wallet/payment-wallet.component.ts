@@ -86,14 +86,14 @@ export class PaymentWalletModalComponent {
   }
 
   public isSucccessfulStatus(): boolean {
-    return this.sessionTransaction.status === 3;
+    return this.sessionTransaction.status === 2;
   }
 
   public isFailedStatus(): boolean {
-    return this.sessionTransaction.status === 4;
+    return this.sessionTransaction.status === 3;
   }
 
   public isCancelledStatus(): boolean {
-    return this.sessionTransaction.status === 5;
+    return this.sessionTransaction.status === 4;
   }
 }

@@ -21,7 +21,7 @@ export class PurchaseOptionsModalComponent {
   @Input() itemID: string;
 
   private txData: TransactionData;
-  public txDataAsString: string;
+  public txDataAsString: any;
 
   constructor(private modal: NgbModal,
     private transactionService: TransactionService) { }
@@ -31,14 +31,11 @@ export class PurchaseOptionsModalComponent {
   }
 
   public openPaymentWalletModal(): void {
-    // this.transactionService.getTransactionData(this.itemID).subscribe((httpResonse: HttpResponse) => {
-    //   localStorage.setItem('sessionID', httpResonse.sessionID);
-    //   this.txData = httpResonse.data[0];
-    //   this.txDataAsString = JSON.stringify(this.txData);
-    //   this.paymentWalletModal.open();
-    // });
-
-    this.txDataAsString = `${Constants.apiHost}${Constants.apiPrefix}transaction/wallet/tx/${this.itemID}`;
-    this.paymentWalletModal.open();
+    this.transactionService.getTransactionData(this.itemID).subscribe((httpResonse: HttpResponse) => {
+      localStorage.setItem('sessionID', httpResonse.sessionID);
+      this.txDataAsString = JSON.stringify(
+        { url: `${Constants.serverHost}${Constants.apiPrefix}transaction/wallet/tx/${httpResonse.sessionID}/${this.itemID}` });
+      this.paymentWalletModal.open();
+    });
   }
 }
