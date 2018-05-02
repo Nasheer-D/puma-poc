@@ -7,6 +7,7 @@ import { ItemsService } from '../../services/items.service';
 import { HttpResponse } from '../../utils/web/models/HttpResponse';
 import { Subscription } from 'rxjs/Subscription';
 import { PurchaseOptionsModalComponent } from '../../components/item-details/modals/purchase-options/purchase-options.component';
+import { Web3Service } from '../../services/web3.service';
 
 @Component({
   selector: `app-item-details`,
@@ -21,7 +22,8 @@ export class ItemDetailsComponent implements OnInit {
 
   public constructor(
     private router: ActivatedRoute,
-    private itemService: ItemsService
+    private itemService: ItemsService,
+    private web3Service: Web3Service
   ) { }
 
   public ngOnInit(): void {

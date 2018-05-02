@@ -5,6 +5,8 @@ import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
 import { TransactionData } from '../../../../models/Transaction';
 import { PaymentWalletModalComponent } from '../payment-wallet/payment-wallet.component';
 import { Constants } from '../../../../app.constants';
+import { PaymentMetamaskComponent } from '../payment-metamask/payment-metamask.component';
+
 
 @Component({
   selector: 'app-purchase-options',
@@ -17,10 +19,13 @@ export class PurchaseOptionsModalComponent {
   @ViewChild('paymentWalletModal')
   public paymentWalletModal: PaymentWalletModalComponent;
 
+  @ViewChild('paymentMetamaskModal')
+  public paymentMetamaskModal: PaymentMetamaskComponent;
+
   @Input() itemPrice: number;
   @Input() itemID: string;
 
-  private txData: TransactionData;
+  public txData: TransactionData;
   public txDataAsString: any;
 
   constructor(private modal: NgbModal,
@@ -38,4 +43,14 @@ export class PurchaseOptionsModalComponent {
       this.paymentWalletModal.open();
     });
   }
+
+  public openPaymentMetamaskModal(): void {
+    this.transactionService.getTransactionData(this.itemID).subscribe((httpResonse: HttpResponse) => {
+      localStorage.setItem('sessionID', httpResonse.sessionID);
+      this.txData = httpResonse.data[0];
+      this.paymentMetamaskModal.open();
+    });
+  }
+
+
 }

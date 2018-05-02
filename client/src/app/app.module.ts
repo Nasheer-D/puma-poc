@@ -23,6 +23,8 @@ import { HeaderComponent } from './shared/header/header.component';
 import { ItemsService } from './services/items.service';
 import { TransactionService } from './services/transaction.service';
 import { TxStatusService } from './services/webSocket.service';
+import { Web3Service } from './services/web3.service';
+import { PaymentMetamaskComponent } from './components/item-details/modals/payment-metamask/payment-metamask.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { TxStatusService } from './services/webSocket.service';
     ItemDetailsComponent,
     PurchaseOptionsModalComponent,
     PaymentWalletModalComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    PaymentMetamaskComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ import { TxStatusService } from './services/webSocket.service';
     AuthGuard,
     ItemsService,
     TransactionService,
-    TxStatusService
+    TxStatusService,
+    Web3Service
   ],
   bootstrap: [AppComponent]
 })
