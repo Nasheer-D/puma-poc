@@ -1,4 +1,4 @@
-<ng-template #paymentWalletModal let-d="dismiss" tabindex="-1" role="dialog">
+<ng-template #paymentMetamaskModal let-d="dismiss" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content options-modal">
       <div class="container modal-header">
@@ -13,7 +13,7 @@
               <b>{{itemPrice | number: '1.2-2'}} PumaPay</b> tokens.</label>
           </div>
           <div class="col-lg-12">
-            <label class="title-name">Scan to complete your purchase</label>
+            <label class="title-name">Continue with metamask</label>
           </div>
         </div>
       </div>
@@ -25,30 +25,23 @@
                 <label>Connect with your
                   <a href="https://outlook.live.com/owa/?authRedirect=true">email </a> to save this image for later access.</label>
               </div>
-              <div class="container qr-container">
-                <qrcode [qrdata]="txDataAsString" [size]="150" [level]="'L'"></qrcode>
-              </div>
-              <div class="col modal-scan-qr">
-                <label>Scan a QR code with the app to complete the transaction.</label>
-              </div>
-              <div class="col modal-link">
-                <label>Don't have PumaPay wallet?</label>
-              </div>
-              <div class="col">
-                <div class="container download-option-image col-sm-12">
-                  <a href="https://itunes.apple.com/us/genre/ios/id36?mt=8">
-                    <img class="app-store-apple" src="../../../assets/images/app-store.png">
-                  </a>
-                  <a href="https://play.google.com/store?hl=en">
-                    <img class="app-store-google" src="../../../assets/images/google-play-badge.png">
-                  </a>
+              <div class="container">
+                <div class="container image-container-modal">
+                  <img class="option-picture" src="../../../../../assets/images/metamask.png" alt="metamask">
+                </div>
+                <div *ngIf="!hasMetamask" class="col modal-btn">
+                  You need the MetaMask browser add-on
+                  <a class="modal-show-code btn btn-primary" href="https://metamask.io" target="_blank">Install Metamask</a>
+                </div>
+                <div class="col modal-btn">
+                  <button class="modal-show-code btn btn-primary" (click)="buyWithMetaMask()" *ngIf="hasMetamask">Initiate transaction</button>
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="container transaction-progress-container">
                 <div class="row">
-                  <div class="container transaction-progress" [ngClass]="{'inactiveBackgroundColor': isInactiveRequest()}">
+                  <div class="container transaction-progress" [ngClass]="{'inactive-background-color': isInactiveRequest()}">
                     <div class="row">
                       <div class="col-sm-9">
                         <label class="transaction-text" [ngClass]="{'transaction-text-inactive': isInactiveRequest()}">Sending transaction request</label>
@@ -59,13 +52,13 @@
                       <div class="col-sm-3">
                         <label class="numberLayout" *ngIf="isInactiveRequest()">1</label>
                         <app-loading-spinner *ngIf="isPendingRequest()"></app-loading-spinner>
-                        <img src="../../../../../assets/images/success-btn.png" class="imageSizeSuccess" *ngIf="isClosedRequest()">
+                        <img src="../../../../../assets/images/success-btn.png" class="image-size-success" *ngIf="isClosedRequest()">
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="container transaction-progress" [ngClass]="{'inactiveBackgroundColor': isInactiveResponse()}">
+                  <div class="container transaction-progress" [ngClass]="{'inactive-background-color': isInactiveResponse()}">
                     <div class="row">
                       <div class="col-sm-9">
                         <label class="transaction-text" [ngClass]="{'transaction-text-inactive': isInactiveResponse()}">Transaction response</label>
@@ -76,13 +69,13 @@
                       <div class="col-sm-3">
                         <label class="numberLayout" *ngIf="isInactiveResponse()">2</label>
                         <app-loading-spinner *ngIf="isPendingResponse()"></app-loading-spinner>
-                        <img src="../../../../../assets/images/success-btn.png" class="imageSizeSuccess" *ngIf="isClosedResponse()">
+                        <img src="../../../../../assets/images/success-btn.png" class="image-size-success" *ngIf="isClosedResponse()">
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="container transaction-progress" [ngClass]="{'inactiveBackgroundColor': isInactiveStatus(), 
+                  <div class="container transaction-progress" [ngClass]="{'inactive-background-color': isInactiveStatus(), 
                   'border-failed-transaction': isFailedStatus() || isCancelledStatus(), 
                   'border-succesfull-transaction': isSucccessfulStatus()}">
                     <div class="row">
@@ -95,8 +88,8 @@
                       </div>
                       <div class="col-sm-3">
                         <label class="numberLayout" *ngIf="isInactiveStatus()">3</label>
-                        <img src="../../../../../assets/images/success-btn.png" class="imageSizeSuccess" *ngIf="isSucccessfulStatus()">
-                        <img src="../../../../../assets/images/fail-btn.png" class="imageSizeFail" *ngIf="isFailedStatus() || isCancelledStatus()">
+                        <img src="../../../../../assets/images/success-btn.png" class="image-size-success" *ngIf="isSucccessfulStatus()">
+                        <img src="../../../../../assets/images/fail-btn.png" class="image-size-fail" *ngIf="isFailedStatus() || isCancelledStatus()">
                       </div>
                     </div>
                   </div>

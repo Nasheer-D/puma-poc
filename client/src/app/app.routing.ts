@@ -6,7 +6,6 @@ import { ItemsComponent } from './components/items/items.component';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
   { path: `items`, component: ItemsComponent },
   { path: `item/:itemID`, component: ItemDetailsComponent },
 

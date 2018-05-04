@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class TransactionService {
+
     private actionUrl: string;
 
     public constructor(private http: HttpClient) {
@@ -17,4 +18,10 @@ export class TransactionService {
     public getTransactionData(itemID: string): Observable<any> {
         return new HttpGetRequest(this.http, `${this.actionUrl}wallet/txdetails/${itemID}`).getResult();
     }
+
+    public sendTransactionStatus(sessionId: string, txhash: string, status: number) {
+        return new HttpGetRequest(this.http,
+            `${this.actionUrl}wallet/txStatus/${sessionId}?tx=${txhash}&status=${status}&fromapp=0`).getResult();
+    }
+
 }

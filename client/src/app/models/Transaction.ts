@@ -4,7 +4,7 @@ export interface TransactionData {
     name: string;
     networkid: number;
     to: string;
-    value: number;
+    value: string;
     signature: string;
 }
 

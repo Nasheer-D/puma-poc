@@ -7,8 +7,8 @@ import {
   EventEmitter
 } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
 import { TxStatusService } from '../../../../services/webSocket.service';
 import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
 import { TxStatus } from '../../../../models/Transaction';
@@ -28,18 +28,8 @@ export class PaymentWalletModalComponent {
   public sessionTransaction: any = {};
   public txStatus: TxStatus;
 
-  disableElements: boolean;
-
-  @Input() activeRequest: boolean; // Request Container color
-  @Input() activeResponse: boolean; // Response Container color
-  @Input() activeStatus: boolean; // Status Container color
-  @Input() completedRequest: number; // [0,1,2] Pending,Loading,Success => Request
-  @Input() completedResponse: number; // [0,1,2] Pending, Loading, Success => Response
-  @Input() completedStatus: number; // [0,1,2,3] Pending, Loading, Success, Failed => Status
-
   constructor(private modal: NgbModal, private spinner: NgxSpinnerService,
     private txStatusService: TxStatusService) {
-
   }
 
   public open(): void {
