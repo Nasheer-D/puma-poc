@@ -1,5 +1,4 @@
 import * as W3 from 'web3';
-const Web3 = require('web3'); // tslint:disable-line
 import { Injectable, Optional, SkipSelf } from '@angular/core';
 import * as Eth from 'ethjs-query';
 import * as EthContract from 'ethjs-contract';
@@ -12,7 +11,8 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/of';
-
+declare var require: any;
+const Web3 = require('web3'); // tslint:disable-line
 
 declare let window: any;
 
@@ -23,7 +23,7 @@ export class Web3Service {
   private token: any;
   private eth: any;
 
-  constructor(@Optional() @SkipSelf() prior: Web3Service) {
+  public constructor(@Optional() @SkipSelf() prior: Web3Service) {
     if (prior) { return prior; }
 
     window.addEventListener('load', (event) => {
@@ -73,14 +73,14 @@ export class Web3Service {
     }
 
     return Observable.fromPromise(this.token.transfer(to, value,
-      {from: this.web3.currentProvider.publicConfigStore.getState().selectedAddress}));
+      { from: this.web3.currentProvider.publicConfigStore.getState().selectedAddress }));
   }
 
   public getTransactionStatus(txhash: string): Observable<any> {
     return Observable.timer(0, 5000).switchMap((i) => {
-        return Observable.fromPromise(this.eth.getTransactionReceipt(txhash));
+      return Observable.fromPromise(this.eth.getTransactionReceipt(txhash));
     });
-}
+  }
 }
 
 

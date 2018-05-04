@@ -62,7 +62,7 @@ $ docker-compose up -d
     * PGUSER=local_user
     * PGPASSWORD=local_pass
     * PGDATABASE=local_puma_poc
-    * PGPORT=`hhtp://localhost:5432`
+    * PGPORT=`http://localhost:5432`
 
 #### Clean up local development environment
 

@@ -17,6 +17,16 @@ export class TransactionController {
     private logger: LoggerInstance = Container.get(LoggerFactory).getInstance('TransactionController');
     private webSocket: io = Container.get(io);
 
+    @Get('/init/')
+    public async initiateTransactionWithSessionID(@Res() response: any) {
+        try {
+            const sessionStoredResult = await new Session().storeSessionID(v1());
+            return new ResponseHandler().handle(response, sessionStoredResult);
+        } catch (err) {
+            return new ResponseHandler().handle(response, err);
+        }
+    }
+
     @Get('/wallet/txdetails/:itemID')
     public async retrieveTransactionData(@Param('itemID') itemID: string, @Res() response: any) {
         this.logger.info('Retrieving Transaction Data for Item');
@@ -28,14 +38,13 @@ export class TransactionController {
 
         try {
             const queryResult = await new DataService().executeQueryAsPromise(sqlQuery);
-
             if (!queryResult.success) {
                 return new ResponseHandler().handle(response, queryResult);
             }
             const sessionID = v1();
             const sessionStoredResult = await new Session().storeSessionID(sessionID);
             if (!sessionStoredResult.success) {
-                return new ResponseHandler().handle(response, queryResult);
+                return new ResponseHandler().handle(response, sessionStoredResult);
             }
 
             const transactionBuilder = new TransactionBuilder();

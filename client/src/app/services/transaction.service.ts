@@ -21,7 +21,7 @@ export class TransactionService {
 
     public sendTransactionStatus(sessionId: string, txhash: string, status: number) {
         return new HttpGetRequest(this.http,
-            `${this.actionUrl}wallet/txStatus/${sessionId}?tx=${txhash}&status=${status}&froapp=0`).getResult();
+            `${this.actionUrl}wallet/txStatus/${sessionId}?tx=${txhash}&status=${status}&fromapp=0`).getResult();
     }
 
 }

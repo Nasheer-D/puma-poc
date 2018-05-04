@@ -6,13 +6,6 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { TxStatusService } from '../../../../services/webSocket.service';
-import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
-import { TxStatus, TransactionData } from '../../../../models/Transaction';
-import { Web3Service } from '../../../../services/web3.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -22,6 +15,13 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/of';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
+import { TxStatusService } from '../../../../services/webSocket.service';
+import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
+import { TxStatus, TransactionData } from '../../../../models/Transaction';
+import { Web3Service } from '../../../../services/web3.service';
 import { TransactionService } from '../../../../services/transaction.service';
 
 @Component({
@@ -29,8 +29,7 @@ import { TransactionService } from '../../../../services/transaction.service';
   templateUrl: './payment-metamask.component.html',
   styleUrls: ['./payment-metamask.component.css']
 })
-export class PaymentMetamaskComponent implements OnInit {
-
+export class PaymentMetamaskComponent {
 
   @ViewChild('paymentMetamaskModal')
   public paymentMetamaskModal: NgbModal;
@@ -41,24 +40,14 @@ export class PaymentMetamaskComponent implements OnInit {
   public sessionTransaction: any = {};
   public txStatus: TxStatus;
   private sessionID: string;
-  disableElements: boolean;
 
-  @Input() activeRequest: boolean; // Request Container color
-  @Input() activeResponse: boolean; // Response Container color
-  @Input() activeStatus: boolean; // Status Container color
-  @Input() completedRequest: number; // [0,1,2] Pending,Loading,Success => Request
-  @Input() completedResponse: number; // [0,1,2] Pending, Loading, Success => Response
-  @Input() completedStatus: number; // [0,1,2,3] Pending, Loading, Success, Failed => Status
-
-  constructor(private modal: NgbModal, private spinner: NgxSpinnerService,
+  constructor(private modal: NgbModal,
+    private spinner: NgxSpinnerService,
     private txStatusService: TxStatusService,
     private web3Service: Web3Service,
     private transactionService: TransactionService) {
-
   }
 
-  ngOnInit(): void {
-  }
   public open(): void {
     this.sessionTransaction.status = -1;
     this.sessionID = localStorage.getItem('sessionID');
@@ -74,19 +63,22 @@ export class PaymentMetamaskComponent implements OnInit {
     return this.web3Service.hasMetaMask;
   }
 
-  public buyWithMetaMask() {
+  public buyWithMetaMask(): void {
     if (!this.web3Service.hasMetaMask) {
-      console.log('no Metamask');
+      console.log('No Metamask Injected - Please download metamask');
+      alert('No Metamask Injected - Please download metamask');
       return;
     }
 
-
     this.transactionService.sendTransactionStatus(this.sessionID, '', 0).subscribe(st => {
-
+      console.log(st);
+      console.log(this.txData);
       this.web3Service.sentTransaction(this.txData.to, this.txData.value).catch(err => {
+        console.log(err);
         this.transactionService.sendTransactionStatus(this.sessionID, '', 4).subscribe();
         return Observable.of(null);
       }).subscribe(tx => {
+        console.log(tx);
         this.transactionService.sendTransactionStatus(this.sessionID, tx, 1).subscribe();
         const receiptSub = this.web3Service.getTransactionStatus(tx).subscribe(receipt => {
           if (receipt != null) {
@@ -99,7 +91,6 @@ export class PaymentMetamaskComponent implements OnInit {
             }
           }
         });
-        console.log(tx);
       });
     });
   }
@@ -147,5 +138,4 @@ export class PaymentMetamaskComponent implements OnInit {
   public isCancelledStatus(): boolean {
     return this.sessionTransaction.status === 4;
   }
-
 }

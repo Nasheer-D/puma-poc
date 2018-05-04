@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { OrderModule } from 'ngx-order-pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { Constants } from './app.constants';
 import { AuthGuard } from './guards/auth.guard';
@@ -17,6 +19,7 @@ import { ItemDetailsComponent } from './components/item-details/item-details.com
 import { PurchaseOptionsModalComponent } from './components/item-details/modals/purchase-options/purchase-options.component';
 import { PaymentWalletModalComponent } from './components/item-details/modals/payment-wallet/payment-wallet.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { PaymentMetamaskComponent } from './components/item-details/modals/payment-metamask/payment-metamask.component';
 
 import { AuthenticationService } from './services/authentication.service';
 import { HeaderComponent } from './shared/header/header.component';
@@ -24,7 +27,6 @@ import { ItemsService } from './services/items.service';
 import { TransactionService } from './services/transaction.service';
 import { TxStatusService } from './services/webSocket.service';
 import { Web3Service } from './services/web3.service';
-import { PaymentMetamaskComponent } from './components/item-details/modals/payment-metamask/payment-metamask.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +46,10 @@ import { PaymentMetamaskComponent } from './components/item-details/modals/payme
     HttpClientModule,
     QRCodeModule,
     routing,
-    NgbModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    OrderModule,
+    Ng2SearchPipeModule,
+    NgbModule.forRoot()
   ],
   providers: [
     appRoutingProviders,

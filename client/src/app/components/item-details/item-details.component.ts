@@ -34,7 +34,7 @@ export class ItemDetailsComponent implements OnInit {
         .getItemByID(itemID)
         .subscribe((response: HttpResponse) => {
           this.item = response.data[0];
-          this.item.uploadedDate = this.item.uploadedDate * 1000;
+          this.item.uploadedDate = this.item.uploadedDate * 1000; // convert timestamp in seconds to milliseconds
         });
     });
   }
