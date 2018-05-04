@@ -3,8 +3,8 @@
 .modal-dialog {
   height: auto;
   max-width: 1000px;
-  margin: auto;
   border-radius: 15px;
+  margin: 0;
 }
 
 .modal-credits {
@@ -137,6 +137,7 @@
   offset-block-end: 0px, 5px;
   margin: 0px;
   max-width: 680px;
+  /* height: 420px; */
   border-radius: 15px;
   padding: 0px;
 }
@@ -172,7 +173,7 @@
   text-align: left;
 }
 
-.inactive-background-color {
+.inactiveBackgroundColor {
   background-color: #ededed;
 }
 
@@ -182,7 +183,7 @@
   font-family: Heebo;
 }
 
-.image-size-success {
+.imageSizeSuccess {
   height: 30px;
   width: 30px;
   margin-top: 15px;
@@ -199,11 +200,18 @@
   border-width: 2px;
 }
 
-.image-size-fail {
+.imageSizeFail {
   height: 30px;
   width: 30px;
   margin-top: 15px;
   margin-left: 10px;
+}
+
+.changeImageSize {
+  width: 190px;
+  height: 120px;
+  margin-top: -63px;
+  margin-bottom: -50px;
 }
 
 .qr-container {

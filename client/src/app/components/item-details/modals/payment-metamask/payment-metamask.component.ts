@@ -40,6 +40,7 @@ export class PaymentMetamaskComponent {
   public sessionTransaction: any = {};
   public txStatus: TxStatus;
   private sessionID: string;
+  private itemID: string;
 
   constructor(private modal: NgbModal,
     private spinner: NgxSpinnerService,
@@ -51,11 +52,18 @@ export class PaymentMetamaskComponent {
   public open(): void {
     this.sessionTransaction.status = -1;
     this.sessionID = localStorage.getItem('sessionID');
-    this.txStatusService.onTxStatusChange(this.sessionID).subscribe((response: HttpResponse) => {
+    this.itemID = localStorage.getItem('itemID');
+    this.transactionService.getTxDetails(this.sessionID, this.itemID).subscribe((response: HttpResponse) => {
       if (response.success) {
-        this.sessionTransaction = response.data[0];
+        this.txData = response.data[0];
       }
+      this.txStatusService.onTxStatusChange(this.sessionID).subscribe((res: HttpResponse) => {
+        if (response.success) {
+          this.sessionTransaction = res.data[0];
+        }
+      });
     });
+
     this.modal.open(this.paymentMetamaskModal, { centered: true, size: 'lg' });
   }
 
@@ -71,14 +79,10 @@ export class PaymentMetamaskComponent {
     }
 
     this.transactionService.sendTransactionStatus(this.sessionID, '', 0).subscribe(st => {
-      console.log(st);
-      console.log(this.txData);
       this.web3Service.sentTransaction(this.txData.to, this.txData.value).catch(err => {
-        console.log(err);
         this.transactionService.sendTransactionStatus(this.sessionID, '', 4).subscribe();
         return Observable.of(null);
       }).subscribe(tx => {
-        console.log(tx);
         this.transactionService.sendTransactionStatus(this.sessionID, tx, 1).subscribe();
         const receiptSub = this.web3Service.getTransactionStatus(tx).subscribe(receipt => {
           if (receipt != null) {

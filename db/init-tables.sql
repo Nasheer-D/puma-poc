@@ -51,6 +51,7 @@ CREATE TABLE public.sessions
     "sessionID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
     "txHash" character varying(255) COLLATE pg_catalog."default",
     status integer NOT NULL,
+    "fromPumaWallet" boolean,
     CONSTRAINT sessions_pkey PRIMARY KEY ("sessionID")
 )
 WITH (
