@@ -1,5 +1,4 @@
 // tslint:disable:variable-name
-
 import * as shortid from 'shortid';
 
 export class User {

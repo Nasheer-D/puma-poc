@@ -6,6 +6,7 @@ CREATE TABLE public.app_users
     password character varying(255) COLLATE pg_catalog."default" NOT NULL,
     credits double precision NOT NULL,
     "registrationDate" bigint NOT NULL,
+    "walletAddress" character varying(255) COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT app_users_pkey PRIMARY KEY ("userID")
 )
 WITH (
@@ -29,6 +30,7 @@ CREATE TABLE public.items
     tags character varying[] COLLATE pg_catalog."default",
     rating double precision[],
     "uploadedDate" bigint NOT NULL,
+    featured boolean,
     
     CONSTRAINT items_pkey PRIMARY KEY ("itemID"),
     CONSTRAINT "ownerID" FOREIGN KEY ("ownerID")
@@ -42,6 +44,21 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.items
+    OWNER to local_user;
+
+CREATE TABLE public.sessions
+(
+    "sessionID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    "txHash" character varying(255) COLLATE pg_catalog."default",
+    status integer NOT NULL,
+    CONSTRAINT sessions_pkey PRIMARY KEY ("sessionID")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.sessions
     OWNER to local_user;
 
 -- THIS IS A TEST TABLE USED ONLY FOR DEVELOPMENT AND UNIT TEST REASONS

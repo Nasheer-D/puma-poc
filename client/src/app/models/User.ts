@@ -1,7 +1,7 @@
-export class User {
-  public userID: string;
-  public username: string;
-  public salt: string;
-  public hash: string;
-  public role: string;
+export interface User {
+  userID: string;
+  username: string;
+  salt: string;
+  hash: string;
+  role: string;
 }

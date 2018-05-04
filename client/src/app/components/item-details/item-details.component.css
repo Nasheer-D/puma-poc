@@ -34,14 +34,25 @@
   color: black;
   font-family: Heebo;
   margin-bottom: 0px;
-  margin-top: 30px;
+  margin-top: 15px;
 }
 
 .item-price {
   font-size: 36px;
   color: #1e69f5;
   font-family: Heebo;
-  margin-bottom: 22px;
+  margin-bottom: 38px;
+}
+
+.item-purchased {
+  font-size: 36px;
+  color: #1e69f5;
+  font-family: Heebo;
+  margin-bottom: -5px;
+}
+
+.download-image {
+  margin-top: 2px;
 }
 
 .plain-text {
@@ -59,6 +70,36 @@
 .extended-link {
   font-size: 12px;
 }
+
 .item-info {
   padding: 10px;
+}
+
+.close {
+  margin-top: 5px;
+  padding-left: 20px;
+  color: #e01a0d;
+}
+
+.warning-message {
+  font-size: 11px;
+  font-family: Heebo;
+  color: #e01a0d;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+
+.border-danger {
+  border-width: 10px;
+  border-radius: 4px;
+}
+
+.close-button {
+  margin-left: 20px;
+  color: #e01a0d;
+  font-weight: bold;
+}
+
+.btn-download-no-warning {
+  margin-top: 40px;
 }

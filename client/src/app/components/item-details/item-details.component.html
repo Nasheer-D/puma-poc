@@ -2,6 +2,7 @@
 <div class="details-container">
   <div class="container-fluid">
     <div class="row">
+      <!-- Change to button with function to redirect back -->
       <a href="items" class="back-link"> &laquo; Back to search results</a>
     </div>
   </div>
@@ -62,4 +63,5 @@
     </div>
   </div>
 </div>
-<app-purchase-options #purchaseOptionModal [itemPrice]="item.price"></app-purchase-options>
+
+<app-purchase-options #purchaseOptionModal [itemPrice]="item.price" [itemID]="item.itemID"></app-purchase-options>

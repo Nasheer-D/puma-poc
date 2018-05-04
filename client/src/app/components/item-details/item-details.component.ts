@@ -1,10 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Item } from '../../models/Item';
+import { TransactionService } from '../../services/transaction.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal';
 import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../../services/items.service';
 import { HttpResponse } from '../../utils/web/models/HttpResponse';
 import { Subscription } from 'rxjs/Subscription';
 import { PurchaseOptionsModalComponent } from '../../components/item-details/modals/purchase-options/purchase-options.component';
+import { Web3Service } from '../../services/web3.service';
 
 @Component({
   selector: `app-item-details`,
@@ -12,15 +15,16 @@ import { PurchaseOptionsModalComponent } from '../../components/item-details/mod
   styleUrls: [`./item-details.component.css`]
 })
 export class ItemDetailsComponent implements OnInit {
-  public item: Item = <Item>{};
-  private routerSubscription: Subscription;
   @ViewChild('purchaseOptionModal')
   public purchaseOptionsModal: PurchaseOptionsModalComponent;
+  public item: Item = <Item>{};
+  private routerSubscription: Subscription;
 
   public constructor(
     private router: ActivatedRoute,
-    private itemService: ItemsService
-  ) {}
+    private itemService: ItemsService,
+    private web3Service: Web3Service
+  ) { }
 
   public ngOnInit(): void {
     this.routerSubscription = this.router.params.subscribe(params => {
@@ -30,7 +34,7 @@ export class ItemDetailsComponent implements OnInit {
         .getItemByID(itemID)
         .subscribe((response: HttpResponse) => {
           this.item = response.data[0];
-          this.item.uploadedDate = this.item.uploadedDate * 1000;
+          this.item.uploadedDate = this.item.uploadedDate * 1000; // convert timestamp in seconds to milliseconds
         });
     });
   }
