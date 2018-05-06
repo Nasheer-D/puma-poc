@@ -77,7 +77,7 @@ export class PaymentMetamaskComponent {
       alert('No Metamask Injected - Please download metamask');
       return;
     }
-
+    console.log(this.txData);
     this.transactionService.sendTransactionStatus(this.sessionID, '', 0).subscribe(st => {
       this.web3Service.sentTransaction(this.txData.to, this.txData.value).catch(err => {
         this.transactionService.sendTransactionStatus(this.sessionID, '', 4).subscribe();

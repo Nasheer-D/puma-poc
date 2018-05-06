@@ -13,30 +13,25 @@ import { PaymentMetamaskComponent } from '../payment-metamask/payment-metamask.c
   templateUrl: './purchase-options.component.html',
   styleUrls: ['./purchase-options.component.css']
 })
-export class PurchaseOptionsModalComponent implements OnInit {
+export class PurchaseOptionsModalComponent {
   @ViewChild('purchaseOptionModal')
   public purchaseOptionModal: NgbModal;
   @ViewChild('paymentWalletModal')
   public paymentWalletModal: PaymentWalletModalComponent;
-
   @ViewChild('paymentMetamaskModal')
   public paymentMetamaskModal: PaymentMetamaskComponent;
 
-  @Input() itemPrice: number;
-  @Input() itemID: string;
+  @Input()
+  public itemPrice: number;
+  @Input()
+  public itemID: string;
+  @Input()
+  public txDataAsString: string;
 
   public txData: TransactionData;
-  public txDataAsString: any;
-  private sessionID: string;
 
   public constructor(private modal: NgbModal,
     private transactionService: TransactionService) {
-    this.sessionID = localStorage.getItem('sessionID');
-  }
-
-  public ngOnInit(): void {
-    this.txDataAsString = JSON.stringify(
-      { url: `${Constants.serverHost}${Constants.apiPrefix}transaction/tx/plain/${this.sessionID}/${this.itemID}` });
   }
 
   public open(): void {
@@ -48,6 +43,10 @@ export class PurchaseOptionsModalComponent implements OnInit {
   }
 
   public openPaymentMetamaskModal(): void {
-    this.paymentMetamaskModal.open();
+    const sessionID = localStorage.getItem('sessionID');
+    this.transactionService.getTxDetails(sessionID, this.itemID).subscribe((httpResonse: HttpResponse) => {
+      this.txData = httpResonse.data[0];
+      this.paymentMetamaskModal.open();
+    });
   }
 }
