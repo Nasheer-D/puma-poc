@@ -25,6 +25,7 @@
                 <label>Connect with your
                   <a href="https://outlook.live.com/owa/?authRedirect=true">email </a> to save this image for later access.</label>
               </div>
+              <div class="filler-div" *ngIf="sessionTransaction.status !== 2"></div>
               <div class="container qr-container">
                 <qrcode [qrdata]="txDataAsString" [size]="150" [level]="'L'"></qrcode>
               </div>
@@ -48,7 +49,7 @@
             <div class="col-md-6">
               <div class="container transaction-progress-container">
                 <div class="row">
-                  <div class="container transaction-progress" [ngClass]="{'inactiveBackgroundColor': isInactiveRequest()}">
+                  <div class="container transaction-progress" [ngClass]="{'inactive-background-color': isInactiveRequest()}">
                     <div class="row">
                       <div class="col-sm-9">
                         <label class="transaction-text" [ngClass]="{'transaction-text-inactive': isInactiveRequest()}">Sending transaction request</label>
@@ -57,15 +58,15 @@
                         <div class="span status" *ngIf="isClosedRequest()">Complete</div>
                       </div>
                       <div class="col-sm-3">
-                        <label class="numberLayout" *ngIf="isInactiveRequest()">1</label>
+                        <label class="number-layout" *ngIf="isInactiveRequest()">1</label>
                         <app-loading-spinner *ngIf="isPendingRequest()"></app-loading-spinner>
-                        <img src="../../../../../assets/images/success-btn.png" class="imageSizeSuccess" *ngIf="isClosedRequest()">
+                        <img src="../../../../../assets/images/success-btn.png" class="image-size-success" *ngIf="isClosedRequest()">
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="container transaction-progress" [ngClass]="{'inactiveBackgroundColor': isInactiveResponse()}">
+                  <div class="container transaction-progress" [ngClass]="{'inactive-background-color': isInactiveResponse()}">
                     <div class="row">
                       <div class="col-sm-9">
                         <label class="transaction-text" [ngClass]="{'transaction-text-inactive': isInactiveResponse()}">Transaction response</label>
@@ -74,15 +75,15 @@
                         <div class="span status" *ngIf="isClosedResponse()">Complete</div>
                       </div>
                       <div class="col-sm-3">
-                        <label class="numberLayout" *ngIf="isInactiveResponse()">2</label>
+                        <label class="number-layout" *ngIf="isInactiveResponse()">2</label>
                         <app-loading-spinner *ngIf="isPendingResponse()"></app-loading-spinner>
-                        <img src="../../../../../assets/images/success-btn.png" class="imageSizeSuccess" *ngIf="isClosedResponse()">
+                        <img src="../../../../../assets/images/success-btn.png" class="image-size-success" *ngIf="isClosedResponse()">
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="container transaction-progress" [ngClass]="{'inactiveBackgroundColor': isInactiveStatus(), 
+                  <div class="container transaction-progress" [ngClass]="{'inactive-background-color': isInactiveStatus(), 
                   'border-failed-transaction': isFailedStatus() || isCancelledStatus(), 
                   'border-succesfull-transaction': isSucccessfulStatus()}">
                     <div class="row">
@@ -94,9 +95,9 @@
                         <div class="span status" *ngIf="isCancelledStatus()">Transation was cancelled.Try again.</div>
                       </div>
                       <div class="col-sm-3">
-                        <label class="numberLayout" *ngIf="isInactiveStatus()">3</label>
-                        <img src="../../../../../assets/images/success-btn.png" class="imageSizeSuccess" *ngIf="isSucccessfulStatus()">
-                        <img src="../../../../../assets/images/fail-btn.png" class="imageSizeFail" *ngIf="isFailedStatus() || isCancelledStatus()">
+                        <label class="number-layout" *ngIf="isInactiveStatus()">3</label>
+                        <img src="../../../../../assets/images/success-btn.png" class="image-size-success" *ngIf="isSucccessfulStatus()">
+                        <img src="../../../../../assets/images/fail-btn.png" class="image-size-fail" *ngIf="isFailedStatus() || isCancelledStatus()">
                       </div>
                     </div>
                   </div>
@@ -108,9 +109,9 @@
                     <button class="btn btn-outline-primary btn-layout">See your balance</button>
                   </div>
                   <div class="row-6 ">
-                    <button class="btn btn-outline-primary btn-layout" (click)="d() " *ngIf="isInactiveStatus()">Back to image</button>
-                    <button class="btn btn-outline-primary btn-layout" (click)="d() " *ngIf="isSucccessfulStatus()">Download Image</button>
-                    <button class="btn btn-outline-primary btn-layout" (click)="d() " *ngIf="isFailedStatus() || isCancelledStatus()">Try Again</button>
+                    <button class="btn btn-primary btn-layout" (click)="d() " *ngIf="isInactiveStatus()">Back to image</button>
+                    <button class="btn btn-primary btn-layout" (click)="d() " *ngIf="isSucccessfulStatus()">Download Image</button>
+                    <button class="btn btn-primary btn-layout" (click)="d() " *ngIf="isFailedStatus() || isCancelledStatus()">Try Again</button>
                   </div>
                 </div>
               </div>

@@ -7,3 +7,11 @@
 ngx-spinner > div {
   position: relative !important;
 }
+
+div.container.modal-header {
+  padding-bottom: 0px;
+}
+
+div.modal-body {
+  padding-top: 0px;
+}
