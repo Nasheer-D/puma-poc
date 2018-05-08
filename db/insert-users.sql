@@ -1,15 +1,15 @@
 INSERT INTO public.app_users(
-	"userID", "userName", email, password, credits, "registrationDate")
-	VALUES ('owner01', 'owner01', 'owner01@pumapay.io', 'no_pass_for_now', 1000000, 1522758956);
+	"userID", "userName", email, hash, salt, credits, "registrationDate")
+	VALUES ('owner01', 'owner01', 'owner01@pumapay.io', 'b0601dbc5a68860fc1a839afc44c881b0e74611c9d70c0be4151aae40f27058fda4c5e1399a9de2442ec76f6380094913d36d63a8989c699d8a37ebf64ed4d2b', '2f685b8c15383517d7e57e3823bcde13', 1000000, 1522758956);
 
 INSERT INTO public.app_users(
-	"userID", "userName", email, password, credits, "registrationDate")
-	VALUES ('owner02', 'owner02', 'owner02@pumapay.io', 'no_pass_for_now', 1500000, 1522758956);
+	"userID", "userName", email, hash, salt, credits, "registrationDate")
+	VALUES ('owner02', 'owner02', 'owner02@pumapay.io', 'b0601dbc5a68860fc1a839afc44c881b0e74611c9d70c0be4151aae40f27058fda4c5e1399a9de2442ec76f6380094913d36d63a8989c699d8a37ebf64ed4d2b', '2f685b8c15383517d7e57e3823bcde13', 1500000, 1522758956);
 
 INSERT INTO public.app_users(
-	"userID", "userName", email, password, credits, "registrationDate")
-	VALUES ('user01', 'user01', 'user01@pumapay.io', 'no_pass_for_now', 2000000, 1522758956);
+	"userID", "userName", email, hash, salt, credits, "registrationDate")
+	VALUES ('user01', 'user01', 'user01@pumapay.io', 'b0601dbc5a68860fc1a839afc44c881b0e74611c9d70c0be4151aae40f27058fda4c5e1399a9de2442ec76f6380094913d36d63a8989c699d8a37ebf64ed4d2b', '2f685b8c15383517d7e57e3823bcde13', 2000000, 1522758956);
 
 INSERT INTO public.app_users(
-	"userID", "userName", email, password, credits, "registrationDate")
-	VALUES ('user02', 'user02', 'user02@pumapay.io', 'no_pass_for_now', 3000000, 1522758956);
+	"userID", "userName", email, hash, salt, credits, "registrationDate")
+	VALUES ('user02', 'user02', 'user02@pumapay.io', 'b0601dbc5a68860fc1a839afc44c881b0e74611c9d70c0be4151aae40f27058fda4c5e1399a9de2442ec76f6380094913d36d63a8989c699d8a37ebf64ed4d2b', '2f685b8c15383517d7e57e3823bcde13', 3000000, 1522758956);

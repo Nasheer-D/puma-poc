@@ -1,0 +1,42 @@
+.login-container {
+  border-radius: 15px;
+  border: 1px white solid;
+  background-color: white;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.15);
+  offset-block-end: 0px, 5px;
+  border-radius: 15px;
+  overflow: auto;
+  align-items: center;
+  justify-content: center;
+  display: inline-grid;
+  max-width: 480px;
+  height: auto;
+  margin-top: 150px;
+}
+
+.text-input {
+  border-radius: 8px;
+  border-color: #353535;
+  border-width: 1px;
+  width: 340px;
+  height: 44px;
+  margin: 10px 14px;
+}
+
+.login-submit {
+  border-radius: 8px;
+  margin-top: 10px;
+  margin-right: 14px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-layout {
+  size: 36px;
+  color: #1E69F5;
+  margin-left: 130px;
+  margin-bottom: 50px;
+  margin-top: 40px;
+}

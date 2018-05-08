@@ -14,11 +14,13 @@ export class ClientAuthenticator {
 
     try {
       const sqlQuery: ISqlQuery = {
-        text: `SELECT * FROM app_users where username = ?`,
+        text: `SELECT * FROM app_users where "userName" = $1`,
         values: [this.username]
       };
 
       const queryResult = await new DataService().executeQueryAsPromise(sqlQuery);
+      this.logger.info(this.password);
+      this.logger.info(queryResult.data[0]);
       if (!new UserAuthenticator().validPassword(queryResult.data[0], this.password)) {
         return <AuthenticationResponse>{
           success: false,
