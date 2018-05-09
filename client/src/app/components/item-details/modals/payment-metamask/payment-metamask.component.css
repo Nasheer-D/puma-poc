@@ -3,8 +3,8 @@
 .modal-dialog {
   height: auto;
   max-width: 1000px;
-  margin: auto;
   border-radius: 15px;
+  margin: 0;
 }
 
 .modal-credits {
@@ -35,12 +35,16 @@
   margin-top: 30px;
 }
 
+.modal-email > label {
+  margin-bottom: 0;
+}
+
 .modal-link {
   font-family: Heebo;
   font-size: 14px;
   color: #9c9c9c;
   text-align: center;
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
 .title-name {
@@ -70,7 +74,7 @@
   background-color: white;
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.15);
   offset-block-end: 0px, 5px;
-  margin: 14px;
+  margin: 10px 14px;
   max-width: 680px;
   height: 420px;
   border-radius: 15px;
@@ -147,7 +151,7 @@
   background-color: white;
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.15);
   offset-block-end: 0px, 5px;
-  margin: 14px;
+  margin: 10px 14px;
   border-radius: 15px;
   max-width: 680px;
   height: 100px;
@@ -174,9 +178,10 @@
 
 .inactive-background-color {
   background-color: #ededed;
+  border-color: #ededed;
 }
 
-.numberLayout {
+.number-layout {
   font-size: 36px;
   color: #d4d4d4;
   font-family: Heebo;

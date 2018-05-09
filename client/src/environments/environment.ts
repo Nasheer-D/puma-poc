@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
-  apiHost: 'http://localhost:8080/',
-  apiPrefix: 'api/v1/'
+  apiHost: 'http://172.26.246.81:8080/', // use your local IP address to establish communication between the wallet and the server
+  apiPrefix: 'api/v1/',
+  webSocketHost: 'http://172.26.246.81:8080' // use your local IP address to establish communication between the wallet and the server
 };

@@ -25,8 +25,9 @@ export class PaymentWalletModalComponent {
   public itemPrice: number;
   @Input()
   public txDataAsString: string;
+
   public sessionTransaction: any = {};
-  public txStatus: TxStatus;
+
 
   constructor(private modal: NgbModal, private spinner: NgxSpinnerService,
     private txStatusService: TxStatusService) {

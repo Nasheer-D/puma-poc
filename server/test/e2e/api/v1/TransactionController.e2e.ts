@@ -44,12 +44,30 @@ const insertTestData = async () => {
 
   await dataservice.executeQueryAsPromise(sqlQuery);
 };
+const sessionID = '000001';
+const initiateSession = async () => {
+  const sqlQuery: ISqlQuery = {
+    text: 'INSERT INTO sessions("sessionID", status) VALUES($1, $2);',
+    values: [sessionID, -1]
+  }
+
+  await dataservice.executeQueryAsPromise(sqlQuery);
+};
 
 const deleteTestData = async () => {
   const sqlQuery: ISqlQuery = {
     text: `DELETE FROM items WHERE "itemID" = $1`,
     values: [testItem.itemID]
   };
+
+  await dataservice.executeQueryAsPromise(sqlQuery);
+};
+
+const deleteSession = async () => {
+  const sqlQuery: ISqlQuery = {
+    text: 'DELETE FROM sessions WHERE "sessionID" = $1;',
+    values: [sessionID]
+  }
 
   await dataservice.executeQueryAsPromise(sqlQuery);
 };
@@ -63,73 +81,69 @@ describe('A TransactionController', () => {
       await deleteTestData();
     });
 
-    it('should return txData', done => {
-      const expectedQueryMessage: IResponseMessage = {
+    it('should initiate a session with random ID', (done) => {
+      const expectedResponse: IResponseMessage = {
         success: true,
         status: 'OK',
-        message: 'Retrieved transaction data succesfully',
-        data: [testItem]
-      };
+        message: 'SQL Query completed successful.',
+        data: []
+      }
 
-      server
-        .get(`${endpoint}${'/wallet/txdetails/'}${testItem.itemID}`)
+      server.get(`${endpoint}/init`)
+        .expect(200)
         .end((err: Error, res: any) => {
           const body = res.body;
-          expect(body)
-            .to.have.property('success')
-            .that.is.equal(expectedQueryMessage.success);
-          expect(body)
-            .to.have.property('status')
-            .that.is.equal(expectedQueryMessage.status);
-          expect(body)
-            .to.have.property('message')
-            .that.is.equal(expectedQueryMessage.message);
-          expect(body)
-            .to.have.property('data')
-            .to.be.an('array');
-          expect(body.data[0])
-            .to.have.property('name')
-            .that.is.equal(testItem.title);
-          expect(body.data[0])
-            .to.have.property('networkid')
-            .that.is.equal(networkid);
-          expect(body.data[0])
-            .to.have.property('description')
-            .that.is.equal(testItem.description);
-          expect(body.data[0])
-            .to.have.property('value')
-            .that.is.equal(unit.convert(testItem.price, 'eth', 'wei'));
+          expect(body).to.have.property('success').that.is.equal(expectedResponse.success);
+          expect(body).to.have.property('status').that.is.equal(expectedResponse.status);
+          expect(body).to.have.property('message').that.is.equal(expectedResponse.message);
+          expect(body).to.have.property('data').to.be.an('array');
+          expect(body.data[0]).to.have.property('sessionID');
+          expect(body.data[0]).to.have.property('txHash').that.is.equal(null);
+          expect(body.data[0]).to.have.property('status').that.is.equal(-1);
+          expect(body.data[0]).to.have.property('fromPumaWallet').that.is.equal(null);
           done(err);
         });
     });
 
-    describe('with wrong data', () => {
-      it('should return no data with wrong itemID', (done: any) => {
-        const expectedQueryMessage: IResponseMessage = {
-          success: false,
-          status: 'NO DATA',
-          message: 'SQL Query returned no data from database.'
-        };
+    describe('should handle tx data', async () => {
+      beforeEach(async () => {
+        await initiateSession();
+      });
+      afterEach(async () => {
+        await deleteSession();
+      });
 
-        server
-          .get(`${endpoint}${'/wallet/txdetails/'}${'item does not exist'}`)
+      const expectedResponse = {
+        success: true,
+        status: 'OK',
+        message: 'Retrieved transaction data succesfully',
+        data: [{
+          description: testItem.description,
+          name: testItem.title,
+          networkid: networkid,
+          to: '',
+          value: testItem.price
+        }]
+      }
+
+      it('should return the tx data', (done) => {
+        server.get(`${endpoint}/tx/${sessionID}/${testItem.itemID}`)
+          .expect(200)
           .end((err: Error, res: any) => {
             const body = res.body;
-            expect(res)
-              .to.have.property('status')
-              .that.is.equal(400);
-            expect(body)
-              .to.have.property('success')
-              .that.is.equal(expectedQueryMessage.success);
-            expect(body)
-              .to.have.property('status')
-              .that.is.equal(expectedQueryMessage.status);
-            expect(body)
-              .to.have.property('message')
-              .that.is.equal(expectedQueryMessage.message);
+            expect(body).to.have.property('success').that.is.equal(expectedResponse.success);
+            expect(body).to.have.property('status').that.is.equal(expectedResponse.status);
+            expect(body).to.have.property('message').that.is.equal(expectedResponse.message);
+            expect(body).to.have.property('data').to.be.an('array');
+            expect(body.data[0]).to.have.property('description').that.is.equal(testItem.description);
+            expect(body.data[0]).to.have.property('name').that.is.equal(testItem.title);
+            expect(body.data[0]).to.have.property('value').that.is.equal(unit.convert(testItem.price, 'eth', 'wei'));
+            expect(body.data[0]).to.have.property('to');
+            expect(body.data[0]).to.have.property('callback');
+            expect(body.data[0]).to.have.property('signature');
             done(err);
           });
-      });
+      })
     });
   });
 });
