@@ -27,6 +27,7 @@ import { ItemsService } from './services/items.service';
 import { TransactionService } from './services/transaction.service';
 import { TxStatusService } from './services/webSocket.service';
 import { Web3Service } from './services/web3.service';
+import { PurchasePackagesComponent } from './components/item-details/modals/purchase-packages/purchase-packages.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { Web3Service } from './services/web3.service';
     PurchaseOptionsModalComponent,
     PaymentWalletModalComponent,
     LoadingSpinnerComponent,
-    PaymentMetamaskComponent
+    PaymentMetamaskComponent,
+    PurchasePackagesComponent
   ],
   imports: [
     BrowserModule,
