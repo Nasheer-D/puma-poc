@@ -13,6 +13,7 @@ export class SignatureCalculator {
   public constructor(private transaction: Transaction) {}
 
   public calculate(): string {
+    try {
     this.logger.info('Calculating Singature');
     const hash = Buffer.from(
       ethers.utils
@@ -31,7 +32,7 @@ export class SignatureCalculator {
       'hex'
     );
 
-    const prefix = new Buffer('\x19Ethereum Signed Message:\n');
+     const prefix = new Buffer('\x19Ethereum Signed Message:\n');
     const prefixedMsg = Buffer.from(
       ethers.utils
         .keccak256(
@@ -48,5 +49,8 @@ export class SignatureCalculator {
     const sig = utils.ecsign(prefixedMsg, privateKey);
 
     return utils.toRpcSig(sig.v, sig.r, sig.s);
+  } catch (err) {
+    return err;
+  }
   }
 }
