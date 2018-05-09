@@ -162,19 +162,19 @@ paths:
         in: query
         schema:
           type: string
-        description: soosos
+        description: The txHash of the transaction
         required: false
       - name: status 
         in: query
         schema:
           type: integer
-        description: something for now
+        description: The status of the transaction (initiated = -1, scanned = 0, open = 2, approved = 3, declined = 4, cancelled = 5)
         required: true
       - name: fromApp
         in: query
         schema:
           type: integer
-        description: something
+        description: The transaction status of the app
         required: true
       responses:
         '200':
