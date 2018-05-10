@@ -1,5 +1,16 @@
 # Proof of Concept for PumaPay
 
+# Description
+This is a Proof of Concept for Pumapay Payment Protocol V1. 
+The V1 of the protocol is a push payment implementation of an ERC20 token in the Ethereum network. 
+
+## Pumapay Payment Sequence Diagram
+<object data="./diagrams/UML Diagram.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="./diagrams/UML Diagram.pdf">
+        This browser does not support PDFs. Please download the PDF to view it: <a href="./diagrams/UML Diagram.pdf">Download PDF</a>.</p>
+    </embed>
+</object> 
+
 # Installation
 
 ## Prerequisites
@@ -8,11 +19,6 @@
 * [Install Docker](https://docs.docker.com/engine/installation/)
 * [Angular-cli](https://github.com/angular/angular-cli) `npm install -g @angular/cli@latest`
 * For Windows in case it will not execute `npm install` correctly > `npm install -g windows-build-tools`
-
-### Configure Docker
-
-You need to share your C drive with docker. Go to `Docker > Settings > Shared Drives > Select C > Apply` - You will be asked to fill in your credentials.
-In case this doesn't work, follow [this guide](https://blogs.msdn.microsoft.com/stevelasker/2016/06/14/configuring-docker-for-windows-volumes/).
 
 ## Get started
 
@@ -59,10 +65,10 @@ $ docker-compose up -d
 * Server: `http://localhost:8080`
 * DB:
   * PGHOST=postgres
-    * PGUSER=local_user
-    * PGPASSWORD=local_pass
-    * PGDATABASE=local_puma_poc
-    * PGPORT=`http://localhost:5432`
+  * PGUSER=local_user
+  * PGPASSWORD=local_pass
+  * PGDATABASE=local_puma_poc
+  * PGPORT=`http://localhost:5432`
 
 #### Clean up local development environment
 
@@ -118,6 +124,12 @@ $ mocha -r ts-node/register path/to/unit/test
 # API Documentation
 
 To see the specification of the APIs import [swagger.yml](./swagger.yml) at the [online swagger editor](https://editor.swagger.io)
+
+# Configure Docker
+
+You need to share your C drive with docker. Go to `Docker > Settings > Shared Drives > Select C > Apply` - You will be asked to fill in your credentials.
+In case this doesn't work, follow [this guide](https://blogs.msdn.microsoft.com/stevelasker/2016/06/14/configuring-docker-for-windows-volumes/).
+
 
 # Troubleshooting
 

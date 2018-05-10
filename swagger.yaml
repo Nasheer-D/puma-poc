@@ -1,7 +1,6 @@
 openapi: 3.0.0
 info:
   title: PumaPay PoC API
-  description: ATTENTION - FOR INTERNAL USE ONLY
   version: 0.0.1
   contact:
     name: PumaPay Team
@@ -9,6 +8,8 @@ info:
 servers:
   - url: 'http://localhost:8080/api/v1'
     description: Local server
+  - url: 'http://developers.pumapay.io:8080/api/v1'
+    description: Test server
 paths:
   /items:
     get:
@@ -57,6 +58,158 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/Item'     
+  /transaction/init:
+    get:
+      summary: Initiate Transaction with SessionID
+      operationId: initiateTransactionWithSessionID
+      tags:
+        - Transactions
+      responses:
+        '200':
+          description: A success response with a JSON object with the details of the initated transaction
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Session'
+  /transaction/tx/{sessionID}/{itemID}:
+    get:
+      summary: Retrieve transaction data for item
+      operationId: retrieveTransactionData
+      tags:
+        - Transactions
+      parameters:
+      - name: "sessionID"
+        in: path
+        schema:
+          type: string
+        description: Current sessionId
+        required: true
+      - name: "itemID"
+        in: path
+        schema:
+          type: string
+        description: Id of items details to be returned
+        required: true
+      responses:
+        '200':
+          description: Succedfully returns transacation data for item
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Transaction'
+  /transaction/tx/plain/{sessionID}/{itemID}:
+    get:
+      summary: Retrieve transaction data for item
+      operationId: retrieveTransaction
+      tags:
+        - Transactions
+      parameters:
+      - name: "sessionID"
+        in: path
+        schema:
+          type: string
+        description: Current sessionId
+        required: true
+      - name: "itemID"
+        in: path
+        schema:
+          type: string
+        description: Id of items details to be returned
+        required: true
+      responses:
+        '200':
+          description: Succesfully returns transacation data for item
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Transaction'
+  /transaction/txStatus/session/{sessionID}:
+    get:
+      summary: Retrieve transaction status for session
+      operationId: getTxStatusForSessionID
+      tags:
+        - Transactions
+      parameters:
+      - name: "sessionID"
+        in: path
+        schema: 
+          type: string
+        description: Current sessionID
+        required: true
+      - name: txHash
+        in: query
+        schema:
+          type: string
+        description: The txHash of the transaction
+        required: false
+      - name: status 
+        in: query
+        schema:
+          type: integer
+        description: The status of the transaction (initiated = -1, scanned = 0, open = 1, approved = 2, declined = 3, cancelled = 4)
+        required: true
+      - name: fromApp
+        in: query
+        schema:
+          type: integer
+        description: Indicates if the transaction came from the wallet app
+        required: true
+      responses:
+        '200':
+          description: Succesfully returns the status of the transaction
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Session'
+  /transaction/txStatus/txhash/{transactionHash}:                        
+    get:
+      summary: Retrievs transaction status
+      operationId: retrieveTransactionStatus
+      tags:
+        - Transactions
+      parameters:
+        - name: "transactionHash"
+          in: path
+          schema:
+            type: string
+          description: Current transaction hash 
+          required: true
+      responses:
+        '200':
+          description: Successfully returns the status of the transaction using the transactionHash
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/TransactionLog'
 components:
   schemas:
     Response:
@@ -64,13 +217,17 @@ components:
       properties:
         success:
           type: boolean
+        status:
+          type: string
         message:
           type: string
-        status:
+        sessionID:
           type: string
         data:
           type: array
           items: {}
+        errcode:
+          type: string
     Item:
       type: object
       properties:
@@ -99,4 +256,53 @@ components:
           items:
             type: number
         uploadedDate:
+          type: number
+    Session:
+      type: object
+      properties:
+        sessionID:
+          type: string
+        txHash:
+          type: string
+        status:
+          type: number
+        fromPumaWallet:
+          type: boolean
+    Transaction:
+      type: object
+      properties:
+        callback:
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        networkid:
+          type: number
+        to:
+          type: string
+        value:
+          type: number
+        signature:
+          type: string
+    TransactionLog:
+      type: object
+      properties:
+        address:
+          type: string
+        data:
+          type: string
+        topics:
+          type: array
+          items:
+            type: string
+        logIndex:
+          type: string
+        transactionIndex:
+          type: number
+        transactionHash:
+          type: string
+        blockHash:
+          type: string
+        blockNumber:
           type: number
