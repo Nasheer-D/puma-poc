@@ -132,7 +132,6 @@ export class TransactionController {
 
       return;
     }
-
     const responseMessage: IResponseMessage = {
       status: 'OK',
       message: 'message',
@@ -143,7 +142,6 @@ export class TransactionController {
     return new ResponseHandler().handle(response, responseMessage);
   }
 }
-
 export interface ITransactionRequest {
   description: string;
   name: string;

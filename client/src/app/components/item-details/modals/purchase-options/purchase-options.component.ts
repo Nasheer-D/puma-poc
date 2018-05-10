@@ -43,10 +43,6 @@ export class PurchaseOptionsModalComponent {
   }
 
   public openPaymentMetamaskModal(): void {
-    const sessionID = localStorage.getItem('sessionID');
-    this.transactionService.getTxDetails(sessionID, this.itemID).subscribe((httpResonse: HttpResponse) => {
-      this.txData = httpResonse.data[0];
       this.paymentMetamaskModal.open();
-    });
   }
 }
