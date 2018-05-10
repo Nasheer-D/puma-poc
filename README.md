@@ -5,11 +5,9 @@ This is a Proof of Concept for Pumapay Payment Protocol V1.
 The V1 of the protocol is a push payment implementation of an ERC20 token in the Ethereum network. 
 
 ## Pumapay Payment Sequence Diagram
-<object data="./diagrams/UML Diagram.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="./diagrams/UML Diagram.pdf">
-        This browser does not support PDFs. Please download the PDF to view it: <a href="./diagrams/UML Diagram.pdf">Download PDF</a>.</p>
-    </embed>
-</object> 
+![alt text](diagrams/UML_Diagram.png "Pumapay Payment UML Diagram")
+
+Find the PDF [here](diagrams/UML_Diagram.pdf)
 
 # Installation
 
