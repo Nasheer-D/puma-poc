@@ -7,8 +7,6 @@ The V1 of the protocol is a push payment implementation of an ERC20 token in the
 ## Pumapay Payment Sequence Diagram
 ![alt text](diagrams/UML_Diagram.png "Pumapay Payment UML Diagram")
 
-Find the PDF [here](diagrams/UML_Diagram.pdf)
-
 # Installation
 
 ## Prerequisites
@@ -29,7 +27,7 @@ $ git clone https://github.com/pumapayio/puma-poc.git
 2.  Change to project directory
 
 ```sh
-$ cd puma.poc
+$ cd puma-poc
 ```
 
 3.  Install the required packages
@@ -97,11 +95,22 @@ To run all the tests
 $ npm test
 ```
 
+To run server tests
+```bash
+$ npm run test-server
+```
+
+To run client tests
+```bash
+$ npm run test-client
+```
+
 ## E2E Testing
 
 To run the E2E tests
 
 ```bash
+$ cd server
 $ npm run test-e2e
 ```
 
@@ -110,13 +119,15 @@ $ npm run test-e2e
 To run all the Unit tests
 
 ```bash
+$ cd server
 $ npm run test-unit
 ```
 
-To run individual unit test
+## Run individual test
 
 ```bash
-$ mocha -r ts-node/register path/to/unit/test
+$ cd server
+$ mocha -r ts-node/register path/to/test
 ```
 
 # API Documentation
