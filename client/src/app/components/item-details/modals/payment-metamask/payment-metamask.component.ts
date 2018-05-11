@@ -48,12 +48,14 @@ export class PaymentMetamaskComponent {
     private web3Service: Web3Service,
     private transactionService: TransactionService) {
   }
-
   public open(): void {
+    // status is -1(not enable the transaction) and get the item with the sessionID
     this.sessionTransaction.status = -1;
     this.sessionID = localStorage.getItem('sessionID');
     this.itemID = localStorage.getItem('itemID');
+    // get the tx details of the specific item
     this.transactionService.getTxDetails(this.sessionID, this.itemID).subscribe((response: HttpResponse) => {
+      // if response is successful,get the tx data
       if (response.success) {
         this.txData = response.data[0];
       }
@@ -64,14 +66,16 @@ export class PaymentMetamaskComponent {
       });
     });
 
+
     this.modal.open(this.paymentMetamaskModal, { centered: true, size: 'lg' });
   }
-
+  // check if metamask exist
   public get hasMetamask(): boolean {
     return this.web3Service.hasMetaMask;
   }
 
   public buyWithMetaMask(): void {
+    // if metamask doesnt exist show a message to download the metamask
     if (!this.web3Service.hasMetaMask) {
       console.log('No Metamask Injected - Please download metamask');
       alert('No Metamask Injected - Please download metamask');
@@ -98,7 +102,8 @@ export class PaymentMetamaskComponent {
       });
     });
   }
-
+  // the folloring functions change their values according to the status received from the
+  // webSocket to display the transaction progress to the client
   public isInactiveRequest(): boolean {
     return this.sessionTransaction.status === -1;
   }
