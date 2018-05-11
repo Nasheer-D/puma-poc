@@ -66,8 +66,6 @@ export class PaymentMetamaskComponent {
         }
       });
     });
-
-
     this.modal.open(this.paymentMetamaskModal, { centered: true, size: 'lg' });
   }
   // check if metamask exist
@@ -82,10 +80,7 @@ export class PaymentMetamaskComponent {
       alert('No Metamask Injected - Please download metamask');
       return;
     }
-<<<<<<< HEAD
     // for tx status equal to 0 send the transaction
-=======
->>>>>>> 610002d72c4631a5ff819e324386b8e9e97efdf9
     this.transactionService.sendTransactionStatus(this.sessionID, '', 0).subscribe(st => {
       this.web3Service.sentTransaction(this.txData.to, this.txData.value).catch(err => {
         // for tx status equal to 4 cancel the transaction
