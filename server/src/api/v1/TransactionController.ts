@@ -128,25 +128,35 @@ export class TransactionController {
   @Get('/txStatus/txhash/:transactionHash')
   public async retrieveTransactionStatus(@Param('transactionHash') transactionHash: string, @Res() response: any) {
     this.logger.info('Retrieving Transaction Status');
-    const web3 = new Web3(new Web3.providers.HttpProvider(`${Globals.GET_INFURA_URL()}${Globals.GET_INFURA_KEY()}`));
-    const receipt = await web3.eth.getTransactionReceipt(transactionHash);
-    if (!receipt) {
-      this.logger.info('Transaction not completed. Trying again after 10 seconds...');
-      setTimeout(() => {
-        this.retrieveTransactionStatus(transactionHash, response);
-      }, 10000);
+    try {
+      const web3 = new Web3(new Web3.providers.HttpProvider(`${Globals.GET_INFURA_URL()}${Globals.GET_INFURA_KEY}`));
+      const receipt = await web3.eth.getTransactionReceipt(transactionHash);
+      if (!receipt) {
+        this.logger.info('Transaction not completed. Trying again after 10 seconds...');
+        setTimeout(() => {
+          this.retrieveTransactionStatus(transactionHash, response);
+        }, 10000);
 
-      return;
+        return;
+      }
+
+      const responseMessage: IResponseMessage = {
+        status: 'OK',
+        message: 'message',
+        success: true,
+        data: [receipt]
+      };
+
+      return new ResponseHandler().handle(response, responseMessage);
+    } catch (err) {
+      const errorResponse: IResponseMessage = {
+        success: false,
+        status: 'FAILED',
+        message: `Blockchain request failed. Reason: ${err.message}`
+      };
+
+      return new ResponseHandler().handle(response, errorResponse);
     }
-
-    const responseMessage: IResponseMessage = {
-      status: 'OK',
-      message: 'message',
-      success: true,
-      data: [receipt]
-    };
-
-    return new ResponseHandler().handle(response, responseMessage);
   }
 }
 

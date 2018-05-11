@@ -16,5 +16,4 @@ export interface IResponseMessage {
     sessionID?: string;
     data?: any;
     errcode?: string;
-    catched?: boolean;
 }
