@@ -7,6 +7,9 @@ The V1 of the protocol is a push payment implementation of an ERC20 token in the
 ## Pumapay Payment Sequence Diagram
 ![alt text](diagrams/UML_Diagram.png "Pumapay Payment UML Diagram")
 
+### Details:
+  The transacation process begins when the user selects a specific item. As soon as an item is selected its unique id is stored in the local storage under the name “itemID”. In addition to that, a call is made to the backend to initiate a session. This created a unique Session id that is stored both locally(“SessionID”) and on the database. As soon as the user clicks on the “Buy with one click” a popup appears that gives the user two options for completing the transaction. In this case we will cover the case that the user picks to pay using the PumaPay wallet app. When the user selects the wallet a function is called that will generate a QRCode which will be used to create the QR that need to be scanned in order to complete the transaction using the wallet. The QR code is displayed to the user who then has to scan the QR using the mobile application. The app reads the data from the QR and using the url impeded in the QR it makes a call to the backend to get the TxData. When the call is made to the backend the transaction is build and the signature of the transaction is signed. The signature and TxData are then send back to the wallet. The tx details are displayed to the user and the wallet used the signature to verify the transaction is correct. As soon as the user accepts the transaction the transaction request is submitted to the blockchain. When submitted the Blockchain returns back the txReceipt. The wallet then makes a call to the backend with the status and txHash and the status of the transaction is updated both on the Database as well as the client interface. This process is then repeated until the transaction is completed.
+
 Find the PDF [here](diagrams/UML_Diagram.pdf)
 
 # Installation
