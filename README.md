@@ -12,6 +12,9 @@ The V1 of the protocol is a push payment implementation of an ERC20 token in the
 
 Find the PDF [here](diagrams/UML_Diagram.pdf)
 
+## Signature
+  In order to validate that transactions are real, signature must be calculated. First, you need to store the transaction data(callback, description, name, networkID, to, value) into a buffer. Callback, description and name are of type bytes and they must converted into utf8 inside of a a new buffer. The transaction data are converted into a hexadecimal character hash using the 'ethers.utils.solidityKeccak256' We store in another buffer the ethereum signed message, which is the prefix. In a new buffer we store the prefix and the hash and using 'ethers.utils.keccak256' we create a new hash, which is called the prefix message. The private key(of type hex) is stored in a buffer as well. Then we convert the prefix message and the private key into a digital signature using 'ecsign' method, which is stored as a variable called signature. Finally the signature's parameters v,r,s and are converted into the format of ethereum signature using toRpcSig method.
+
 ## WebSocket
   The WebSocket’s purpose is to create an active connection between the client and the backend. As soon as a transaction is verified and approved updates for the transaction status are pushed from the wallet to the backend which in turn pushes the updated status to the Database and uses the WebSocket to emit the status changes to the client. When a transaction is completed, the connection is closed.
 
