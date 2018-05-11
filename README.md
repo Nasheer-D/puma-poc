@@ -12,7 +12,7 @@ The V1 of the protocol is a push payment implementation of an ERC20 token in the
 
 Find the PDF [here](diagrams/UML_Diagram.pdf)
 
-##WebSocket
+## WebSocket
   The WebSocket’s purpose is to create an active connection between the client and the backend. As soon as a transaction is verified and approved updates for the transaction status are pushed from the wallet to the backend which in turn pushes the updated status to the Database and uses the WebSocket to emit the status changes to the client. When a transaction is completed, the connection is closed.
 
 
