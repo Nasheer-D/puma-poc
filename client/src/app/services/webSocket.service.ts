@@ -14,6 +14,7 @@ export class TxStatusService {
 
     public onTxStatusChange(sessionID: string) {
         return Observable.create(observer => {
+            // Receives status updates every time the txStatus/ api is called and pushes them to the client
             this.socket.on(`txStatus/${sessionID}`, (httpResponse: HttpResponse) => {
                 observer.next(httpResponse);
             });

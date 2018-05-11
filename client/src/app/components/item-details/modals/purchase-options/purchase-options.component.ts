@@ -28,20 +28,16 @@ export class PurchaseOptionsModalComponent {
   @Input()
   public txDataAsString: string;
 
-  public txData: TransactionData;
-
-  public constructor(private modal: NgbModal,
-    private transactionService: TransactionService) {
-  }
+  public constructor(private modal: NgbModal) {}
 
   public open(): void {
     this.modal.open(this.purchaseOptionModal, { centered: true, size: 'lg' });
   }
-
+  // opens wallet modal
   public openPaymentWalletModal(): void {
     this.paymentWalletModal.open();
   }
-
+  // opens metamask modal
   public openPaymentMetamaskModal(): void {
       this.paymentMetamaskModal.open();
   }
