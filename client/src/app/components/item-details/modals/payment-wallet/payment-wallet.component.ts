@@ -47,7 +47,6 @@ export class PaymentWalletModalComponent {
 
   public generateQr(): any {
     this.txDataAsString = this.qrGeneratorService.getQrData(localStorage.getItem('sessionID'), localStorage.getItem('itemID'));
-    console.log('This is a string', this.txDataAsString);
   }
 
   public isInactiveRequest(): boolean {

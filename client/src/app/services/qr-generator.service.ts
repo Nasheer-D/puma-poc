@@ -5,7 +5,6 @@ import { Constants } from '../app.constants';
 export class QrGeneratorService {
 
   public getQrData(sessionId: string, itemId: string): string {
-    console.log('hello');
     return JSON.stringify(
       { url: `${Constants.apiHost}${Constants.apiPrefix}transaction/tx/plain/${sessionId}/${itemId}` });
   }
