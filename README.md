@@ -2,10 +2,22 @@
 
 # Description
 This is a Proof of Concept for Pumapay Payment Protocol V1. 
-The V1 of the protocol is a push payment implementation of an ERC20 token in the Ethereum network. 
+The V1 of the protocol is a push payment implementation of an ERC20 token in the Ethereum network.
+This project is intended to be used as a starter project by 
 
 ## Pumapay Payment Sequence Diagram
 ![alt text](diagrams/UML_Diagram.png "Pumapay Payment UML Diagram")
+
+#### Details
+  The transacation process begins when the user selects a specific item. As soon as an item is selected its unique id is stored in the local storage under the name “itemID”. In addition to that, a call is made to the backend to initiate a session. This created a unique Session id that is stored both locally(“SessionID”) and on the database. As soon as the user clicks on the “Buy with one click” a popup appears that gives the user two options for completing the transaction. In this case we will cover the case that the user picks to pay using the PumaPay wallet app. When the user selects the wallet a function is called that will generate a QRCode which will be used to create the QR that need to be scanned in order to complete the transaction using the wallet. The QR code is displayed to the user who then has to scan the QR using the mobile application. The app reads the data from the QR and using the url impeded in the QR it makes a call to the backend to get the TxData. When the call is made to the backend the transaction is build and the signature of the transaction is signed. The signature and TxData are then send back to the wallet. The tx details are displayed to the user and the wallet used the signature to verify the transaction is correct. As soon as the user accepts the transaction the transaction request is submitted to the blockchain. When submitted the Blockchain returns back the txReceipt. The wallet then makes a call to the backend with the status and txHash and the status of the transaction is updated both on the Database as well as the client interface. This process is then repeated until the transaction is completed.
+
+Find the PDF [here](diagrams/UML_Diagram.pdf)
+
+#### Signature
+  In order to validate that transactions are real, signature must be calculated. First, you need to store the transaction data(callback, description, name, networkID, to, value) into a buffer. Callback, description and name are of type bytes and they must converted into utf8 inside of a a new buffer. The transaction data are converted into a hexadecimal character hash using the 'ethers.utils.solidityKeccak256' We store in another buffer the ethereum signed message, which is the prefix. In a new buffer we store the prefix and the hash and using 'ethers.utils.keccak256' we create a new hash, which is called the prefix message. The private key(of type hex) is stored in a buffer as well. Then we convert the prefix message and the private key into a digital signature using 'ecsign' method, which is stored as a variable called signature. Finally the signature's parameters v,r,s and are converted into the format of ethereum signature using toRpcSig method.
+
+#### WebSocket
+  The WebSocket’s purpose is to create an active connection between the client and the backend. As soon as a transaction is verified and approved updates for the transaction status are pushed from the wallet to the backend which in turn pushes the updated status to the Database and uses the WebSocket to emit the status changes to the client. When a transaction is completed, the connection is closed.
 
 # Installation
 
@@ -55,7 +67,7 @@ $ docker-compose build
 $ docker-compose up -d
 ```
 
-## PoC local development ports
+## PoC local development
 
 * PoC Webpage : `http://localhost:4200`
 * Server: `http://localhost:8080`
