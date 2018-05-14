@@ -34,7 +34,7 @@ export class SignatureCalculator {
                 [prefix, new Buffer(String(hash.length)), hash]
             )).substr(2), 'hex');
         // store the secret key
-        // TODO: properly store and hanlde private keys 
+        // TODO: properly store and hanlde private keys
         const privateKey = Buffer.from('7737d0e22f791970f8a847d24f27d90d4693d39074b76a758a99232aba6ec37a', 'hex');
         // convert the prefix messafe and the private key using ecsign to create the digital signature
         const sig = utils.ecsign(prefixedMsg, privateKey);
