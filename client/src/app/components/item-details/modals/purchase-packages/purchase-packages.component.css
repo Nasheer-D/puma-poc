@@ -1,90 +1,93 @@
 .modal-dialog {
-    height: auto;
-    max-width: 1500px;
-    margin: auto;
-    border-radius: 15px;
-    text-align: center;
-  }
-  
-  .modal-credits {
-    color: black;
-    font-size: 16px;
-    font-family: Heebo;
-  }
-  .modal-payment-method{
-    color:#353535;
-    font-size: 16px;
-    font-family: Heebo;
-  }
-  .title-name {
-    color: #1e69f5;
-    font-size: 36px;
-    font-family: Heebo;
-    margin-bottom: 10px;
-  }
-  
-  .options-modal {
-    background-color: rgba(0, 0, 0, 0.15);
-    align-content: center;
-    border-radius: 15px;
-  }
-  
-  .modal-header {
-    border: 0px;
-    text-align: center;
-    object-position: center;
-  }
-  
-  .options-container {
-    border-radius: 15px;
-    border: 1px white solid;
-    background-color: white;
-    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.15);
-    offset-block-end: 0px, 5px;
-    margin: 10px 5px;
-    max-width: 880px;
-    height: auto;
-    border-radius: 15px;
-    padding: 0px;
-    align-items: center;
-  }
-  .image-container-modal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
-  }
-  
-  .close-button {
-    position: absolute;
-    right: 35px;
-    top: 8px;
-  }
-  
-  .credit-number{
-    font-size:96px;
-    color:#1E69F5;
-    font-family: Heebo;
-    font-family: Heebo;
-  }
-  .credits{
-    font-size:36px;
-    color:#8F8F8F;
-    font-family: Heebo;
-    margin-top: -50px;
-  }
-  .bonus{
-    font-size:14px;
-    color:#1E69F5;
-    font-family: Heebo;
-  }
-  .buy-credits{
-    font-family: Heebo;
-    border-radius: 15px;
-  }
-  .puma-amount{
-    font-size:14px;
-    color:#9C9C9C;
-    font-family: Heebo;
-  }
+  height: auto;
+  max-width: 1500px;
+  margin: auto;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.modal-credits {
+  color: black;
+  font-size: 16px;
+  font-family: Heebo;
+  margin-bottom: 0px;
+}
+.modal-payment-method{
+  color:#353535;
+  font-size: 16px;
+  font-family: Heebo;
+}
+.title-name {
+  color: #1e69f5;
+  font-size: 36px;
+  font-family: Heebo;
+  margin-bottom: 10px;
+}
+
+.options-modal {
+  background-color: rgba(0, 0, 0, 0.15);
+  align-content: center;
+  border-radius: 15px;
+}
+
+.modal-header {
+  border: 0px;
+  text-align: center;
+  object-position: center;
+}
+
+.options-container {
+  border-radius: 15px;
+  border: 1px white solid;
+  background-color: white;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.15);
+  offset-block-end: 0px, 5px;
+  margin: 10px 5px;
+  max-width: 880px;
+  height: auto;
+  border-radius: 15px;
+  padding: 0px;
+  align-items: center;
+}
+.image-container-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.close-button {
+  position: absolute;
+  right: 35px;
+  top: 8px;
+}
+
+.credit-number{
+  font-size:96px;
+  color:#1E69F5;
+  font-family: Heebo;
+  line-height: 141px;
+}
+.credits{
+  font-size:36px;
+  color:#8F8F8F;
+  font-family: Heebo;
+  margin-top: -50px;
+}
+.bonus{
+  font-size:14px;
+  color:#1E69F5;
+  font-family: Heebo;
+  margin-bottom: 10px;
+}
+.buy-credits{
+  font-family: Heebo;
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+.puma-amount{
+  font-size:14px;
+  color:#9C9C9C;
+  font-family: Heebo;
+}
