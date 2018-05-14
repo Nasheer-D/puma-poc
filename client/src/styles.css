@@ -16,11 +16,6 @@ div.modal-body {
   padding-top: 0px;
 }
 
-.modal-open .modal {
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-
 .row{
   margin-top: 10px;
 }
