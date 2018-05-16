@@ -1,7 +1,37 @@
 <app-header></app-header>
 <div class="container">
-  <div class="row margin-space">
-    <div class="image-container col-lg-4 col-md-4 col-sm-6 col-xs-6" *ngFor="let item of items">
+  <div class="row">
+    <div class="col search-option">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Search results for:</span>
+        </div>
+        <input type="text" class="form-control" aria-label="search box" [(ngModel)]="searchText" aria-describedby="inputGroup-sizing-sm">
+      </div>
+    </div>
+    <div class="col-6 images-filtering search-option  mb-3">
+      <label>Filter images by:
+        <span>
+          <a class="images-filtering" [ngClass]="{'active-filter': byDate == true}" [routerLink]="" (click)="orderByDate()">Recent</a>
+        </span>
+        <span> | </span>
+        <span>
+          <a class="images-filtering" [ngClass]="{'active-filter': byFeatured == true}" [routerLink]="" (click)="orderByFeatured()">Featured</a>
+        </span>
+        <span> | </span>
+        <span>
+          <a class="images-filtering" [ngClass]="{'active-filter': byRating == true}" [routerLink]="" (click)="orderByRating()">Rating</a>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="row margin-space" *ngIf="isFiltered == false">
+    <div class="image-container col-lg-4 col-md-4 col-sm-6 col-xs-6" *ngFor="let item of items |  filter: searchText">
+      <img class="img-style" src={{item.itemUrl}} (click)="goToItemDetails(item.itemID)" alt="{{item.description}}">
+    </div>
+  </div>
+  <div class="row margin-space" *ngIf="isFiltered == true">
+    <div class="image-container col-lg-4 col-md-4 col-sm-6 col-xs-6" *ngFor="let item of sortedItems |  filter: searchText">
       <img class="img-style" src={{item.itemUrl}} (click)="goToItemDetails(item.itemID)" alt="{{item.description}}">
     </div>
   </div>

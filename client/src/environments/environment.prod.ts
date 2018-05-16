@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  apiHost: 'http://localhost:8080/', // TODO: change to real production host
-  apiPrefix: 'api/v1/'
+  apiHost: 'http:// 172.26.246.81:8080/',
+  apiPrefix: 'api/v1/',
+  webSocketHost: 'http:// 172.26.246.81:8080/'
 };

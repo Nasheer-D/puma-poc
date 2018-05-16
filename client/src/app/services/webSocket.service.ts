@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
 import { HttpResponse } from '../utils/web/models/HttpResponse';
+import { Constants } from '../app.constants';
 
 @Injectable()
 export class TxStatusService {
     private socket: SocketIOClient.Socket;
 
     public constructor() {
-        this.socket = io('http://localhost:8080');
+        this.socket = io(Constants.webSocketHost);
     }
 
     public onTxStatusChange(sessionID: string) {

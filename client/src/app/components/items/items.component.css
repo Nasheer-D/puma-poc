@@ -9,10 +9,41 @@
   margin-left: 0 auto;
   margin-right: 0 auto;
   align-content: center;
+  cursor: pointer;
 }
 
 .img-style {
   height: 204px;
   width: 100%;
   border-radius: 8px;
+}
+
+.images-filtering {
+  padding-top: 10px;
+  font-family: Heebo;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: right;
+  color: #9c9c9c;
+}
+
+a:hover {
+  color: #575454;
+}
+
+.active-filter {
+  color: #575454;
+  text-decoration: underline;
+}
+
+.search-option {
+  font-size: 14px;
+  font-family: Heebo;
+  color: #9c9c9c;
+  margin-top: 20px;
+}
+
+.search-input-layout {
+  border: none;
+  color: #9c9c9c;
 }

@@ -1,4 +1,4 @@
-CREATE TABLE public.app_users
+CREATE TABLE IF NOT EXISTS public.app_users 
 (
     "userID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
     "userName" character varying(255) COLLATE pg_catalog."default" NOT NULL,
@@ -17,7 +17,7 @@ TABLESPACE pg_default;
 ALTER TABLE public.app_users
     OWNER to local_user;
 
-CREATE TABLE public.items
+CREATE TABLE IF NOT EXISTS public.items
 (
     "itemID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
     "ownerID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
@@ -30,6 +30,7 @@ CREATE TABLE public.items
     tags character varying[] COLLATE pg_catalog."default",
     rating double precision[],
     "uploadedDate" bigint NOT NULL,
+    featured boolean,
     
     CONSTRAINT items_pkey PRIMARY KEY ("itemID"),
     CONSTRAINT "ownerID" FOREIGN KEY ("ownerID")
@@ -45,11 +46,12 @@ TABLESPACE pg_default;
 ALTER TABLE public.items
     OWNER to local_user;
 
-CREATE TABLE public.sessions
+CREATE TABLE IF NOT EXISTS public.sessions
 (
     "sessionID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
     "txHash" character varying(255) COLLATE pg_catalog."default",
     status integer NOT NULL,
+    "fromPumaWallet" boolean,
     CONSTRAINT sessions_pkey PRIMARY KEY ("sessionID")
 )
 WITH (

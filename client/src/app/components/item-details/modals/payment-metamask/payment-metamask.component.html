@@ -1,4 +1,4 @@
-<ng-template #paymentWalletModal let-d="dismiss" tabindex="-1" role="dialog">
+<ng-template #paymentMetamaskModal let-d="dismiss" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content options-modal">
       <div class="container modal-header">
@@ -13,7 +13,7 @@
               <b>{{itemPrice | number: '1.2-2'}} PumaPay</b> tokens.</label>
           </div>
           <div class="col-lg-12">
-            <label class="title-name">Scan to complete your purchase</label>
+            <label class="title-name">Continue with metamask</label>
           </div>
         </div>
       </div>
@@ -25,24 +25,18 @@
                 <label>Connect with your
                   <a href="https://outlook.live.com/owa/?authRedirect=true">email </a> to save this image for later access.</label>
               </div>
-              <div class="filler-div" *ngIf="sessionTransaction.status !== 2"></div>
-              <div class="container qr-container">
-                <qrcode [qrdata]="txDataAsString" [size]="150" [level]="'L'"></qrcode>
-              </div>
-              <div class="col modal-scan-qr">
-                <label>Scan a QR code with the app to complete the transaction.</label>
-              </div>
-              <div class="col modal-link">
-                <label>Don't have PumaPay wallet?</label>
-              </div>
-              <div class="col">
-                <div class="container download-option-image col-sm-12">
-                  <a href="https://itunes.apple.com/us/genre/ios/id36?mt=8">
-                    <img class="app-store-apple" src="../../../assets/images/app-store.png">
-                  </a>
-                  <a href="https://play.google.com/store?hl=en">
-                    <img class="app-store-google" src="../../../assets/images/google-play-badge.png">
-                  </a>
+              <div class="container">
+                <div class="container image-container-modal">
+                  <img class="option-picture" src="../../../../../assets/images/metamask.png" alt="metamask">
+                </div>
+                <div *ngIf="!hasMetamask" class="col install-metamask">
+                  <label>You need the MetaMask browser add-on</label>
+                </div>
+                <div *ngIf="!hasMetamask" class="col modal-btn">
+                  <a class="modal-show-code btn btn-primary" href="https://metamask.io" target="_blank">Install Metamask</a>
+                </div>
+                <div class="col modal-btn">
+                  <button class="modal-show-code btn btn-primary" (click)="buyWithMetaMask()" *ngIf="hasMetamask">Initiate transaction</button>
                 </div>
               </div>
             </div>
@@ -108,10 +102,10 @@
                   <div class="col-sm-6">
                     <button class="btn btn-outline-primary btn-layout">See your balance</button>
                   </div>
-                  <div class="col-sm-6 ">
-                    <button class="btn btn-primary btn-layout" (click)="d() " *ngIf="isInactiveStatus()">Back to image</button>
-                    <button class="btn btn-primary btn-layout" (click)="d() " *ngIf="isSucccessfulStatus()">Download Image</button>
-                    <button class="btn btn-primary btn-layout" (click)="d() " *ngIf="isFailedStatus() || isCancelledStatus()">Try Again</button>
+                  <div class="col-sm-6">
+                    <button class="btn btn-primary btn-layout" (click)="d()" *ngIf="isInactiveStatus()">Back to image</button>
+                    <button class="btn btn-primary btn-layout" (click)="d()" *ngIf="isSucccessfulStatus()">Download Image</button>
+                    <button class="btn btn-primary btn-layout" (click)="d()" *ngIf="isFailedStatus() || isCancelledStatus()">Try Again</button>
                   </div>
                 </div>
               </div>
