@@ -5,6 +5,7 @@ import { AuthenticationService } from './authentication.service';
 import { Constants } from '../app.constants';
 import { Item } from '../models/Item';
 import { Observable } from 'rxjs/Observable';
+import { ObserveOnSubscriber } from 'rxjs/operators/observeOn';
 
 @Injectable()
 export class TransactionService {
@@ -15,13 +16,16 @@ export class TransactionService {
         this.actionUrl = `${Constants.apiHost}${Constants.apiPrefix}transaction/`;
     }
 
-    public getTransactionData(itemID: string): Observable<any> {
-        return new HttpGetRequest(this.http, `${this.actionUrl}wallet/txdetails/${itemID}`).getResult();
+    public initiateTransactionSession(): Observable<any> {
+        return new HttpGetRequest(this.http, `${this.actionUrl}init`).getResult();
+    }
+
+    public getTxDetails(sessionID: string, itemID: string): Observable<any> {
+        return new HttpGetRequest(this.http, `${this.actionUrl}tx/${sessionID}/${itemID}`).getResult();
     }
 
     public sendTransactionStatus(sessionId: string, txhash: string, status: number) {
         return new HttpGetRequest(this.http,
-            `${this.actionUrl}wallet/txStatus/${sessionId}?tx=${txhash}&status=${status}&fromapp=0`).getResult();
+            `${this.actionUrl}txStatus/session/${sessionId}?tx=${txhash}&status=${status}&fromapp=0`).getResult();
     }
-
 }

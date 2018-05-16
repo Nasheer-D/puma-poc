@@ -1,8 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 .modal-content {
   border-radius: 15px;
+  display: flow-root;
 }
 
 ngx-spinner > div {
   position: relative !important;
+}
+
+div.container.modal-header {
+  padding-bottom: 0px;
+}
+
+div.modal-body {
+  padding-top: 0px;
 }
