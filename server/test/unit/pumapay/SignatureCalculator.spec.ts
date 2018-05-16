@@ -1,77 +1,51 @@
 import * as chai from 'chai';
 import { SignatureCalculator } from '../../../../server/src/utils/txHelpers/SignatureCalculator';
-import * as utils from 'ethereumjs-util';
-import * as ethers from 'ethers';
+import { SignatureDecoder } from '../../../src/utils/testHelpers/SignatureDecoder';
 
 const expect = chai.expect;
 const transaction: any = {
   callback: 'asd',
   description: 'asd',
   name: 'asd',
-  networkID: '3',
+  networkID: 3,
   to: '0xaA5CBc1eB612e9A6FB7DCA72f559c8BC3a63F510',
-  value: 12,
-  signature: 'asd'
-};
-
-const wrongTransaction: any = {
-  callback: 'asd',
-  description: 'asd',
-  name: 'asd',
-  networkID: '3',
-  to: '0xaA5CBc1eB612e9A6FB7DCA72f559c8BC3a63F510',
-  value: 12,
-  signature: 'asd'
+  value: 12
 };
 
 describe('SignatureCalculator with correct transaction data', () => {
     const signatureCalculator = new SignatureCalculator(transaction);
+    const decoder = new SignatureDecoder();
     const signature = signatureCalculator.calculate();
+    transaction.signature = signature;
     it('should generate a signature with the correct length', () => {
-    expect(signature).to.have.lengthOf(132);
-  });
+      expect(signature).to.have.lengthOf(132);
+    });
+
+    it('should return the correct public key when decrypted', async() => {
+      const decryptedTx = decoder.decrypt(transaction);
+      expect(decryptedTx).to.equal('0x41bbc81089e26615fa7bf7ff2dcd051dff773e54');
+    });
 });
 
-describe('SignatureCalculator with wrong transaction data', () => {
-  it('should not generate a signature when the _to address does not start with 0x.', () => {
-    const signatureCalculator = new SignatureCalculator(wrongTransaction);
+describe('SignatureCalulator with wrong transaction data', () => {
+  const signatureCalculator = new SignatureCalculator(transaction);
+  it('should return an error when address has no prefix', () => {
+    transaction.to = 'aA5CBc1eB612e9A6FB7DCA72f559c8BC3a63F510';
     const signature = signatureCalculator.calculate();
-    const hash = Buffer.from(
-      ethers.utils
-        .solidityKeccak256(
-          ['bytes', 'bytes', 'bytes', 'uint256', 'address', 'uint256'],
-          [
-            Buffer.from(wrongTransaction.callback, 'utf8'),
-            Buffer.from(wrongTransaction.description, 'utf8'),
-            Buffer.from(wrongTransaction.name, 'utf8'),
-            wrongTransaction.networkID,
-            wrongTransaction.to,
-            wrongTransaction.value
-          ]
-        )
-        .substr(2),
-      'hex'
-    );
-    const digest = ethers.utils.keccak256(Buffer.concat([new Buffer('\x19Ethereum Signed Message:\n'), new Buffer(String(hash.length)), hash]));
-    const r = Buffer.from(signature.slice(2, 66), 'hex');
-    console.log('r: ' + r);
-    const s = Buffer.from(signature.slice(66, 130), 'hex');
-    console.log('s :' + s);
-    let header = parseInt('0x' + signature.slice(130, 132), 16);
-    console.log('Header1: ' + header);
-    if ((header < 27) || (header > 34)){
-      console.log('Header2: ' + header);
-      header = header;
-    }
-    if (header >= 31)
-    {
-      console.log('Header3: ' + header);
-      header -= 4;
-      console.log('Header4: ' + header);
-      header = header - 27;
-    }
-    console.log('Header5: ' + header);
-    const pk = ethers.SigningKey.recover(digest, r, s, header).toLowerCase();
-    console.log('This: ' + pk);
+    console.log(signature);
+    expect(signature.[Error]).to.equal('Error: hex string must have 0x prefix (arg="value", value="aA5CBc1eB612e9A6FB7DCA72f559c8BC3a63F510")');
+  });
+  it('should return an error when callback has the wrong datatype', () => {
+    transaction.callback = 2;
+    transaction.to = '0xaA5CBc1eB612e9A6FB7DCA72f559c8BC3a63F510';
+    const signature = signatureCalculator.calculate();
+    expect(signature).to.equal('TypeError: "value" argument must not be a number');
+  });
+  it('should return an error when name has the wrong datatype', () => {
+    transaction.name = 2;
+    transaction.callback = 'asd';
+    transaction.to = '0xaA5CBc1eB612e9A6FB7DCA72f559c8BC3a63F510';
+    const signature = signatureCalculator.calculate();
+    expect(signature).to.equal('TypeError: "value" argument must not be a number');
   });
 });
