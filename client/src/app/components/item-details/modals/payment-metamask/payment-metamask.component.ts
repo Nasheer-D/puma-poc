@@ -73,7 +73,7 @@ export class PaymentMetamaskComponent {
 
   public buyWithMetaMask(): void {
     if (!this.web3Service.hasMetaMask) {
-      alert('No Metamask Injected - Please download metamask');
+      console.log('No Metamask Injected - Please download metamask');
       return;
     }
     this.transactionService.sendTransactionStatus(this.sessionID, '', 0).subscribe(st => {

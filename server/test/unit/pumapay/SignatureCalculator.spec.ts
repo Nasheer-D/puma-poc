@@ -4,9 +4,9 @@ import { SignatureDecoder } from '../../../src/utils/testHelpers/SignatureDecode
 
 const expect = chai.expect;
 const transaction: any = {
-  callback: 'asd',
-  description: 'asd',
-  name: 'asd',
+  callback: 'test_Callback',
+  description: 'test_Description',
+  name: 'test_Name',
   networkID: 3,
   to: '0xaA5CBc1eB612e9A6FB7DCA72f559c8BC3a63F510',
   value: 12

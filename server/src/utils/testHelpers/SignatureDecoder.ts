@@ -1,9 +1,8 @@
 import * as ethers from 'ethers';
 
 export class SignatureDecoder {
-
     public decrypt = (transaction: any) => {
-        const bla = Buffer.from(
+        const hash = Buffer.from(
             ethers.utils
                 .solidityKeccak256(
                     ['bytes', 'bytes', 'bytes', 'uint256', 'address', 'uint256'],
@@ -20,7 +19,7 @@ export class SignatureDecoder {
             'hex'
         );
         const digest = ethers.utils.keccak256(Buffer.concat([new Buffer('\x19Ethereum Signed Message:\n'),
-        new Buffer(String(bla.length)), bla]));
+        new Buffer(String(hash.length)), hash]));
         const sig = this.extractEcdsaSignature(transaction.signature);
         return ethers.SigningKey.recover(digest, sig.r, sig.s, this.getRecIdFromV(sig.v)).toLowerCase();
     }
