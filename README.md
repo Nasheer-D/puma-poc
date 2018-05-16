@@ -1,4 +1,4 @@
-![alt text](diagrams/pumapay01.png "PumaPay")
+![PumaPay Logo](diagrams/pumapay02.png "PumaPay")
 
 
 # Proof of Concept for PumaPay
