@@ -104,7 +104,7 @@ export class PaymentMetamaskComponent {
       });
     });
   }
-  // the folloring functions change their values according to the status received from the
+  // the following functions change their values according to the status received from the
   // webSocket to display the transaction progress to the client
   public isInactiveRequest(): boolean {
     return this.sessionTransaction.status === -1;

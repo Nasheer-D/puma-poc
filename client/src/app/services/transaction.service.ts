@@ -9,7 +9,6 @@ import { ObserveOnSubscriber } from 'rxjs/operators/observeOn';
 
 @Injectable()
 export class TransactionService {
-
     private actionUrl: string;
 
     public constructor(private http: HttpClient) {
