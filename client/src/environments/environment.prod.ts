@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiHost: 'http://developers.pumapay.io:8080/',
+  apiHost: 'http://172.26.246.81:8080/',
   apiPrefix: 'api/v1/',
-  webSocketHost: 'http://developers.pumapay.io:8080/'
+  webSocketHost: 'http://172.26.246.81:8080/'
 };
