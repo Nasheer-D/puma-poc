@@ -1,7 +1,9 @@
 export class User {
   public userID: string;
-  public username: string;
+  public userName: string;
+  public emails: string;
   public salt: string;
   public hash: string;
-  public role: string;
+  public credits: number;
+  public registrationDate: number;
 }

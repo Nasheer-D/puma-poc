@@ -23,7 +23,12 @@
   margin: 10px 14px;
 }
 
-.login-submit {
+.login-btn {
+  width: 340px;
+  height: 44px;
+  justify-content: center;
+  justify-self: center;
+  margin-left: 29px;
   border-radius: 8px;
   margin-top: 10px;
   margin-right: 14px;
@@ -35,8 +40,16 @@
 
 .login-layout {
   size: 36px;
+  font-family: Heebo;
   color: #1E69F5;
   margin-left: 130px;
   margin-bottom: 50px;
   margin-top: 40px;
+}
+
+.signup-label {
+  font-family: Heebo;
+  font-size: 14px;
+  text-align: center;
+  color: #9c9c9c;
 }
