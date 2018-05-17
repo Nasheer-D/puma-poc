@@ -1,71 +1,85 @@
+![PumaPay Logo](diagrams/pumapay02.png "PumaPay")
+
+
 # Proof of Concept for PumaPay
 
+# Description
+The first version of the PumaPay SDK is now available for developers' use free of charge. Built around the features of the ERC20 token, this initial version of the PumaPay solution is an open-source protocol that flexibly integrates with any kind of merchant platform. This allows developers to either clone the entire project or use only parts of it directly into their platform or edit it as it may suit the merchant's needs. While this only facilitates a crypto-typical push action, the full-scale Pull protocol will come with a future version of this software.
+
+## Pumapay Payment Sequence Diagram
+![alt text](diagrams/UML_Diagram.png "Pumapay Payment UML Diagram")
 # Installation
 
-## Prerequisites
-
+### Prerequisites
 * [Install Node and NPM](https://www.npmjs.com/get-npm)
 * [Install Docker](https://docs.docker.com/engine/installation/)
 * [Angular-cli](https://github.com/angular/angular-cli) `npm install -g @angular/cli@latest`
 * For Windows in case it will not execute `npm install` correctly > `npm install -g windows-build-tools`
 
-### Configure Docker
+### Get started with Node
+1.  Clone this repo
+```git
+$ git clone https://github.com/pumapayio/puma-poc.git
+```
+2.  Change to project directory
 
-You need to share your C drive with docker. Go to `Docker > Settings > Shared Drives > Select C > Apply` - You will be asked to fill in your credentials.
-In case this doesn't work, follow [this guide](https://blogs.msdn.microsoft.com/stevelasker/2016/06/14/configuring-docker-for-windows-volumes/).
+```bash
+$ cd puma-poc
+```
+3.  Install the required packages
 
-## Get started
+```bash
+# from root
+$ cd ./server
+$ npm install
 
+$ cd ./client
+$ npm install
+```
+4. In Order to access the data you need a running instance of Postgres 
+    * DB: [Details](#usage) 
+
+5. Start client - from client ng serve
+
+6. Start server - from server npm start
+
+### Get started with Docker
 1.  Clone this repo
 
 ```git
 $ git clone https://github.com/pumapayio/puma-poc.git
 ```
-
 2.  Change to project directory
 
-```sh
-$ cd puma.poc
+```bash
+$ cd puma-poc
 ```
-
-3.  Install the required packages
-
-```npm
-$ npm install
-```
-
-or individually server and client
-
-```npm
-$ npm install-server
-$ npm install-client
-```
-
-4.  Build the docker containers
+3.  Build the docker containers
 
 ```docker
 $ docker-compose build
 ```
-
-5.  Start the application
+4.  Start the application
 
 ```docker
 $ docker-compose up -d
+ # to check the logs -- $ docker-compose logs -f
 ```
+#### Configure Docker Windows
+You need to share your C drive with docker. Go to `Docker > Settings > Shared Drives > Select C > Apply` - You will be asked to fill in your credentials.
+In case this doesn't work, follow [this guide](https://blogs.msdn.microsoft.com/stevelasker/2016/06/14/configuring-docker-for-windows-volumes/). Firewall needs to be paused in order for this to work properly.
 
-## PoC local development ports
-
+# Usage 
 * PoC Webpage : `http://localhost:4200`
 * Server: `http://localhost:8080`
 * DB:
-  * PGHOST=postgres
+    * PGHOST=postgres
     * PGUSER=local_user
     * PGPASSWORD=local_pass
     * PGDATABASE=local_puma_poc
-    * PGPORT=`http://localhost:5432`
+    * PGPORT=`http://localhost:5435` -- port specified in docker-compose.yml
 
 #### Clean up local development environment
-
 ```bash
 $ docker-compose down
 ## OR
@@ -76,53 +90,56 @@ $ docker rm <CONTAINER_ID> # remove the container with ID
 $ docker rm <CONTAINER_ID> -f # force remove the container with ID
 ```
 
-# Tests
-
-First you need to deploy the application locally - See [Local Deployment](#local-deployment)
+## Run Tests
+To run the test you need to deploy the application locally - See [Local Deployment](#local-deployment)
 Testing Suite:
 
 * [Mocha](https://mochajs.org/) - Test Framework
 * [Chai](http://www.chaijs.com/) - Assertion Library
 * [Supertest](https://github.com/visionmedia/supertest) - HTTP Testing
 
-## Run all tests
-
+#### Run all tests
 To run all the tests
 
 ```bash
 $ npm test
 ```
 
-## E2E Testing
-
+#### E2E Testing
 To run the E2E tests
 
 ```bash
+$ cd server
 $ npm run test-e2e
 ```
 
-## Unit Testing
-
+#### Unit Testing
 To run all the Unit tests
 
 ```bash
+$ cd server
 $ npm run test-unit
 ```
 
-To run individual unit test
+## Run individual test
 
 ```bash
-$ mocha -r ts-node/register path/to/unit/test
+$ cd server
+$ mocha -r ts-node/register path/to/test
 ```
 
-# API Documentation
-
+## API Documentation
 To see the specification of the APIs import [swagger.yml](./swagger.yml) at the [online swagger editor](https://editor.swagger.io)
 
+## Docker Useful Links
+You can find some more info about docker [here](https://github.com/wsargent/docker-cheat-sheet) and [here](https://medium.com/statuscode/dockercheatsheet-9730ce03630d)
+
+# Credits 
+
+# License
+
 # Troubleshooting
-
 ### Docker containers failed to start
-
 In case of the error below when starting the docker containers, you should quit docker from the taskbar and start it again
 
 ```
@@ -130,78 +147,10 @@ ERROR: for pumaapi_pp_io_dev_1  Cannot start service pp_io_dev: driver failed pr
 ```
 
 ### Docker Shared Volumes - Not working as expected
-
 In case of the error below when starting the docker containers, you should go to Docker Settings from the taskbar > Shared Drives > UnShare and Share the C drive for this to work. Keep in mind that your firewall should be disabled during this process.
 
 ```
- psql:/docker-entrypoint-initdb.d/20-create-io-tables.sql:0: could not read from input file: Is a directory
-```
-
-# Docker Useful Links
-
-You can find some more info about docker [here](https://github.com/wsargent/docker-cheat-sheet) and [here](https://medium.com/statuscode/dockercheatsheet-9730ce03630d)
-
-#### Other Useful docker commands
-
-* Build Docker images
-
-```docker
-# for all containers
-docker-compose build
-# or for a specific container
-docker-compose build <CONTAINER_NAME>
-```
-
-* Start Docker containers
-
-```docker
-# for all containers
-docker-compose up -d  
-# or for a specific container
-docker-compose up -d <CONTAINER_NAME>
-```
-
-* See Docker containers
-
-```docker
-# only running containers
-docker ps
-# all containers
-docker ps -a
-```
-
-* Remove Docker containers
-
-```docker
-# specific container
-docker rm <CONTAINER_ID>
-# all containers
-docker rm $(docker ps -a -q)
-# add -f at the end to force container removal
-```
-
-* See Docker images
-
-```docker
-docker images
-```
-
-* Remove Docker images
-
-```docker
-# specific image
-docker rmi <IMAGE_ID>
-# all unused images
-docker images prune
-```
-
-* See Docker container logs
-
-```docker
-# for all containers
-docker-compose logs -f
-# or for a specific container
-docker-compose logs -f <CONTAINER_NAME>
+ psql:/docker-entrypoint-initdb.d/20-create-poc-tables.sql:0: could not read from input file: Is a directory
 ```
 
 # Description
