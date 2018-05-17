@@ -40,6 +40,7 @@ export class Web3Service {
 
       this.eth = new Eth(this.web3.currentProvider);
       const contract = new EthContract(this.eth);
+      // create the abi
       const abi = [{
         'constant': false,
         'inputs': [
@@ -62,21 +63,25 @@ export class Web3Service {
         'payable': false,
         'type': 'function'
       }];
+      // transfer the ERC20 token value to a specific address
       const ERC20Transfer = contract(abi);
       this.token = ERC20Transfer.at('0x11c1e537801cc1c37ad6e1b7d0bdc0e00fcc6dc1');
     }
   }
 
   public sentTransaction(to: string, value: string): Observable<any> {
+    // return an error if metamask does not exist
     if (!this.hasMetaMask) {
       throw Error('No MetaMask');
     }
 
+    // transfer the token to the selected address
     return Observable.fromPromise(this.token.transfer(to, value,
       { from: this.web3.currentProvider.publicConfigStore.getState().selectedAddress }));
   }
 
   public getTransactionStatus(txhash: string): Observable<any> {
+    // wait 5 secs and return the transaction hash using getTransactionReceipt
     return Observable.timer(0, 5000).switchMap((i) => {
       return Observable.fromPromise(this.eth.getTransactionReceipt(txhash));
     });

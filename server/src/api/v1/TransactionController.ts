@@ -3,15 +3,8 @@ import { LoggerInstance } from 'winston';
 import { LoggerFactory } from '../../utils/logger';
 import { Container } from 'typedi';
 import { v1 } from 'uuid';
-
-import {
-  IResponseMessage,
-  ResponseHandler
-} from '../../utils/responseHandler/ResponseHandler';
-import {
-  TransactionBuilder,
-  Transaction
-} from '../../domain/transactions/models/Transaction';
+import { IResponseMessage, ResponseHandler } from '../../utils/responseHandler/ResponseHandler';
+import { TransactionBuilder, Transaction } from '../../domain/transactions/models/Transaction';
 import { ISqlQuery, DataService } from '../../datasource/DataService';
 import { Session, TxStatus } from '../../domain/sessions/models/Session';
 import { Globals } from '../../globals';
@@ -159,7 +152,6 @@ export class TransactionController {
     }
   }
 }
-
 export interface ITransactionRequest {
   description: string;
   name: string;
