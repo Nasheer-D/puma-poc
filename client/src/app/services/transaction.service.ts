@@ -17,7 +17,7 @@ export class TransactionService {
     }
 
     public initiateTransactionSession(): Observable<any> {
-        // this function makes a call to the init/ API that returns the session id ans initiates the transaction process
+        // this function makes a call to the init/ API that returns the session id and initiates the transaction process
         return new HttpGetRequest(this.http, `${this.actionUrl}init`).getResult();
     }
 
