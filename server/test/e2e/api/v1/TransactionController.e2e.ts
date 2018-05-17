@@ -139,9 +139,9 @@ describe('A TransactionController', () => {
             expect(body.data[0]).to.have.property('description').that.is.equal(testItem.description);
             expect(body.data[0]).to.have.property('name').that.is.equal(testItem.title);
             expect(body.data[0]).to.have.property('value').that.is.equal(unit.convert(testItem.price, 'eth', 'wei'));
-            expect(body.data[0]).to.have.property('to');
-            expect(body.data[0]).to.have.property('callback');
-            expect(body.data[0]).to.have.property('signature');
+            expect(body.data[0]).to.have.property('to').that.is.equal('0xb344ec617313d90331285E33cF4168DDb5C91B21');
+            expect(body.data[0]).to.have.property('callback').that.is.equal(`http://172.26.246.81:8080/${endpoint}/txStatus/session/${sessionID}`);
+            expect(body.data[0]).to.have.property('signature').that.is.equal('0x2b12a7855ad66c6cc26d148cd67bf7eb66f0a1e5abe75ff73864bbb5158a899c0f0db6ff86a29f870a9cb67820d0a1ce84afc56b862b344008572bcce33a9ddb01');
             done(err);
           });
       })
@@ -154,9 +154,9 @@ describe('A TransactionController', () => {
             expect(body).to.have.property('description').that.is.equal(testItem.description);
             expect(body).to.have.property('name').that.is.equal(testItem.title);
             expect(body).to.have.property('value').that.is.equal(unit.convert(testItem.price, 'eth', 'wei'));
-            expect(body).to.have.property('to');
-            expect(body).to.have.property('callback');
-            expect(body).to.have.property('signature');
+            expect(body).to.have.property('to').that.is.equal('0xb344ec617313d90331285E33cF4168DDb5C91B21');
+            expect(body).to.have.property('callback').that.is.equal(`http://172.26.246.81:8080/${endpoint}/txStatus/session/${sessionID}`);
+            expect(body).to.have.property('signature').that.is.equal('0x2b12a7855ad66c6cc26d148cd67bf7eb66f0a1e5abe75ff73864bbb5158a899c0f0db6ff86a29f870a9cb67820d0a1ce84afc56b862b344008572bcce33a9ddb01');
             done(err);
           });
       })
@@ -340,9 +340,6 @@ describe('A TransactionController', () => {
             done(err);
           });
       });
-    });
-
-    describe('should return errors of tx hash', async () => {
       it('should return error message when tx hash has wrong length', (done: any) => {
         const transactionHash = '0x5b5a5641b918b2d22143cc2f2a6b3b21f30e09bbb13fbd414304becb4ba1cdf01';
         const expectedResponse: IResponseMessage = {
