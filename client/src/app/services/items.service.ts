@@ -11,7 +11,7 @@ export class ItemsService {
   private actionUrl: string;
 
   public constructor(private http: HttpClient) {
-    this.actionUrl = `${Constants.apiHost}${Constants.apiPrefix}items`;
+    this.actionUrl = `${Constants.apiHost}${Constants.apiPrefix}items/`;
   }
 
   public getAllItems() {
@@ -21,7 +21,7 @@ export class ItemsService {
   public getItemByID(itemID: string): Observable<any> {
     return new HttpGetRequest(
       this.http,
-      this.actionUrl + `/${itemID}`
+      this.actionUrl + itemID
     ).getResult();
   }
 }

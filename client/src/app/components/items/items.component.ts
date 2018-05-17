@@ -28,9 +28,11 @@ export class ItemsComponent implements OnInit {
     private router: Router,
     private itemsService: ItemsService,
     private orderPipe: OrderPipe
-  ) {}
+  ) { }
 
   public ngOnInit() {
+    localStorage.removeItem('sessionID');
+    localStorage.removeItem('itemID');
     this.itemsService.getAllItems().subscribe((res: HttpResponse) => {
       if (res.success) {
         this.items = res.data;
@@ -45,6 +47,7 @@ export class ItemsComponent implements OnInit {
     this.router.navigate(['item/', itemID]);
   }
 
+  // TODO: refactor
   public orderByDate() {
     this.sortedItems = this.orderPipe.transform(
       this.unsortedItems,

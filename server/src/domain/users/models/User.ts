@@ -1,5 +1,4 @@
 // tslint:disable:variable-name
-
 import * as crypto from 'crypto';
 import { Password } from '../../../utils/authentication/Password';
 import * as shortid from 'shortid';

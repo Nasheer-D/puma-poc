@@ -1,8 +1,9 @@
 import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 import * as supertest from 'supertest';
-import { IQueryMessage, ISqlQuery, DataService } from '../../../../src/datasource/DataService';
+import { ISqlQuery, DataService } from '../../../../src/datasource/DataService';
 import { Item } from '../../../../src/domain/items/models/Item';
+import { IResponseMessage } from '../../../../src/utils/responseHandler/ResponseHandler';
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
@@ -51,8 +52,8 @@ describe('An ItemsController', () => {
             await deleteTestData();
         });
 
-        it('should return an array of items', () => {
-            const expectedQueryMessage: IQueryMessage = {
+        it('should return an array of items', (done) => {
+            const expectedQueryMessage: IResponseMessage = {
                 success: true,
                 status: 'OK',
                 message: 'SQL Query completed successful.',
@@ -65,26 +66,27 @@ describe('An ItemsController', () => {
                 .end((err: Error, res: any) => {
                     const body = res.body;
                     const numberOfItems = body.data.length;
-                    expect(Promise.resolve(body)).to.eventually.have.property('success').that.is.equal(expectedQueryMessage.success);
-                    expect(Promise.resolve(body)).to.eventually.have.property('status').that.is.equal(expectedQueryMessage.status);
-                    expect(Promise.resolve(body)).to.eventually.have.property('message').that.is.equal(expectedQueryMessage.message);
-                    expect(Promise.resolve(body)).to.eventually.have.property('data').to.be.an('array');
-                    expect(Promise.resolve(body.data[numberOfItems - 1])).to.eventually.have.property('itemID').that.is.equal(testItem.itemID);
-                    expect(Promise.resolve(body.data[numberOfItems - 1])).to.eventually.have.property('ownerID').that.is.equal(testItem.ownerID);
-                    expect(Promise.resolve(body.data[numberOfItems - 1])).to.eventually.have.property('title').that.is.equal(testItem.title);
-                    expect(Promise.resolve(body.data[numberOfItems - 1])).to.eventually.have.property('description').that.is.equal(testItem.description);
-                    expect(Promise.resolve(body.data[numberOfItems - 1])).to.eventually.have.property('price').that.is.equal(testItem.price);
-                    expect(Promise.resolve(body.data[numberOfItems - 1])).to.eventually.have.property('size').that.is.equal(testItem.size);
-                    expect(Promise.resolve(body.data[numberOfItems - 1])).to.eventually.have.property('licence').that.is.equal(testItem.licence);
-                    expect(Promise.resolve(body.data[numberOfItems - 1])).to.eventually.have.property('itemUrl').that.is.equal(testItem.itemUrl);
-                    expect(Promise.resolve(body.data[numberOfItems - 1])).to.eventually.have.property('uploadedDate').that.is.equal(String(testItem.uploadedDate));
-                    expect(Promise.resolve(body.data[numberOfItems - 1])).to.eventually.have.property('tags').to.be.an('array');
-                    expect(Promise.resolve(body.data[numberOfItems - 1])).to.eventually.have.property('rating').to.be.an('array');
+                    expect(body).to.have.property('success').that.is.equal(expectedQueryMessage.success);
+                    expect(body).to.have.property('status').that.is.equal(expectedQueryMessage.status);
+                    expect(body).to.have.property('message').that.is.equal(expectedQueryMessage.message);
+                    expect(body).to.have.property('data').to.be.an('array');
+                    expect(body.data[numberOfItems - 1]).to.have.property('itemID').that.is.equal(testItem.itemID);
+                    expect(body.data[numberOfItems - 1]).to.have.property('ownerID').that.is.equal(testItem.ownerID);
+                    expect(body.data[numberOfItems - 1]).to.have.property('title').that.is.equal(testItem.title);
+                    expect(body.data[numberOfItems - 1]).to.have.property('description').that.is.equal(testItem.description);
+                    expect(body.data[numberOfItems - 1]).to.have.property('price').that.is.equal(testItem.price);
+                    expect(body.data[numberOfItems - 1]).to.have.property('size').that.is.equal(testItem.size);
+                    expect(body.data[numberOfItems - 1]).to.have.property('licence').that.is.equal(testItem.licence);
+                    expect(body.data[numberOfItems - 1]).to.have.property('itemUrl').that.is.equal(testItem.itemUrl);
+                    expect(body.data[numberOfItems - 1]).to.have.property('uploadedDate').that.is.equal(String(testItem.uploadedDate));
+                    expect(body.data[numberOfItems - 1]).to.have.property('tags').to.be.an('array');
+                    expect(body.data[numberOfItems - 1]).to.have.property('rating').to.be.an('array');
+                    done(err);
                 });
         });
 
-        it('should get an item by ID', () => {
-            const expectedQueryMessage: IQueryMessage = {
+        it('should get an item by ID', (done) => {
+            const expectedQueryMessage: IResponseMessage = {
                 success: true,
                 status: 'OK',
                 message: 'SQL Query completed successful.',
@@ -95,43 +97,44 @@ describe('An ItemsController', () => {
                 .get(`${endpoint}${testItem.itemID}`)
                 .end((err: Error, res: any) => {
                     const body = res.body;
-                    expect(Promise.resolve(res)).to.eventually.have.property('status').that.is.equal(200);
-                    expect(Promise.resolve(body)).to.eventually.have.property('success').that.is.equal(expectedQueryMessage.success);
-                    expect(Promise.resolve(body)).to.eventually.have.property('status').that.is.equal(expectedQueryMessage.status);
-                    expect(Promise.resolve(body)).to.eventually.have.property('message').that.is.equal(expectedQueryMessage.message);
-                    expect(Promise.resolve(body)).to.eventually.have.property('data').to.be.an('array');
-                    expect(Promise.resolve(body.data[0])).to.eventually.have.property('itemID').that.is.equal(testItem.itemID);
-                    expect(Promise.resolve(body.data[0])).to.eventually.have.property('ownerID').that.is.equal(testItem.ownerID);
-                    expect(Promise.resolve(body.data[0])).to.eventually.have.property('title').that.is.equal(testItem.title);
-                    expect(Promise.resolve(body.data[0])).to.eventually.have.property('description').that.is.equal(testItem.description);
-                    expect(Promise.resolve(body.data[0])).to.eventually.have.property('price').that.is.equal(testItem.price);
-                    expect(Promise.resolve(body.data[0])).to.eventually.have.property('size').that.is.equal(testItem.size);
-                    expect(Promise.resolve(body.data[0])).to.eventually.have.property('licence').that.is.equal(testItem.licence);
-                    expect(Promise.resolve(body.data[0])).to.eventually.have.property('itemUrl').that.is.equal(testItem.itemUrl);
-                    expect(Promise.resolve(body.data[0])).to.eventually.have.property('uploadedDate').that.is.equal(String(testItem.uploadedDate));
-                    expect(Promise.resolve(body.data[0])).to.eventually.have.property('tags').to.be.an('array');
-                    expect(Promise.resolve(body.data[0])).to.eventually.have.property('rating').to.be.an('array');
+                    expect(res).to.have.property('status').that.is.equal(200);
+                    expect(body).to.have.property('success').that.is.equal(expectedQueryMessage.success);
+                    expect(body).to.have.property('status').that.is.equal(expectedQueryMessage.status);
+                    expect(body).to.have.property('message').that.is.equal(expectedQueryMessage.message);
+                    expect(body).to.have.property('data').to.be.an('array');
+                    expect(body.data[0]).to.have.property('itemID').that.is.equal(testItem.itemID);
+                    expect(body.data[0]).to.have.property('ownerID').that.is.equal(testItem.ownerID);
+                    expect(body.data[0]).to.have.property('title').that.is.equal(testItem.title);
+                    expect(body.data[0]).to.have.property('description').that.is.equal(testItem.description);
+                    expect(body.data[0]).to.have.property('price').that.is.equal(testItem.price);
+                    expect(body.data[0]).to.have.property('size').that.is.equal(testItem.size);
+                    expect(body.data[0]).to.have.property('licence').that.is.equal(testItem.licence);
+                    expect(body.data[0]).to.have.property('itemUrl').that.is.equal(testItem.itemUrl);
+                    expect(body.data[0]).to.have.property('uploadedDate').that.is.equal(String(testItem.uploadedDate));
+                    expect(body.data[0]).to.have.property('tags').to.be.an('array');
+                    expect(body.data[0]).to.have.property('rating').to.be.an('array');
+                    done(err);
                 });
         });
-    })
+    });
 
     describe('with no data response', () => {
         it('should return a message when the item with ID does not exist', (done: any) => {
-            const expectedQueryMessage: IQueryMessage = {
+            const expectedQueryMessage: IResponseMessage = {
                 success: false,
                 status: 'NO DATA',
                 message: 'SQL Query returned no data from database.'
             };
+
             server
                 .get(endpoint + 'item_id_not_exist')
                 .end((err: Error, res: any) => {
-                    console.log(res.status);
                     const body = res.body;
-                    expect(Promise.resolve(res)).to.eventually.have.property('status').that.is.equal(400);
-                    expect(Promise.resolve(body)).to.eventually.have.property('success').that.is.equal(expectedQueryMessage.success);
-                    expect(Promise.resolve(body)).to.eventually.have.property('status').that.is.equal(expectedQueryMessage.status);
-                    expect(Promise.resolve(body)).to.eventually.have.property('message').that.is.equal(expectedQueryMessage.message);
-                    done();
+                    expect(res).to.have.property('status').that.is.equal(400);
+                    expect(body).to.have.property('success').that.is.equal(expectedQueryMessage.success);
+                    expect(body).to.have.property('status').that.is.equal(expectedQueryMessage.status);
+                    expect(body).to.have.property('message').that.is.equal(expectedQueryMessage.message);
+                    done(err);
                 });
         });
     });

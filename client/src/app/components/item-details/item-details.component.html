@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="details-container">
   <div class="container-fluid">
-    <div class="row">
+    <div class="row mb-3">
       <a href="items" class="back-link"> &laquo; Back to search results</a>
     </div>
   </div>
@@ -17,28 +17,18 @@
           <label class="item-description">{{item.description}}</label>
         </div>
         <div class="col">
-          <label class="item-tags">{{item.tags}}</label>
+          <label class="item-tags" *ngFor="let tag of item.tags; let last = last">{{tag}}
+            <span *ngIf="!last">,&nbsp;</span>
+          </label>
         </div>
         <div class="col">
           <label class="item-price-label">This image price is:</label>
         </div>
         <div class="col">
           <label class="item-price">{{item.price | number: '1.2-2'}} PMA </label>
-          <!-- <label class="item-purchased" *ngIf="completedStatus == 2">Purchased</label> -->
         </div>
-        <!-- <div class="col">
-          <div class="border border-danger" *ngIf="showWarning == true && completedStatus == 2">
-            <button type="button" class="close" aria-label="Close" (click)="closeButton()">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <label class="warning-message">* Warning. This image going to dissapear when you'll leave this site.
-              <br> &nbsp;&nbsp; Send link to your email to save this image for later access.
-            </label>
-          </div>
-        </div> -->
         <div class="col">
           <button class="btn btn-primary" data-toggle="modal" (click)="openPurchaseOptionsModal()">Buy with one click</button>
-          <!-- <button class="btn btn-primary download-image" [ngClass]="{'btn-download-no-warning' : showWarning == false}" *ngIf="completedStatus == 2">Download image</button> -->
         </div>
       </div>
       <div class="item-info col-md-6">
@@ -58,7 +48,7 @@
           </label>
         </div>
       </div>
-      <div class="item-info col-md-6">
+      <div class="item-info col-lg-6">
         <div class="col">
           <label class="plain-text">Licence:
             <span class="value-color">{{item.licence}}</span>
@@ -74,4 +64,4 @@
     </div>
   </div>
 </div>
-<app-purchase-options #purchaseOptionModal [itemPrice]="item.price"></app-purchase-options>
+<app-purchase-options #purchaseOptionModal [itemPrice]="item.price" [itemID]="item.itemID" [txDataAsString]="txDataAsString"></app-purchase-options>

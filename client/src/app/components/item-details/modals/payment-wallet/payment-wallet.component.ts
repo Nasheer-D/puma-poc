@@ -7,69 +7,84 @@ import {
   EventEmitter
 } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
+import { TxStatusService } from '../../../../services/webSocket.service';
+import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
+import { TxStatus } from '../../../../models/Transaction';
 
 @Component({
   selector: 'app-payment-wallet',
   templateUrl: './payment-wallet.component.html',
   styleUrls: ['./payment-wallet.component.css']
 })
-export class PaymentWalletComponent implements OnInit {
-  @ViewChild('paymentWalletModal') paymentWalletModal: NgbModal;
-  @Input() itemPrice2: number;
-  @Input() transactionStatus: boolean;
-  disableElements: boolean;
+export class PaymentWalletModalComponent {
+  @ViewChild('paymentWalletModal')
+  public paymentWalletModal: NgbModal;
+  @Input()
+  public itemPrice: number;
+  @Input()
+  public txDataAsString: string;
 
-  @Input() activeRequest: boolean; // Request Container color
-  @Input() activeResponse: boolean; // Response Container color
-  @Input() activeStatus: boolean; // Status Container color
-  @Input() completedRequest: number; // [0,1,2] Pending,Loading,Success => Request
-  @Input() completedResponse: number; // [0,1,2] Pending, Loading, Success => Response
-  @Input() completedStatus: number; // [0,1,2,3] Pending, Loading, Success, Failed => Status
+  public sessionTransaction: any = {};
 
-  // @Output() private onPurchaseSuccess = new EventEmmiter();
 
-  constructor(private modal: NgbModal, private spinner: NgxSpinnerService) {
-    this.activeRequest = false;
-    this.activeResponse = false;
-    this.activeStatus = false;
-    this.disableElements = null;
-    this.completedRequest = 0;
-    this.completedResponse = 0;
-    this.completedStatus = 0;
-  }
-
-  // transactionCompleted() {
-  //   this.onPurchaseSuccess.emit(this.completedStatus);
-  // }
-
-  ngOnInit() {
-    setTimeout(() => {
-      // Request
-      this.disableElements = true;
-      this.activeRequest = true;
-      this.completedRequest = 1;
-      setTimeout(() => {
-        // Response
-        this.completedRequest = 2;
-        this.activeResponse = true;
-        this.completedResponse = 1;
-        setTimeout(() => {
-          // Status
-          this.completedResponse = 2;
-          this.activeStatus = true;
-          this.completedStatus = 1;
-          setTimeout(() => {
-            this.completedStatus = 2;
-            this.disableElements = null;
-          }, 2000);
-        }, 2000);
-      }, 2000);
-    }, 2000);
+  constructor(private modal: NgbModal, private spinner: NgxSpinnerService,
+    private txStatusService: TxStatusService) {
   }
 
   public open(): void {
+    this.sessionTransaction.status = -1;
+    const sessionID = localStorage.getItem('sessionID');
+    this.txStatusService.onTxStatusChange(sessionID).subscribe((response: HttpResponse) => {
+      if (response.success) {
+        this.sessionTransaction = response.data[0];
+      }
+    });
     this.modal.open(this.paymentWalletModal, { centered: true, size: 'lg' });
+  }
+
+  public isInactiveRequest(): boolean {
+    return this.sessionTransaction.status === -1;
+  }
+
+  public isPendingRequest(): boolean {
+    return this.sessionTransaction.status === 0;
+  }
+
+  public isClosedRequest(): boolean {
+    return this.sessionTransaction.status !== -1 && this.sessionTransaction.status !== 0;
+  }
+
+  public isInactiveResponse(): boolean {
+    return this.sessionTransaction.status === -1 || this.sessionTransaction.status === 0;
+  }
+
+  public isPendingResponse(): boolean {
+    return this.sessionTransaction.status === 1;
+  }
+
+  public isClosedResponse(): boolean {
+    return this.sessionTransaction.status !== -1 && this.sessionTransaction.status !== 0 && this.sessionTransaction.status !== 1;
+  }
+
+  public isInactiveStatus(): boolean {
+    return this.sessionTransaction.status === -1 || this.sessionTransaction.status === 0 || this.sessionTransaction.status === 1;
+  }
+
+  public isPendingStatus(): boolean {
+    return this.sessionTransaction.status === 2;
+  }
+
+  public isSucccessfulStatus(): boolean {
+    return this.sessionTransaction.status === 2;
+  }
+
+  public isFailedStatus(): boolean {
+    return this.sessionTransaction.status === 3;
+  }
+
+  public isCancelledStatus(): boolean {
+    return this.sessionTransaction.status === 4;
   }
 }

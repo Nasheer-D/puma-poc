@@ -1,0 +1,118 @@
+<ng-template #paymentMetamaskModal let-d="dismiss" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content options-modal">
+      <div class="container modal-header">
+        <div class="row close-button">
+          <button type="button" class="close" aria-label="Close" (click)="d()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="row col-md-12">
+          <div class="col-lg-12">
+            <label class="modal-credits">You choose
+              <b>{{itemPrice | number: '1.2-2'}} PumaPay</b> tokens.</label>
+          </div>
+          <div class="col-lg-12">
+            <label class="title-name">Continue with metamask</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="container transaction-tool">
+          <div class="row">
+            <div class="container options-container col-md">
+              <div class="col modal-email" *ngIf="isSucccessfulStatus()">
+                <label>Connect with your
+                  <a href="https://outlook.live.com/owa/?authRedirect=true">email </a> to save this image for later access.</label>
+              </div>
+              <div class="container">
+                <div class="container image-container-modal">
+                  <img class="option-picture" src="../../../../../assets/images/metamask.png" alt="metamask">
+                </div>
+                <div *ngIf="!hasMetamask" class="col install-metamask">
+                  <label>You need the MetaMask browser add-on</label>
+                </div>
+                <div *ngIf="!hasMetamask" class="col modal-btn">
+                  <a class="modal-show-code btn btn-primary" href="https://metamask.io" target="_blank">Install Metamask</a>
+                </div>
+                <div class="col modal-btn">
+                  <button class="modal-show-code btn btn-primary" (click)="buyWithMetaMask()" *ngIf="hasMetamask">Initiate transaction</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="container transaction-progress-container">
+                <div class="row">
+                  <div class="container transaction-progress" [ngClass]="{'inactive-background-color': isInactiveRequest()}">
+                    <div class="row">
+                      <div class="col-sm-9">
+                        <label class="transaction-text" [ngClass]="{'transaction-text-inactive': isInactiveRequest()}">Sending transaction request</label>
+                        <div class="span status" *ngIf="isInactiveRequest()">Waiting</div>
+                        <div class="span status" *ngIf="isPendingRequest()">In Progress...</div>
+                        <div class="span status" *ngIf="isClosedRequest()">Complete</div>
+                      </div>
+                      <div class="col-sm-3">
+                        <label class="number-layout" *ngIf="isInactiveRequest()">1</label>
+                        <app-loading-spinner *ngIf="isPendingRequest()"></app-loading-spinner>
+                        <img src="../../../../../assets/images/success-btn.png" class="image-size-success" *ngIf="isClosedRequest()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="container transaction-progress" [ngClass]="{'inactive-background-color': isInactiveResponse()}">
+                    <div class="row">
+                      <div class="col-sm-9">
+                        <label class="transaction-text" [ngClass]="{'transaction-text-inactive': isInactiveResponse()}">Transaction response</label>
+                        <div class="span status" *ngIf="isInactiveResponse()">Waiting</div>
+                        <div class="span status" *ngIf="isPendingResponse()">In Progress...</div>
+                        <div class="span status" *ngIf="isClosedResponse()">Complete</div>
+                      </div>
+                      <div class="col-sm-3">
+                        <label class="number-layout" *ngIf="isInactiveResponse()">2</label>
+                        <app-loading-spinner *ngIf="isPendingResponse()"></app-loading-spinner>
+                        <img src="../../../../../assets/images/success-btn.png" class="image-size-success" *ngIf="isClosedResponse()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="container transaction-progress" [ngClass]="{'inactive-background-color': isInactiveStatus(), 
+                  'border-failed-transaction': isFailedStatus() || isCancelledStatus(), 
+                  'border-succesfull-transaction': isSucccessfulStatus()}">
+                    <div class="row">
+                      <div class="col-sm-9">
+                        <label class="transaction-text" [ngClass]="{'transaction-text-inactive': isInactiveStatus()}">Transaction status</label>
+                        <div class="span status" *ngIf="isInactiveStatus()">Waiting</div>
+                        <div class="span status" *ngIf="isSucccessfulStatus()">Transation has been approved!</div>
+                        <div class="span status" *ngIf="isFailedStatus()">Transation was failed.Try again.</div>
+                        <div class="span status" *ngIf="isCancelledStatus()">Transation was cancelled.Try again.</div>
+                      </div>
+                      <div class="col-sm-3">
+                        <label class="number-layout" *ngIf="isInactiveStatus()">3</label>
+                        <img src="../../../../../assets/images/success-btn.png" class="image-size-success" *ngIf="isSucccessfulStatus()">
+                        <img src="../../../../../assets/images/fail-btn.png" class="image-size-fail" *ngIf="isFailedStatus() || isCancelledStatus()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <button class="btn btn-outline-primary btn-layout">See your balance</button>
+                  </div>
+                  <div class="col-sm-6">
+                    <button class="btn btn-primary btn-layout" (click)="d()" *ngIf="isInactiveStatus()">Back to image</button>
+                    <button class="btn btn-primary btn-layout" (click)="d()" *ngIf="isSucccessfulStatus()">Download Image</button>
+                    <button class="btn btn-primary btn-layout" (click)="d()" *ngIf="isFailedStatus() || isCancelledStatus()">Try Again</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -4,4 +4,5 @@ import { environment } from '../environments/environment';
 export class Constants {
     public static apiHost: string = environment.apiHost;
     public static apiPrefix: string = environment.apiPrefix;
+    public static webSocketHost: string = environment.webSocketHost;
 }

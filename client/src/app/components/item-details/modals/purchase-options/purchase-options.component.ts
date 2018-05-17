@@ -1,6 +1,12 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PaymentWalletComponent } from '../../../../components/item-details/modals/payment-wallet/payment-wallet.component';
+import { TransactionService } from '../../../../services/transaction.service';
+import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
+import { TransactionData } from '../../../../models/Transaction';
+import { PaymentWalletModalComponent } from '../payment-wallet/payment-wallet.component';
+import { Constants } from '../../../../app.constants';
+import { PaymentMetamaskComponent } from '../payment-metamask/payment-metamask.component';
+
 
 @Component({
   selector: 'app-purchase-options',
@@ -8,18 +14,39 @@ import { PaymentWalletComponent } from '../../../../components/item-details/moda
   styleUrls: ['./purchase-options.component.css']
 })
 export class PurchaseOptionsModalComponent {
-  @ViewChild('purchaseOptionModal') purchaseOptionModal: NgbModal;
-  @Input() itemPrice: number;
+  @ViewChild('purchaseOptionModal')
+  public purchaseOptionModal: NgbModal;
   @ViewChild('paymentWalletModal')
-  public paymentWalletModal: PaymentWalletComponent;
+  public paymentWalletModal: PaymentWalletModalComponent;
+  @ViewChild('paymentMetamaskModal')
+  public paymentMetamaskModal: PaymentMetamaskComponent;
 
-  constructor(private modal: NgbModal) {}
+  @Input()
+  public itemPrice: number;
+  @Input()
+  public itemID: string;
+  @Input()
+  public txDataAsString: string;
+
+  public txData: TransactionData;
+
+  public constructor(private modal: NgbModal,
+    private transactionService: TransactionService) {
+  }
 
   public open(): void {
     this.modal.open(this.purchaseOptionModal, { centered: true, size: 'lg' });
   }
 
-  public openPaymentWalletModal() {
+  public openPaymentWalletModal(): void {
     this.paymentWalletModal.open();
+  }
+
+  public openPaymentMetamaskModal(): void {
+    const sessionID = localStorage.getItem('sessionID');
+    this.transactionService.getTxDetails(sessionID, this.itemID).subscribe((httpResonse: HttpResponse) => {
+      this.txData = httpResonse.data[0];
+      this.paymentMetamaskModal.open();
+    });
   }
 }

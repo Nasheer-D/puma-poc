@@ -1,0 +1,228 @@
+/*Modal size*/
+
+.modal-dialog {
+  height: auto;
+  max-width: 1000px;
+  border-radius: 15px;
+  margin: 0;
+}
+
+.modal-credits {
+  color: black;
+  font-size: 16px;
+  font-family: Heebo;
+}
+
+.modal-description {
+  font-family: Heebo;
+  font-size: 26px;
+  color: black;
+  text-align: center;
+}
+
+.modal-scan-qr {
+  font-family: Heebo;
+  font-size: 16px;
+  color: black;
+  text-align: center;
+}
+
+.modal-email {
+  font-family: Heebo;
+  font-size: 16px;
+  color: black;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.modal-email > label {
+  margin-bottom: 0;
+}
+
+.modal-link {
+  font-family: Heebo;
+  font-size: 14px;
+  color: #9c9c9c;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.title-name {
+  color: #1e69f5;
+  font-size: 36px;
+  font-family: Heebo;
+  margin-bottom: 10px;
+}
+
+/*Styles the modal(border,background etc) */
+
+.options-modal {
+  background-color: rgba(0, 0, 0, 0.15);
+  align-content: center;
+  border-radius: 15px;
+}
+
+.modal-header {
+  border: 0px;
+  text-align: center;
+  object-position: center;
+}
+
+.options-container {
+  border-radius: 15px;
+  border: 1px white solid;
+  background-color: white;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.15);
+  offset-block-end: 0px, 5px;
+  margin: 10px 14px;
+  max-width: 680px;
+  height: 420px;
+  border-radius: 15px;
+  padding: 0px;
+}
+
+.modal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-picture {
+  width: 180px;
+  height: 110px;
+}
+
+.image-container-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 80px;
+  margin-bottom: 65px;
+}
+
+.app-store-apple {
+  height: 35px;
+  width: 105px;
+  margin-bottom: 15px;
+}
+
+.app-store-google {
+  height: 52px;
+  width: 120px;
+  margin-bottom: 15px;
+}
+
+.download-option-image {
+  border: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-button {
+  position: absolute;
+  right: 35px;
+  top: 8px;
+}
+
+.modal-show-code {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.btn-layout {
+  margin-top: 12px;
+  margin-right: 5px;
+  border-radius: 8px;
+  width: 140px;
+}
+
+.transaction-progress-container {
+  border-radius: 15px;
+  offset-block-end: 0px, 5px;
+  margin: 0px;
+  max-width: 680px;
+  border-radius: 15px;
+  padding: 0px;
+}
+
+.transaction-progress {
+  border-radius: 15px;
+  border: 1px white solid;
+  background-color: white;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.15);
+  offset-block-end: 0px, 5px;
+  margin: 10px 14px;
+  border-radius: 15px;
+  max-width: 680px;
+  padding: 20px;
+}
+
+.transaction-text {
+  font-family: Heebo;
+  font-size: 16px;
+  color: black;
+  text-align: left;
+}
+
+.transaction-text-inactive {
+  color: #adadad;
+}
+
+.status {
+  color: #9c9c9c;
+  font-family: Heebo;
+  font-size: 14px;
+  text-align: left;
+}
+
+.inactive-background-color {
+  background-color: #ededed;
+  border-color: #ededed;
+}
+
+.number-layout {
+  font-size: 36px;
+  color: #d4d4d4;
+  font-family: Heebo;
+}
+
+.image-size-success {
+  height: 30px;
+  width: 30px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.border-succesfull-transaction {
+  border-color: #2cc93c;
+  border-width: 2px;
+}
+
+.border-failed-transaction {
+  border-color: #e01a0d;
+  border-width: 2px;
+}
+
+.image-size-fail {
+  height: 30px;
+  width: 30px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.qr-container {
+  width: 50%;
+  margin: 1rem auto;
+}
+
+qr-code>img {
+  width: 100%;
+}
+
+.install-metamask{
+  font-family: Heebo;
+  font-size: 16px;
+  color: black;
+  text-align: center;
+}

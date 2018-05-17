@@ -13,6 +13,7 @@ services:
       - PGPASSWORD=local_pass
       - PGDATABASE=local_puma_poc
       - PGPORT=5432
+      - BACKEND_HOST=http://172.26.246.81:8080/
     volumes:
       - ./server/src:/usr/src/app/src
       - ./server/tsconfig.json:/usr/src/app/tsconfig.json
@@ -28,12 +29,12 @@ services:
   client:
     build: client
     ports:
-        - "4200:4200"
-        - "49153:49153"
+      - "4200:4200"
+      - "49153:49153"
     volumes:
-        - ./client/src:/usr/src/app/src
-        - ./client/angular-cli.json:/usr/src/app/angular-cli.json
-        - ./client/tslint.json:/usr/src/app/tslint.json
+      - ./client/src:/usr/src/app/src
+      - ./client/angular-cli.json:/usr/src/app/angular-cli.json
+      - ./client/tslint.json:/usr/src/app/tslint.json
     command: bash -c 'ng lint && ng serve --host 0.0.0.0 --poll 1000'
     networks:
       - puma_poc

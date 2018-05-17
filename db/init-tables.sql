@@ -1,4 +1,4 @@
-CREATE TABLE public.app_users
+CREATE TABLE IF NOT EXISTS public.app_users 
 (
     "userID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
     "userName" character varying(255) COLLATE pg_catalog."default" NOT NULL,
@@ -7,6 +7,7 @@ CREATE TABLE public.app_users
     hash char(128) NOT NULL,
     credits double precision NOT NULL,
     "registrationDate" bigint NOT NULL,
+    "walletAddress" character varying(255) COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT app_users_pkey PRIMARY KEY ("userID")
 )
 WITH (
@@ -17,7 +18,7 @@ TABLESPACE pg_default;
 ALTER TABLE public.app_users
     OWNER to local_user;
 
-CREATE TABLE public.items
+CREATE TABLE IF NOT EXISTS public.items
 (
     "itemID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
     "ownerID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
@@ -44,6 +45,22 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.items
+    OWNER to local_user;
+
+CREATE TABLE IF NOT EXISTS public.sessions
+(
+    "sessionID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    "txHash" character varying(255) COLLATE pg_catalog."default",
+    status integer NOT NULL,
+    "fromPumaWallet" boolean,
+    CONSTRAINT sessions_pkey PRIMARY KEY ("sessionID")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.sessions
     OWNER to local_user;
 
 -- THIS IS A TEST TABLE USED ONLY FOR DEVELOPMENT AND UNIT TEST REASONS

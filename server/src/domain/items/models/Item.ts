@@ -1,4 +1,3 @@
-// tslint:disable:variable-name
 export class Item {
   public itemID: string;
   public ownerID: string;
