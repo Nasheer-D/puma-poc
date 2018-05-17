@@ -58,14 +58,14 @@ export class PaymentMetamaskComponent {
       if (response.success) {
         this.txData = response.data[0];
       }
+      // get the tx status change
       this.txStatusService.onTxStatusChange(this.sessionID).subscribe((res: HttpResponse) => {
+        // if response is successful,get the tx session
         if (response.success) {
           this.sessionTransaction = res.data[0];
         }
       });
     });
-
-
     this.modal.open(this.paymentMetamaskModal, { centered: true, size: 'lg' });
   }
   // check if metamask exist
@@ -79,17 +79,21 @@ export class PaymentMetamaskComponent {
       console.log('No Metamask Injected - Please download metamask');
       return;
     }
+    // for tx status equal to 0 send the transaction
     this.transactionService.sendTransactionStatus(this.sessionID, '', 0).subscribe(st => {
       this.web3Service.sentTransaction(this.txData.to, this.txData.value).catch(err => {
+        // for tx status equal to 4 cancel the transaction
         this.transactionService.sendTransactionStatus(this.sessionID, '', 4).subscribe();
         return Observable.of();
       }).subscribe(tx => {
+        // for tx status equal to 1 get the receipt
         this.transactionService.sendTransactionStatus(this.sessionID, tx, 1).subscribe();
         const receiptSub = this.web3Service.getTransactionStatus(tx).subscribe(receipt => {
           if (receipt != null) {
             receiptSub.unsubscribe();
             // tslint:disable-next-line:triple-equals
-            if (receipt.status == 1) {
+            // if receipt.status equal to 1, set tx status to 1 otherwise set it to 3
+            if (receipt.status === 1) {
               this.transactionService.sendTransactionStatus(this.sessionID, tx, 2).subscribe();
             } else {
               this.transactionService.sendTransactionStatus(this.sessionID, tx, 3).subscribe();
@@ -99,7 +103,7 @@ export class PaymentMetamaskComponent {
       });
     });
   }
-  // the folloring functions change their values according to the status received from the
+  // the following functions change their values according to the status received from the
   // webSocket to display the transaction progress to the client
   public isInactiveRequest(): boolean {
     return this.sessionTransaction.status === -1;

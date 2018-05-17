@@ -70,7 +70,7 @@ export class Web3Service {
   }
 
   public sentTransaction(to: string, value: string): Observable<any> {
-     // return an error if metamask does not exist
+    // return an error if metamask does not exist
     if (!this.hasMetaMask) {
       throw Error('No MetaMask');
     }
