@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiHost: 'http://192.168.56.1:8080/', // use your local IP address to establish communication between the wallet and the server
+  apiHost: 'http://developers.pumapay.io:8080/', // use your local IP address to establish communication between the wallet and the server
   apiPrefix: 'api/v1/',
-  webSocketHost: 'http://192.168.56.1:8080' // use your local IP address to establish communication between the wallet and the server
+  webSocketHost: 'http://developers.pumapay.io:8080' // use your local IP address to establish communication between the wallet and the server
 };
