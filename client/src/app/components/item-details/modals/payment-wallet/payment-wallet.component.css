@@ -134,6 +134,7 @@
   margin-top: 12px;
   margin-right: 5px;
   border-radius: 8px;
+  width: 140px;
 }
 
 .transaction-progress-container {
@@ -154,7 +155,6 @@
   margin: 10px 14px;
   border-radius: 15px;
   max-width: 680px;
-  height: 100px;
   padding: 20px;
 }
 

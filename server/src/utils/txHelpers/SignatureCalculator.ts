@@ -6,10 +6,11 @@ import { LoggerFactory } from '../logger';
 import { Transaction } from '../../domain/transactions/models/Transaction';
 
 export class SignatureCalculator {
-    private logger: LoggerInstance = Container.get(LoggerFactory).getInstance('SignatureCalcuator');
+  private logger: LoggerInstance = Container.get(LoggerFactory).getInstance(
+    'SignatureCalcuator'
+  );
 
-    public constructor(private transaction: Transaction) {
-    }
+  public constructor(private transaction: Transaction) { }
 
     public calculate(): string {
         this.logger.info('Calculating Singature');
@@ -40,4 +41,5 @@ export class SignatureCalculator {
         //convert the signature parameters r,v,s into the format of eth signature RPC method using toRpcSig
         return utils.toRpcSig(sig.v, sig.r, sig.s);
     }
+  }
 }
