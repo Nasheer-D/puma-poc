@@ -41,7 +41,7 @@ export class AuthenticationService {
 
         // store username and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem(TOKEN_KEY, JSON.stringify({ token }));
-        localStorage.setItem(USER_KEY, JSON.stringify({ user }));
+        localStorage.setItem(USER_KEY, JSON.stringify( user ));
 
         return true;
       })

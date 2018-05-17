@@ -4,10 +4,16 @@
       <img class="header-image img-responsive" src="/assets/images/logo.png" alt="Logo">
       <label class="label-header">Pumapay</label>
     </div>
-    <div class="header-div-color">
+    <div class="header-div-color" *ngIf="this.user === null">
       <ul class="nav navbar-right">
         <a routerLink="/login" routerLinkActive="active" class="header-login">Login</a>&nbsp;/&nbsp;
         <a routerLink="/signUp" routerLinkActive="active" class="header-login">Sign up</a>
+      </ul>
+    </div>
+    <div class="header-div-color" *ngIf="this.user !== null">
+      <ul class="nav navbar-right">
+        <a class="header-login" href="login">{{ user.userName }}</a>&nbsp;/&nbsp;
+        <label class="header-login" href="login">Credits: {{user.credits | number: '1.2-2'}} - <span><a href="#">Get more</a></span></label>
       </ul>
     </div>
   </div>

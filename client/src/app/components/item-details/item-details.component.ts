@@ -35,6 +35,7 @@ export class ItemDetailsComponent implements OnInit {
         .getItemByID(itemID)
         .subscribe((response: HttpResponse) => {
           this.item = response.data[0];
+          console.log('check me:::', this.item);
           this.item.uploadedDate = this.item.uploadedDate * 1000; // convert timestamp in seconds to milliseconds
           this.transactionService.initiateTransactionSession().subscribe((res: HttpResponse) => {
             localStorage.setItem('sessionID', res.data[0].sessionID);
