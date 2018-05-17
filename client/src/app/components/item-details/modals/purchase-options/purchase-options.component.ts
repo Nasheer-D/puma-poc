@@ -7,7 +7,6 @@ import { PaymentWalletModalComponent } from '../payment-wallet/payment-wallet.co
 import { Constants } from '../../../../app.constants';
 import { PaymentMetamaskComponent } from '../payment-metamask/payment-metamask.component';
 
-
 @Component({
   selector: 'app-purchase-options',
   templateUrl: './purchase-options.component.html',
@@ -28,25 +27,17 @@ export class PurchaseOptionsModalComponent {
   @Input()
   public txDataAsString: string;
 
-  public txData: TransactionData;
-
-  public constructor(private modal: NgbModal,
-    private transactionService: TransactionService) {
-  }
+  public constructor(private modal: NgbModal) { }
 
   public open(): void {
     this.modal.open(this.purchaseOptionModal, { centered: true, size: 'lg' });
   }
-
+  // opens wallet modal
   public openPaymentWalletModal(): void {
     this.paymentWalletModal.open();
   }
-
+  // opens metamask modal
   public openPaymentMetamaskModal(): void {
-    const sessionID = localStorage.getItem('sessionID');
-    this.transactionService.getTxDetails(sessionID, this.itemID).subscribe((httpResonse: HttpResponse) => {
-      this.txData = httpResonse.data[0];
-      this.paymentMetamaskModal.open();
-    });
+    this.paymentMetamaskModal.open();
   }
 }
