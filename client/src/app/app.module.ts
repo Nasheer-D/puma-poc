@@ -27,6 +27,7 @@ import { ItemsService } from './services/items.service';
 import { TransactionService } from './services/transaction.service';
 import { TxStatusService } from './services/webSocket.service';
 import { Web3Service } from './services/web3.service';
+import { QrGeneratorService } from './services/qr-generator.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { Web3Service } from './services/web3.service';
     ItemsService,
     TransactionService,
     TxStatusService,
-    Web3Service
+    Web3Service,
+    QrGeneratorService
   ],
   bootstrap: [AppComponent]
 })

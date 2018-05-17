@@ -12,6 +12,7 @@ import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/load
 import { TxStatusService } from '../../../../services/webSocket.service';
 import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
 import { TxStatus } from '../../../../models/Transaction';
+import { QrGeneratorService } from '../../../../services/qr-generator.service';
 
 @Component({
   selector: 'app-payment-wallet',
@@ -23,19 +24,18 @@ export class PaymentWalletModalComponent {
   public paymentWalletModal: NgbModal;
   @Input()
   public itemPrice: number;
-  @Input()
   public txDataAsString: string;
-
   public sessionTransaction: any = {};
-
+  private sessionID: string;
 
   constructor(private modal: NgbModal, private spinner: NgxSpinnerService,
-    private txStatusService: TxStatusService) {
+    private txStatusService: TxStatusService,
+    private qrGeneratorService: QrGeneratorService) {
   }
-
   public open(): void {
     this.sessionTransaction.status = -1;
     const sessionID = localStorage.getItem('sessionID');
+    this.txDataAsString = this.qrGeneratorService.getQrData();
     this.txStatusService.onTxStatusChange(sessionID).subscribe((response: HttpResponse) => {
       if (response.success) {
         this.sessionTransaction = response.data[0];
@@ -43,7 +43,8 @@ export class PaymentWalletModalComponent {
     });
     this.modal.open(this.paymentWalletModal, { centered: true, size: 'lg' });
   }
-
+  // the following functions change their values according to the status received from the
+  // webSocket to display the transaction progress to the client
   public isInactiveRequest(): boolean {
     return this.sessionTransaction.status === -1;
   }
