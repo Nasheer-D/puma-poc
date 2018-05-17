@@ -26,13 +26,9 @@
 .login-btn {
   width: 340px;
   height: 44px;
-  justify-content: center;
   justify-self: center;
-  margin-left: 29px;
+  margin: 10px 14px 20px 29px;
   border-radius: 8px;
-  margin-top: 10px;
-  margin-right: 14px;
-  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
