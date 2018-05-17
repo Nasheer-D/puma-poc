@@ -10,6 +10,7 @@ const appRoutes: Routes = [
   { path: `items`, component: ItemsComponent },
   { path: `item/:itemID`, component: ItemDetailsComponent },
   { path: `signUp`, component: SignUpComponent },
+  { path: `login`, component: LoginComponent },
   { path: `**`, redirectTo: `items` }  // otherwise redirect to login
 ];
 
