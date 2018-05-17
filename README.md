@@ -135,7 +135,7 @@ You can find some more info about docker [here](https://github.com/wsargent/dock
 To see the specification of the APIs import [swagger.yml](./swagger.yml) at the [online swagger editor](https://editor.swagger.io)
 
 ## Code of Conduct
-In order to have a more open and welcoming community, PumaPay adheres to a code of conduct adapted from [[https://www.w3.org/Consortium/cepc | W3C’s Code of Ethics and Professional Conduct]] with some additions from the [[https://www.cloudfoundry.org/ | Cloud Foundry]]‘s Code of Conduct.
+In order to have a more open and welcoming community, PumaPay adheres to a code of conduct adapted from [W3C’s Code of Ethics and Professional Conduct](https://www.w3.org/Consortium/cepc) with some additions from the [Cloud Foundry's](https://www.cloudfoundry.org/) Code of Conduct.
 
 Please adhere to this [code of conduct](./CODE_OF_CONDUCT.md) in any interactions you have in the PumaPay community. It is strictly enforced on all official PumaPay repositories, websites, and resources. If you encounter someone violating these terms, please let one of our core team members know and we will address it as soon as possible.
 
