@@ -11,7 +11,7 @@ const appRoutes: Routes = [
   { path: `item/:itemID`, component: ItemDetailsComponent },
   { path: `signUp`, component: SignUpComponent },
   { path: `login`, component: LoginComponent },
-  { path: `**`, redirectTo: `items` }  // otherwise redirect to login
+  { path: `**`, redirectTo: `items` }  // otherwise redirect to items
 ];
 
 export const appRoutingProviders: any[] = [];
