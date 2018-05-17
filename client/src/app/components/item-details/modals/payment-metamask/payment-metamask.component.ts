@@ -74,14 +74,12 @@ export class PaymentMetamaskComponent {
   public buyWithMetaMask(): void {
     if (!this.web3Service.hasMetaMask) {
       console.log('No Metamask Injected - Please download metamask');
-      alert('No Metamask Injected - Please download metamask');
       return;
     }
-    console.log(this.txData);
     this.transactionService.sendTransactionStatus(this.sessionID, '', 0).subscribe(st => {
       this.web3Service.sentTransaction(this.txData.to, this.txData.value).catch(err => {
         this.transactionService.sendTransactionStatus(this.sessionID, '', 4).subscribe();
-        return Observable.of(null);
+        return Observable.of();
       }).subscribe(tx => {
         this.transactionService.sendTransactionStatus(this.sessionID, tx, 1).subscribe();
         const receiptSub = this.web3Service.getTransactionStatus(tx).subscribe(receipt => {

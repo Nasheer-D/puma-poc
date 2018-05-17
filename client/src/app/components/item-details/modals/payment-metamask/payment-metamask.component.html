@@ -29,8 +29,10 @@
                 <div class="container image-container-modal">
                   <img class="option-picture" src="../../../../../assets/images/metamask.png" alt="metamask">
                 </div>
+                <div *ngIf="!hasMetamask" class="col install-metamask">
+                  <label>You need the MetaMask browser add-on</label>
+                </div>
                 <div *ngIf="!hasMetamask" class="col modal-btn">
-                  You need the MetaMask browser add-on
                   <a class="modal-show-code btn btn-primary" href="https://metamask.io" target="_blank">Install Metamask</a>
                 </div>
                 <div class="col modal-btn">
@@ -38,7 +40,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
               <div class="container transaction-progress-container">
                 <div class="row">
                   <div class="container transaction-progress" [ngClass]="{'inactive-background-color': isInactiveRequest()}">
@@ -97,10 +99,10 @@
               </div>
               <div class="container">
                 <div class="row">
-                  <div class="col-6">
+                  <div class="col-sm-6">
                     <button class="btn btn-outline-primary btn-layout">See your balance</button>
                   </div>
-                  <div class="row-6 ">
+                  <div class="col-sm-6">
                     <button class="btn btn-primary btn-layout" (click)="d()" *ngIf="isInactiveStatus()">Back to image</button>
                     <button class="btn btn-primary btn-layout" (click)="d()" *ngIf="isSucccessfulStatus()">Download Image</button>
                     <button class="btn btn-primary btn-layout" (click)="d()" *ngIf="isFailedStatus() || isCancelledStatus()">Try Again</button>
