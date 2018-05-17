@@ -34,6 +34,11 @@ $ cd ./client
 $ npm install
 ```
 4. In Order to access the data you need a running instance of Postgres 
+    * DB: [Details](#Usage) 
+
+5. Start client - from client ng serve
+
+6. Start server - from server npm start
 
 ### Get started with Docker
 1.  Clone this repo
@@ -55,6 +60,7 @@ $ docker-compose build
 
 ```docker
 $ docker-compose up -d
+ # to check the logs -- $ docker-compose logs -f
 ```
 #### Configure Docker Windows
 You need to share your C drive with docker. Go to `Docker > Settings > Shared Drives > Select C > Apply` - You will be asked to fill in your credentials.
