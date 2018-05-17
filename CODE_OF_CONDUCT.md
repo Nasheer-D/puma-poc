@@ -63,7 +63,7 @@ Hard to define? Some questions to ask yourself are:
   * could someone misinterpret my behavior as intentionally harmful or harassing?
   * would I treat my boss or a person I admire at work like that ?
 
-//Summary//: if you are unsure whether something might be welcome or unwelcome, don't do it.
+**Summary**: if you are unsure whether something might be welcome or unwelcome, don't do it.
 
 #### Unwelcome sexual advance 
 includes requests for sexual favors, and other verbal or physical conduct of a sexual nature, where:
