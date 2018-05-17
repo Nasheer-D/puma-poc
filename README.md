@@ -139,15 +139,11 @@ In order to have a more open and welcoming community, PumaPay adheres to a code 
 
 Please adhere to this [code of conduct](./CODE_OF_CONDUCT.md) in any interactions you have in the PumaPay community. It is strictly enforced on all official PumaPay repositories, websites, and resources. If you encounter someone violating these terms, please let one of our core team members know and we will address it as soon as possible.
 
-## License
-See the [LICENCE](./LICENCE) file.
-
 ## Troubleshooting
 ### Docker containers failed to start
 In case of the error below when starting the docker containers, you should quit docker from the taskbar and start it again
-
 ```
-ERROR: for pumaapi_pp_io_dev_1  Cannot start service pp_io_dev: driver failed programming external connectivity on endpoint pumaapi_pp_io_dev_1
+ERROR: for puma_pp_poc_dev_1  Cannot start service poc_io_dev: driver failed programming external connectivity on endpoint puma_pp_poc_dev_1
 ```
 
 ### Docker Shared Volumes - Not working as expected
@@ -156,3 +152,7 @@ In case of the error below when starting the docker containers, you should go to
 ```
  psql:/docker-entrypoint-initdb.d/20-create-poc-tables.sql:0: could not read from input file: Is a directory
 ```
+
+## License
+This software is under the MIT License.
+See the full [LICENCE](./LICENCE) file.
