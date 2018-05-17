@@ -1,9 +1,31 @@
+<app-header></app-header>
 <div>
-  <h1>LOGIN</h1>
-  <div>
-    <input type="text" placeholder="Username" autofocus [(ngModel)]="username">
-    <input type="password" placeholder="Password" [(ngModel)]="password">
-    <br>
-    <button (click)="login(username, password)">Submit</button>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 container login-container">
+        <div class="row">
+          <div class="col-12 login-header">
+            <h1 class="login-layout">Login</h1>
+          </div>
+        </div>
+        <div class="row login-input">
+          <div class="col-12">
+            <input class="form-control text-input" type="text" placeholder="Username" autofocus [(ngModel)]="username">
+          </div>
+        </div>
+        <div class="row login-input">
+          <div class="col-12">
+            <input class="form-control text-input" type="password" placeholder="Password" [(ngModel)]="password">
+          </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-primary login-btn" (click)="login(username, password)">Submit</button>
+        </div>
+        <div class="row">
+          <div class="col-12 signup-label">
+            <label>Don't have an account yet? <a href="#">Sign Up</a></label>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>

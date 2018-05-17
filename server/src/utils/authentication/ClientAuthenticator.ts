@@ -14,7 +14,7 @@ export class ClientAuthenticator {
 
     try {
       const sqlQuery: ISqlQuery = {
-        text: `SELECT * FROM app_users where username = ?`,
+        text: `SELECT * FROM app_users where "userName" = $1`,
         values: [this.username]
       };
 
