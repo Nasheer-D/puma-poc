@@ -19,8 +19,6 @@ export class ClientAuthenticator {
       };
 
       const queryResult = await new DataService().executeQueryAsPromise(sqlQuery);
-      this.logger.info(this.password);
-      this.logger.info(queryResult.data[0]);
       if (!new UserAuthenticator().validPassword(queryResult.data[0], this.password)) {
         return <AuthenticationResponse>{
           success: false,

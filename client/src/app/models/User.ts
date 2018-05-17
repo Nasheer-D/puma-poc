@@ -1,9 +1,9 @@
-export class User {
-  public userID: string;
-  public userName: string;
-  public emails: string;
-  public salt: string;
-  public hash: string;
-  public credits: number;
-  public registrationDate: number;
+export interface User {
+  userID: string;
+  userName: string;
+  emails: string;
+  salt: string;
+  hash: string;
+  credits: number;
+  registrationDate: number;
 }

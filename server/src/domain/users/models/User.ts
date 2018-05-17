@@ -44,9 +44,3 @@ export class User {
     };
   }
 }
-
-export interface IUserTestData {
-  userID: string;
-  password: string;
-  role: string;
-}
