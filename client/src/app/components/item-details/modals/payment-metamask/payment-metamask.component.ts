@@ -56,9 +56,9 @@ export class PaymentMetamaskComponent {
     this.transactionService.getTxDetails(this.sessionID, this.itemID).subscribe((response: HttpResponse) => {
       // if response is successful,get the tx data
       if (response.success) {
+         // get the tx status change
         this.txData = response.data[0];
       }
-      // get the tx status change
       this.txStatusService.onTxStatusChange(this.sessionID).subscribe((res: HttpResponse) => {
         // if response is successful,get the tx session
         if (response.success) {
@@ -75,7 +75,7 @@ export class PaymentMetamaskComponent {
 
   public buyWithMetaMask(): void {
     // if metamask doesnt exist show a message to download the metamask
-    if (!this.web3Service.hasMetaMask) {
+    if (!this.hasMetamask) {
       console.log('No Metamask Injected - Please download metamask');
       return;
     }

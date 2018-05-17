@@ -32,21 +32,16 @@ export class PaymentWalletModalComponent {
     private txStatusService: TxStatusService,
     private qrGeneratorService: QrGeneratorService) {
   }
-  // opens modal, retrieves sessionID from localstorage and opens the websocket for retrieving transaction updates
   public open(): void {
     this.sessionTransaction.status = -1;
     const sessionID = localStorage.getItem('sessionID');
-    this.generateQr();
+    this.txDataAsString = this.qrGeneratorService.getQrData();
     this.txStatusService.onTxStatusChange(sessionID).subscribe((response: HttpResponse) => {
       if (response.success) {
         this.sessionTransaction = response.data[0];
       }
     });
     this.modal.open(this.paymentWalletModal, { centered: true, size: 'lg' });
-  }
-  // calls the service that creates the QRData based on sessionID and itemID
-  public generateQr(): any {
-    this.txDataAsString = this.qrGeneratorService.getQrData();
   }
   // the following functions change their values according to the status received from the
   // webSocket to display the transaction progress to the client
