@@ -29,8 +29,10 @@
                 <div class="container image-container-modal">
                   <img class="option-picture" src="../../../../../assets/images/metamask.png" alt="metamask">
                 </div>
+                <div *ngIf="!hasMetamask" class="col install-metamask">
+                  <label>You need the MetaMask browser add-on</label>
+                </div>
                 <div *ngIf="!hasMetamask" class="col modal-btn">
-                  You need the MetaMask browser add-on
                   <a class="modal-show-code btn btn-primary" href="https://metamask.io" target="_blank">Install Metamask</a>
                 </div>
                 <div class="col modal-btn">
@@ -38,7 +40,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
               <div class="container transaction-progress-container">
                 <div class="row">
                   <div class="container transaction-progress" [ngClass]="{'inactive-background-color': isInactiveRequest()}">
@@ -50,7 +52,7 @@
                         <div class="span status" *ngIf="isClosedRequest()">Complete</div>
                       </div>
                       <div class="col-sm-3">
-                        <label class="numberLayout" *ngIf="isInactiveRequest()">1</label>
+                        <label class="number-layout" *ngIf="isInactiveRequest()">1</label>
                         <app-loading-spinner *ngIf="isPendingRequest()"></app-loading-spinner>
                         <img src="../../../../../assets/images/success-btn.png" class="image-size-success" *ngIf="isClosedRequest()">
                       </div>
@@ -67,7 +69,7 @@
                         <div class="span status" *ngIf="isClosedResponse()">Complete</div>
                       </div>
                       <div class="col-sm-3">
-                        <label class="numberLayout" *ngIf="isInactiveResponse()">2</label>
+                        <label class="number-layout" *ngIf="isInactiveResponse()">2</label>
                         <app-loading-spinner *ngIf="isPendingResponse()"></app-loading-spinner>
                         <img src="../../../../../assets/images/success-btn.png" class="image-size-success" *ngIf="isClosedResponse()">
                       </div>
@@ -87,7 +89,7 @@
                         <div class="span status" *ngIf="isCancelledStatus()">Transation was cancelled.Try again.</div>
                       </div>
                       <div class="col-sm-3">
-                        <label class="numberLayout" *ngIf="isInactiveStatus()">3</label>
+                        <label class="number-layout" *ngIf="isInactiveStatus()">3</label>
                         <img src="../../../../../assets/images/success-btn.png" class="image-size-success" *ngIf="isSucccessfulStatus()">
                         <img src="../../../../../assets/images/fail-btn.png" class="image-size-fail" *ngIf="isFailedStatus() || isCancelledStatus()">
                       </div>
@@ -97,13 +99,13 @@
               </div>
               <div class="container">
                 <div class="row">
-                  <div class="col-6">
+                  <div class="col-sm-6">
                     <button class="btn btn-outline-primary btn-layout">See your balance</button>
                   </div>
-                  <div class="row-6 ">
-                    <button class="btn btn-outline-primary btn-layout" (click)="d() " *ngIf="isInactiveStatus()">Back to image</button>
-                    <button class="btn btn-outline-primary btn-layout" (click)="d() " *ngIf="isSucccessfulStatus()">Download Image</button>
-                    <button class="btn btn-outline-primary btn-layout" (click)="d() " *ngIf="isFailedStatus() || isCancelledStatus()">Try Again</button>
+                  <div class="col-sm-6">
+                    <button class="btn btn-primary btn-layout" (click)="d()" *ngIf="isInactiveStatus()">Back to image</button>
+                    <button class="btn btn-primary btn-layout" (click)="d()" *ngIf="isSucccessfulStatus()">Download Image</button>
+                    <button class="btn btn-primary btn-layout" (click)="d()" *ngIf="isFailedStatus() || isCancelledStatus()">Try Again</button>
                   </div>
                 </div>
               </div>

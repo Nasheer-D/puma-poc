@@ -1,8 +1,7 @@
 <app-header></app-header>
 <div class="details-container">
   <div class="container-fluid">
-    <div class="row">
-      <!-- Change to button with function to redirect back -->
+    <div class="row mb-3">
       <a href="items" class="back-link"> &laquo; Back to search results</a>
     </div>
   </div>
@@ -18,7 +17,9 @@
           <label class="item-description">{{item.description}}</label>
         </div>
         <div class="col">
-          <label class="item-tags">{{item.tags}}</label>
+          <label class="item-tags" *ngFor="let tag of item.tags; let last = last">{{tag}}
+            <span *ngIf="!last">,&nbsp;</span>
+          </label>
         </div>
         <div class="col">
           <label class="item-price-label">This image price is:</label>
@@ -47,7 +48,7 @@
           </label>
         </div>
       </div>
-      <div class="item-info col-md-6">
+      <div class="item-info col-lg-6">
         <div class="col">
           <label class="plain-text">Licence:
             <span class="value-color">{{item.licence}}</span>
@@ -63,5 +64,4 @@
     </div>
   </div>
 </div>
-
-<app-purchase-options #purchaseOptionModal [itemPrice]="item.price" [itemID]="item.itemID"></app-purchase-options>
+<app-purchase-options #purchaseOptionModal [itemPrice]="item.price" [itemID]="item.itemID" [txDataAsString]="txDataAsString"></app-purchase-options>

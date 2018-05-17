@@ -6,11 +6,11 @@ import { LoggerFactory } from '../logger';
 import { Transaction } from '../../domain/transactions/models/Transaction';
 
 export class SignatureCalculator {
-    private logger: LoggerInstance = Container.get(LoggerFactory).getInstance('SignatureCalcuator');
+    private logger: LoggerInstance = Container.get(LoggerFactory).getInstance(
+        'SignatureCalcuator'
+    );
 
-    public constructor(private transaction: Transaction) {
-    }
-
+    public constructor(private transaction: Transaction) { }
     public calculate(): string {
         this.logger.info('Calculating Singature');
         // convert the transaction data into a hex hash using keccak256
