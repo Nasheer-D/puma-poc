@@ -10,9 +10,7 @@ const appRoutes: Routes = [
   { path: `items`, component: ItemsComponent },
   { path: `item/:itemID`, component: ItemDetailsComponent },
   { path: `signUp`, component: SignUpComponent },
-
-  // otherwise redirect to login
-  { path: `**`, redirectTo: `items` }
+  { path: `**`, redirectTo: `items` }  // otherwise redirect to login
 ];
 
 export const appRoutingProviders: any[] = [];
