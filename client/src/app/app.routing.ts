@@ -4,13 +4,13 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './components/login/login.component';
 import { ItemsComponent } from './components/items/items.component';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
+import {SignUpComponent} from './components/sign-up/sign-up.component';
 
 const appRoutes: Routes = [
   { path: `items`, component: ItemsComponent },
   { path: `item/:itemID`, component: ItemDetailsComponent },
-
-  // otherwise redirect to login
-  { path: `**`, redirectTo: `items` }
+  { path: `signUp`, component: SignUpComponent },
+  { path: `**`, redirectTo: `items` }  // otherwise redirect to login
 ];
 
 export const appRoutingProviders: any[] = [];

@@ -28,6 +28,7 @@ import { TransactionService } from './services/transaction.service';
 import { TxStatusService } from './services/webSocket.service';
 import { Web3Service } from './services/web3.service';
 import { PurchasePackagesComponent } from './components/item-details/modals/purchase-packages/purchase-packages.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { QrGeneratorService } from './services/qr-generator.service';
 
 @NgModule({
@@ -41,7 +42,8 @@ import { QrGeneratorService } from './services/qr-generator.service';
     PaymentWalletModalComponent,
     LoadingSpinnerComponent,
     PaymentMetamaskComponent,
-    PurchasePackagesComponent
+    PurchasePackagesComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
