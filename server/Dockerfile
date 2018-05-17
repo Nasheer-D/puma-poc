@@ -1,4 +1,4 @@
-FROM node:6.11.2
+FROM node:8.11
 
 # Workdir
 RUN mkdir -p /usr/src/app/
@@ -6,6 +6,6 @@ WORKDIR /usr/src/app
 
 COPY package.json package.json
 RUN npm install --loglevel error
-RUN npm cache clean
+RUN npm cache clean --force
 
 COPY . .

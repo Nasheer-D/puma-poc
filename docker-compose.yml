@@ -13,7 +13,7 @@ services:
       - PGPASSWORD=local_pass
       - PGDATABASE=local_puma_poc
       - PGPORT=5432
-      - BACKEND_HOST=http://192.168.56.1:8080/
+      - BACKEND_HOST=http://172.26.246.81:8080/
     volumes:
       - ./server/src:/usr/src/app/src
       - ./server/tsconfig.json:/usr/src/app/tsconfig.json
