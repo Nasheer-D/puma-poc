@@ -1,7 +1,9 @@
 export interface User {
   userID: string;
-  username: string;
+  userName: string;
+  emails: string;
   salt: string;
   hash: string;
-  role: string;
+  credits: number;
+  registrationDate: number;
 }
