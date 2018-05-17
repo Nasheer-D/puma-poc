@@ -15,3 +15,7 @@ div.container.modal-header {
 div.modal-body {
   padding-top: 0px;
 }
+
+.row{
+  margin-top: 10px;
+}
