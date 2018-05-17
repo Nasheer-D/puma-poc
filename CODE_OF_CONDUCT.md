@@ -1,4 +1,4 @@
-##PumaPay Project Code of Conduct 
+## PumaPay Project Code of Conduct 
 
 PumaPay Project is an open-source and open community project where participants choose to work together, and in that process experience differences in language, location, nationality, and experience. In such a diverse environment, misunderstandings and disagreements happen, which in most cases can be resolved informally. In rare cases, however, behavior can intimidate, harass, or otherwise disrupt one or more people in the community, which PumaPay Project will not tolerate.
 
@@ -8,17 +8,17 @@ This code (**CoC**) applies to any member of the PumaPay Project community – d
 
 ### Statement of Intent
 
-PumaPay Project is committed to maintain a **positive**  [work environment](#work_environment). This commitment calls for a workplace where [participants](#participant) at all levels behave according to the rules of the following code. A foundational concept of this code is that we all share responsibility for our work environment.
+PumaPay Project is committed to maintain a **positive**  [work environment](#work-environment). This commitment calls for a workplace where [participants](#participant) at all levels behave according to the rules of the following code. A foundational concept of this code is that we all share responsibility for our work environment.
 ### Code
   - Treat each other with [respect](#respect), professionalism, fairness, and sensitivity to our many differences and strengths, including in situations of high pressure and urgency.
-  - Never [harass](#harassment) or [bully](#workplace_bullying) anyone verbally, physically or [sexually](#sexual_harassment).
+  - Never [harass](#harassment) or [bully](#workplace-bullying) anyone verbally, physically or [sexually](#sexual-harassment).
   - Never [discriminate](#discrimination)  on the basis of personal characteristics or group membership.
-  - Communicate constructively and avoid [demeaning](#demeaning_behavior) or [insulting](#insulting_behavior) behavior or language.
+  - Communicate constructively and avoid [demeaning](#demeaning-behavior) or [insulting](#insulting-behavior) behavior or language.
   - Seek, accept, and offer objective work criticism, and [acknowledge](#acknowledgement) properly the contributions of others.
   - Be honest about your own qualifications, and about any circumstances that might lead to conflicts of interest.
   - Respect the privacy of others and the confidentiality of data you access.
-  - With respect to cultural differences, be conservative in what you do and liberal in what you accept from others, but not to the point of accepting disrespectful, unprofessional or unfair or [[unwelcome behavior](#unwelcome_behavior) or [advances](#unwelcome_sexual_advance).
-  - Promote the rules of this Code and take action (especially if you are in a [leadership position](#leadership_position) to bring the discussion back to a more civil level whenever inappropriate behaviors are observed.
+  - With respect to cultural differences, be conservative in what you do and liberal in what you accept from others, but not to the point of accepting disrespectful, unprofessional or unfair or [[unwelcome behavior](#unwelcome-behavior) or [advances](#unwelcome-sexual-advance).
+  - Promote the rules of this Code and take action (especially if you are in a [leadership position](#leadership-position) to bring the discussion back to a more civil level whenever inappropriate behaviors are observed.
   - Stay on topic: Make sure that you are posting to the correct channel and avoid off-topic discussions. Remember when you update an issue or respond to an email you are potentially sending to a large number of people.
   - Step down considerately: Members of every project come and go, and the PumaPay Project is no different. When you leave or disengage from the project, in whole or in part, we ask that you do so in a way that minimizes disruption to the project. This means you should tell people you are leaving and take the proper steps to ensure that others can pick up where you left off.
 
