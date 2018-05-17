@@ -34,7 +34,7 @@ $ cd ./client
 $ npm install
 ```
 4. In Order to access the data you need a running instance of Postgres 
-    * DB: [Details](#Usage) 
+    * DB: [Details](#usage) 
 
 5. Start client - from client ng serve
 
