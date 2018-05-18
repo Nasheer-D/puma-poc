@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS public.credit_packages
     amount double precision NOT NULL DEFAULT 0,
     "bonusCredits" integer NOT NULL DEFAULT 0,
     "bonusTickets" integer NOT NULL DEFAULT 0,
-    featured boolean NOT NULL DEFAULT false
+    featured boolean NOT NULL DEFAULT false,
+    "priceInUSD" double precision NOT NULL DEFAULT 0
 )
 WITH (
     OIDS = FALSE
