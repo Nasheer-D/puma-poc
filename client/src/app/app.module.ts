@@ -30,6 +30,7 @@ import { Web3Service } from './services/web3.service';
 import { PurchasePackagesComponent } from './components/item-details/modals/purchase-packages/purchase-packages.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { QrGeneratorService } from './services/qr-generator.service';
+import { AccountBalanceActivityComponent } from './components/account-balance-activity/account-balance-activity.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { QrGeneratorService } from './services/qr-generator.service';
     LoadingSpinnerComponent,
     PaymentMetamaskComponent,
     PurchasePackagesComponent,
-    SignUpComponent
+    SignUpComponent,
+    AccountBalanceActivityComponent
   ],
   imports: [
     BrowserModule,
