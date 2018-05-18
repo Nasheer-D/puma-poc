@@ -31,6 +31,7 @@ import { PurchasePackagesComponent } from './components/item-details/modals/purc
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { QrGeneratorService } from './services/qr-generator.service';
 import { PackagesService } from './services/packages.service';
+import { RateService } from './services/rate.service';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { PackagesService } from './services/packages.service';
     TxStatusService,
     Web3Service,
     QrGeneratorService,
-    PackagesService
+    PackagesService,
+    RateService
   ],
   bootstrap: [AppComponent]
 })
