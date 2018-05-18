@@ -13,7 +13,7 @@ services:
       - PGPASSWORD=local_pass
       - PGDATABASE=local_puma_poc
       - PGPORT=5432
-      - BACKEND_HOST=http://192.168.56.1:8080/
+      - BACKEND_HOST=http://172.26.246.81:8080/
     volumes:
       - ./server/src:/usr/src/app/src
       - ./server/tsconfig.json:/usr/src/app/tsconfig.json
@@ -51,6 +51,7 @@ services:
       - ./db/init-tables.sql:/docker-entrypoint-initdb.d/20-create-tables.sql
       - ./db/insert-users.sql:/docker-entrypoint-initdb.d/21-insert-users.sql
       - ./db/insert-items.sql:/docker-entrypoint-initdb.d/22-insert-items.sql
+      - ./db/insert-packages.sql:/docker-entrypoint-initdb.d/23-insert-packages.sql
     networks:
       - puma_poc
     restart: unless-stopped

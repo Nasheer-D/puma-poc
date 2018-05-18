@@ -1,3 +1,20 @@
+CREATE TABLE IF NOT EXISTS public.credit_packages
+(
+    "packageID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    amount double precision NOT NULL DEFAULT 0,
+    "bonusCredits" integer NOT NULL DEFAULT 0,
+    "bonusTickets" integer NOT NULL DEFAULT 0,
+    featured boolean NOT NULL DEFAULT false,
+    "priceInUSD" double precision NOT NULL DEFAULT 0
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.credit_packages
+    OWNER to local_user;
+
 CREATE TABLE IF NOT EXISTS public.app_users 
 (
     "userID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
