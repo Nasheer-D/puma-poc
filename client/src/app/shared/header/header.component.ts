@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../models/User';
 import { PurchasePackagesComponent } from '../../components/item-details/modals/purchase-packages/purchase-packages.component';
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
