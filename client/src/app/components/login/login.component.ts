@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
     this.authenticationService.logout();
   }
 
-  public login(username: string, password: string) {
-    this.authenticationService.login(username, password)
+  public login() {
+    this.authenticationService.login(this.username, this.password)
       .subscribe(result => {
         if (result) {
           this.router.navigate(['./things']);
