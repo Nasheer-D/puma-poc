@@ -1,5 +1,5 @@
 export class RateHelpers {
-    public getRate(): number {
-        return 0.000015;
+    public getPMAtoUSDRate(): number {
+        return 0.015;
     }
 }

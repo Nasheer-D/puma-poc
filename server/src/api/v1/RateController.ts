@@ -12,7 +12,7 @@ export class RateController {
             message: 'PMA Rate returned succesfully',
             data: [
                 {
-                    rate: new RateHelpers().getRate()
+                    rate: new RateHelpers().getPMAtoUSDRate()
                 }
             ]
         };
