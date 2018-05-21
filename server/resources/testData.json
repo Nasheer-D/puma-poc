@@ -19,5 +19,16 @@
             5
         ],
         "uploadedDate": 1522759457
+    },
+
+        "testPackage": {
+            "packageID": "testpackage01",
+            "amount": 10,
+            "bonusCredits": 0,
+            "bonusTickets": 0,
+            "featured": false,
+            "priceInUSD": 15
     }
+
+
 }
