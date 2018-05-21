@@ -3,7 +3,7 @@ import { RateHelpers } from '../../../../server/src/utils/rateHelpers/RateHelper
 const expect = chai.expect;
 
 let rateHelpers = new RateHelpers()
-const rate = 0.015; 
+const rate = 0.015;
 
 describe('A RateHelpers', () => {
 
