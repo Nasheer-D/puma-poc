@@ -16,7 +16,6 @@ const endpoint = 'api/v1/rate';
 const rate = 0.015;
 
 describe('A RateController', () => {
-
     const expectedResponse = {
         success: true,
         status: 'OK',
