@@ -244,10 +244,10 @@ paths:
               schema:
                 allOf:
                   - $ref: '#/components/schemas/Response'
-                  - type: number
+                  - type: object
                     properties:
-                      data:
-                        type: array                  
+                      rate:
+                        type: number                  
 components:
   schemas:
     Response:
