@@ -8,7 +8,6 @@ const rate = 0.015;
 describe('A RateHelpers', () => {
 
     it('should return rate', () => {
-        // expect(rate).to.equal(rate);
         expect(rateHelpers.getPMAtoUSDRate()).equals(rate);
     });
 })
