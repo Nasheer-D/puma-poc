@@ -210,6 +210,44 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/TransactionLog'
+  /packages:
+    get:
+      summary: List all the packages
+      operationId: getAllPackages
+      tags:
+        - Package
+      responses:
+        '200':
+          description: A Success Responce with a JSON array of all packages
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Package'
+  /rate:
+    get:
+      summary: Retrieve the rate
+      operationId: getRate
+      tags:
+        - Rate
+      responses:
+        '200':
+          description: A Success Responce with a JSON array of the rate
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                    properties:
+                      rate:
+                        type: number                  
 components:
   schemas:
     Response:
@@ -305,4 +343,21 @@ components:
         blockHash:
           type: string
         blockNumber:
+          type: number
+    Package:
+      type: object
+      properties:
+        packageID:
+          type: number
+        amount:
+          type: string
+        bonusCredits:
+          type: number
+        bonusTickets:
+          type: number
+        featured:
+          type: boolean
+        priceInUSD:
+          type: number
+        priceInPMA:
           type: number

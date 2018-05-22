@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Package } from '../../../../models/Packages';
 import { PackagesService } from '../../../../services/packages.service';
+import { RateService } from '../../../../services/rate.service';
 import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
 import { AuthenticationService } from '../../../../services/authentication.service';
 
@@ -15,19 +16,28 @@ export class PurchasePackagesComponent implements OnInit {
   @ViewChild('purchasePackages')
   public purchasePackages: NgbModal;
   public packages: Package[] = [];
+  public rate: number;
   constructor(
     private modal: NgbModal,
     private authService: AuthenticationService,
-    private packageService: PackagesService
+    private packageService: PackagesService,
+    public rateService: RateService
   ) { }
 
   public ngOnInit(): void {
     if (!this.authService.isTokenExpired()) {
-      this.packageService.getAllPackages().subscribe((res: HttpResponse) => {
+      this.rateService.getPMAtoUSDRate().subscribe((res: HttpResponse) => {
         if (res.success) {
-          this.packages = res.data;
-          Object.keys(this.packages).forEach(key => {
-            console.log(this.packages[key]);
+          this.rate = res.data[0].rate;
+          this.packageService.getAllPackages().subscribe((ressponse: HttpResponse) => {
+            if (ressponse.success) {
+              this.packages = ressponse.data;
+              Object.keys(this.packages).forEach(key => {
+                this.packages[key].priceInPMA = this.packages[key].priceInUSD * this.rate;
+              });
+            } else {
+              alert(ressponse.message);
+            }
           });
         } else {
           alert(res.message);
