@@ -18,26 +18,27 @@ export class PurchasePackagesComponent implements OnInit {
   public rate: number;
   constructor(
     private modal: NgbModal,
-    private packageService: PackagesService, public rateService: RateService
+    private packageService: PackagesService,
+    public rateService: RateService
   ) { }
 
   public ngOnInit(): void {
-    this.rateService.getRate().subscribe((res: HttpResponse) => {
+    this.rateService.getPMAtoUSDRate().subscribe((res: HttpResponse) => {
       if (res.success) {
         this.rate = res.data[0].rate;
       } else {
         alert(res.message);
       }
-    });
-    this.packageService.getAllPackages().subscribe((res: HttpResponse) => {
-      if (res.success) {
-        this.packages = res.data;
-        Object.keys(this.packages).forEach(key => {
-          this.packages[key].priceInPMA = this.packages[key].priceInUSD * this.rate;
-        });
-      } else {
-        alert(res.message);
-      }
+      this.packageService.getAllPackages().subscribe((response: HttpResponse) => {
+        if (response.success) {
+          this.packages = response.data;
+          Object.keys(this.packages).forEach(key => {
+            this.packages[key].priceInPMA = this.packages[key].priceInUSD * this.rate;
+          });
+        } else {
+          alert(response.message);
+        }
+      });
     });
   }
 

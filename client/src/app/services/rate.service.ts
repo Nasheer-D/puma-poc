@@ -10,7 +10,7 @@ export class RateService {
     this.actionUrl = `${Constants.apiHost}${Constants.apiPrefix}rate/`;
    }
 
-  public getRate() {
+  public getPMAtoUSDRate() {
     return new HttpGetRequest(this.http, this.actionUrl).getResult();
   }
 }
