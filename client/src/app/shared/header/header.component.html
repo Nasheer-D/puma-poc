@@ -12,10 +12,10 @@
     </div>
     <div class="header-div-color" *ngIf="this.user !== null">
       <ul class="nav navbar-right">
-        <a class="header-login username-container" href="">{{user.userName }}</a>&nbsp;/&nbsp;
+        <a class="header-login username-container" href="">{{user.userName }}</a>&nbsp;&nbsp;/&nbsp;&nbsp;
         <label class="header-login" href="">Credits: {{user.credits | number: '1.2-2'}} PMA -
           <span>
-            <a data-toggle="modal" (click)="showCreditModal()">Get more</a>&nbsp;/&nbsp;
+            <a data-toggle="modal" (click)="showCreditModal()">Get more</a>&nbsp;&nbsp;/&nbsp;&nbsp;
           </span>
         </label>
         <span>

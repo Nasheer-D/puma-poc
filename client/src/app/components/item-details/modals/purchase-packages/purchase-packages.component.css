@@ -98,3 +98,38 @@
   color:#9C9C9C;
   font-family: Heebo;
 }
+
+.invoice-ribbon {
+  width:85px;
+  height:88px;
+  overflow:hidden;
+  position:absolute;
+  top:-1px;
+  right:-1px;
+}
+  
+.ribbon-inner {
+  text-align:center;
+  -webkit-transform:rotate(45deg);
+  -moz-transform:rotate(45deg);
+  -ms-transform:rotate(45deg);
+  -o-transform:rotate(45deg);
+  position:relative;
+  padding:12px 0;
+  left:-5px;
+  top:11px;
+  width:120px;
+  background-color:#5FE65A;
+  font-size:14px;
+  color:#fff;
+}
+  
+.best-offer {
+  position: absolute;
+  top: -58px;
+  left: 35px;
+  height: 0;
+  text-align: start;
+  
+  font-size: 11px;
+}
