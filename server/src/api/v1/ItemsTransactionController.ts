@@ -1,4 +1,4 @@
-import { JsonController, Res, Param, Get } from 'routing-controllers';
+import { JsonController, Res, Param, Get, QueryParam } from 'routing-controllers';
 import { LoggerInstance } from 'winston';
 import { LoggerFactory } from '../../utils/logger';
 import { Container } from 'typedi';
@@ -6,12 +6,14 @@ import { IResponseMessage, ResponseHandler } from '../../utils/responseHandler/R
 import { TransactionBuilder, Transaction } from '../../domain/transactions/models/Transaction';
 import { ISqlQuery, DataService } from '../../datasource/DataService';
 import { Globals } from '../../globals';
+import * as io from 'socket.io';
 
-@JsonController('/transaction')
-export class TransactionController {
+@JsonController('/transaction/item')
+export class ItemTransactionController {
   private logger: LoggerInstance = Container.get(LoggerFactory).getInstance('TransactionController');
+  private webSocket: io = Container.get(io);
 
-  @Get('/tx/:sessionID/item/:itemID')
+  @Get('/tx/:sessionID/:itemID')
   public async retrieveTransactionData(@Param('sessionID') sessionID: string, @Param('itemID') itemID: string, @Res() response: any) {
     this.logger.info('Retrieving Transaction Data for Item');
     const sqlQuery: ISqlQuery = {
@@ -33,7 +35,7 @@ export class TransactionController {
       transactionBuilder.value = queryResult.data[0].price;
 
       transactionBuilder.callbackUrl =
-        `${Globals.GET_BACKEND_HOST()}${Globals.GET_API_PREFIX()}transaction/txStatus/session/${sessionID}`;
+        `${Globals.GET_BACKEND_HOST()}${Globals.GET_API_PREFIX()}transaction/item/txStatus/session/${sessionID}`;
 
       const transaction: Transaction = transactionBuilder.build();
       const responseMessage: IResponseMessage = {
@@ -49,7 +51,7 @@ export class TransactionController {
     }
   }
 
-  @Get('/tx/plain/:sessionID/item/:itemID')
+  @Get('/tx/plain/:sessionID/:itemID')
   public async retrieveTransaction(@Param('sessionID') sessionID: string, @Param('itemID') itemID: string, @Res() response: any) {
     this.logger.info('Retrieving Transaction Data for Item');
     const sqlQuery: ISqlQuery = {
@@ -71,7 +73,7 @@ export class TransactionController {
       transactionBuilder.value = queryResult.data[0].price;
 
       transactionBuilder.callbackUrl =
-        `${Globals.GET_BACKEND_HOST()}${Globals.GET_API_PREFIX()}transaction/txStatus/session/${sessionID}`;
+        `${Globals.GET_BACKEND_HOST()}${Globals.GET_API_PREFIX()}transaction/item/txStatus/session/${sessionID}`;
 
       const transaction: Transaction = transactionBuilder.build();
 
@@ -80,15 +82,26 @@ export class TransactionController {
       return new ResponseHandler().handle(response, err);
     }
   }
-}
-export interface ITransactionRequest {
-  description: string;
-  name: string;
-  to: string;
-  value: number;
-}
 
-export interface ITxStatusUpdateRequest {
-  txHash: string;
-  status: TxStatus;
+  @Get('/txStatus/session/:sessionID')
+  public async getTxStatusForSessionID(
+    @Param('sessionID') sessionID: string,
+    @QueryParam('tx') txHash: string,
+    @QueryParam('status') status: number,
+    @QueryParam('fromApp') fromPumaWallet: number,
+    @Res() response: any) {
+    this.logger.info('Retrieving Transaction Status for session');
+    const sqlQuery: ISqlQuery = {
+      text: 'UPDATE sessions SET ("txHash", "status", "fromPumaWallet") = ($1, $2, $3) WHERE "sessionID"=$4 RETURNING *',
+      values: [txHash, status, fromPumaWallet, sessionID]
+    };
+
+    try {
+      const queryResult = await new DataService().executeQueryAsPromise(sqlQuery);
+      this.webSocket.emit(`txStatus/${sessionID}`, queryResult);
+      return new ResponseHandler().handle(response, queryResult);
+    } catch (err) {
+      return new ResponseHandler().handle(response, err);
+    }
+  }
 }

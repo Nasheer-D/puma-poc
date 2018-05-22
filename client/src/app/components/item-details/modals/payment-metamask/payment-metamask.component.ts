@@ -56,7 +56,7 @@ export class PaymentMetamaskComponent {
     this.transactionService.getTxDetails(this.sessionID, this.itemID).subscribe((response: HttpResponse) => {
       // if response is successful,get the tx data
       if (response.success) {
-         // get the tx status change
+        // get the tx status change
         this.txData = response.data[0];
       }
       this.txStatusService.onTxStatusChange(this.sessionID).subscribe((res: HttpResponse) => {
@@ -91,7 +91,6 @@ export class PaymentMetamaskComponent {
         const receiptSub = this.web3Service.getTransactionStatus(tx).subscribe(receipt => {
           if (receipt != null) {
             receiptSub.unsubscribe();
-            // tslint:disable-next-line:triple-equals
             // if receipt.status equal to 1, set tx status to 1 otherwise set it to 3
             if (receipt.status === 1) {
               this.transactionService.sendTransactionStatus(this.sessionID, tx, 2).subscribe();

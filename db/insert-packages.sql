@@ -1,15 +1,15 @@
 INSERT INTO public.credit_packages(
-	"packageID", amount, "bonusCredits", "bonusTickets", featured, "priceInUSD")
-	VALUES ('package01' , 10, 0, 0, false, 15);
+	"packageID", "ownerID", amount, "bonusCredits", "bonusTickets", featured, "priceInUSD", title, description)
+	VALUES ('package01', 'owner01', 10, 0, 0, false, 15, 'Basic', 'Basic Credits Package');
 
 INSERT INTO public.credit_packages(
-	"packageID", amount, "bonusCredits", "bonusTickets", featured, "priceInUSD")
-	VALUES ('package02' , 25, 2, 1, false, 20);
+	"packageID", "ownerID", amount, "bonusCredits", "bonusTickets", featured, "priceInUSD", title, description)
+	VALUES ('package02', 'owner01', 25, 2, 1, false, 20, 'Pro', 'Pro Credits Package');
 
 INSERT INTO public.credit_packages(
-	"packageID", amount, "bonusCredits", "bonusTickets", featured, "priceInUSD")
-	VALUES ('package03' , 50, 10, 2, true, 35);        
+	"packageID", "ownerID", amount, "bonusCredits", "bonusTickets", featured, "priceInUSD", title, description)
+	VALUES ('package03', 'owner01', 50, 10, 2, true, 35, 'Premium', 'Premium Credits Package');        
 
 INSERT INTO public.credit_packages(
-	"packageID", amount, "bonusCredits", "bonusTickets", featured, "priceInUSD")
-	VALUES ('package04' , 100, 20, 4, false, 65);    
+	"packageID", "ownerID", amount, "bonusCredits", "bonusTickets", featured, "priceInUSD", title, description)
+	VALUES ('package04', 'owner01', 100, 20, 4, false, 65, 'Elite', 'Elite Credits Package');    
