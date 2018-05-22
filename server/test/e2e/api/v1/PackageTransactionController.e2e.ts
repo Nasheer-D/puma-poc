@@ -15,7 +15,7 @@ process.env.PGPORT = '5435';
 process.env.PGUSER = 'local_user';
 process.env.PGPASSWORD = 'local_pass';
 process.env.PGDATABASE = 'local_puma_poc';
-process.env.BACKEND_HOST = 'http://172.25.16.1:8080/';
+process.env.BACKEND_HOST = 'http://192.168.1.54:8080/';
 
 const server = supertest.agent('http://localhost:8080/');
 const endpoint = 'api/v1/transaction/package';
@@ -78,7 +78,7 @@ const loginCredetials = {
     "password": "passw0rd"
 }
 
-describe('An CreditsTransactionController', () => {
+describe('A PackageTransactionController', () => {
     describe('with correct data', () => {
         beforeEach(async () => {
             await insertTestData();
@@ -128,7 +128,7 @@ describe('An CreditsTransactionController', () => {
                                     .equal(unit.convert(testPackage.priceInUSD * new RateHelpers().getPMAtoUSDRate(), 'eth', 'wei'));
                                 expect(body.data[0]).to.have.property('to').that.is.equal('0xb344ec617313d90331285E33cF4168DDb5C91B21');
                                 expect(body.data[0]).to.have.property('callback').that.is
-                                    .equal(`http://172.25.16.1:8080/${endpoint}/txStatus/${testPackage.packageID}/${loginCredetials.username}/session/${sessionID}`);
+                                    .equal(`http://192.168.1.54:8080/${endpoint}/txStatus/${testPackage.packageID}/${loginCredetials.username}/session/${sessionID}`);
                                 expect(body.data[0]).to.have.property('signature');
                                 done(err);
                             });
@@ -151,7 +151,7 @@ describe('An CreditsTransactionController', () => {
                                     .equal(unit.convert(testPackage.priceInUSD * new RateHelpers().getPMAtoUSDRate(), 'eth', 'wei'));
                                 expect(body).to.have.property('to').that.is.equal('0xb344ec617313d90331285E33cF4168DDb5C91B21');
                                 expect(body).to.have.property('callback').that.is
-                                    .equal(`http://172.25.16.1:8080/${endpoint}/txStatus/${testPackage.packageID}/${loginCredetials.username}/session/${sessionID}`);
+                                    .equal(`http://192.168.1.54:8080/${endpoint}/txStatus/${testPackage.packageID}/${loginCredetials.username}/session/${sessionID}`);
                                 expect(body).to.have.property('signature');
                                 done(err);
                             });
