@@ -126,10 +126,10 @@
   
 .best-offer {
   position: absolute;
-  top: -60px;
+  top: -58px;
   left: 35px;
   height: 0;
   text-align: start;
-  color: #1E69F5;
+  
   font-size: 11px;
 }
