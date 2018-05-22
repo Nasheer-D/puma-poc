@@ -5,13 +5,12 @@ import { AuthenticationService } from '../../services/authentication.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
-  providers: [AuthenticationService]
+  styleUrls: ['./header.component.css']
 
 })
 export class HeaderComponent implements OnInit {
   @ViewChild('purchasePackages')
-  public purchasePackages: PurchasePackagesComponent;
+  public purchasePackagesModal: PurchasePackagesComponent;
   public user: User;
 
   constructor(private authservice: AuthenticationService) {
@@ -22,7 +21,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public showCreditModal() {
-    this.purchasePackages.open();
+    this.purchasePackagesModal.open();
   }
 
   public callLogoutFunction() {
