@@ -10,7 +10,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class HeaderComponent implements OnInit {
   @ViewChild('purchasePackages')
-  public purchasePackagesModal: PurchasePackagesComponent;
+  public purchasePackagesComponent: PurchasePackagesComponent;
   public user: User;
 
   constructor(private authservice: AuthenticationService) {
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public showCreditModal() {
-    this.purchasePackagesModal.open();
+    this.purchasePackagesComponent.open();
   }
 
   public callLogoutFunction() {
