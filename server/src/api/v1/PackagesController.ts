@@ -1,6 +1,7 @@
 import { JsonController, Res, Get, Param } from 'routing-controllers';
 import { ISqlQuery, DataService } from '../../datasource/DataService';
 import { ResponseHandler } from '../../utils/responseHandler/ResponseHandler';
+import { RateHelpers } from '../../utils/rateHelpers/RateHelper';
 
 @JsonController('/packages')
 export class PackagesController {
@@ -12,6 +13,9 @@ export class PackagesController {
 
         try {
             const result = await new DataService().executeQueryAsPromise(sqlQuery);
+            Object.keys(result.data).forEach(key => {
+                result.data[key].priceInPMA = result.data[key].priceInUSD / new RateHelpers().getPMAtoUSDRate();
+            });
             return new ResponseHandler().handle(response, result);
         } catch (error) {
             return new ResponseHandler().handle(response, error);

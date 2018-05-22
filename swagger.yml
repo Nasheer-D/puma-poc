@@ -78,7 +78,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/Session'
-  /transaction/tx/{sessionID}/{itemID}:
+  /transaction/item/tx/{sessionID}/{itemID}:
     get:
       summary: Retrieve transaction data for item
       operationId: retrieveTransactionData
@@ -111,9 +111,9 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/Transaction'
-  /transaction/tx/plain/{sessionID}/{itemID}:
+  /transaction/item/tx/plain/{sessionID}/{itemID}:
     get:
-      summary: Retrieve transaction data for item
+      summary: Retrieve plain transaction data for item
       operationId: retrieveTransaction
       tags:
         - Transactions
@@ -138,9 +138,9 @@ paths:
               schema:
                 allOf:
                   - $ref: '#/components/schemas/Transaction'
-  /transaction/txStatus/session/{sessionID}:
+  /transaction/item/txStatus/session/{sessionID}:
     get:
-      summary: Retrieve transaction status for session
+      summary: Retrieve item transaction status for session
       operationId: getTxStatusForSessionID
       tags:
         - Transactions
@@ -349,6 +349,10 @@ components:
       properties:
         packageID:
           type: number
+        title:
+          type: string
+        description:
+          type: string
         amount:
           type: string
         bonusCredits:

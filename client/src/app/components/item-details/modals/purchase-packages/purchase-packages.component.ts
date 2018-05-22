@@ -32,9 +32,6 @@ export class PurchasePackagesComponent implements OnInit {
           this.packageService.getAllPackages().subscribe((ressponse: HttpResponse) => {
             if (ressponse.success) {
               this.packages = ressponse.data;
-              Object.keys(this.packages).forEach(key => {
-                this.packages[key].priceInPMA = this.packages[key].priceInUSD * this.rate;
-              });
             } else {
               alert(ressponse.message);
             }
