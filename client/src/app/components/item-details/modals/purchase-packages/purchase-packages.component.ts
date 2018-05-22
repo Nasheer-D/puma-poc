@@ -4,6 +4,7 @@ import { Package } from '../../../../models/Packages';
 import { PackagesService } from '../../../../services/packages.service';
 import { RateService } from '../../../../services/rate.service';
 import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
+import { AuthenticationService } from '../../../../services/authentication.service';
 
 
 @Component({
@@ -18,28 +19,28 @@ export class PurchasePackagesComponent implements OnInit {
   public rate: number;
   constructor(
     private modal: NgbModal,
+    private authService: AuthenticationService,
     private packageService: PackagesService,
     public rateService: RateService
   ) { }
 
   public ngOnInit(): void {
-    this.rateService.getPMAtoUSDRate().subscribe((res: HttpResponse) => {
-      if (res.success) {
-        this.rate = res.data[0].rate;
-      } else {
-        alert(res.message);
-      }
-      this.packageService.getAllPackages().subscribe((response: HttpResponse) => {
-        if (response.success) {
-          this.packages = response.data;
-          Object.keys(this.packages).forEach(key => {
-            this.packages[key].priceInPMA = this.packages[key].priceInUSD * this.rate;
+    if (!this.authService.isTokenExpired()) {
+      this.rateService.getPMAtoUSDRate().subscribe((res: HttpResponse) => {
+        if (res.success) {
+          this.rate = res.data[0].rate;
+          this.packageService.getAllPackages().subscribe((ressponse: HttpResponse) => {
+            if (ressponse.success) {
+              this.packages = ressponse.data;
+            } else {
+              alert(ressponse.message);
+            }
           });
         } else {
-          alert(response.message);
+          alert(res.message);
         }
       });
-    });
+    }
   }
 
   public open(): void {

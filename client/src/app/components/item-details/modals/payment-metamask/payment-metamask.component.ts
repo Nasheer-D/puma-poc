@@ -53,10 +53,10 @@ export class PaymentMetamaskComponent {
     this.sessionID = localStorage.getItem('sessionID');
     this.itemID = localStorage.getItem('itemID');
     // get the tx details of the specific item
-    this.transactionService.getTxDetails(this.sessionID, this.itemID).subscribe((response: HttpResponse) => {
+    this.transactionService.getTxDetailsForItem(this.sessionID, this.itemID).subscribe((response: HttpResponse) => {
       // if response is successful,get the tx data
       if (response.success) {
-         // get the tx status change
+        // get the tx status change
         this.txData = response.data[0];
       }
       this.txStatusService.onTxStatusChange(this.sessionID).subscribe((res: HttpResponse) => {
@@ -80,23 +80,23 @@ export class PaymentMetamaskComponent {
       return;
     }
     // for tx status equal to 0 send the transaction
-    this.transactionService.sendTransactionStatus(this.sessionID, '', 0).subscribe(st => {
+    this.transactionService.sendTransactionStatusForItem(this.sessionID, '', 0).subscribe(st => {
       this.web3Service.sentTransaction(this.txData.to, this.txData.value).catch(err => {
         // for tx status equal to 4 cancel the transaction
-        this.transactionService.sendTransactionStatus(this.sessionID, '', 4).subscribe();
+        this.transactionService.sendTransactionStatusForItem(this.sessionID, '', 4).subscribe();
         return Observable.of();
       }).subscribe(tx => {
         // for tx status equal to 1 get the receipt
-        this.transactionService.sendTransactionStatus(this.sessionID, tx, 1).subscribe();
+        this.transactionService.sendTransactionStatusForItem(this.sessionID, tx, 1).subscribe();
         const receiptSub = this.web3Service.getTransactionStatus(tx).subscribe(receipt => {
           if (receipt != null) {
             receiptSub.unsubscribe();
-            // tslint:disable-next-line:triple-equals
             // if receipt.status equal to 1, set tx status to 1 otherwise set it to 3
-            if (receipt.status === 1) {
-              this.transactionService.sendTransactionStatus(this.sessionID, tx, 2).subscribe();
+            // tslint:disable-next-line:triple-equals
+            if (receipt.status == 1) {
+              this.transactionService.sendTransactionStatusForItem(this.sessionID, tx, 2).subscribe();
             } else {
-              this.transactionService.sendTransactionStatus(this.sessionID, tx, 3).subscribe();
+              this.transactionService.sendTransactionStatusForItem(this.sessionID, tx, 3).subscribe();
             }
           }
         });

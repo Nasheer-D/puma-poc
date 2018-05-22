@@ -31,7 +31,7 @@ export class Web3Service {
     });
   }
 
-  public bootstrapWeb3() {
+  public bootstrapWeb3(): void {
     // Checking if Web3 has been injected by the browser (Mist/MetaMask)
     if (typeof window.web3 !== 'undefined') {
       // Use Mist/MetaMask's provider

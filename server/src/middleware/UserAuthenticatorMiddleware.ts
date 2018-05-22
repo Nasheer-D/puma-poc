@@ -1,8 +1,8 @@
-import {ExpressMiddlewareInterface} from 'routing-controllers';
+import { ExpressMiddlewareInterface } from 'routing-controllers';
 import * as jwt from 'jsonwebtoken';
-import {JSONWebToken} from '../utils/authentication/JSONWebToken';
-import {Config} from '../config';
-import {AuthenticationResponse} from '../utils/authentication/ClientAuthenticator';
+import { JSONWebToken } from '../utils/authentication/JSONWebToken';
+import { Config } from '../config';
+import { AuthenticationResponse } from '../utils/authentication/ClientAuthenticator';
 
 export class UserAuthenticatorMiddleware implements ExpressMiddlewareInterface {
 
@@ -25,6 +25,7 @@ export class UserAuthenticatorMiddleware implements ExpressMiddlewareInterface {
   private failAuthentication(response: any, message: string): void {
     response.status(403).json(<AuthenticationResponse>{
       success: false,
+      status: 'FAILED',
       message: message
     });
   }

@@ -1,6 +1,5 @@
 import { LoggerInstance } from 'winston';
 import { UserAuthenticator } from './UserAuthenticator';
-import { DataSourceConfig } from '../../datasource/config/DataSource.config';
 import { DataService, ISqlQuery } from '../../datasource/DataService';
 
 export class ClientAuthenticator {
@@ -22,6 +21,7 @@ export class ClientAuthenticator {
       if (!new UserAuthenticator().validPassword(queryResult.data[0], this.password)) {
         return <AuthenticationResponse>{
           success: false,
+          status: 'FAILED',
           message: 'Password is incorrect.',
           errcode: 'WRONG_PASS'
         };
@@ -29,6 +29,7 @@ export class ClientAuthenticator {
 
       return <AuthenticationResponse>{
         success: true,
+        status: 'OK',
         message: `Succesful login for user: ` + this.username,
         token: new UserAuthenticator().generateToken(queryResult.data[0]),
         user: queryResult.data[0]
@@ -37,12 +38,14 @@ export class ClientAuthenticator {
       if (error.message === 'Cannot read property \'0\' of undefined') {
         return <AuthenticationResponse>{
           success: false,
+          status: 'FAILED',
           message: 'User does not exists.',
           errcode: 'NO_USER'
         };
       } else {
         return <AuthenticationResponse>{
           success: false,
+          status: 'FAILED',
           message: error.message,
           errcode: error.code ? error.code : 'NO_CODE'
         };
@@ -53,6 +56,7 @@ export class ClientAuthenticator {
 
 export interface AuthenticationResponse {
   success: boolean;
+  status: string;
   message: string;
   token?: string;
   user?: any;

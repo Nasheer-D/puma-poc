@@ -21,14 +21,14 @@ export class TransactionService {
         return new HttpGetRequest(this.http, `${this.actionUrl}init`).getResult();
     }
 
-    public getTxDetails(sessionID: string, itemID: string): Observable<any> {
+    public getTxDetailsForItem(sessionID: string, itemID: string): Observable<any> {
         // makes a call that builds the transaction data and returns it back including the item details and signature
-        return new HttpGetRequest(this.http, `${this.actionUrl}tx/${sessionID}/${itemID}`).getResult();
+        return new HttpGetRequest(this.http, `${this.actionUrl}item/tx/${sessionID}/${itemID}`).getResult();
     }
 
-    public sendTransactionStatus(sessionId: string, txhash: string, status: number) {
+    public sendTransactionStatusForItem(sessionId: string, txhash: string, status: number) {
         // Returns the status of the pending transaction..it is repeated until the transaction is completed
         return new HttpGetRequest(this.http,
-            `${this.actionUrl}txStatus/session/${sessionId}?tx=${txhash}&status=${status}&fromapp=0`).getResult();
+            `${this.actionUrl}item/txStatus/session/${sessionId}?tx=${txhash}&status=${status}&fromapp=0`).getResult();
     }
 }

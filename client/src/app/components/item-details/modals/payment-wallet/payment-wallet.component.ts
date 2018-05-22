@@ -35,7 +35,7 @@ export class PaymentWalletModalComponent {
   public open(): void {
     this.sessionTransaction.status = -1;
     const sessionID = localStorage.getItem('sessionID');
-    this.txDataAsString = this.qrGeneratorService.getQrData();
+    this.txDataAsString = this.qrGeneratorService.getQrDataForItem();
     this.txStatusService.onTxStatusChange(sessionID).subscribe((response: HttpResponse) => {
       if (response.success) {
         this.sessionTransaction = response.data[0];

@@ -22,11 +22,22 @@ const testPackage: Package = require('../../../../resources/testData.json').test
 const dataservice = new DataService();
 const insertTestData = async () => {
     const sqlQuery: ISqlQuery = {
-        text: `INSERT INTO credit_packages("packageID", amount, "bonusCredits", "bonusTickets", featured, "priceInUSD")
-            VALUES ($1, $2, $3, $4, $5, $6);
+        text: `INSERT INTO credit_packages("packageID", "ownerID", amount, "bonusCredits", "bonusTickets", 
+            featured, "priceInUSD", description, title)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
         `,
-        values: [testPackage.packageID, testPackage.amount, testPackage.bonusCredits, testPackage.bonusTickets, testPackage.featured, testPackage.priceInUSD]
-    }
+        values: [
+            testPackage.packageID,
+            testPackage.ownerID,
+            testPackage.amount,
+            testPackage.bonusCredits,
+            testPackage.bonusTickets,
+            testPackage.featured,
+            testPackage.priceInUSD,
+            testPackage.description,
+            testPackage.title
+        ]
+    };
 
     await dataservice.executeQueryAsPromise(sqlQuery);
 }
@@ -69,6 +80,8 @@ describe('A PackageController', () => {
                     expect(body).to.have.property('message').that.is.equal(expectedQueryMessage.message);
                     expect(body).to.have.property('data').to.be.an('array');
                     expect(body.data[numberOfPackages - 1]).to.have.property('packageID').that.is.equal(testPackage.packageID);
+                    expect(body.data[numberOfPackages - 1]).to.have.property('description').that.is.equal(testPackage.description);
+                    expect(body.data[numberOfPackages - 1]).to.have.property('title').that.is.equal(testPackage.title);
                     expect(body.data[numberOfPackages - 1]).to.have.property('amount').that.is.equal(testPackage.amount);
                     expect(body.data[numberOfPackages - 1]).to.have.property('bonusCredits').that.is.equal(testPackage.bonusCredits);
                     expect(body.data[numberOfPackages - 1]).to.have.property('bonusTickets').that.is.equal(testPackage.bonusTickets);
