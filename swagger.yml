@@ -14,7 +14,7 @@ servers:
 paths:
   /login:
     post:
-      summary: Add login user details
+      summary: User can login to the web app
       operationId: login
       tags: 
         - UserLogin
@@ -30,7 +30,7 @@ paths:
                   type: string
       responses:
         '200': 
-          description: A Success Response with a JSON object with the login details
+          description: A Success Response with a JSON object with the user details and the token
           content:
             application/json:
               schema:
@@ -71,7 +71,7 @@ paths:
         in: path
         schema:
           type: string
-        description: Id of item details to be returned
+        description: ID of item details to be returned
         required: true
       responses:
         '200': 
@@ -89,15 +89,15 @@ paths:
                           $ref: '#/components/schemas/Item'
   /packages:
     get:
-      summary: List all the packages
+      summary: List all the credit packages
       operationId: getAllPackages
       tags:
-        - Package
+        - CreditPackage
       security:
         - TokenAuth: []
       responses:
         '200':
-          description: A Success Responce with a JSON array of all packages
+          description: A Success Responce with a JSON array of all the credit packages
           content:
             application/json:
               schema:
@@ -108,25 +108,25 @@ paths:
                       data:
                         type: array
                         items:
-                          $ref: '#/components/schemas/Package'
+                          $ref: '#/components/schemas/CreditPackage'
   /packages/{packageID}:
     get:
-      summary: Get package details based on ID
+      summary: Get credit package details based on ID
       operationId: getPackageByID
       tags: 
-        - Package
+        - CreditPackage
       parameters: 
       - name: "packageID"
         in: path
         schema:
           type: string
-        description: Id of package to be returned
+        description: ID of credit package to be returned
         required: true
       security:
         - TokenAuth: []
       responses:
         '200': 
-          description: A Success Response with a JSON object with the details of the package
+          description: A Success Response with a JSON object with the details of the credit package
           content:
             application/json:
               schema:
@@ -137,7 +137,7 @@ paths:
                       data:
                         type: array
                         items:
-                          $ref: '#/components/schemas/Package'
+                          $ref: '#/components/schemas/CreditPackage'
   /transaction/init:
     get:
       summary: Initiate Transaction with SessionID
@@ -202,7 +202,8 @@ paths:
         in: path
         schema:
           type: string
-        description: Id of items details to be returned
+        description: ID
+         of items details to be returned
         required: true
       responses:
         '200':
@@ -235,7 +236,7 @@ paths:
         in: path
         schema:
           type: string
-        description: Id of items details to be returned
+        description: ID of items details to be returned
         required: true
       responses:
         '200':
@@ -292,28 +293,28 @@ paths:
                           $ref: '#/components/schemas/Session'
   /transaction/package/tx/{sessionID}/{packageID}:
     get:
-      summary: Retrieve transaction data for item
-      operationId: retrieveTransactionData
+      summary: Retrieve transaction data for credit package
+      operationId: retrieveTransactionDataForPackage
       tags:
-        - PackageTransaction
+        - CreditPackageTransaction
       parameters:
       - name: "sessionID"
         in: path
         schema:
           type: string
-        description: Current sessionId
+        description: Current session ID
         required: true
       - name: "packageID"
         in: path
         schema:
           type: string
-        description: Id of packages details to be returned
+        description: ID of credit packages details to be returned
         required: true
       security:
         - TokenAuth: []
       responses:
         '200':
-          description: Succesfully returns transacation data for package
+          description: Succesfully returns transacation data for credit package
           content:
             application/json:
               schema:
@@ -327,10 +328,10 @@ paths:
                           $ref: '#/components/schemas/Transaction'
   /transaction/package/tx/plain/{sessionID}/{packageID}:
     get:
-      summary: Retrieve transaction data for package
-      operationId: retrieveTransaction
+      summary: Retrieve transaction data for credit package
+      operationId: retrieveTransactionForPackage
       tags:
-        - PackageTransaction
+        - CreditPackageTransaction
       parameters:
       - name: "sessionID"
         in: path
@@ -342,13 +343,13 @@ paths:
         in: path
         schema:
           type: string
-        description: Id of packages details to be returned
+        description: ID of credit packages details to be returned
         required: true
       security:
         - TokenAuth: []
       responses:
         '200':
-          description: Succesfully returns transacation data for package
+          description: Succesfully returns transacation data for credit package
           content:
             application/json:
               schema:
@@ -356,10 +357,10 @@ paths:
                   - $ref: '#/components/schemas/Transaction'
   /transaction/package/txStatus/{packageID}/{userID}/session/{sessionID}:
     get:
-      summary: Retrieve transaction status for session
+      summary: Retrieve transaction status for session 
       operationId: getTxStatusForSessionID
       tags:
-        - PackageTransaction
+        - CreditPackageTransaction
       parameters:
       - name: "sessionID"
         in: path
@@ -371,13 +372,13 @@ paths:
         in: path
         schema:
           type: string
-        description: Id of user details to be returned
+        description: ID of user for which the credits will be added
         required: true
       - name: "packageID"
         in: path
         schema:
           type: string
-        description: Id of packages details to be returned
+        description: ID of the selected credit package
         required: true
       - name: txHash
         in: query
@@ -467,8 +468,6 @@ components:
           type: string
         user:
           type: array
-        errcode:
-          type: string
     Item:
       type: object
       properties:
@@ -547,7 +546,7 @@ components:
           type: string
         blockNumber:
           type: number
-    Package:
+    CreditPackage:
       type: object
       properties:
         packageID:
