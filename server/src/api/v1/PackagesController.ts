@@ -1,9 +1,11 @@
-import { JsonController, Res, Get, Param } from 'routing-controllers';
+import { JsonController, Res, Get, Param, UseBefore } from 'routing-controllers';
 import { ISqlQuery, DataService } from '../../datasource/DataService';
 import { ResponseHandler } from '../../utils/responseHandler/ResponseHandler';
 import { RateHelpers } from '../../utils/rateHelpers/RateHelper';
+import { UserAuthenticatorMiddleware } from '../../middleware/UserAuthenticatorMiddleware';
 
 @JsonController('/packages')
+@UseBefore(UserAuthenticatorMiddleware)
 export class PackagesController {
     @Get('/')
     public async getAllPackages(@Res() response: any): Promise<any> {
