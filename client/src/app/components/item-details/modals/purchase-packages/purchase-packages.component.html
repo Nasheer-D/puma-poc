@@ -23,6 +23,11 @@
               <div>
                 <div class="col credit-number">
                   <label>{{package.amount}}</label>
+                  <div class="invoice-ribbon" *ngIf="package.featured">
+                    <div class="ribbon-inner">
+                      <span class="best-offer">BEST OFFER</span>
+                    </div>
+                  </div>
                 </div>
                 <div class="col credits">
                   <label>Credits</label>
