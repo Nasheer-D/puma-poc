@@ -54,7 +54,7 @@ export class PaymentMetamaskComponent {
 
   public open(): void {
     // status is -1(not enable the transaction) and get the item with the sessionID
-    // TODO: Get transaction session status from API 
+    // TODO: Get transaction session status from API
     this.sessionTransaction.status = -1;
     this.sessionID = localStorage.getItem('sessionID');
     if (this.itemPrice) {
