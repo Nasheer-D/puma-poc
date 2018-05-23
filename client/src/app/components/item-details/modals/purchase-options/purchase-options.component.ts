@@ -25,6 +25,10 @@ export class PurchaseOptionsModalComponent {
   @Input()
   public itemID: string;
   @Input()
+  public packagePrice: string;
+  @Input()
+  public packageID: string;
+  @Input()
   public txDataAsString: string;
 
   public constructor(private modal: NgbModal) { }

@@ -35,11 +35,14 @@ export class PaymentMetamaskComponent {
   public paymentMetamaskModal: NgbModal;
   @Input()
   public itemPrice: number;
+  @Input()
+  public packagePrice: number;
   public txData: TransactionData;
   public sessionTransaction: any = {};
   public txStatus: TxStatus;
   private sessionID: string;
   private itemID: string;
+  private packageID: string;
 
   constructor(private modal: NgbModal,
     private spinner: NgxSpinnerService,
@@ -47,25 +50,48 @@ export class PaymentMetamaskComponent {
     private web3Service: Web3Service,
     private transactionService: TransactionService) {
   }
+
   public open(): void {
     // status is -1(not enable the transaction) and get the item with the sessionID
     this.sessionTransaction.status = -1;
     this.sessionID = localStorage.getItem('sessionID');
-    this.itemID = localStorage.getItem('itemID');
-    // get the tx details of the specific item
-    this.transactionService.getTxDetailsForItem(this.sessionID, this.itemID).subscribe((response: HttpResponse) => {
-      // if response is successful,get the tx data
-      if (response.success) {
-        // get the tx status change
-        this.txData = response.data[0];
-      }
-      this.txStatusService.onTxStatusChange(this.sessionID).subscribe((res: HttpResponse) => {
-        // if response is successful,get the tx session
+    console.log(this.itemPrice);
+    console.log(this.packagePrice);
+    if (this.itemPrice) {
+      this.itemID = localStorage.getItem('itemID');
+      // get the tx details of the specific item
+      this.transactionService.getTxDetailsForItem(this.sessionID, this.itemID).subscribe((response: HttpResponse) => {
+        // if response is successful,get the tx data
         if (response.success) {
-          this.sessionTransaction = res.data[0];
+          // get the tx status change
+          this.txData = response.data[0];
         }
+        this.txStatusService.onTxStatusChange(this.sessionID).subscribe((res: HttpResponse) => {
+          // if response is successful,get the tx session
+          if (response.success) {
+            this.sessionTransaction = res.data[0];
+          }
+        });
       });
-    });
+    }
+    if (this.packagePrice) {
+      this.packageID = localStorage.getItem('packageID');
+      // get the tx details of the specific item
+      this.transactionService.getTxDetailsForPackage(this.sessionID, this.packageID).subscribe((response: HttpResponse) => {
+        // if response is successful,get the tx data
+        if (response.success) {
+          // get the tx status change
+          this.txData = response.data[0];
+        }
+        this.txStatusService.onTxStatusChange(this.sessionID).subscribe((res: HttpResponse) => {
+          // if response is successful,get the tx session
+          if (response.success) {
+            this.sessionTransaction = res.data[0];
+          }
+        });
+      });
+    }
+
     this.modal.open(this.paymentMetamaskModal, { centered: true, size: 'lg' });
   }
   // check if metamask exist

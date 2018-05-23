@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Package } from '../../../../models/Packages';
+import { CreditPackage } from '../../../../models/Packages';
 import { PackagesService } from '../../../../services/packages.service';
 import { RateService } from '../../../../services/rate.service';
 import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
 import { AuthenticationService } from '../../../../services/authentication.service';
-
+import { PurchaseOptionsModalComponent } from '../purchase-options/purchase-options.component';
+import { TransactionService } from '../../../../services/transaction.service';
 
 @Component({
   selector: 'app-purchase-packages',
@@ -15,13 +16,18 @@ import { AuthenticationService } from '../../../../services/authentication.servi
 export class PurchasePackagesComponent implements OnInit {
   @ViewChild('purchasePackages')
   public purchasePackages: NgbModal;
-  public packages: Package[] = [];
+  @ViewChild('purchaseOptionModal')
+  public purchaseOptionsModal: PurchaseOptionsModalComponent;
+
+  public creditPackages: CreditPackage[] = [];
+  public selectedPackage: CreditPackage = <CreditPackage>{};
   public rate: number;
   constructor(
     private modal: NgbModal,
     private authService: AuthenticationService,
     private packageService: PackagesService,
-    public rateService: RateService
+    public rateService: RateService,
+    private transactionService: TransactionService
   ) { }
 
   public ngOnInit(): void {
@@ -31,7 +37,7 @@ export class PurchasePackagesComponent implements OnInit {
           this.rate = res.data[0].rate;
           this.packageService.getAllPackages().subscribe((ressponse: HttpResponse) => {
             if (ressponse.success) {
-              this.packages = ressponse.data;
+              this.creditPackages = ressponse.data;
             } else {
               alert(ressponse.message);
             }
@@ -44,6 +50,24 @@ export class PurchasePackagesComponent implements OnInit {
   }
 
   public open(): void {
-    this.modal.open(this.purchasePackages, { centered: true, size: 'lg' });
+    this.transactionService.initiateTransactionSession().subscribe((res: HttpResponse) => {
+      localStorage.setItem('sessionID', res.data[0].sessionID);
+    });
+    this.modal.open(this.purchasePackages, { centered: true, size: 'lg' }).result.then((result) => {
+      this.clearLocalStorage();
+    }, (dismissReason) => {
+      this.clearLocalStorage();
+    });
+  }
+
+  public openPuchaseOptionsModal(creditPackage: CreditPackage): void {
+    localStorage.setItem('packageID', creditPackage.packageID);
+    this.selectedPackage = creditPackage;
+    this.purchaseOptionsModal.open();
+  }
+
+  private clearLocalStorage(): void {
+    localStorage.removeItem('sessionID');
+    localStorage.removeItem('packageID');
   }
 }

@@ -31,3 +31,7 @@
   color: black;
   font-family: Heebo;
 }
+
+.get-more-link {
+  cursor: pointer;
+}

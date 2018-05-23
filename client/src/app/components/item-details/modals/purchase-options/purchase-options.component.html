@@ -9,8 +9,11 @@
         </div>
         <div class="row col-md-12">
           <div class="col-lg-12">
-            <label class="modal-credits">You choose
-              <b>{{itemPrice | number: '1.2-2'}} PumaPay</b> tokens.</label>
+            <label class="modal-credits">You will pay
+              <b *ngIf="itemPrice">{{itemPrice | number: '1.2-2'}} PumaPay</b>
+              <b *ngIf="packagePrice">{{packagePrice | number: '1.2-2'}} PumaPay</b>
+              tokens.
+            </label>
           </div>
           <div class="col-lg-12">
             <label class="title-name">Make your purchase with</label>
@@ -76,5 +79,5 @@
     </div>
   </div>
 </ng-template>
-<app-payment-wallet #paymentWalletModal [itemPrice]="itemPrice"></app-payment-wallet>
-<app-payment-metamask #paymentMetamaskModal [itemPrice]="itemPrice"></app-payment-metamask>
+<app-payment-wallet #paymentWalletModal [itemPrice]="itemPrice" [packagePrice]="packagePrice"></app-payment-wallet>
+<app-payment-metamask #paymentMetamaskModal [itemPrice]="itemPrice" [packagePrice]="packagePrice"></app-payment-metamask>

@@ -1,4 +1,4 @@
-export interface Package {
+export interface CreditPackage {
     packageID: string;
     amount: number;
     bonusCredits: number;

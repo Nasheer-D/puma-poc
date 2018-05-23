@@ -11,7 +11,7 @@ import { ObserveOnSubscriber } from 'rxjs/operators/observeOn';
 export class TransactionService {
     private actionUrl: string;
 
-    public constructor(private http: HttpClient) {
+    public constructor(private http: HttpClient, private authService: AuthenticationService) {
         // The constractor declares host and apiPrefix for the calls
         this.actionUrl = `${Constants.apiHost}${Constants.apiPrefix}transaction/`;
     }
@@ -30,5 +30,18 @@ export class TransactionService {
         // Returns the status of the pending transaction..it is repeated until the transaction is completed
         return new HttpGetRequest(this.http,
             `${this.actionUrl}item/txStatus/session/${sessionId}?tx=${txhash}&status=${status}&fromapp=0`).getResult();
+    }
+
+    public getTxDetailsForPackage(sessionID: string, packageID: string): Observable<any> {
+        // makes a call that builds the transaction data and returns it back including the item details and signature
+        return new HttpGetRequest(this.http, `${this.actionUrl}package/tx/${sessionID}/${packageID}`,
+            this.authService).getResult();
+    }
+
+    public sendTransactionStatusForPackage(sessionId: string, txhash: string, status: number) {
+        // Returns the status of the pending transaction..it is repeated until the transaction is completed
+        return new HttpGetRequest(this.http,
+            `${this.actionUrl}package/txStatus/session/${sessionId}?tx=${txhash}&status=${status}&fromapp=0`,
+            this.authService).getResult();
     }
 }
