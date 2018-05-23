@@ -22,26 +22,26 @@ export class TransactionService {
     }
 
     public getTxDetailsForItem(sessionID: string, itemID: string): Observable<any> {
-        // makes a call that builds the transaction data and returns it back including the item details and signature
+        // makes a call that builds the transaction data, returns it back including the item details and signature
         return new HttpGetRequest(this.http, `${this.actionUrl}item/tx/${sessionID}/${itemID}`).getResult();
     }
 
     public sendTransactionStatusForItem(sessionId: string, txhash: string, status: number) {
-        // Returns the status of the pending transaction..it is repeated until the transaction is completed
+        // Returns the status of the pending transaction, it is repeated until the transaction is completed
         return new HttpGetRequest(this.http,
             `${this.actionUrl}item/txStatus/session/${sessionId}?tx=${txhash}&status=${status}&fromapp=0`).getResult();
     }
 
     public getTxDetailsForPackage(sessionID: string, packageID: string): Observable<any> {
-        // makes a call that builds the transaction data and returns it back including the item details and signature
+        // makes a call that builds the transaction data for package purchase, returns it back including the package details and signature
         return new HttpGetRequest(this.http, `${this.actionUrl}package/tx/${sessionID}/${packageID}`,
             this.authService).getResult();
     }
 
-    public sendTransactionStatusForPackage(sessionId: string, txhash: string, status: number) {
-        // Returns the status of the pending transaction..it is repeated until the transaction is completed
+    public sendTransactionStatusForPackage(packageID: string, userID: string, sessionID: string, txhash: string, status: number) {
+        // Returns the status of the pending transaction for package purchase, it is repeated until the transaction is completed
         return new HttpGetRequest(this.http,
-            `${this.actionUrl}package/txStatus/session/${sessionId}?tx=${txhash}&status=${status}&fromapp=0`,
+            `${this.actionUrl}package/txStatus/${packageID}/${userID}/session/${sessionID}?tx=${txhash}&status=${status}&fromapp=0`,
             this.authService).getResult();
     }
 }

@@ -39,12 +39,9 @@ export class PaymentWalletModalComponent {
     // status is -1(not enable the transaction) and get the item with the sessionID
     this.sessionTransaction.status = -1;
     const sessionID = localStorage.getItem('sessionID');
-    console.log(this.itemPrice);
-    console.log(this.packagePrice);
     if (this.itemPrice) {
       this.txDataAsString = this.qrGeneratorService.getQrDataForItem();
-    }
-    if (this.packagePrice) {
+    } else if (this.packagePrice) {
       this.txDataAsString = this.qrGeneratorService.getQrDataForPackage();
     }
     this.txStatusService.onTxStatusChange(sessionID).subscribe((response: HttpResponse) => {
