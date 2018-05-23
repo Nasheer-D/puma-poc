@@ -19,7 +19,7 @@
       <div class="modal-body">
         <div class="container transaction-tool">
           <div class="row">
-            <div class="container options-container col-md" *ngFor="let package of packages">
+            <div class="container options-container col-md" *ngFor="let package of creditPackages">
               <div>
                 <div class="col credit-number">
                   <label>{{package.amount}}</label>
@@ -37,7 +37,7 @@
                   <label *ngIf="package.bonusTickets == 0">+ No Bonus Attached</label>
                 </div>
                 <div class="col">
-                  <button class="btn btn-primary buy-credits">Buy Credits</button>
+                  <button class="btn btn-primary buy-credits" (click)="openPuchaseOptionsModal(package)">Buy Credits</button>
                 </div>
                 <div class="col puma-amount">
                   <label>For {{package.priceInPMA | number: '1.2-2'}} PMA</label>
@@ -47,24 +47,28 @@
           </div>
         </div>
       </div>
-      <div class="container modal-header">
+      <div class="container modal-footer">
         <div class="row col-md-12">
           <div class="col-lg-12">
-            <label class="modal-payment-method">Choose your payment method:</label>
+            <div class="modal-payment-method">Choose your payment method:</div>
           </div>
-          <div class="col-lg-12">
-            <label class="radio-inline">
-              <input type="radio" name="optradio"> Credit Card &nbsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio"> Pay Pal &nbsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio"> PumaPay
-            </label>
+          <div class="row col-lg-12">
+            <div class="col-lg-4 custom-control custom-radio">
+              <input type="radio" id="credit-card-radio" name="credit-card-radio" class="custom-control-input" disabled>
+              <label class="custom-control-label" for="credit-card-radio">Credit Card</label>
+            </div>
+            <div class="col-lg-4 custom-control custom-radio">
+              <input type="radio" id="pay-pal-radio" name="pay-pal-radio" class="custom-control-input" disabled>
+              <label class="custom-control-label" for="pay-pal-radio">Pay Pal</label>
+            </div>
+            <div class="col-lg-4 custom-control custom-radio">
+              <input type="radio" id="puma-pay-radio" name="puma-pay-radio" class="custom-control-input" checked>
+              <label class="custom-control-label" for="puma-pay-radio">PumaPay</label>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </ng-template>
+<app-purchase-options #purchaseOptionModal [packagePrice]="selectedPackage.priceInPMA" [packageID]="selectedPackage.packageID"></app-purchase-options>

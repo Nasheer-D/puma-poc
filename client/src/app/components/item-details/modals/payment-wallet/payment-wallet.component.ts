@@ -24,6 +24,8 @@ export class PaymentWalletModalComponent {
   public paymentWalletModal: NgbModal;
   @Input()
   public itemPrice: number;
+  @Input()
+  public packagePrice: number;
   public txDataAsString: string;
   public sessionTransaction: any = {};
   private sessionID: string;
@@ -32,10 +34,16 @@ export class PaymentWalletModalComponent {
     private txStatusService: TxStatusService,
     private qrGeneratorService: QrGeneratorService) {
   }
+
   public open(): void {
+    // status is -1(not enable the transaction) and get the item with the sessionID
     this.sessionTransaction.status = -1;
     const sessionID = localStorage.getItem('sessionID');
-    this.txDataAsString = this.qrGeneratorService.getQrDataForItem();
+    if (this.itemPrice) {
+      this.txDataAsString = this.qrGeneratorService.getQrDataForItem();
+    } else if (this.packagePrice) {
+      this.txDataAsString = this.qrGeneratorService.getQrDataForPackage();
+    }
     this.txStatusService.onTxStatusChange(sessionID).subscribe((response: HttpResponse) => {
       if (response.success) {
         this.sessionTransaction = response.data[0];
