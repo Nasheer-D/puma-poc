@@ -187,8 +187,8 @@ paths:
                           $ref: '#/components/schemas/TransactionLog'
   /transaction/item/tx/{sessionID}/{itemID}:
     get:
-      summary: Retrieve transaction data for item
-      operationId: retrieveTransactionData
+      summary: Retrieve transaction data for item with session ID
+      operationId: retrieveTransactionDataForItemWithSessionID
       tags:
         - ItemTransaction
       parameters:
@@ -221,8 +221,8 @@ paths:
                           $ref: '#/components/schemas/Transaction'
   /transaction/item/tx/plain/{sessionID}/{itemID}:
     get:
-      summary: Retrieve transaction data for item
-      operationId: retrieveTransaction
+      summary: Retrieve transaction data for item with session ID
+      operationId: retrieveTransactionDataForItemWithSessionID
       tags:
         - ItemTransaction
       parameters:
@@ -248,8 +248,8 @@ paths:
                   - $ref: '#/components/schemas/Transaction'
   /transaction/item/txStatus/session/{sessionID}:
     get:
-      summary: Retrieve transaction status for session
-      operationId: getTxStatusForSessionID
+      summary: Retrieve item transaction status for session ID
+      operationId: getItemTxStatusForSessionID
       tags:
         - ItemTransaction
       parameters:
@@ -293,8 +293,8 @@ paths:
                           $ref: '#/components/schemas/Session'
   /transaction/package/tx/{sessionID}/{packageID}:
     get:
-      summary: Retrieve transaction data for credit package
-      operationId: retrieveTransactionDataForPackage
+      summary: Retrieve transaction data for credit package with session ID
+      operationId: retrieveTransactionDataForPackageWithSessionID
       tags:
         - CreditPackageTransaction
       parameters:
@@ -328,8 +328,8 @@ paths:
                           $ref: '#/components/schemas/Transaction'
   /transaction/package/tx/plain/{sessionID}/{packageID}:
     get:
-      summary: Retrieve transaction data for credit package
-      operationId: retrieveTransactionForPackage
+      summary: Retrieve transaction data for credit package with session ID
+      operationId: retrieveTransactionForPackageWithSessionID
       tags:
         - CreditPackageTransaction
       parameters:
@@ -357,8 +357,8 @@ paths:
                   - $ref: '#/components/schemas/Transaction'
   /transaction/package/txStatus/{packageID}/{userID}/session/{sessionID}:
     get:
-      summary: Retrieve transaction status for session 
-      operationId: getTxStatusForSessionID
+      summary: Retrieve transaction status for session of user ID with package ID 
+      operationId: getTxStatusForSessionIDOfUserWithPackageID
       tags:
         - CreditPackageTransaction
       parameters:
