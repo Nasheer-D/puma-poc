@@ -22,6 +22,5 @@ export class UsersController {
     } catch (error) {
       return new ResponseHandler().handle(response, error);
     }
-
   }
 }
