@@ -196,7 +196,7 @@ paths:
         in: path
         schema:
           type: string
-        description: Current sessionId
+        description: Current sessionID
         required: true
       - name: "itemID"
         in: path
@@ -230,7 +230,7 @@ paths:
         in: path
         schema:
           type: string
-        description: Current sessionId
+        description: Current sessionID
         required: true
       - name: "itemID"
         in: path
@@ -337,7 +337,7 @@ paths:
         in: path
         schema:
           type: string
-        description: Current sessionId
+        description: Current sessionID
         required: true
       - name: "packageID"
         in: path
