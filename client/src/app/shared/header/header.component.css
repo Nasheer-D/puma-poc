@@ -35,3 +35,8 @@
 .get-more-link {
   cursor: pointer;
 }
+
+.user-details-separation {
+  margin-left: 8px;
+  margin-right: 10px;
+}
