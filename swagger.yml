@@ -10,7 +10,36 @@ servers:
     description: Local server
   - url: 'http://developers.pumapay.io:8080/api/v1'
     description: Test server
+  
 paths:
+  /login:
+    post:
+      summary: User can login to the web app
+      operationId: login
+      tags: 
+        - UserLogin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties: 
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200': 
+          description: A Success Response with a JSON object with the user details and the token
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/LoginResponse'
+                  - type: object
+                    properties:
+                      user:
+                        $ref: '#/components/schemas/User'
   /items:
     get:
       summary: List all items
@@ -42,7 +71,7 @@ paths:
         in: path
         schema:
           type: string
-        description: Id of item details to be returned
+        description: ID of item details to be returned
         required: true
       responses:
         '200': 
@@ -57,7 +86,58 @@ paths:
                       data:
                         type: array
                         items:
-                          $ref: '#/components/schemas/Item'     
+                          $ref: '#/components/schemas/Item'
+  /packages:
+    get:
+      summary: List all the credit packages
+      operationId: getAllPackages
+      tags:
+        - CreditPackage
+      security:
+        - TokenAuth: []
+      responses:
+        '200':
+          description: A Success Responce with a JSON array of all the credit packages
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CreditPackage'
+  /packages/{packageID}:
+    get:
+      summary: Get credit package details based on ID
+      operationId: getPackageByID
+      tags: 
+        - CreditPackage
+      parameters: 
+      - name: "packageID"
+        in: path
+        schema:
+          type: string
+        description: ID of credit package to be returned
+        required: true
+      security:
+        - TokenAuth: []
+      responses:
+        '200': 
+          description: A Success Response with a JSON object with the details of the credit package
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CreditPackage'
   /transaction/init:
     get:
       summary: Initiate Transaction with SessionID
@@ -78,24 +158,52 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/Session'
-  /transaction/item/tx/{sessionID}/{itemID}:
+  /transaction/txStatus/txhash/{transactionHash}:                        
     get:
-      summary: Retrieve transaction data for item
-      operationId: retrieveTransactionData
+      summary: Retrieve transaction status
+      operationId: retrieveTransactionStatus
       tags:
         - Transactions
+      parameters:
+        - name: "transactionHash"
+          in: path
+          schema:
+            type: string
+          description: Current transaction hash 
+          required: true
+      responses:
+        '200':
+          description: Successfully returns the status of the transaction using the transactionHash
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/TransactionLog'
+  /transaction/item/tx/{sessionID}/{itemID}:
+    get:
+      summary: Retrieve transaction data for item with session ID
+      operationId: retrieveTransactionDataForItemWithSessionID
+      tags:
+        - ItemTransaction
       parameters:
       - name: "sessionID"
         in: path
         schema:
           type: string
-        description: Current sessionId
+        description: Current sessionID
         required: true
       - name: "itemID"
         in: path
         schema:
           type: string
-        description: Id of items details to be returned
+        description: ID
+         of items details to be returned
         required: true
       responses:
         '200':
@@ -113,22 +221,22 @@ paths:
                           $ref: '#/components/schemas/Transaction'
   /transaction/item/tx/plain/{sessionID}/{itemID}:
     get:
-      summary: Retrieve plain transaction data for item
-      operationId: retrieveTransaction
+      summary: Retrieve transaction data for item with session ID
+      operationId: retrieveTransactionDataForItemWithSessionID
       tags:
-        - Transactions
+        - ItemTransaction
       parameters:
       - name: "sessionID"
         in: path
         schema:
           type: string
-        description: Current sessionId
+        description: Current sessionID
         required: true
       - name: "itemID"
         in: path
         schema:
           type: string
-        description: Id of items details to be returned
+        description: ID of items details to be returned
         required: true
       responses:
         '200':
@@ -140,10 +248,10 @@ paths:
                   - $ref: '#/components/schemas/Transaction'
   /transaction/item/txStatus/session/{sessionID}:
     get:
-      summary: Retrieve item transaction status for session
-      operationId: getTxStatusForSessionID
+      summary: Retrieve item transaction status for session ID
+      operationId: getItemTxStatusForSessionID
       tags:
-        - Transactions
+        - ItemTransaction
       parameters:
       - name: "sessionID"
         in: path
@@ -183,22 +291,30 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/Session'
-  /transaction/txStatus/txhash/{transactionHash}:                        
+  /transaction/package/tx/{sessionID}/{packageID}:
     get:
-      summary: Retrievs transaction status
-      operationId: retrieveTransactionStatus
+      summary: Retrieve transaction data for credit package with session ID
+      operationId: retrieveTransactionDataForPackageWithSessionID
       tags:
-        - Transactions
+        - CreditPackageTransaction
       parameters:
-        - name: "transactionHash"
-          in: path
-          schema:
-            type: string
-          description: Current transaction hash 
-          required: true
+      - name: "sessionID"
+        in: path
+        schema:
+          type: string
+        description: Current session ID
+        required: true
+      - name: "packageID"
+        in: path
+        schema:
+          type: string
+        description: ID of credit packages details to be returned
+        required: true
+      security:
+        - TokenAuth: []
       responses:
         '200':
-          description: Successfully returns the status of the transaction using the transactionHash
+          description: Succesfully returns transacation data for credit package
           content:
             application/json:
               schema:
@@ -209,16 +325,84 @@ paths:
                       data:
                         type: array
                         items:
-                          $ref: '#/components/schemas/TransactionLog'
-  /packages:
+                          $ref: '#/components/schemas/Transaction'
+  /transaction/package/tx/plain/{sessionID}/{packageID}:
     get:
-      summary: List all the packages
-      operationId: getAllPackages
+      summary: Retrieve transaction data for credit package with session ID
+      operationId: retrieveTransactionForPackageWithSessionID
       tags:
-        - Package
+        - CreditPackageTransaction
+      parameters:
+      - name: "sessionID"
+        in: path
+        schema:
+          type: string
+        description: Current sessionID
+        required: true
+      - name: "packageID"
+        in: path
+        schema:
+          type: string
+        description: ID of credit packages details to be returned
+        required: true
+      security:
+        - TokenAuth: []
       responses:
         '200':
-          description: A Success Responce with a JSON array of all packages
+          description: Succesfully returns transacation data for credit package
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Transaction'
+  /transaction/package/txStatus/{packageID}/{userID}/session/{sessionID}:
+    get:
+      summary: Retrieve transaction status for session of user ID with package ID 
+      operationId: getTxStatusForSessionIDOfUserWithPackageID
+      tags:
+        - CreditPackageTransaction
+      parameters:
+      - name: "sessionID"
+        in: path
+        schema: 
+          type: string
+        description: Current sessionID
+        required: true
+      - name: "userID"
+        in: path
+        schema:
+          type: string
+        description: ID of user for which the credits will be added
+        required: true
+      - name: "packageID"
+        in: path
+        schema:
+          type: string
+        description: ID of the selected credit package
+        required: true
+      - name: txHash
+        in: query
+        schema:
+          type: string
+        description: The txHash of the transaction
+        required: false
+      - name: status 
+        in: query
+        schema:
+          type: integer
+        description: The status of the transaction (initiated = -1, scanned = 0, open = 1, approved = 2, declined = 3, cancelled = 4)
+        required: true
+      - name: fromApp
+        in: query
+        schema:
+          type: integer
+        description: Indicates if the transaction came from the wallet app
+        required: true
+      security:
+        - TokenAuth: []
+      responses:
+        '200':
+          description: Succesfully returns the status of the transaction
           content:
             application/json:
               schema:
@@ -229,7 +413,7 @@ paths:
                       data:
                         type: array
                         items:
-                          $ref: '#/components/schemas/Package'
+                          $ref: '#/components/schemas/Session'
   /rate:
     get:
       summary: Retrieve the rate
@@ -247,8 +431,13 @@ paths:
                   - type: object
                     properties:
                       rate:
-                        type: number                  
+                        type: number
 components:
+  securitySchemes:
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: x-access-token
   schemas:
     Response:
       type: object
@@ -266,6 +455,19 @@ components:
           items: {}
         errcode:
           type: string
+    LoginResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        status:
+          type: string
+        message:
+          type: string
+        token:
+          type: string
+        user:
+          type: array
     Item:
       type: object
       properties:
@@ -344,14 +546,12 @@ components:
           type: string
         blockNumber:
           type: number
-    Package:
+    CreditPackage:
       type: object
       properties:
         packageID:
           type: number
-        title:
-          type: string
-        description:
+        ownerID:
           type: string
         amount:
           type: string
@@ -363,5 +563,26 @@ components:
           type: boolean
         priceInUSD:
           type: number
-        priceInPMA:
-          type: number
+        description:
+          type: string
+        title:
+          type: string
+    User:
+      type: object
+      properties:
+        userID:
+          type: string
+        userName:
+          type: string
+        email:
+          type: string
+        salt:
+          type: string
+        hash:
+          type: string
+        credits:
+          type: integer
+        registrationDate:
+          type: integer
+        walletAddress:
+          type: string

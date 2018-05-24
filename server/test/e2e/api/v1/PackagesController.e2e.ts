@@ -51,6 +51,11 @@ const deleteTestData = async () => {
     await dataservice.executeQueryAsPromise(sqlQuery);
 }
 
+const loginCredetials = {
+    "username": "user01",
+    "password": "passw0rd"
+}
+
 describe('A PackageController', () => {
     describe('with successful response', () => {
         beforeEach(async () => {
@@ -69,25 +74,68 @@ describe('A PackageController', () => {
                 data: [testPackage]
             };
 
-            server
-                .get(endpoint)
-                .expect(200)
-                .end((err: Error, res: any) => {
-                    const body = res.body;
-                    const numberOfPackages = body.data.length;
-                    expect(body).to.have.property('success').that.is.equal(expectedQueryMessage.success);
-                    expect(body).to.have.property('status').that.is.equal(expectedQueryMessage.status);
-                    expect(body).to.have.property('message').that.is.equal(expectedQueryMessage.message);
-                    expect(body).to.have.property('data').to.be.an('array');
-                    expect(body.data[numberOfPackages - 1]).to.have.property('packageID').that.is.equal(testPackage.packageID);
-                    expect(body.data[numberOfPackages - 1]).to.have.property('description').that.is.equal(testPackage.description);
-                    expect(body.data[numberOfPackages - 1]).to.have.property('title').that.is.equal(testPackage.title);
-                    expect(body.data[numberOfPackages - 1]).to.have.property('amount').that.is.equal(testPackage.amount);
-                    expect(body.data[numberOfPackages - 1]).to.have.property('bonusCredits').that.is.equal(testPackage.bonusCredits);
-                    expect(body.data[numberOfPackages - 1]).to.have.property('bonusTickets').that.is.equal(testPackage.bonusTickets);
-                    expect(body.data[numberOfPackages - 1]).to.have.property('featured').that.is.equal(testPackage.featured);
-                    expect(body.data[numberOfPackages - 1]).to.have.property('priceInUSD').that.is.equal(testPackage.priceInUSD);
-                    done(err);
+            server.post(`api/v1/login`)
+                .send(loginCredetials)
+                .end((err, res) => {
+                    const token = res.body.token;
+                    server
+                        .get(endpoint)
+                        .set('x-access-token', token)
+                        .expect(200)
+                        .end((err: Error, res: any) => {
+                            const body = res.body;
+                            const numberOfPackages = body.data.length;
+                            expect(body).to.have.property('success').that.is.equal(expectedQueryMessage.success);
+                            expect(body).to.have.property('status').that.is.equal(expectedQueryMessage.status);
+                            expect(body).to.have.property('message').that.is.equal(expectedQueryMessage.message);
+                            expect(body).to.have.property('data').to.be.an('array');
+                            expect(body.data[numberOfPackages - 1]).to.have.property('packageID').that.is.equal(testPackage.packageID);
+                            expect(body.data[numberOfPackages - 1]).to.have.property('ownerID').that.is.equal(testPackage.ownerID);
+                            expect(body.data[numberOfPackages - 1]).to.have.property('amount').that.is.equal(testPackage.amount);
+                            expect(body.data[numberOfPackages - 1]).to.have.property('bonusCredits').that.is.equal(testPackage.bonusCredits);
+                            expect(body.data[numberOfPackages - 1]).to.have.property('bonusTickets').that.is.equal(testPackage.bonusTickets);
+                            expect(body.data[numberOfPackages - 1]).to.have.property('featured').that.is.equal(testPackage.featured);
+                            expect(body.data[numberOfPackages - 1]).to.have.property('priceInUSD').that.is.equal(testPackage.priceInUSD);
+                            expect(body.data[numberOfPackages - 1]).to.have.property('description').that.is.equal(testPackage.description);
+                            expect(body.data[numberOfPackages - 1]).to.have.property('title').that.is.equal(testPackage.title);
+                            done(err);
+                        });
+                });
+        });
+
+        it('should get package by ID', (done) => {
+            const expectedQueryMessage: IResponseMessage = {
+                success: true,
+                status: 'OK',
+                message: 'SQL Query completed successful.',
+                data: [testPackage]
+            };
+
+            server.post(`api/v1/login`)
+                .send(loginCredetials)
+                .end((err, res) => {
+                    const token = res.body.token;
+                    server
+                        .get(`${endpoint}${testPackage.packageID}`)
+                        .set('x-access-token', token)
+                        .end((err: Error, res: any) => {
+                            const body = res.body;
+                            expect(res).to.have.property('status').that.is.equal(200);
+                            expect(body).to.have.property('success').that.is.equal(expectedQueryMessage.success);
+                            expect(body).to.have.property('status').that.is.equal(expectedQueryMessage.status);
+                            expect(body).to.have.property('message').that.is.equal(expectedQueryMessage.message);
+                            expect(body).to.have.property('data').to.be.an('array');
+                            expect(body.data[0]).to.have.property('packageID').that.is.equal(testPackage.packageID);
+                            expect(body.data[0]).to.have.property('ownerID').that.is.equal(testPackage.ownerID);
+                            expect(body.data[0]).to.have.property('amount').that.is.equal(testPackage.amount);
+                            expect(body.data[0]).to.have.property('bonusCredits').that.is.equal(testPackage.bonusCredits);
+                            expect(body.data[0]).to.have.property('bonusTickets').that.is.equal(testPackage.bonusTickets);
+                            expect(body.data[0]).to.have.property('featured').that.is.equal(testPackage.featured);
+                            expect(body.data[0]).to.have.property('priceInUSD').that.is.equal(testPackage.priceInUSD);
+                            expect(body.data[0]).to.have.property('description').that.is.equal(testPackage.description);
+                            expect(body.data[0]).to.have.property('title').that.is.equal(testPackage.title);
+                            done(err);
+                        });
                 });
         });
     });
