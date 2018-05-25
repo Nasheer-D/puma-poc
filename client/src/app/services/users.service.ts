@@ -15,6 +15,6 @@ export class UserService {
   }
 
   public getLoggedInUserCredits() {
-    return new HttpGetRequest(this.http, `${this.actionUrl}credits`).getResult();
+    return new HttpGetRequest(this.http, `${this.actionUrl}credits/`, this.authService).getResult();
   }
 }

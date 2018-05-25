@@ -33,7 +33,9 @@
                   <label>Credits</label>
                 </div>
                 <div class="col bonus">
-                  <label *ngIf="package.bonusTickets != 0">+ {{package.bonusTickets}} Raffle Ticket</label>
+                  <label *ngIf="package.bonusTickets != 0">+ {{package.bonusTickets}} Raffle Ticket
+                    <span *ngIf="package.bonusTickets > 1">s</span>
+                  </label>
                   <label *ngIf="package.bonusTickets == 0">+ No Bonus Attached</label>
                 </div>
                 <div class="col">

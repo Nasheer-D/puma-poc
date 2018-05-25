@@ -13,7 +13,7 @@ export class UsersController {
     @Res() response: any) {
     const userID = new JSONWebToken(request).decodedToken.userID;
     const sqlQuery: ISqlQuery = {
-      text: `SELECT * FROM app_users where "userID" = $1`,
+      text: `SELECT credits FROM app_users where "userID" = $1`,
       values: [userID]
     };
     try {

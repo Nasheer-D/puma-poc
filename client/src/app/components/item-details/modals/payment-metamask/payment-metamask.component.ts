@@ -23,6 +23,7 @@ import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
 import { TxStatus, TransactionData } from '../../../../models/Transaction';
 import { Web3Service } from '../../../../services/web3.service';
 import { TransactionService } from '../../../../services/transaction.service';
+import { UserService } from '../../../../services/users.service';
 
 @Component({
   selector: 'app-payment-metamask',
@@ -44,12 +45,15 @@ export class PaymentMetamaskComponent {
   private sessionID: string;
   private itemID: string;
   private packageID: string;
+  private credits: string;
+
 
   constructor(private modal: NgbModal,
     private spinner: NgxSpinnerService,
     private txStatusService: TxStatusService,
     private web3Service: Web3Service,
-    private transactionService: TransactionService) {
+    private transactionService: TransactionService,
+    private userService: UserService) {
   }
 
   public open(): void {
@@ -77,16 +81,27 @@ export class PaymentMetamaskComponent {
       this.packageID = localStorage.getItem('packageID');
       this.userID = JSON.parse(localStorage.getItem('currentUser')).userID;
       // get the tx details of the specific item
-      this.transactionService.getTxDetailsForPackage(this.sessionID, this.packageID).subscribe((response: HttpResponse) => {
+      this.transactionService.getTxDetailsForPackage(this.sessionID, this.packageID).subscribe((txResponse: HttpResponse) => {
         // if response is successful,get the tx data
-        if (response.success) {
+        if (txResponse.success) {
           // get the tx status change
-          this.txData = response.data[0];
+          this.txData = txResponse.data[0];
         }
-        this.txStatusService.onTxStatusChange(this.sessionID).subscribe((res: HttpResponse) => {
+        this.txStatusService.onTxStatusChange(this.sessionID).subscribe((statusResponse: HttpResponse) => {
           // if response is successful,get the tx session
-          if (response.success) {
-            this.sessionTransaction = res.data[0];
+          if (statusResponse.success) {
+            this.sessionTransaction = statusResponse.data[0];
+            if (this.isSucccessfulStatus()) {
+              this.userService.getLoggedInUserCredits().subscribe((creditResponse: HttpResponse) => {
+                if (creditResponse.success) {
+                  const user = JSON.parse(localStorage.getItem('currentUser'));
+                  user.credits = creditResponse.data[0].credits;
+                  localStorage.setItem('currentUser', JSON.stringify(user));
+                  // TODO - Reload in the proper way
+                  window.location.reload();
+                }
+              });
+            }
           }
         });
       });
@@ -94,6 +109,7 @@ export class PaymentMetamaskComponent {
 
     this.modal.open(this.paymentMetamaskModal, { centered: true, size: 'lg' });
   }
+
   // check if metamask exist
   public get hasMetamask(): boolean {
     return this.web3Service.hasMetaMask;
