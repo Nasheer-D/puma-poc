@@ -53,6 +53,7 @@ export class PurchasePackagesComponent implements OnInit {
     this.transactionService.initiateTransactionSession().subscribe((res: HttpResponse) => {
       localStorage.setItem('sessionID', res.data[0].sessionID);
     });
+
     this.modal.open(this.purchasePackages, { centered: true, size: 'lg' }).result.then((result) => {
       this.clearLocalStorage();
     }, (dismissReason) => {

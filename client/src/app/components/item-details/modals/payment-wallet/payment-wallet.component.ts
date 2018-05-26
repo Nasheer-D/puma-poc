@@ -13,6 +13,7 @@ import { TxStatusService } from '../../../../services/webSocket.service';
 import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
 import { TxStatus } from '../../../../models/Transaction';
 import { QrGeneratorService } from '../../../../services/qr-generator.service';
+import { UserService } from '../../../../services/users.service';
 
 @Component({
   selector: 'app-payment-wallet',
@@ -29,10 +30,12 @@ export class PaymentWalletModalComponent {
   public txDataAsString: string;
   public sessionTransaction: any = {};
   private sessionID: string;
+  private credits: string;
 
   constructor(private modal: NgbModal, private spinner: NgxSpinnerService,
     private txStatusService: TxStatusService,
-    private qrGeneratorService: QrGeneratorService) {
+    private qrGeneratorService: QrGeneratorService,
+    private userService: UserService) {
   }
 
   public open(): void {
@@ -47,6 +50,17 @@ export class PaymentWalletModalComponent {
     this.txStatusService.onTxStatusChange(sessionID).subscribe((response: HttpResponse) => {
       if (response.success) {
         this.sessionTransaction = response.data[0];
+        if (this.isSucccessfulStatus()) {
+          this.userService.getLoggedInUserCredits().subscribe((creditResponse: HttpResponse) => {
+            if (creditResponse.success) {
+              const user = JSON.parse(localStorage.getItem('currentUser'));
+              user.credits = creditResponse.data[0].credits;
+              localStorage.setItem('currentUser', JSON.stringify(user));
+              // TODO - Reload in the proper way
+              window.location.reload();
+            }
+          });
+        }
       }
     });
     this.modal.open(this.paymentWalletModal, { centered: true, size: 'lg' });
