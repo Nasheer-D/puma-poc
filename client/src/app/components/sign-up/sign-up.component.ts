@@ -13,7 +13,6 @@ export class SignUpComponent {
   public email: string;
   public walletAddress: string;
   public password: string;
-  // private registrationDetails: IRegistrationDetails = <IRegistrationDetails>{};
 
   public constructor(private router: Router,
     private registrationService: RegistrationService) { }
@@ -25,7 +24,6 @@ export class SignUpComponent {
       password: this.password
     };
     this.registrationService.registerNewUser(registrationDetails).subscribe(result => {
-      console.log(result);
       if (result) {
         this.router.navigate(['./login']);
       } else {
