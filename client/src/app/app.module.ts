@@ -33,6 +33,7 @@ import { QrGeneratorService } from './services/qr-generator.service';
 import { PackagesService } from './services/packages.service';
 import { RateService } from './services/rate.service';
 import { UserService } from './services/users.service';
+import { RegistrationService } from './services/registration.service';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { UserService } from './services/users.service';
     QrGeneratorService,
     PackagesService,
     RateService,
-    UserService
+    UserService,
+    RegistrationService
   ],
   bootstrap: [AppComponent]
 })
