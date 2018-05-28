@@ -2,6 +2,7 @@
 
 
 # Proof of Concept for PumaPay | V1.0.0-alpha
+###### [See our Blog for more details](https://blog.pumapay.io/pumapay-sdk-version-1-0-is-up/)
 
 ## Description
 The Alpha version of the PumaPay SDK is now available for developers' use free of charge. Built around the features of the ERC20 token, this initial version of the PumaPay solution is an open-source protocol that flexibly integrates with any kind of merchant platform. This allows developers to either clone the entire project or use only parts of it directly into their platform or edit it as it may suit the merchant's needs. While this only facilitates a crypto-typical push action, the full-scale Pull protocol will come with a future version of this software.
