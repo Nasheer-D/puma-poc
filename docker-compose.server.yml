@@ -43,6 +43,7 @@ services:
       - ./db/insert-users.sql:/docker-entrypoint-initdb.d/21-insert-users.sql
       - ./db/insert-items.sql:/docker-entrypoint-initdb.d/22-insert-items.sql
       - ./db/insert-packages.sql:/docker-entrypoint-initdb.d/23-insert-packages.sql
+      - ./db/insert-account.sql:/docker-entrypoint-initdb.d/23-insert-account.sql
     networks:
       - puma_poc
     restart: unless-stopped

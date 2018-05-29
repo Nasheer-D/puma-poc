@@ -4,7 +4,7 @@ import * as supertest from 'supertest';
 import { ISqlQuery, DataService } from '../../../../src/datasource/DataService';
 import { IResponseMessage } from '../../../../src/utils/responseHandler/ResponseHandler';
 import * as unit from 'ethereumjs-units';
-import { Package } from '../../../../src/domain/packages/models/Package';
+import { CreditPackage } from '../../../../src/domain/creditPackages/models/CreditPackage';
 import { RateHelpers } from '../../../../src/utils/rateHelpers/RateHelper';
 
 chai.use(chaiAsPromised);
@@ -20,7 +20,7 @@ process.env.BACKEND_HOST = 'http://192.168.1.54:8080/';
 const server = supertest.agent('http://localhost:8080/');
 const endpoint = 'api/v1/transaction/package';
 const networkid = 3; //3 – ropsten, 1- mainnet
-const testPackage: Package = require('../../../../resources/testData.json').testPackage;
+const testPackage: CreditPackage = require('../../../../resources/testData.json').testPackage;
 const status = 0;
 
 const dataservice = new DataService();
