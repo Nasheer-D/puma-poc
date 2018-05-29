@@ -7,6 +7,7 @@ import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
 import { AuthenticationService } from '../../../../services/authentication.service';
 import { PurchaseOptionsModalComponent } from '../purchase-options/purchase-options.component';
 import { TransactionService } from '../../../../services/transaction.service';
+import { User } from '../../../../models/User';
 
 @Component({
   selector: 'app-purchase-packages',
@@ -18,6 +19,7 @@ export class PurchasePackagesComponent implements OnInit {
   public purchasePackages: NgbModal;
   @ViewChild('purchaseOptionModal')
   public purchaseOptionsModal: PurchaseOptionsModalComponent;
+  public user: User;
 
   public creditPackages: CreditPackage[] = [];
   public selectedPackage: CreditPackage = <CreditPackage>{};
@@ -31,6 +33,7 @@ export class PurchasePackagesComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
     if (!this.authService.isTokenExpired()) {
       this.rateService.getPMAtoUSDRate().subscribe((res: HttpResponse) => {
         if (res.success) {
