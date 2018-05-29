@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS public.app_users
     hash char(128) NOT NULL,
     credits double precision NOT NULL,
     "registrationDate" bigint NOT NULL,
-    "walletAddress" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    "walletAddress" character varying(255) COLLATE pg_catalog."default",
     CONSTRAINT app_users_pkey PRIMARY KEY ("userID")
 )
 WITH (
