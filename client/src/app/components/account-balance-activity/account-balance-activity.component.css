@@ -35,7 +35,7 @@
   text-align: start;
 }
 
-.user-credits-balance {
+.user-credits-title {
   font-family: Heebo;
   font-size: 14px;
   color: #9C9C9C;
@@ -110,8 +110,4 @@
 
 .history-table tbody tr:last-child td:last-child {
   border-radius: 0 0 15px 0;
-}
-
-.change-color {
-  color: #707070;
 }
