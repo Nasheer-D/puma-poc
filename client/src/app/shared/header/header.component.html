@@ -2,7 +2,7 @@
   <div class="header-div-color container-fluid">
     <div class="header-div-color navbar-brand">
       <img class="header-image img-responsive" src="/assets/images/logo.png" alt="Logo">
-      <label class="label-header">Pumapay</label>
+      <label routerLink="/items" routerLinkActive="active" class="label-header">Pumapay</label>
     </div>
     <div class="header-div-color" *ngIf="this.user === null">
       <ul class="nav navbar-right">
@@ -12,7 +12,7 @@
     </div>
     <div class="header-div-color" *ngIf="this.user !== null">
       <ul class="nav navbar-right">
-        <a class="header-login username-container" href="">{{user.userName }}</a>
+        <a routerLink="/accountDetails" routerLinkActive="active" class="header-login username-container">{{user.userName }}</a>
         <span class="user-details-separation">/</span>
         <label class="header-login" href="">Credits: {{user.credits | number: '1.2-2'}} PMA -
           <span>
