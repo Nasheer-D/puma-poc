@@ -6,10 +6,10 @@ import { JSONWebToken } from '../../utils/authentication/JSONWebToken';
 
 @JsonController('/account')
 export class ItemsController {
-  @Get('/:ownerID')
+  @Get('/:userID')
   @UseBefore(UserAuthenticatorMiddleware)
   public async getAccountDetails(
-    @Param('ownerID') ownerID: string,
+    @Param('userID') ownerID: string,
     @Req() request: any,
     @Res() response: any) {
       const userID = new JSONWebToken(request).decodedToken.userID;
