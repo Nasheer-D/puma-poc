@@ -73,9 +73,6 @@ TABLESPACE pg_default;
 ALTER TABLE public.credit_packages
     OWNER to local_user;
 
-
-
-
 CREATE TABLE IF NOT EXISTS public.account_details
 (
     "ownerID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
@@ -92,8 +89,7 @@ CREATE TABLE IF NOT EXISTS public.account_details
     CONSTRAINT "ownerID" FOREIGN KEY ("ownerID")
         REFERENCES public.app_users ("userID") MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-	
+        ON DELETE NO ACTION	
 )
 WITH (
     OIDS = FALSE

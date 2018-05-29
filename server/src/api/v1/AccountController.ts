@@ -12,16 +12,16 @@ export class ItemsController {
     @Param('userID') ownerID: string,
     @Req() request: any,
     @Res() response: any) {
-      const userID = new JSONWebToken(request).decodedToken.userID;
-      const sqlQuery: ISqlQuery = {
+    const userID = new JSONWebToken(request).decodedToken.userID;
+    const sqlQuery: ISqlQuery = {
       text: `SELECT * FROM account_details  WHERE "ownerID" = $1;`,
       values: [userID]
     };
-  try {
-    const result = await new DataService().executeQueryAsPromise(sqlQuery);
-    return new ResponseHandler().handle(response, result);
-  } catch (error) {
-    return new ResponseHandler().handle(response, error);
+    try {
+      const result = await new DataService().executeQueryAsPromise(sqlQuery);
+      return new ResponseHandler().handle(response, result);
+    } catch (error) {
+      return new ResponseHandler().handle(response, error);
+    }
   }
-}
 }
