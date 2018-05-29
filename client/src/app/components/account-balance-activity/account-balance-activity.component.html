@@ -1,35 +1,97 @@
 <app-header></app-header>
-<div class="acount-details-container">
-  <div class="container-fluid">
+<div class="acccount-details-container">
+  <div class="container-fluid title-container">
     <div class="row">
       <div class="col-12">
-        <label class="title-label"></label>
-        <label class="subtitle-label"></label>
+        <label class="title-label">Account, Balance & Activity</label>
+        <label class="subtitle-label">In cases of Credit lost due to a site malfunction of faults in service, we invite you to
+          <u>contact Customer Support</u>
+          or
+          <u>submit a request for Credit refund</u> equal to the price paid, subject to effective reporting of the problem.</label>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="container">
+    <div class="container credit-balance-container">
+      <div class="row">
+        <div class="col-12">
           <div class="row">
-
+            <div class="col-12 credit-balance">
+              <label>Your Credit Balance
+                <i class="fa fa-question-circle"></i>
+              </label>
+            </div>
           </div>
           <div class="row">
-
+            <div class="col-6 user-credits-balance">
+              <label>Your Credits:
+                <span class="credits-balance"></span>49.92 PMA</label>
+            </div>
+            <div class="col-6 user-treats">
+              <label>Treats: 0.00</label>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-6">
-
-      </div>
-      <div class="col-6">
-
+      <div class="container filter-container">
+        <div class="col-6 activity-log">
+          <label>Activity Log</label>
+        </div>
+        <div class="col-6 activity-filter">
+          <label>Sort by: Today | This week | This month | Choose interval</label>
+        </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
-
+      <div class="container table-container">
+        <div class="panel panel-default">
+          <table class="table history-table">
+            <thead class="table-head">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Activity</th>
+                <th scope="col">Total Time</th>
+                <th scope="col">Charge per Minute</th>
+                <th scope="col">Discount per Minute</th>
+                <th scope="col">Total Charged</th>
+                <th scope="col">Total Credited</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="col">2</th>
+                <td>3/28/2018</td>
+                <td id="change-color">PumaPay</td>
+                <td>11:50:16 AM</td>
+                <td>15</td>
+                <td>none</td>
+                <td>15</td>
+                <td id="change-color">none</td>
+              </tr>
+              <tr>
+                <th scope="col">3</th>
+                <td>3/28/2018</td>
+                <td id="change-color">PumaPay</td>
+                <td>11:50:16 AM</td>
+                <td>15</td>
+                <td>none</td>
+                <td>15</td>
+                <td id="change-color">none</td>
+              </tr>
+              <tr>
+                <th scope="col">4</th>
+                <td>3/28/2018</td>
+                <td id="change-color">PumaPay</td>
+                <td>11:50:16 AM</td>
+                <td>15</td>
+                <td>none</td>
+                <td>15</td>
+                <td id="change-color">none</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
