@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS public.app_users
     hash char(128) NOT NULL,
     credits double precision NOT NULL,
     "registrationDate" bigint NOT NULL,
-    "walletAddress" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    "walletAddress" character varying(255) COLLATE pg_catalog."default",
     CONSTRAINT app_users_pkey PRIMARY KEY ("userID")
 )
 WITH (
@@ -71,6 +71,32 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.credit_packages
+    OWNER to local_user;
+
+CREATE TABLE IF NOT EXISTS public.account_details
+(
+    "ownerID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    date bigint NOT NULL,
+    "paymentMethod" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    "totalTime" time without time zone NOT NULL,
+    changePerMinute integer NOT NULL,
+    "discountPerMinute" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    totalCharged integer NOT NULL,
+    "totalCredited" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    "transactionID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+	
+	CONSTRAINT account_pkey PRIMARY KEY ("transactionID"),
+    CONSTRAINT "ownerID" FOREIGN KEY ("ownerID")
+        REFERENCES public.app_users ("userID") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION	
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.account_details
     OWNER to local_user;
 
 

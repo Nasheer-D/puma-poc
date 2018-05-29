@@ -2,7 +2,7 @@ import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 import * as supertest from 'supertest';
 import { ISqlQuery, DataService } from '../../../../src/datasource/DataService';
-import { Package } from '../../../../src/domain/packages/models/Package';
+import { CreditPackage } from '../../../../src/domain/creditPackages/models/CreditPackage';
 import { IResponseMessage } from '../../../../src/utils/responseHandler/ResponseHandler';
 
 chai.use(chaiAsPromised);
@@ -17,7 +17,7 @@ process.env.PGDATABASE = 'local_puma_poc';
 const server = supertest.agent('http://localhost:8080/');
 const endpoint = 'api/v1/packages/';
 
-const testPackage: Package = require('../../../../resources/testData.json').testPackage;
+const testPackage: CreditPackage = require('../../../../resources/testData.json').testPackage;
 
 const dataservice = new DataService();
 const insertTestData = async () => {
