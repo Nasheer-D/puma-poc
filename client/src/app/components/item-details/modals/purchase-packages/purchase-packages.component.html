@@ -19,103 +19,58 @@
       <div class="modal-body">
         <div class="container transaction-tool">
           <div class="row">
-            <div class="container options-container col-md">
+            <div class="container options-container col-md" *ngFor="let package of creditPackages">
               <div>
                 <div class="col credit-number">
-                  <label>10</label>
+                  <label>{{package.amount}}</label>
+                  <div class="invoice-ribbon" *ngIf="package.featured">
+                    <div class="ribbon-inner">
+                      <span class="best-offer">BEST OFFER</span>
+                    </div>
+                  </div>
                 </div>
                 <div class="col credits">
                   <label>Credits</label>
                 </div>
                 <div class="col bonus">
-                  <label>+ No Bonus Attached</label>
+                  <label *ngIf="package.bonusTickets != 0">+ {{package.bonusTickets}} Raffle Ticket
+                    <span *ngIf="package.bonusTickets > 1">s</span>
+                  </label>
+                  <label *ngIf="package.bonusTickets == 0">+ No Bonus Attached</label>
                 </div>
                 <div class="col">
-                  <button class="btn btn-primary buy-credits">Buy Credits</button>
+                  <button class="btn btn-primary buy-credits" (click)="openPuchaseOptionsModal(package)">Buy Credits</button>
                 </div>
                 <div class="col puma-amount">
-                  <label>For 551.7059 PMA</label>
-                </div>
-              </div>
-            </div>
-            <div class="container options-container col-md">
-              <div>
-                <div class="col credit-number">
-                  <label>25</label>
-                </div>
-                <div class="col credits">
-                  <label>Credits</label>
-                </div>
-                <div class="col bonus">
-                  <label>+ 1 Raffle Ticket</label>
-                </div>
-                <div class="col">
-                  <button class="btn btn-primary buy-credits">Buy Credits</button>
-                </div>
-                <div class="col puma-amount">
-                  <label>For 1379.2647 PMA</label>
-                </div>
-              </div>
-            </div>
-            <div class="container options-container col-md">
-              <div>
-                <div class="col credit-number">
-                  <label>50</label>
-                </div>
-                <div class="col credits">
-                  <label>Credits</label>
-                </div>
-                <div class="col bonus">
-                  <label>+ 2 Raffle Ticket</label>
-                </div>
-                <div class="col">
-                  <button class="btn btn-primary buy-credits">Buy Credits</button>
-                </div>
-                <div class="col puma-amount">
-                  <label>For 2758.5294 PMA</label>
-                </div>
-              </div>
-            </div>
-            <div class="container options-container col-md">
-              <div>
-                <div class="col credit-number">
-                  <label>100</label>
-                </div>
-                <div class="col credits">
-                  <label>Credits</label>
-                </div>
-                <div class="col bonus">
-                  <label>+ 4 Raffle Ticket</label>
-                </div>
-                <div class="col">
-                  <button class="btn btn-primary buy-credits">Buy Credits</button>
-                </div>
-                <div class="col puma-amount">
-                  <label>For 5517.0587 PMA</label>
+                  <label>For {{package.priceInPMA | number: '1.2-2'}} PMA</label>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="container modal-header">
+      <div class="container modal-footer">
         <div class="row col-md-12">
           <div class="col-lg-12">
-            <label class="modal-payment-method">Choose your payment method:</label>
+            <div class="modal-payment-method">Choose your payment method:</div>
           </div>
-          <div class="col-lg-12">
-            <label class="radio-inline">
-              <input type="radio" name="optradio"> Credit Card &nbsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio"> Pay Pal &nbsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio"> PumaPay
-            </label>
+          <div class="row col-lg-12">
+            <div class="col-lg-4 custom-control custom-radio">
+              <input type="radio" id="credit-card-radio" name="credit-card-radio" class="custom-control-input" disabled>
+              <label class="custom-control-label" for="credit-card-radio">Credit Card</label>
+            </div>
+            <div class="col-lg-4 custom-control custom-radio">
+              <input type="radio" id="pay-pal-radio" name="pay-pal-radio" class="custom-control-input" disabled>
+              <label class="custom-control-label" for="pay-pal-radio">Pay Pal</label>
+            </div>
+            <div class="col-lg-4 custom-control custom-radio">
+              <input type="radio" id="puma-pay-radio" name="puma-pay-radio" class="custom-control-input" checked>
+              <label class="custom-control-label" for="puma-pay-radio">PumaPay</label>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </ng-template>
+<app-purchase-options #purchaseOptionModal [packagePrice]="selectedPackage.priceInPMA" [packageID]="selectedPackage.packageID"></app-purchase-options>

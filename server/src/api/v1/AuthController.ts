@@ -33,6 +33,7 @@ export class AuthController {
     } catch (error) {
       response.status(500).json(<AuthenticationResponse>{
         success: false,
+        status: 'FAILED',
         message: 'Server error occurred.'
       });
     }

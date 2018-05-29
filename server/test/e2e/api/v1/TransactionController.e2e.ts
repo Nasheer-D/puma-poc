@@ -17,9 +17,7 @@ process.env.PGDATABASE = 'local_puma_poc';
 
 const server = supertest.agent('http://localhost:8080/');
 const endpoint = 'api/v1/transaction';
-const networkid = 3; //3 – ropsten, 1- mainnet
 const testItem: Item = require('../../../../resources/testData.json').testItem;
-const status = 0;
 
 const dataservice = new DataService();
 const insertTestData = async () => {
@@ -106,7 +104,7 @@ describe('A TransactionController', () => {
         });
     });
 
-    describe('should handle tx data', async () => {
+    describe('should handle blockchain tx status', async () => {
       beforeEach(async () => {
         await initiateSession();
       });
@@ -114,89 +112,7 @@ describe('A TransactionController', () => {
         await deleteSession();
       });
 
-      const expectedResponse = {
-        success: true,
-        status: 'OK',
-        message: 'Retrieved transaction data succesfully',
-        data: [{
-          description: testItem.description,
-          name: testItem.title,
-          networkid: networkid,
-          to: '',
-          value: testItem.price
-        }]
-      }
-
-      it('should return the tx data', (done) => {
-        server.get(`${endpoint}/tx/${sessionID}/${testItem.itemID}`)
-          .expect(200)
-          .end((err: Error, res: any) => {
-            const body = res.body;
-            expect(body).to.have.property('success').that.is.equal(expectedResponse.success);
-            expect(body).to.have.property('status').that.is.equal(expectedResponse.status);
-            expect(body).to.have.property('message').that.is.equal(expectedResponse.message);
-            expect(body).to.have.property('data').to.be.an('array');
-            expect(body.data[0]).to.have.property('description').that.is.equal(testItem.description);
-            expect(body.data[0]).to.have.property('name').that.is.equal(testItem.title);
-            expect(body.data[0]).to.have.property('value').that.is.equal(unit.convert(testItem.price, 'eth', 'wei'));
-            expect(body.data[0]).to.have.property('to').that.is.equal('0xb344ec617313d90331285E33cF4168DDb5C91B21');
-            expect(body.data[0]).to.have.property('callback').that.is.equal(`http://172.26.246.81:8080/${endpoint}/txStatus/session/${sessionID}`);
-            expect(body.data[0]).to.have.property('signature').that.is.equal('0x2b12a7855ad66c6cc26d148cd67bf7eb66f0a1e5abe75ff73864bbb5158a899c0f0db6ff86a29f870a9cb67820d0a1ce84afc56b862b344008572bcce33a9ddb01');
-            done(err);
-          });
-      })
-
-      it('should return the tx data plain', (done) => {
-        server.get(`${endpoint}/tx/plain/${sessionID}/${testItem.itemID}`)
-          .expect(200)
-          .end((err: Error, res: any) => {
-            const body = res.body;
-            expect(body).to.have.property('description').that.is.equal(testItem.description);
-            expect(body).to.have.property('name').that.is.equal(testItem.title);
-            expect(body).to.have.property('value').that.is.equal(unit.convert(testItem.price, 'eth', 'wei'));
-            expect(body).to.have.property('to').that.is.equal('0xb344ec617313d90331285E33cF4168DDb5C91B21');
-            expect(body).to.have.property('callback').that.is.equal(`http://172.26.246.81:8080/${endpoint}/txStatus/session/${sessionID}`);
-            expect(body).to.have.property('signature').that.is.equal('0x2b12a7855ad66c6cc26d148cd67bf7eb66f0a1e5abe75ff73864bbb5158a899c0f0db6ff86a29f870a9cb67820d0a1ce84afc56b862b344008572bcce33a9ddb01');
-            done(err);
-          });
-      })
-    });
-
-    describe('should handle tx status', async () => {
-      beforeEach(async () => {
-        await initiateSession();
-      });
-      afterEach(async () => {
-        await deleteSession();
-      });
-
-      it('should return the tx status for session', (done) => {
-        const txHash = '';
-        const fromPumaWallet = 1;
-        const expectedResponse: IResponseMessage = {
-          success: true,
-          status: 'OK',
-          message: 'SQL Query completed successful.',
-          data: []
-        }
-
-        server.get(`${endpoint}/txStatus/session/${sessionID}?tx=${txHash}&status=${status}&fromApp=${fromPumaWallet}`)
-          .expect(200)
-          .end((err: Error, res: any) => {
-            const body = res.body;
-            expect(body).to.have.property('success').that.is.equal(expectedResponse.success);
-            expect(body).to.have.property('status').that.is.equal(expectedResponse.status);
-            expect(body).to.have.property('message').that.is.equal(expectedResponse.message);
-            expect(body).to.have.property('data').to.be.an('array');
-            expect(body.data[0]).to.have.property('sessionID');
-            expect(body.data[0]).to.have.property('txHash').that.is.equal(txHash);
-            expect(body.data[0]).to.have.property('status').that.is.equal(0);
-            expect(body.data[0]).to.have.property('fromPumaWallet').that.is.equal(true);
-            done(err);
-          });
-      });
-
-      it('should return the tx status for tx hash', (done) => {
+      it('should return the tx status for blockchain tx hash', (done) => {
         const transactionHash = '0x5b5a5641b918b2d22143cc2f2a6b3b21f30e09bbb13fbd414304becb4ba1cdf0';
         const blockHash = '0xecbe047f90729ab8da1926905563deb7185771d447f34c92646886adf32aa340';
         const from = '0xb344ec617313d90331285e33cf4168ddb5c91b21';
@@ -240,106 +156,8 @@ describe('A TransactionController', () => {
     afterEach(async () => {
       await deleteSession();
     });
-    describe('should return errors of tx data', async () => {
-      it('should return error message when itemID doesnt exist in tx data', (done: any) => {
-        const expectedResponse: IResponseMessage = {
-          success: false,
-          status: 'NO DATA',
-          message: 'SQL Query returned no data from database.'
-        };
 
-        server.get(`${endpoint}/tx/${sessionID}/'wrong_itemID'`)
-          .expect(400)
-          .end((err: Error, res: any) => {
-            const body = res.body;
-            expect(body).to.have.property('success').that.is.equal(expectedResponse.success);
-            expect(body).to.have.property('status').that.is.equal(expectedResponse.status);
-            expect(body).to.have.property('message').that.is.equal(expectedResponse.message);
-            done(err);
-          });
-      });
-
-      it('should return error message when itemID doesnt exist in tx plain', (done: any) => {
-        const expectedResponse: IResponseMessage = {
-          success: false,
-          status: 'NO DATA',
-          message: 'SQL Query returned no data from database.'
-        };
-
-        server.get(`${endpoint}/tx/plain/${sessionID}/'wrong_itemID'`)
-          .expect(400)
-          .end((err: Error, res: any) => {
-            const body = res.body;
-            expect(body).to.have.property('success').that.is.equal(expectedResponse.success);
-            expect(body).to.have.property('status').that.is.equal(expectedResponse.status);
-            expect(body).to.have.property('message').that.is.equal(expectedResponse.message);
-            done(err);
-          });
-      });
-    });
-
-    describe('should return errors of tx status', async () => {
-      it('should return error message when from app value is wrong', (done: any) => {
-        const txHash = '';
-        const expectedResponse: IResponseMessage = {
-          success: false,
-          status: 'FAILED',
-          message: 'SQL Query failed. Reason: invalid_text_representation',
-          errcode: '22P02'
-        };
-
-        server.get(`${endpoint}/txStatus/session/${sessionID}?tx=${txHash}&status=${status}&fromApp='5'`)
-          .expect(500)
-          .end((err: Error, res: any) => {
-            const body = res.body;
-            expect(body).to.have.property('success').that.is.equal(expectedResponse.success);
-            expect(body).to.have.property('status').that.is.equal(expectedResponse.status);
-            expect(body).to.have.property('message').that.is.equal(expectedResponse.message);
-            expect(body).to.have.property('errcode').that.is.equal(expectedResponse.errcode);
-            done(err);
-          });
-      });
-
-      it('should return error message when status value is wrong', (done: any) => {
-        const txHash = '';
-        const expectedResponse: IResponseMessage = {
-          success: false,
-          status: 'FAILED',
-          message: 'SQL Query failed. Reason: invalid_text_representation',
-          errcode: '22P02'
-        };
-
-        server.get(`${endpoint}/txStatus/session/${sessionID}?tx=${txHash}&status=wrong_status&fromApp='1'`)
-          .expect(500)
-          .end((err: Error, res: any) => {
-            const body = res.body;
-            expect(body).to.have.property('success').that.is.equal(expectedResponse.success);
-            expect(body).to.have.property('status').that.is.equal(expectedResponse.status);
-            expect(body).to.have.property('message').that.is.equal(expectedResponse.message);
-            expect(body).to.have.property('errcode').that.is.equal(expectedResponse.errcode);
-            done(err);
-          });
-      });;
-
-      it('should return error message when query parameters are null', (done: any) => {
-        const expectedResponse: IResponseMessage = {
-          success: false,
-          status: 'FAILED',
-          message: 'SQL Query failed. Reason: not_null_violation',
-          errcode: '23502'
-        };
-
-        server.get(`${endpoint}/txStatus/session/${sessionID}`)
-          .expect(500)
-          .end((err: Error, res: any) => {
-            const body = res.body;
-            expect(body).to.have.property('success').that.is.equal(expectedResponse.success);
-            expect(body).to.have.property('status').that.is.equal(expectedResponse.status);
-            expect(body).to.have.property('message').that.is.equal(expectedResponse.message);
-            expect(body).to.have.property('errcode').that.is.equal(expectedResponse.errcode);
-            done(err);
-          });
-      });
+    describe('should return errors of blockchain tx status', async () => {
       it('should return error message when tx hash has wrong length', (done: any) => {
         const transactionHash = '0x5b5a5641b918b2d22143cc2f2a6b3b21f30e09bbb13fbd414304becb4ba1cdf01';
         const expectedResponse: IResponseMessage = {

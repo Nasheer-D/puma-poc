@@ -31,6 +31,9 @@ import { PurchasePackagesComponent } from './components/item-details/modals/purc
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { QrGeneratorService } from './services/qr-generator.service';
 import { AccountBalanceActivityComponent } from './components/account-balance-activity/account-balance-activity.component';
+import { PackagesService } from './services/packages.service';
+import { RateService } from './services/rate.service';
+import { UserService } from './services/users.service';
 
 @NgModule({
   declarations: [
@@ -67,7 +70,10 @@ import { AccountBalanceActivityComponent } from './components/account-balance-ac
     TransactionService,
     TxStatusService,
     Web3Service,
-    QrGeneratorService
+    QrGeneratorService,
+    PackagesService,
+    RateService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

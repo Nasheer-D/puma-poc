@@ -13,6 +13,7 @@ import { TxStatusService } from '../../../../services/webSocket.service';
 import { HttpResponse } from '../../../../utils/web/models/HttpResponse';
 import { TxStatus } from '../../../../models/Transaction';
 import { QrGeneratorService } from '../../../../services/qr-generator.service';
+import { UserService } from '../../../../services/users.service';
 
 @Component({
   selector: 'app-payment-wallet',
@@ -24,21 +25,42 @@ export class PaymentWalletModalComponent {
   public paymentWalletModal: NgbModal;
   @Input()
   public itemPrice: number;
+  @Input()
+  public packagePrice: number;
   public txDataAsString: string;
   public sessionTransaction: any = {};
   private sessionID: string;
+  private credits: string;
 
   constructor(private modal: NgbModal, private spinner: NgxSpinnerService,
     private txStatusService: TxStatusService,
-    private qrGeneratorService: QrGeneratorService) {
+    private qrGeneratorService: QrGeneratorService,
+    private userService: UserService) {
   }
+
   public open(): void {
+    // status is -1(not enable the transaction) and get the item with the sessionID
     this.sessionTransaction.status = -1;
     const sessionID = localStorage.getItem('sessionID');
-    this.txDataAsString = this.qrGeneratorService.getQrData();
+    if (this.itemPrice) {
+      this.txDataAsString = this.qrGeneratorService.getQrDataForItem();
+    } else if (this.packagePrice) {
+      this.txDataAsString = this.qrGeneratorService.getQrDataForPackage();
+    }
     this.txStatusService.onTxStatusChange(sessionID).subscribe((response: HttpResponse) => {
       if (response.success) {
         this.sessionTransaction = response.data[0];
+        if (this.isSucccessfulStatus()) {
+          this.userService.getLoggedInUserCredits().subscribe((creditResponse: HttpResponse) => {
+            if (creditResponse.success) {
+              const user = JSON.parse(localStorage.getItem('currentUser'));
+              user.credits = creditResponse.data[0].credits;
+              localStorage.setItem('currentUser', JSON.stringify(user));
+              // TODO - Reload in the proper way
+              window.location.reload();
+            }
+          });
+        }
       }
     });
     this.modal.open(this.paymentWalletModal, { centered: true, size: 'lg' });

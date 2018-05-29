@@ -11,7 +11,7 @@ import { ObserveOnSubscriber } from 'rxjs/operators/observeOn';
 export class TransactionService {
     private actionUrl: string;
 
-    public constructor(private http: HttpClient) {
+    public constructor(private http: HttpClient, private authService: AuthenticationService) {
         // The constractor declares host and apiPrefix for the calls
         this.actionUrl = `${Constants.apiHost}${Constants.apiPrefix}transaction/`;
     }
@@ -21,14 +21,27 @@ export class TransactionService {
         return new HttpGetRequest(this.http, `${this.actionUrl}init`).getResult();
     }
 
-    public getTxDetails(sessionID: string, itemID: string): Observable<any> {
-        // makes a call that builds the transaction data and returns it back including the item details and signature
-        return new HttpGetRequest(this.http, `${this.actionUrl}tx/${sessionID}/${itemID}`).getResult();
+    public getTxDetailsForItem(sessionID: string, itemID: string): Observable<any> {
+        // makes a call that builds the transaction data, returns it back including the item details and signature
+        return new HttpGetRequest(this.http, `${this.actionUrl}item/tx/${sessionID}/${itemID}`).getResult();
     }
 
-    public sendTransactionStatus(sessionId: string, txhash: string, status: number) {
-        // Returns the status of the pending transaction..it is repeated until the transaction is completed
+    public sendTransactionStatusForItem(sessionId: string, txhash: string, status: number) {
+        // Returns the status of the pending transaction, it is repeated until the transaction is completed
         return new HttpGetRequest(this.http,
-            `${this.actionUrl}txStatus/session/${sessionId}?tx=${txhash}&status=${status}&fromapp=0`).getResult();
+            `${this.actionUrl}item/txStatus/session/${sessionId}?tx=${txhash}&status=${status}&fromapp=0`).getResult();
+    }
+
+    public getTxDetailsForPackage(sessionID: string, packageID: string): Observable<any> {
+        // makes a call that builds the transaction data for package purchase, returns it back including the package details and signature
+        return new HttpGetRequest(this.http, `${this.actionUrl}package/tx/${sessionID}/${packageID}`,
+            this.authService).getResult();
+    }
+
+    public sendTransactionStatusForPackage(packageID: string, userID: string, sessionID: string, txhash: string, status: number) {
+        // Returns the status of the pending transaction for package purchase, it is repeated until the transaction is completed
+        return new HttpGetRequest(this.http,
+            `${this.actionUrl}package/txStatus/${packageID}/${userID}/session/${sessionID}?tx=${txhash}&status=${status}&fromapp=0`,
+            this.authService).getResult();
     }
 }

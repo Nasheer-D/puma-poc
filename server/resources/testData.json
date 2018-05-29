@@ -19,5 +19,16 @@
             5
         ],
         "uploadedDate": 1522759457
+    },
+    "testPackage": {
+        "packageID": "testpackage01",
+        "ownerID": "owner01",
+        "amount": 20,
+        "bonusCredits": 10,
+        "bonusTickets": 2,
+        "featured": false,
+        "priceInUSD": 15,
+        "title": "Test Package",
+        "description": "Test Package Description"
     }
 }

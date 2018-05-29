@@ -13,8 +13,8 @@
   margin-bottom: 0px;
 }
 
-.modal-payment-method{
-  color:#353535;
+.modal-payment-method {
+  color: #353535;
   font-size: 16px;
   font-family: Heebo;
 }
@@ -66,35 +66,73 @@
   top: 8px;
 }
 
-.credit-number{
-  font-size:96px;
-  color:#1E69F5;
+.credit-number {
+  font-size: 96px;
+  color: #1E69F5;
   font-family: Heebo;
   line-height: 141px;
 }
 
-.credits{
-  font-size:36px;
-  color:#8F8F8F;
+.credits {
+  font-size: 36px;
+  color: #8F8F8F;
   font-family: Heebo;
   margin-top: -50px;
 }
 
-.bonus{
-  font-size:14px;
-  color:#1E69F5;
+.bonus {
+  font-size: 14px;
+  color: #1E69F5;
   font-family: Heebo;
   margin-bottom: 10px;
 }
 
-.buy-credits{
+.buy-credits {
   font-family: Heebo;
   border-radius: 8px;
   margin-bottom: 5px;
 }
 
-.puma-amount{
-  font-size:14px;
-  color:#9C9C9C;
+.puma-amount {
+  font-size: 14px;
+  color: #9C9C9C;
   font-family: Heebo;
+}
+
+.modal-footer {
+  border-top: none;
+}
+
+.invoice-ribbon {
+  width: 85px;
+  height: 88px;
+  overflow: hidden;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+}
+
+.ribbon-inner {
+  text-align: center;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  position: relative;
+  padding: 12px 0;
+  left: -5px;
+  top: 11px;
+  width: 120px;
+  background-color: #5FE65A;
+  font-size: 14px;
+  color: #fff;
+}
+
+.best-offer {
+  position: absolute;
+  top: -58px;
+  left: 35px;
+  height: 0;
+  text-align: start;
+  font-size: 11px;
 }

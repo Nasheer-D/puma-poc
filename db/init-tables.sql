@@ -47,6 +47,33 @@ TABLESPACE pg_default;
 ALTER TABLE public.items
     OWNER to local_user;
 
+CREATE TABLE IF NOT EXISTS public.credit_packages
+(
+    "packageID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    "ownerID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    amount double precision NOT NULL DEFAULT 0,
+    "bonusCredits" integer NOT NULL DEFAULT 0,
+    "bonusTickets" integer NOT NULL DEFAULT 0,
+    featured boolean NOT NULL DEFAULT false,
+    "priceInUSD" double precision NOT NULL DEFAULT 0,
+    description character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    title character varying(255) COLLATE pg_catalog."default" NOT NULL,
+
+    CONSTRAINT packages_pkey PRIMARY KEY ("packageID"),
+    CONSTRAINT "ownerID" FOREIGN KEY ("ownerID")
+        REFERENCES public.app_users ("userID") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.credit_packages
+    OWNER to local_user;
+
+
 CREATE TABLE IF NOT EXISTS public.sessions
 (
     "sessionID" character varying(255) COLLATE pg_catalog."default" NOT NULL,

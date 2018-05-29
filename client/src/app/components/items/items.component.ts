@@ -32,6 +32,7 @@ export class ItemsComponent implements OnInit {
 
   public ngOnInit() {
     localStorage.removeItem('sessionID');
+    localStorage.removeItem('packageID');
     localStorage.removeItem('itemID');
     this.itemsService.getAllItems().subscribe((res: HttpResponse) => {
       if (res.success) {
