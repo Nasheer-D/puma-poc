@@ -21,8 +21,12 @@
   border-radius: 15px;
   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
   offset-block-end: 0px, 3px;
-  max-width: 882px;
+  max-width: 852px;
   height: auto;
+}
+
+.question-cirle {
+  color: #C4C2C2;
 }
 
 .credit-balance {
@@ -106,4 +110,8 @@
 
 .history-table tbody tr:last-child td:last-child {
   border-radius: 0 0 15px 0;
+}
+
+.change-color {
+  color: #707070;
 }
