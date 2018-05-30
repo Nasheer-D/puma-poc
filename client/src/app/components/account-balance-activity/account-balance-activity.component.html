@@ -23,7 +23,7 @@
           <div class="row">
             <div class="col-6 user-credits-title">
               <label>Your Credits:
-                <span class="credits-balance">49.92 PMA</span>
+                <span class="credits-balance">{{userCredits | number: '1.2-2'}} PMA</span>
               </label>
             </div>
             <div class="col-6 user-treats">
@@ -60,35 +60,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="col">2</th>
-                <td>3/28/2018</td>
-                <td>PumaPay</td>
-                <td>11:50:16 AM</td>
-                <td>15</td>
-                <td>none</td>
-                <td>15</td>
-                <td>none</td>
-              </tr>
-              <tr>
-                <th scope="col">3</th>
-                <td>3/28/2018</td>
-                <td>PumaPay</td>
-                <td>11:50:16 AM</td>
-                <td>15</td>
-                <td>none</td>
-                <td>15</td>
-                <td >none</td>
-              </tr>
-              <tr>
-                <th scope="col">4</th>
-                <td>3/28/2018</td>
-                <td >PumaPay</td>
-                <td>11:50:16 AM</td>
-                <td>15</td>
-                <td>none</td>
-                <td>15</td>
-                <td >none</td>
+              <tr *ngFor="let detail of details; let rowNumber = index">
+                <th scope="col">{{rowNumber + 1}}</th>
+                <td>{{detail.date | date}}</td>
+                <td>{{detail.paymentMethod}}</td>
+                <td>{{detail.totalTime}}</td>
+                <td>{{detail.chargePerMinute}}</td>
+                <td>{{detail.discountPerMinute}}</td>
+                <td>{{detail.totalCharged}}</td>
+                <td>{{detail.totalCredited}}</td>
               </tr>
             </tbody>
           </table>

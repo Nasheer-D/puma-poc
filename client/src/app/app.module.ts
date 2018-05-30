@@ -35,6 +35,7 @@ import { PackagesService } from './services/packages.service';
 import { RateService } from './services/rate.service';
 import { UserService } from './services/users.service';
 import { RegistrationService } from './services/registration.service';
+import { AccountDetailsService } from './services/account-details.service';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { RegistrationService } from './services/registration.service';
     PackagesService,
     RateService,
     UserService,
-    RegistrationService
+    RegistrationService,
+    AccountDetailsService
   ],
   bootstrap: [AppComponent]
 })
