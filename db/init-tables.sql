@@ -130,3 +130,4 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.items
     OWNER to local_user;
+    
