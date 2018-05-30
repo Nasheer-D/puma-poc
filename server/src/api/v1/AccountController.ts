@@ -1,4 +1,4 @@
-import { Get, JsonController, Res, UseBefore, Param, Req } from 'routing-controllers';
+import { Get, JsonController, Res, UseBefore, Param, Req, Header } from 'routing-controllers';
 import { DataService, ISqlQuery } from '../../datasource/DataService';
 import { ResponseHandler } from '../../utils/responseHandler/ResponseHandler';
 import { UserAuthenticatorMiddleware } from '../../middleware/UserAuthenticatorMiddleware';
