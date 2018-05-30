@@ -30,5 +30,16 @@
         "priceInUSD": 15,
         "title": "Test Package",
         "description": "Test Package Description"
+    },
+    "testAccount": {
+        "ownerID": "user01",
+        "date": "1522758951",
+        "paymentMethod": "Pumapay",
+        "totalTime": "800",
+        "chargePerMinute": 4000,
+        "discountPerMinute": 25,
+        "totalCharged": 1000,
+        "totalCredited": 4000,
+        "transactionID": "transactiontest"
     }
 }
