@@ -237,7 +237,7 @@ paths:
         required: true
       responses:
         '200':
-          description: Succedfully returns transacation data for item
+          description: Succesfully returns transacation data for item
           content:
             application/json:
               schema:
@@ -462,6 +462,35 @@ paths:
                     properties:
                       rate:
                         type: number
+  /account/{userID}:
+    get:
+      summary: Retrieve the account details of user
+      operationId: retrieveAccountDetailsOfUser
+      tags:
+        - AccountDetails
+      parameters:
+      - name: "userID"
+        in: path
+        schema:
+          type: string
+        description: Current logged in userID
+        required: true
+      security:
+        - TokenAuth: []
+      responses:
+        '200':
+          description: Succesfully returns account details for logged in user
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/AccountResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Account'
 components:
   securitySchemes:
     TokenAuth:
@@ -497,6 +526,20 @@ components:
         token:
           type: string
         user:
+          type: string
+    AccountResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        status:
+          type: string
+        message:
+          type: string
+        data:
+          type: array
+          items: {}
+        errcode:
           type: string
     Item:
       type: object
@@ -615,4 +658,25 @@ components:
         registrationDate:
           type: integer
         walletAddress:
+          type: string
+    Account:
+      type: object
+      properties:
+        ownerID:
+          type: string
+        date:
+          type: number
+        paymentMethod:
+          type: string
+        totalTime:
+          type: number
+        changePerMinute:
+          type: number
+        discountPerMinute:
+          type: number
+        totalCharged:
+          type: number
+        totalCredited:
+          type: number
+        transactionID:
           type: string
