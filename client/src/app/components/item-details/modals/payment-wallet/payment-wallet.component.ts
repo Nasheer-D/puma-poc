@@ -50,7 +50,7 @@ export class PaymentWalletModalComponent {
     this.txStatusService.onTxStatusChange(sessionID).subscribe((response: HttpResponse) => {
       if (response.success) {
         this.sessionTransaction = response.data[0];
-        if (this.isSucccessfulStatus()) {
+        if (this.isSucccessfulStatus() && this.packagePrice) {
           this.userService.getLoggedInUserCredits().subscribe((creditResponse: HttpResponse) => {
             if (creditResponse.success) {
               const user = JSON.parse(localStorage.getItem('currentUser'));

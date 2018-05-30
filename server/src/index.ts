@@ -5,6 +5,8 @@ import * as bodyParser from 'body-parser';
 import * as debug from 'debug';
 import * as http from 'http';
 import * as io from 'socket.io';
+import * as YAML from 'yamljs';
+import * as swaggerUi from 'swagger-ui-express';
 import { useExpressServer, useContainer, RoutingControllersOptions } from 'routing-controllers';
 import { Container } from 'typedi';
 import { LoggerInstance } from 'winston';
@@ -13,6 +15,8 @@ import { Config } from './config';
 import { IDebugger } from 'debug';
 import { Application } from 'express';
 import { WebSocketHelper } from './utils/webSocket/webSocketHelper';
+
+const swaggerDocument = YAML.load('./src/doc/api.yml');
 
 class App {
   private loggerFactory: LoggerFactory = new LoggerFactory(Config.settings.winston, Config.settings.morgan);
@@ -31,7 +35,8 @@ class App {
     // allow CORS
     app.use(cors());
     app.use(this.loggerFactory.requestLogger);
-
+    // swagger serve
+    app.use('/api/v1/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     this.debug('dependency injection');
     useContainer(Container);
     Container.set(LoggerFactory, this.loggerFactory);

@@ -81,7 +81,7 @@ export class PaymentMetamaskComponent {
       this.packageID = localStorage.getItem('packageID');
       this.userID = JSON.parse(localStorage.getItem('currentUser')).userID;
       // get the tx details of the specific item
-      this.transactionService.getTxDetailsForPackage(this.sessionID, this.packageID).subscribe((txResponse: HttpResponse) => {
+      this.transactionService.getTxDetailsForPackageMetamask(this.sessionID, this.packageID).subscribe((txResponse: HttpResponse) => {
         // if response is successful,get the tx data
         if (txResponse.success) {
           // get the tx status change

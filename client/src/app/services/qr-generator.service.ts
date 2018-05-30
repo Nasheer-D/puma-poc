@@ -10,9 +10,10 @@ export class QrGeneratorService {
   }
 
   public getQrDataForPackage(): string {
+    const userID = JSON.parse(localStorage.getItem('currentUser')).userID;
     const sessionID = localStorage.getItem('sessionID');
     const packageID = localStorage.getItem('packageID');
     return JSON.stringify(
-      { url: `${Constants.apiHost}${Constants.apiPrefix}transaction/package/tx/plain/${sessionID}/${packageID}` });
+      { url: `${Constants.apiHost}${Constants.apiPrefix}transaction/package/tx/wallet/plain/${userID}/${sessionID}/${packageID}` });
   }
 }

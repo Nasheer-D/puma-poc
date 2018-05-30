@@ -73,6 +73,8 @@ In case this doesn't work, follow [this guide](https://blogs.msdn.microsoft.com/
 ## Usage 
 * PoC Webpage : `http://localhost:4200`
 * Server: `http://localhost:8080`
+* v1 api URL: `http://localhost:8080/api/v1/`
+* v1 api Documentation: `http://localhost:8080/api/v1/doc`
 * DB:
     * PGHOST=postgres
     * PGUSER=local_user

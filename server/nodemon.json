@@ -1,12 +1,12 @@
 {
   "verbose": false,
-  "ext":     "ts,json",
-  "env":     {
-    "DEBUG":    "app:config",
+  "ext": "ts,json,yaml",
+  "env": {
+    "DEBUG": "app:config",
     "NODE_ENV": "development"
   },
-  "watch":   [
+  "watch": [
     "src"
   ],
-  "exec":    "npm run lint -s && node --max-old-space-size=16384 server.js"
+  "exec": "npm run lint -s && node --max-old-space-size=16384 server.js"
 }

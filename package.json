@@ -17,10 +17,21 @@
     "Angular",
     "PostgreSql",
     "Docker",
-    "PumaPay"
+    "PumaPay",
+    "Blockchain",
+    "ERC20",
+    "CryptoPayments",
+    "Cryptocurrency"
   ],
   "author": "PumaPay Team",
-  "license": "ISC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pumapayio/puma-poc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pumapayio/puma-poc/issues"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "npm test"

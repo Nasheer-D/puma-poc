@@ -5,6 +5,7 @@ export interface ISession {
     sessionID: string;
     txHash: string;
     status: TxStatus;
+    fromPumaWallet: boolean;
 }
 
 export enum TxStatus {

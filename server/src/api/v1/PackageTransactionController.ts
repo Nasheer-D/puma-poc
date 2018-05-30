@@ -18,9 +18,9 @@ export class PackageTransactionController {
   private logger: LoggerInstance = Container.get(LoggerFactory).getInstance('PackageTransactionController');
   private webSocket: io = Container.get(io);
 
-  @Get('/tx/:sessionID/:packageID')
+  @Get('/tx/metamask/:sessionID/:packageID')
   @UseBefore(UserAuthenticatorMiddleware)
-  public async retrieveTransactionData(
+  public async retrieveTransactionDataForMetamask(
     @Param('sessionID') sessionID: string,
     @Param('packageID') packageID: string,
     @Req() request: any, @Res() response: any) {
@@ -37,7 +37,7 @@ export class PackageTransactionController {
         return new ResponseHandler().handle(response, queryResult);
       }
 
-      const priceInPMA = queryResult.data[0].priceInUSD * new RateHelpers().getPMAtoUSDRate();
+      const priceInPMA = queryResult.data[0].priceInUSD / new RateHelpers().getPMAtoUSDRate();
       const transactionBuilder = new TransactionBuilder();
       transactionBuilder.description = queryResult.data[0].description;
       transactionBuilder.name = queryResult.data[0].title;
@@ -62,9 +62,9 @@ export class PackageTransactionController {
     }
   }
 
-  @Get('/tx/plain/:sessionID/:packageID')
-  @UseBefore(UserAuthenticatorMiddleware)
-  public async retrieveTransaction(
+  @Get('/tx/wallet/plain/:userID/:sessionID/:packageID')
+  public async retrieveTransactionForWallet(
+    @Param('userID') userID: string,
     @Param('sessionID') sessionID: string,
     @Param('packageID') packageID: string,
     @Req() request: any,
@@ -82,14 +82,13 @@ export class PackageTransactionController {
         return new ResponseHandler().handle(response, queryResult);
       }
 
-      const priceInPMA = queryResult.data[0].priceInUSD * new RateHelpers().getPMAtoUSDRate();
+      const priceInPMA = queryResult.data[0].priceInUSD / new RateHelpers().getPMAtoUSDRate();
       const transactionBuilder = new TransactionBuilder();
       transactionBuilder.description = queryResult.data[0].description;
       transactionBuilder.name = queryResult.data[0].title;
       transactionBuilder.to = queryResult.data[0].walletAddress;
       transactionBuilder.value = priceInPMA;
 
-      const userID = new JSONWebToken(request).decodedToken.userID;
       transactionBuilder.callbackUrl =
         `${Globals.GET_BACKEND_HOST()}${Globals.GET_API_PREFIX()}transaction/package/txStatus/${packageID}/${userID}/session/${sessionID}`;
 

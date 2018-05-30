@@ -32,9 +32,9 @@ export class TransactionService {
             `${this.actionUrl}item/txStatus/session/${sessionId}?tx=${txhash}&status=${status}&fromapp=0`).getResult();
     }
 
-    public getTxDetailsForPackage(sessionID: string, packageID: string): Observable<any> {
+    public getTxDetailsForPackageMetamask(sessionID: string, packageID: string): Observable<any> {
         // makes a call that builds the transaction data for package purchase, returns it back including the package details and signature
-        return new HttpGetRequest(this.http, `${this.actionUrl}package/tx/${sessionID}/${packageID}`,
+        return new HttpGetRequest(this.http, `${this.actionUrl}package/tx/metamask/${sessionID}/${packageID}`,
             this.authService).getResult();
     }
 

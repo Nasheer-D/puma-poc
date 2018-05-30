@@ -432,6 +432,8 @@ paths:
           type: integer
         description: Indicates if the transaction came from the wallet app
         required: true
+      security:
+        - TokenAuth: []
       responses:
         '200':
           description: Succesfully returns the status of the transaction
