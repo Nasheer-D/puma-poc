@@ -19,7 +19,7 @@
 
 .credit-balance-container {
   border-radius: 15px;
-  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.15);
   offset-block-end: 0px, 3px;
   max-width: 852px;
   height: auto;
@@ -78,15 +78,16 @@
 
 .table-container {
   border-radius: 15px;
-  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.15);
   offset-block-end: 0px, 3px;
   max-width: 852px;
   height: auto;
   font-family: Heebo;
   font-size: 14px;
-  color: #707070;
+  color: #9C9C9C;
   padding: 0px;
 }
+
 
 .history-table {
   border-top-left-radius: 6px;
@@ -94,6 +95,8 @@
 
 .history-table thead th {
   background-color: #D9D9D9;
+  color: #707070;
+  border: 0px;
 }
 
 .history-table thead th:first-child {
@@ -110,4 +113,8 @@
 
 .history-table tbody tr:last-child td:last-child {
   border-radius: 0 0 15px 0;
+}
+
+.text-color{
+  color:#707070;
 }

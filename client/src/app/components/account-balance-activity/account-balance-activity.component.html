@@ -63,12 +63,12 @@
               <tr *ngFor="let detail of details; let rowNumber = index">
                 <th scope="col">{{rowNumber + 1}}</th>
                 <td>{{detail.date | date}}</td>
-                <td>{{detail.paymentMethod}}</td>
+                <td><label class="text-color">{{detail.paymentMethod}}</label></td>
                 <td>{{detail.totalTime}}</td>
                 <td>{{detail.chargePerMinute}}</td>
                 <td>{{detail.discountPerMinute}}</td>
                 <td>{{detail.totalCharged}}</td>
-                <td>{{detail.totalCredited}}</td>
+                <td><label class="text-color">{{detail.totalCredited}}</label></td>
               </tr>
             </tbody>
           </table>
