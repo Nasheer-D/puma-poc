@@ -81,9 +81,9 @@ describe('An AccountController', () => {
               expect(body).to.have.property('message').that.is.equal(expectedQueryMessage.message);
               expect(body).to.have.property('data').to.be.an('array');
               expect(body.data[numberOfItems - 1]).to.have.property('ownerID').that.is.equal(testAccount.ownerID);
-              expect(body.data[numberOfItems - 1]).to.have.property('date').that.is.equal(testAccount.date);
+              expect(body.data[numberOfItems - 1]).to.have.property('date').that.is.equal(testAccount.date * 1000);
               expect(body.data[numberOfItems - 1]).to.have.property('paymentMethod').that.is.equal(testAccount.paymentMethod);
-              expect(body.data[numberOfItems - 1]).to.have.property('totalTime').that.is.equal(testAccount.totalTime);
+              expect(body.data[numberOfItems - 1]).to.have.property('totalTime').that.is.equal(testAccount.totalTime / 60);
               expect(body.data[numberOfItems - 1]).to.have.property('chargePerMinute').that.is.equal(testAccount.chargePerMinute);
               expect(body.data[numberOfItems - 1]).to.have.property('discountPerMinute').that.is.equal(testAccount.discountPerMinute);
               expect(body.data[numberOfItems - 1]).to.have.property('totalCharged').that.is.equal(testAccount.totalCharged);
