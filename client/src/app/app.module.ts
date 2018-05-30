@@ -30,10 +30,12 @@ import { Web3Service } from './services/web3.service';
 import { PurchasePackagesComponent } from './components/item-details/modals/purchase-packages/purchase-packages.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { QrGeneratorService } from './services/qr-generator.service';
+import { AccountBalanceActivityComponent } from './components/account-balance-activity/account-balance-activity.component';
 import { PackagesService } from './services/packages.service';
 import { RateService } from './services/rate.service';
 import { UserService } from './services/users.service';
 import { RegistrationService } from './services/registration.service';
+import { AccountDetailsService } from './services/account-details.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { RegistrationService } from './services/registration.service';
     LoadingSpinnerComponent,
     PaymentMetamaskComponent,
     PurchasePackagesComponent,
-    SignUpComponent
+    SignUpComponent,
+    AccountBalanceActivityComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,8 @@ import { RegistrationService } from './services/registration.service';
     PackagesService,
     RateService,
     UserService,
-    RegistrationService
+    RegistrationService,
+    AccountDetailsService
   ],
   bootstrap: [AppComponent]
 })

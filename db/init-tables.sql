@@ -73,6 +73,32 @@ TABLESPACE pg_default;
 ALTER TABLE public.credit_packages
     OWNER to local_user;
 
+CREATE TABLE IF NOT EXISTS public.account_details
+(
+    "ownerID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    "date" bigint NOT NULL,
+    "paymentMethod" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    "totalTime" bigint NOT NULL,
+    "chargePerMinute" integer NOT NULL,
+    "discountPerMinute" integer NOT NULL,
+    "totalCharged" integer NOT NULL,
+    "totalCredited" integer NOT NULL,
+    "transactionID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+	
+    CONSTRAINT account_pkey PRIMARY KEY ("transactionID"),
+    CONSTRAINT "ownerID" FOREIGN KEY ("ownerID")
+        REFERENCES public.app_users ("userID") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION	
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.account_details
+    OWNER to local_user;
+
 
 CREATE TABLE IF NOT EXISTS public.sessions
 (
@@ -104,3 +130,4 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.items
     OWNER to local_user;
+    

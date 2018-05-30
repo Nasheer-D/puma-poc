@@ -1,0 +1,113 @@
+.title-label {
+  font-family: Heebo;
+  font-size: 36px;
+  color: #1E69F5;
+}
+
+.title-container {
+  text-align: center;
+  align-content: center;
+  width: 882px;
+  height: auto;
+}
+
+.subtitle-label {
+  font-family: Heebo;
+  font-size: 16px;
+  color: black;
+}
+
+.credit-balance-container {
+  border-radius: 15px;
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+  offset-block-end: 0px, 3px;
+  max-width: 852px;
+  height: auto;
+}
+
+.question-cirle {
+  color: #C4C2C2;
+}
+
+.credit-balance {
+  font-family: Heebo;
+  font-size: 16px;
+  text-align: start;
+}
+
+.user-credits-title {
+  font-family: Heebo;
+  font-size: 14px;
+  color: #9C9C9C;
+  text-align: start;
+}
+
+.user-treats {
+  font-family: Heebo;
+  font-size: 14px;
+  color: #9C9C9C;
+  text-align: end;
+}
+
+.credits-balance {
+  font-family: Heebo;
+  font-size: 14px;
+  color: #1E69F5;
+}
+
+.filter-container {
+  max-width: 882px;
+  height: auto;
+}
+
+.activity-log {
+  font-family: Heebo;
+  font-size: 14px;
+  color: #9C9C9C;
+  float: left;
+  text-align: start;
+}
+
+.activity-filter {
+  font-family: Heebo;
+  font-size: 14px;
+  color: #9C9C9C;
+  float: right;
+  text-align: end;
+}
+
+.table-container {
+  border-radius: 15px;
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+  offset-block-end: 0px, 3px;
+  max-width: 852px;
+  height: auto;
+  font-family: Heebo;
+  font-size: 14px;
+  color: #707070;
+  padding: 0px;
+}
+
+.history-table {
+  border-top-left-radius: 6px;
+}
+
+.history-table thead th {
+  background-color: #D9D9D9;
+}
+
+.history-table thead th:first-child {
+  border-radius: 15px 0 0 0;
+}
+
+.history-table thead th:last-child {
+  border-radius: 0 15px 0 0;
+}
+
+.history-table tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 15px;
+}
+
+.history-table tbody tr:last-child td:last-child {
+  border-radius: 0 0 15px 0;
+}
