@@ -19,6 +19,12 @@ export class ItemsController {
     };
     try {
       const result = await new DataService().executeQueryAsPromise(sqlQuery);
+      if (result.success === true) {
+        Object.keys(result.data).forEach(key => {
+          result.data[key].date = result.data[key].date * 1000;
+          result.data[key].totalTime = result.data[key].totalTime / 60;
+        });
+      }
       return new ResponseHandler().handle(response, result);
     } catch (error) {
       return new ResponseHandler().handle(response, error);

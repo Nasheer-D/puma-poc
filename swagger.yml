@@ -12,6 +12,36 @@ servers:
     description: Test server
   
 paths:
+  /register:
+    post:
+      summary: User can register to the web app
+      operationId: registration
+      tags: 
+        - UserRegistration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties: 
+                email:
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200': 
+          description: A Success Response with a JSON object with the user details and the token
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/LoginResponse'
+                  - type: object
+                    properties:
+                      user:
+                        $ref: '#/components/schemas/User'
   /login:
     post:
       summary: User can login to the web app
@@ -647,6 +677,6 @@ components:
         totalCharged:
           type: number
         totalCredited:
-          type: string
+          type: number
         transactionID:
           type: string
