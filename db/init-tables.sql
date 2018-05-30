@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS public.account_details
     "totalCredited" integer NOT NULL,
     "transactionID" character varying(255) COLLATE pg_catalog."default" NOT NULL,
 	
-	CONSTRAINT account_pkey PRIMARY KEY ("transactionID"),
+    CONSTRAINT account_pkey PRIMARY KEY ("transactionID"),
     CONSTRAINT "ownerID" FOREIGN KEY ("ownerID")
         REFERENCES public.app_users ("userID") MATCH SIMPLE
         ON UPDATE NO ACTION
