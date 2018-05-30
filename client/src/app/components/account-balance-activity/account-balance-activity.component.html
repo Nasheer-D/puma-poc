@@ -23,7 +23,7 @@
           <div class="row">
             <div class="col-6 user-credits-title">
               <label>Your Credits:
-                <span class="credits-balance">49.92 PMA</span>
+                <span class="credits-balance">{{userCredits | number: '1.2-2'}} PMA</span>
               </label>
             </div>
             <div class="col-6 user-treats">
@@ -62,7 +62,7 @@
             <tbody>
               <tr *ngFor="let detail of details; let rowNumber = index">
                 <th scope="col">{{rowNumber + 1}}</th>
-                <td>{{detail.date}}</td>
+                <td>{{detail.date | date}}</td>
                 <td>{{detail.paymentMethod}}</td>
                 <td>{{detail.totalTime}}</td>
                 <td>{{detail.chargePerMinute}}</td>

@@ -14,9 +14,11 @@ export class AccountBalanceActivityComponent implements OnInit {
   public details: AccountDetails[] = [];
   constructor(private detailsService: AccountDetailsService) { }
   public user: User;
+  public userCredits: number;
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.userCredits = this.user.credits;
     this.detailsService.getAllTransactions(this.user.userID).subscribe((res: HttpResponse) => {
       if (res.success) {
         this.details = res.data;

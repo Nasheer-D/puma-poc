@@ -1,4 +1,4 @@
-import { Get, JsonController, Res, UseBefore, Param, Req, Header } from 'routing-controllers';
+import { Get, JsonController, Res, UseBefore, Param, Req } from 'routing-controllers';
 import { DataService, ISqlQuery } from '../../datasource/DataService';
 import { ResponseHandler } from '../../utils/responseHandler/ResponseHandler';
 import { UserAuthenticatorMiddleware } from '../../middleware/UserAuthenticatorMiddleware';
@@ -19,6 +19,10 @@ export class ItemsController {
     };
     try {
       const result = await new DataService().executeQueryAsPromise(sqlQuery);
+      Object.keys(result.data).forEach(key => {
+        result.data[key].date = result.data[key].date * 1000;
+        result.data[key].totalTime = result.data[key].totalTime / 60;
+      });
       return new ResponseHandler().handle(response, result);
     } catch (error) {
       return new ResponseHandler().handle(response, error);
