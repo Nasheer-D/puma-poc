@@ -15,7 +15,7 @@ process.env.PGPORT = '5435';
 process.env.PGUSER = 'local_user';
 process.env.PGPASSWORD = 'local_pass';
 process.env.PGDATABASE = 'local_puma_poc';
-process.env.BACKEND_HOST = 'http://192.168.1.54:8080/';
+process.env.BACKEND_HOST = 'http://192.168.178.38:8080/';
 
 const server = supertest.agent('http://localhost:8080/');
 const endpoint = 'api/v1/transaction/package';
@@ -104,7 +104,7 @@ describe('A PackageTransactionController', () => {
                     name: testPackage.title,
                     networkid: networkid,
                     to: '',
-                    value: testPackage.priceInUSD * new RateHelpers().getPMAtoUSDRate()
+                    value: testPackage.priceInUSD / new RateHelpers().getPMAtoUSDRate()
                 }]
             }
 
@@ -113,7 +113,7 @@ describe('A PackageTransactionController', () => {
                     .send(loginCredetials)
                     .end((err, res) => {
                         const token = res.body.token;
-                        server.get(`${endpoint}/tx/${sessionID}/${testPackage.packageID}`)
+                        server.get(`${endpoint}/tx/metamask/${sessionID}/${testPackage.packageID}`)
                             .set('x-access-token', token)
                             .expect(200)
                             .end((err: Error, res: any) => {
@@ -125,10 +125,10 @@ describe('A PackageTransactionController', () => {
                                 expect(body.data[0]).to.have.property('description').that.is.equal(testPackage.description);
                                 expect(body.data[0]).to.have.property('name').that.is.equal(testPackage.title);
                                 expect(body.data[0]).to.have.property('value').that.is
-                                    .equal(unit.convert(testPackage.priceInUSD * new RateHelpers().getPMAtoUSDRate(), 'eth', 'wei'));
+                                    .equal(unit.convert(testPackage.priceInUSD / new RateHelpers().getPMAtoUSDRate(), 'eth', 'wei'));
                                 expect(body.data[0]).to.have.property('to').that.is.equal('0xb344ec617313d90331285E33cF4168DDb5C91B21');
                                 expect(body.data[0]).to.have.property('callback').that.is
-                                    .equal(`http://192.168.1.54:8080/${endpoint}/txStatus/${testPackage.packageID}/${loginCredetials.username}/session/${sessionID}`);
+                                    .equal(`http://192.168.178.38:8080/${endpoint}/txStatus/${testPackage.packageID}/${loginCredetials.username}/session/${sessionID}`);
                                 expect(body.data[0]).to.have.property('signature');
                                 done(err);
                             });
@@ -136,25 +136,19 @@ describe('A PackageTransactionController', () => {
             })
 
             it('should return the tx data plain for item', (done) => {
-                server.post(`api/v1/login`)
-                    .send(loginCredetials)
-                    .end((err, res) => {
-                        const token = res.body.token;
-                        server.get(`${endpoint}/tx/plain/${sessionID}/${testPackage.packageID}`)
-                            .set('x-access-token', token)
-                            .expect(200)
-                            .end((err: Error, res: any) => {
-                                const body = res.body;
-                                expect(body).to.have.property('description').that.is.equal(testPackage.description);
-                                expect(body).to.have.property('name').that.is.equal(testPackage.title);
-                                expect(body).to.have.property('value').that.is
-                                    .equal(unit.convert(testPackage.priceInUSD * new RateHelpers().getPMAtoUSDRate(), 'eth', 'wei'));
-                                expect(body).to.have.property('to').that.is.equal('0xb344ec617313d90331285E33cF4168DDb5C91B21');
-                                expect(body).to.have.property('callback').that.is
-                                    .equal(`http://192.168.1.54:8080/${endpoint}/txStatus/${testPackage.packageID}/${loginCredetials.username}/session/${sessionID}`);
-                                expect(body).to.have.property('signature');
-                                done(err);
-                            });
+                server.get(`${endpoint}/tx/wallet/plain/${loginCredetials.username}/${sessionID}/${testPackage.packageID}`)
+                    .expect(200)
+                    .end((err: Error, res: any) => {
+                        const body = res.body;
+                        expect(body).to.have.property('description').that.is.equal(testPackage.description);
+                        expect(body).to.have.property('name').that.is.equal(testPackage.title);
+                        expect(body).to.have.property('value').that.is
+                            .equal(unit.convert(testPackage.priceInUSD / new RateHelpers().getPMAtoUSDRate(), 'eth', 'wei'));
+                        expect(body).to.have.property('to').that.is.equal('0xb344ec617313d90331285E33cF4168DDb5C91B21');
+                        expect(body).to.have.property('callback').that.is
+                            .equal(`http://192.168.178.38:8080/${endpoint}/txStatus/${testPackage.packageID}/${loginCredetials.username}/session/${sessionID}`);
+                        expect(body).to.have.property('signature');
+                        done(err);
                     });
             })
         });
@@ -215,7 +209,7 @@ describe('A PackageTransactionController', () => {
                     .send(loginCredetials)
                     .end((err, res) => {
                         const token = res.body.token;
-                        server.get(`${endpoint}/tx/${sessionID}/'wrong_itemID'`)
+                        server.get(`${endpoint}/tx/metamask/${sessionID}/'wrong_itemID'`)
                             .set('x-access-token', token)
                             .expect(400)
                             .end((err: Error, res: any) => {
@@ -239,7 +233,7 @@ describe('A PackageTransactionController', () => {
                     .send(loginCredetials)
                     .end((err, res) => {
                         const token = res.body.token;
-                        server.get(`${endpoint}/tx/${sessionID}/'wrong_itemID'`)
+                        server.get(`${endpoint}/tx/metamask/${sessionID}/'wrong_itemID'`)
                             .set('x-access-token', token)
                             .expect(400)
                             .end((err: Error, res: any) => {
@@ -314,43 +308,6 @@ describe('A PackageTransactionController', () => {
                         expect(body).to.have.property('status').that.is.equal(expectedResponse.status);
                         expect(body).to.have.property('message').that.is.equal(expectedResponse.message);
                         expect(body).to.have.property('errcode').that.is.equal(expectedResponse.errcode);
-                        done(err);
-                    });
-            });
-
-            it('should return error message when no access token is passed in the header', (done: any) => {
-                const expectedResponse: IResponseMessage = {
-                    success: false,
-                    status: 'FAILED',
-                    message: 'No token provided.'
-                };
-
-                server.get(`${endpoint}/tx/plain/${sessionID}/${testPackage.packageID}`)
-                    .expect(403)
-                    .end((err: Error, res: any) => {
-                        const body = res.body;
-                        expect(body).to.have.property('success').that.is.equal(expectedResponse.success);
-                        expect(body).to.have.property('status').that.is.equal(expectedResponse.status);
-                        expect(body).to.have.property('message').that.is.equal(expectedResponse.message);
-                        done(err);
-                    });
-            });
-
-            it('should return error message when wrong access token is passed in the header', (done: any) => {
-                const expectedResponse: IResponseMessage = {
-                    success: false,
-                    status: 'FAILED',
-                    message: 'Failed to authenticate token.'
-                };
-
-                server.get(`${endpoint}/tx/plain/${sessionID}/${testPackage.packageID}`)
-                    .set('x-access-token', 'wrong_access_token')
-                    .expect(403)
-                    .end((err: Error, res: any) => {
-                        const body = res.body;
-                        expect(body).to.have.property('success').that.is.equal(expectedResponse.success);
-                        expect(body).to.have.property('status').that.is.equal(expectedResponse.status);
-                        expect(body).to.have.property('message').that.is.equal(expectedResponse.message);
                         done(err);
                     });
             });

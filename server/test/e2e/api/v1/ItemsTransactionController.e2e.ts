@@ -14,7 +14,7 @@ process.env.PGPORT = '5435';
 process.env.PGUSER = 'local_user';
 process.env.PGPASSWORD = 'local_pass';
 process.env.PGDATABASE = 'local_puma_poc';
-process.env.BACKEND_HOST = 'http://192.168.1.54:8080/';
+process.env.BACKEND_HOST = 'http://192.168.178.38:8080/';
 
 const server = supertest.agent('http://localhost:8080/');
 const endpoint = 'api/v1/transaction/item';
@@ -117,7 +117,7 @@ describe('An ItemsTransactionController', () => {
                         expect(body.data[0]).to.have.property('name').that.is.equal(testItem.title);
                         expect(body.data[0]).to.have.property('value').that.is.equal(unit.convert(testItem.price, 'eth', 'wei'));
                         expect(body.data[0]).to.have.property('to').that.is.equal('0xb344ec617313d90331285E33cF4168DDb5C91B21');
-                        expect(body.data[0]).to.have.property('callback').that.is.equal(`http://192.168.1.54:8080/${endpoint}/txStatus/session/${sessionID}`);
+                        expect(body.data[0]).to.have.property('callback').that.is.equal(`http://192.168.178.38:8080/${endpoint}/txStatus/session/${sessionID}`);
                         expect(body.data[0]).to.have.property('signature');
                         done(err);
                     });
@@ -132,7 +132,7 @@ describe('An ItemsTransactionController', () => {
                         expect(body).to.have.property('name').that.is.equal(testItem.title);
                         expect(body).to.have.property('value').that.is.equal(unit.convert(testItem.price, 'eth', 'wei'));
                         expect(body).to.have.property('to').that.is.equal('0xb344ec617313d90331285E33cF4168DDb5C91B21');
-                        expect(body).to.have.property('callback').that.is.equal(`http://192.168.1.54:8080/${endpoint}/txStatus/session/${sessionID}`);
+                        expect(body).to.have.property('callback').that.is.equal(`http://192.168.178.38:8080/${endpoint}/txStatus/session/${sessionID}`);
                         expect(body).to.have.property('signature');
                         done(err);
                     });
