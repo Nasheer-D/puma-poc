@@ -53,9 +53,15 @@
             </span>
             <span> | </span>
             <span>
-              <a class="activity-filter-option" [ngClass]="{'active-filter': byInterval == true}" [routerLink]="" (click)="filterByInterval()">Choose interval</a>
+              <a class="activity-filter-option" [ngClass]="{'active-filter': byInterval == true}" [routerLink]="" (click)="showCalendar()">Choose interval</a>
             </span>
           </label>
+        </div>
+        <div class="input-group input-daterange" *ngIf="calendarVisible">
+            <input type="date" class="form-control text-input" autofocus [(ngModel)]="startDate">
+            <div class="input-group-addon">to</div>
+            <input type="date" class="form-control text-input" [(ngModel)]="endDate">
+            <button class="btn btn-primary" (click)="filterByInterval()">Filter</button>
         </div>
       </div>
     </div>
@@ -140,7 +146,7 @@
               </tr>
             </tbody>
             <tbody *ngIf="byInterval && !byThisWeek && !byToday && !byThisMonth">
-              <tr *ngFor="let detail of filterByInterval; let rowNumber = index">
+              <tr *ngFor="let detail of filterDetailsByInterval; let rowNumber = index">
                 <th scope="col">{{rowNumber + 1}}</th>
                 <td>{{detail.date | date}}</td>
                 <td>

@@ -133,3 +133,10 @@
 a:hover {
   color: #575454;
 }
+
+.text-input {
+  border-radius: 8px 8px 8px 8px;
+  border-color: #353535;
+  border-width: 1px;
+  margin: 10px 14px;
+}

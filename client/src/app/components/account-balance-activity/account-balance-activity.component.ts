@@ -3,7 +3,7 @@ import { AccountDetails } from '../../models/AccountDetails';
 import { AccountDetailsService } from '../../services/account-details.service';
 import { HttpResponse } from '../../utils/web/models/HttpResponse';
 import { User } from '../../models/User';
-import { isSameWeek, isSameMonth, isSameDay, isWithinRange } from 'date-fns';
+import { isSameWeek, isSameMonth, isSameDay, isWithinRange, endOfMonth } from 'date-fns';
 @Component({
   selector: 'app-account-balance-activity',
   templateUrl: './account-balance-activity.component.html',
@@ -15,9 +15,9 @@ export class AccountBalanceActivityComponent implements OnInit {
   public filteredDetailsByWeek: AccountDetails[] = [];
   public filteredDetailsByMonth: AccountDetails[] = [];
   public filterDetailsByInterval: AccountDetails[] = [];
-  public sortingOption = '';
-  startDate: number;
-  endDate: number;
+  public startDate: number;
+  public endDate: number;
+  calendarVisible: boolean = false;
   byToday: boolean = false;
   byThisWeek: boolean = false;
   byThisMonth: boolean = false;
@@ -87,18 +87,26 @@ export class AccountBalanceActivityComponent implements OnInit {
   }
 
   public filterByInterval() {
-    if (this.byInterval === false) {
+    Object.keys(this.details).forEach(key => {
+      if ((isWithinRange(this.details[key].date, this.startDate, this.endDate)) === true) {
+        this.filterDetailsByInterval[key] = this.details[key];
+      }
+    });
+    if (this.filterDetailsByInterval.length > 0) {
       this.byInterval = true;
+    }
+  }
+
+  public showCalendar() {
+    if (this.byInterval === false && this.calendarVisible === false) {
+      this.calendarVisible = true;
       this.byThisMonth = false;
       this.byThisWeek = false;
       this.byToday = false;
-      Object.keys(this.details).forEach(key => {
-        if ((isWithinRange(this.details[key].date, this.startDate, this.endDate)) === true) {
-          this.filterDetailsByInterval[key] = this.details[key];
-        }
-      });
-    } else if (this.byInterval === true) {
+    } else if (this.byInterval === true || this.calendarVisible === true) {
+      console.log('dhould');
       this.byInterval = false;
+      this.calendarVisible = false;
     }
   }
 }
