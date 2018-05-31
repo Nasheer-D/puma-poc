@@ -104,7 +104,6 @@ export class AccountBalanceActivityComponent implements OnInit {
       this.byThisWeek = false;
       this.byToday = false;
     } else if (this.byInterval === true || this.calendarVisible === true) {
-      console.log('dhould');
       this.byInterval = false;
       this.calendarVisible = false;
     }
