@@ -103,7 +103,7 @@
               <div class="container">
                 <div class="row">
                   <div class="col-sm-6">
-                    <button class="btn btn-outline-primary btn-layout">See your balance</button>
+                    <button class="btn btn-outline-primary btn-layout" routerLink="/accountDetails" routerLinkActive="active" (click)="d()">See your balance</button>
                   </div>
                   <div class="col-sm-6">
                     <button class="btn btn-primary btn-layout" (click)="d()" *ngIf="isInactiveStatus()">Back to image</button>
