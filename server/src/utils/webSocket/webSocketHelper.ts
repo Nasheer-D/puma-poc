@@ -1,12 +1,12 @@
 import * as http from 'http';
-import * as io from 'socket.io';
+import * as socketIo from 'socket.io';
 
 export class WebSocketHelper {
-    private io: io;
+   private io: SocketIO.Server;
 
-    public initiate(server: http.Server): io {
-        this.io = io(server);
+   public initiate(server: http.Server): SocketIO.Server {
+       this.io = socketIo(server);
 
-        return this.io;
-    }
+       return this.io;
+   }
 }

@@ -25,6 +25,7 @@
     "angularx-qrcode": "^1.1.0",
     "bootstrap": "^3.3.7",
     "core-js": "^2.5.4",
+    "date-fns": "^1.29.0",
     "ethjs-contract": "^0.2.1",
     "ethjs-query": "^0.3.7",
     "jwt-decode": "^2.2.0",

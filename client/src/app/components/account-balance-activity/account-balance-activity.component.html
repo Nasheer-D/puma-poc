@@ -39,7 +39,23 @@
           <label>Activity Log</label>
         </div>
         <div class="col-6 activity-filter">
-          <label>Sort by: Today | This week | This month | Choose interval</label>
+          <label>Sort by:
+            <span>
+              <a class="activity-filter-option" [ngClass]="{'active-filter': byToday == true}" [routerLink]="" (click)="filterByToday()">Today</a>
+            </span>
+            <span> | </span>
+            <span>
+              <a class="activity-filter-option" [ngClass]="{'active-filter': byThisWeek == true}" [routerLink]="" (click)="filterByThisWeek()">This week</a>
+            </span>
+            <span> | </span>
+            <span>
+              <a class="activity-filter-option" [ngClass]="{'active-filter': byThisMonth == true}" [routerLink]="">This month</a>
+            </span>
+            <span> | </span>
+            <span>
+              <a class="activity-filter-option" [ngClass]="{'active-filter': byInterval == true}" [routerLink]="">Choose interval</a>
+            </span>
+          </label>
         </div>
       </div>
     </div>
@@ -60,15 +76,19 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let detail of details; let rowNumber = index">
-                <th scope="col">{{rowNumber + 1}}</th>
+              <tr *ngFor="let detail of details | filter: sortingOption">
+                <th scope="col"></th> <!-- {{rowNumber + 1}} -->
                 <td>{{detail.date | date}}</td>
-                <td><label class="text-color">{{detail.paymentMethod}}</label></td>
+                <td>
+                  <label class="text-color">{{detail.paymentMethod}}</label>
+                </td>
                 <td>{{detail.totalTime}}</td>
                 <td>{{detail.chargePerMinute}}</td>
                 <td>{{detail.discountPerMinute}}</td>
                 <td>{{detail.totalCharged}}</td>
-                <td><label class="text-color">{{detail.totalCredited}}</label></td>
+                <td>
+                  <label class="text-color">{{detail.totalCredited}}</label>
+                </td>
               </tr>
             </tbody>
           </table>
