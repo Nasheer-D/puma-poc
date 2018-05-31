@@ -3,7 +3,7 @@ import { AccountDetails } from '../../models/AccountDetails';
 import { AccountDetailsService } from '../../services/account-details.service';
 import { HttpResponse } from '../../utils/web/models/HttpResponse';
 import { User } from '../../models/User';
-import { isSameWeek } from 'date-fns';
+import { isSameWeek, isSameMonth, isSameDay } from 'date-fns';
 @Component({
   selector: 'app-account-balance-activity',
   templateUrl: './account-balance-activity.component.html',
@@ -11,8 +11,11 @@ import { isSameWeek } from 'date-fns';
 })
 export class AccountBalanceActivityComponent implements OnInit {
   public details: AccountDetails[] = [];
+  public filteredDetailsByToday: AccountDetails[] = [];
+  public filteredDetailsByWeek: AccountDetails[] = [];
+  public filteredDetailsByMonth: AccountDetails[] = [];
+  public filterDetailsByInterval: AccountDetails[] = [];
   public sortingOption = '';
-  isFiltered: boolean = false;
   byToday: boolean = false;
   byThisWeek: boolean = false;
   byThisMonth: boolean = false;
@@ -27,7 +30,6 @@ export class AccountBalanceActivityComponent implements OnInit {
     this.detailsService.getAllTransactions(this.user.userID).subscribe((res: HttpResponse) => {
       if (res.success) {
         this.details = res.data;
-        console.log(this.details);
       } else {
         alert(res.message);
       }
@@ -35,23 +37,51 @@ export class AccountBalanceActivityComponent implements OnInit {
   }
 
   public filterByToday() {
-    this.byInterval = false;
-    this.byThisMonth = false;
-    this.byThisWeek = false;
-    this.byToday = true;
-    this.isFiltered = true;
-    this.sortingOption = (Math.floor(Date.now() * 1000).toString()).slice(0, 5);
-    console.log(this.sortingOption);
+    if (this.byToday === false) {
+      this.byInterval = false;
+      this.byThisMonth = false;
+      this.byThisWeek = false;
+      this.byToday = true;
+      Object.keys(this.details).forEach(key => {
+        if ((isSameDay(Date.now(), (this.details[key].date))) === true) {
+          this.filteredDetailsByToday[key] = this.details[key];
+        }
+      });
+    } else if (this.byToday === true) {
+      this.byToday = false;
+    }
   }
 
   public filterByThisWeek() {
-    this.byInterval = false;
-    this.byThisMonth = false;
-    this.byThisWeek = true;
-    this.byToday = false;
-    this.isFiltered = true;
-    this.sortingOption = Math.floor(Date.now() / 1000).toString();
-    console.log(isSameWeek(Date.now(), Date.now()));
+    if (this.byThisWeek === false) {
+      this.byInterval = false;
+      this.byThisMonth = false;
+      this.byThisWeek = true;
+      this.byToday = false;
+      Object.keys(this.details).forEach(key => {
+        if ((isSameWeek(Date.now(), (this.details[key].date))) === true) {
+          this.filteredDetailsByWeek[key] = this.details[key];
+        }
+      });
+    } else if (this.byThisWeek === true) {
+      this.byThisWeek = false;
+    }
+  }
+
+  public filterByThisMonth() {
+    if (this.byThisMonth === false) {
+      this.byInterval = false;
+      this.byThisMonth = true;
+      this.byThisWeek = false;
+      this.byToday = false;
+      Object.keys(this.details).forEach(key => {
+        if ((isSameMonth(Date.now(), (this.details[key].date))) === true) {
+          this.filteredDetailsByMonth[key] = this.details[key];
+        }
+      });
+    } else if (this.byThisMonth === true) {
+      this.byThisMonth = false;
+    }
   }
 
   public filterByInterval() {
@@ -59,16 +89,10 @@ export class AccountBalanceActivityComponent implements OnInit {
     this.byThisMonth = false;
     this.byThisWeek = false;
     this.byToday = false;
-    this.isFiltered = true;
-    this.sortingOption = Math.floor(Date.now() * 1000).toString();
-  }
-
-  public filterByThisMonth() {
-    this.byInterval = false;
-    this.byThisMonth = true;
-    this.byThisWeek = false;
-    this.byToday = false;
-    this.isFiltered = true;
-    this.sortingOption = Math.floor(Date.now() / 1000).toString();
+    Object.keys(this.details).forEach(key => {
+      if ((isSameMonth(Date.now(), (this.details[key].date))) === true) {
+        this.filterDetailsByInterval[key] = this.details[key];
+      }
+    });
   }
 }
