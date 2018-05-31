@@ -3,7 +3,7 @@ import { AccountDetails } from '../../models/AccountDetails';
 import { AccountDetailsService } from '../../services/account-details.service';
 import { HttpResponse } from '../../utils/web/models/HttpResponse';
 import { User } from '../../models/User';
-import { isSameWeek, isSameMonth, isSameDay } from 'date-fns';
+import { isSameWeek, isSameMonth, isSameDay, isWithinRange } from 'date-fns';
 @Component({
   selector: 'app-account-balance-activity',
   templateUrl: './account-balance-activity.component.html',
@@ -16,6 +16,8 @@ export class AccountBalanceActivityComponent implements OnInit {
   public filteredDetailsByMonth: AccountDetails[] = [];
   public filterDetailsByInterval: AccountDetails[] = [];
   public sortingOption = '';
+  startDate: number;
+  endDate: number;
   byToday: boolean = false;
   byThisWeek: boolean = false;
   byThisMonth: boolean = false;
@@ -59,7 +61,7 @@ export class AccountBalanceActivityComponent implements OnInit {
       this.byThisWeek = true;
       this.byToday = false;
       Object.keys(this.details).forEach(key => {
-        if ((isSameWeek(Date.now(), (this.details[key].date))) === true) {
+        if ((isSameWeek(Date.now(), (this.details[key].date), { weekStartsOn: 0 })) === true) {
           this.filteredDetailsByWeek[key] = this.details[key];
         }
       });
@@ -85,14 +87,18 @@ export class AccountBalanceActivityComponent implements OnInit {
   }
 
   public filterByInterval() {
-    this.byInterval = true;
-    this.byThisMonth = false;
-    this.byThisWeek = false;
-    this.byToday = false;
-    Object.keys(this.details).forEach(key => {
-      if ((isSameMonth(Date.now(), (this.details[key].date))) === true) {
-        this.filterDetailsByInterval[key] = this.details[key];
-      }
-    });
+    if (this.byInterval === false) {
+      this.byInterval = true;
+      this.byThisMonth = false;
+      this.byThisWeek = false;
+      this.byToday = false;
+      Object.keys(this.details).forEach(key => {
+        if ((isWithinRange(this.details[key].date, this.startDate, this.endDate)) === true) {
+          this.filterDetailsByInterval[key] = this.details[key];
+        }
+      });
+    } else if (this.byInterval === true) {
+      this.byInterval = false;
+    }
   }
 }
