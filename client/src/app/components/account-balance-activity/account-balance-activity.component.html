@@ -57,11 +57,13 @@
             </span>
           </label>
         </div>
-        <div class="input-group input-daterange" *ngIf="calendarVisible">
-            <input type="date" class="form-control text-input" autofocus [(ngModel)]="startDate">
-            <div class="input-group-addon">to</div>
-            <input type="date" class="form-control text-input" [(ngModel)]="endDate">
-            <button class="btn btn-primary" (click)="filterByInterval()">Filter</button>
+        <div class="container">
+          <div class="input-group" *ngIf="calendarVisible">
+            <input type="date" class="col-5 form-control text-input" autofocus [(ngModel)]="startDate">
+            <span class="between-dates">to</span>
+            <input type="date" class="col-5 form-control text-input" [(ngModel)]="endDate">
+            <button class="col-2 btn btn-primary filter-btn" (click)="filterByInterval()">Filter</button>
+          </div>
         </div>
       </div>
     </div>

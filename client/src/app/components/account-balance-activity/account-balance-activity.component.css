@@ -137,6 +137,30 @@ a:hover {
 .text-input {
   border-radius: 8px 8px 8px 8px;
   border-color: #353535;
+  color: #9C9C9C;
   border-width: 1px;
   margin: 10px 14px;
+}
+
+.filter-btn {
+  border-radius: 8px;
+  height: 40px;
+  margin-top: 10px;
+}
+
+.between-dates {
+  font-family: Heebo;
+  font-size: 16px;
+  color: #9C9C9C;
+  margin-top: 20px;
+}
+
+.input-group>.form-control:not(:first-child) {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.input-group>.form-control:not(:last-child) {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }

@@ -25,6 +25,7 @@ export class AccountBalanceActivityComponent implements OnInit {
   constructor(private detailsService: AccountDetailsService) { }
   public user: User;
   public userCredits: number;
+  private i: number = 0;
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
@@ -39,6 +40,7 @@ export class AccountBalanceActivityComponent implements OnInit {
   }
 
   public filterByToday() {
+    this.i = 0;
     if (this.byToday === false) {
       this.byInterval = false;
       this.byThisMonth = false;
@@ -46,7 +48,8 @@ export class AccountBalanceActivityComponent implements OnInit {
       this.byToday = true;
       Object.keys(this.details).forEach(key => {
         if ((isSameDay(Date.now(), (this.details[key].date))) === true) {
-          this.filteredDetailsByToday[key] = this.details[key];
+          this.filteredDetailsByToday[this.i] = this.details[key];
+          this.i = this.i + 1;
         }
       });
     } else if (this.byToday === true) {
@@ -55,14 +58,16 @@ export class AccountBalanceActivityComponent implements OnInit {
   }
 
   public filterByThisWeek() {
+    this.i = 0;
     if (this.byThisWeek === false) {
       this.byInterval = false;
       this.byThisMonth = false;
       this.byThisWeek = true;
       this.byToday = false;
       Object.keys(this.details).forEach(key => {
-        if ((isSameWeek(Date.now(), (this.details[key].date), { weekStartsOn: 0 })) === true) {
-          this.filteredDetailsByWeek[key] = this.details[key];
+        if ((isSameWeek(Date.now(), (this.details[key].date), { weekStartsOn: 1 })) === true) {
+          this.filteredDetailsByWeek[this.i] = this.details[key];
+          this.i = this.i + 1;
         }
       });
     } else if (this.byThisWeek === true) {
@@ -71,6 +76,7 @@ export class AccountBalanceActivityComponent implements OnInit {
   }
 
   public filterByThisMonth() {
+    this.i = 0;
     if (this.byThisMonth === false) {
       this.byInterval = false;
       this.byThisMonth = true;
@@ -78,7 +84,8 @@ export class AccountBalanceActivityComponent implements OnInit {
       this.byToday = false;
       Object.keys(this.details).forEach(key => {
         if ((isSameMonth(Date.now(), (this.details[key].date))) === true) {
-          this.filteredDetailsByMonth[key] = this.details[key];
+          this.filteredDetailsByMonth[this.i] = this.details[key];
+          this.i = this.i + 1;
         }
       });
     } else if (this.byThisMonth === true) {
@@ -87,12 +94,17 @@ export class AccountBalanceActivityComponent implements OnInit {
   }
 
   public filterByInterval() {
+    this.i = 0;
+    this.filterDetailsByInterval = [];
     Object.keys(this.details).forEach(key => {
+      console.log('shouldt');
       if ((isWithinRange(this.details[key].date, this.startDate, this.endDate)) === true) {
-        this.filterDetailsByInterval[key] = this.details[key];
+        this.filterDetailsByInterval[this.i] = this.details[key];
+        this.i = this.i + 1;
       }
     });
     if (this.filterDetailsByInterval.length > 0) {
+      console.log('this is true');
       this.byInterval = true;
     }
   }
