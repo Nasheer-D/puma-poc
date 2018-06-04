@@ -78,7 +78,9 @@ In case this doesn't work, follow [this guide](https://blogs.msdn.microsoft.com/
     * PGUSER=local_user
     * PGPASSWORD=local_pass
     * PGDATABASE=local_puma_poc
-    * PGPORT=`http://localhost:5435` -- port specified in docker-compose.yml
+    * PGPORT=`http://localhost:5435` -- port specified in docker-compose.yml 
+      - For client change the IP address to your local IP address in the environment.ts  
+      - For server change the IP address to your local IP address in the docker-compose.yml
 
 #### Clean up local development environment
 ```bash
