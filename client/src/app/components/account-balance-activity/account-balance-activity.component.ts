@@ -97,14 +97,12 @@ export class AccountBalanceActivityComponent implements OnInit {
     this.i = 0;
     this.filterDetailsByInterval = [];
     Object.keys(this.details).forEach(key => {
-      console.log('shouldt');
       if ((isWithinRange(this.details[key].date, this.startDate, this.endDate)) === true) {
         this.filterDetailsByInterval[this.i] = this.details[key];
         this.i = this.i + 1;
       }
     });
     if (this.filterDetailsByInterval.length > 0) {
-      console.log('this is true');
       this.byInterval = true;
     }
   }
