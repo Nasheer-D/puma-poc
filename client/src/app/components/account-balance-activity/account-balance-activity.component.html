@@ -39,7 +39,31 @@
           <label>Activity Log</label>
         </div>
         <div class="col-6 activity-filter">
-          <label>Sort by: Today | This week | This month | Choose interval</label>
+          <label>Sort by:
+            <span>
+              <a class="activity-filter-option" [ngClass]="{'active-filter': byToday == true}" [routerLink]="" (click)="filterByToday()">Today</a>
+            </span>
+            <span> | </span>
+            <span>
+              <a class="activity-filter-option" [ngClass]="{'active-filter': byThisWeek == true}" [routerLink]="" (click)="filterByThisWeek()">This week</a>
+            </span>
+            <span> | </span>
+            <span>
+              <a class="activity-filter-option" [ngClass]="{'active-filter': byThisMonth == true}" [routerLink]="" (click)="filterByThisMonth()">This month</a>
+            </span>
+            <span> | </span>
+            <span>
+              <a class="activity-filter-option" [ngClass]="{'active-filter': byInterval == true}" [routerLink]="" (click)="showCalendar()">Choose interval</a>
+            </span>
+          </label>
+        </div>
+        <div class="container">
+          <div class="input-group" *ngIf="calendarVisible">
+            <input type="date" class="col-5 form-control text-input" autofocus [(ngModel)]="startDate">
+            <span class="between-dates">to</span>
+            <input type="date" class="col-5 form-control text-input" [(ngModel)]="endDate">
+            <button class="col-2 btn btn-primary filter-btn" (click)="filterByInterval()">Filter</button>
+          </div>
         </div>
       </div>
     </div>
@@ -59,16 +83,84 @@
                 <th scope="col">Total Credited</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="!byThisWeek && !byThisMonth && !byToday && !byInterval">
               <tr *ngFor="let detail of details; let rowNumber = index">
                 <th scope="col">{{rowNumber + 1}}</th>
                 <td>{{detail.date | date}}</td>
-                <td><label class="text-color">{{detail.paymentMethod}}</label></td>
+                <td>
+                  <label class="text-color">{{detail.paymentMethod}}</label>
+                </td>
                 <td>{{detail.totalTime}}</td>
                 <td>{{detail.chargePerMinute}}</td>
                 <td>{{detail.discountPerMinute}}</td>
                 <td>{{detail.totalCharged}}</td>
-                <td><label class="text-color">{{detail.totalCredited}}</label></td>
+                <td>
+                  <label class="text-color">{{detail.totalCredited}}</label>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="byToday && !byThisWeek && !byThisMonth && !byInterval">
+              <tr *ngFor="let detail of filteredDetailsByToday; let rowNumber = index">
+                <th scope="col">{{rowNumber + 1}}</th>
+                <td>{{detail.date | date}}</td>
+                <td>
+                  <label class="text-color">{{detail.paymentMethod}}</label>
+                </td>
+                <td>{{detail.totalTime}}</td>
+                <td>{{detail.chargePerMinute}}</td>
+                <td>{{detail.discountPerMinute}}</td>
+                <td>{{detail.totalCharged}}</td>
+                <td>
+                  <label class="text-color">{{detail.totalCredited}}</label>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="byThisWeek && !byThisMonth && !byToday && !byInterval">
+              <tr *ngFor="let detail of filteredDetailsByWeek; let rowNumber = index">
+                <th scope="col">{{rowNumber + 1}}</th>
+                <td>{{detail.date | date}}</td>
+                <td>
+                  <label class="text-color">{{detail.paymentMethod}}</label>
+                </td>
+                <td>{{detail.totalTime}}</td>
+                <td>{{detail.chargePerMinute}}</td>
+                <td>{{detail.discountPerMinute}}</td>
+                <td>{{detail.totalCharged}}</td>
+                <td>
+                  <label class="text-color">{{detail.totalCredited}}</label>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="byThisMonth && !byThisWeek && !byToday && !byInterval">
+              <tr *ngFor="let detail of filteredDetailsByMonth; let rowNumber = index">
+                <th scope="col">{{rowNumber + 1}}</th>
+                <td>{{detail.date | date}}</td>
+                <td>
+                  <label class="text-color">{{detail.paymentMethod}}</label>
+                </td>
+                <td>{{detail.totalTime}}</td>
+                <td>{{detail.chargePerMinute}}</td>
+                <td>{{detail.discountPerMinute}}</td>
+                <td>{{detail.totalCharged}}</td>
+                <td>
+                  <label class="text-color">{{detail.totalCredited}}</label>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="byInterval && !byThisWeek && !byToday && !byThisMonth">
+              <tr *ngFor="let detail of filterDetailsByInterval; let rowNumber = index">
+                <th scope="col">{{rowNumber + 1}}</th>
+                <td>{{detail.date | date}}</td>
+                <td>
+                  <label class="text-color">{{detail.paymentMethod}}</label>
+                </td>
+                <td>{{detail.totalTime}}</td>
+                <td>{{detail.chargePerMinute}}</td>
+                <td>{{detail.discountPerMinute}}</td>
+                <td>{{detail.totalCharged}}</td>
+                <td>
+                  <label class="text-color">{{detail.totalCredited}}</label>
+                </td>
               </tr>
             </tbody>
           </table>

@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "client": "file:client",
+    "date-fns": "^1.29.0",
     "server": "file:server"
   }
 }
